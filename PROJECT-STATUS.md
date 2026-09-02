@@ -4,7 +4,7 @@ Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 02 — MARKET RESEARCH
 Current Stage: Research planning and evidence collection
-Current Task: تعریف Research plan، رقبا، درد کاربران، Market gaps و Source register
+Current Task: جمع‌آوری شواهد مستقیم بازار ایران، Search demand و willingness-to-pay
 Overall Status: PLANNING
 
 Last Completed:
@@ -18,7 +18,7 @@ Last Completed:
 
 Currently Working On:
 
-- آماده‌سازی Research plan و ثبت منابع واقعی و به‌روز.
+- تکمیل PHASE 02؛ Desk research اولیه انجام شده و تحقیق مستقیم بازار ایران باقی مانده است.
 
 Next:
 
@@ -50,8 +50,9 @@ Critical Risks:
 - کتابخانه MVP به حدود ۲۵۰ بازی تأییدشده با Coverage کافی نیاز دارد.
 - Safety و Metadata ناقص می‌تواند Matching قطعی را تضعیف کند.
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
+- داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 NOT STARTED
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 IN PROGRESS
 Implementation Status: LOCKED
 Testing Status: NOT APPLICABLE — no application code
 Launch Status: NOT STARTED

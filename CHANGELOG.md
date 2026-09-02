@@ -9,6 +9,7 @@
 - اسناد PHASE 00 شامل Brief پروژه، Vision و تعریف موفقیت.
 - Requirementهای قطعی PHP/Laravel، وب‌سایت-first، TWA مشروط، Motion هویتی و تیله تعاملی Homepage.
 - اسناد PHASE 01 شامل تعریف مسئله، پنج فرضیه راه‌حل، چهارده فرضیه آزمون‌نشده و سؤال‌های حیاتی.
+- Research pack اولیه PHASE 02 شامل Market overview، Competitors، Matrix، User pain، Market gaps و Source register.
 
 ### Changed
 
