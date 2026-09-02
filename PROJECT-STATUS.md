@@ -2,9 +2,9 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 03 — IDEA VALIDATION
-Current Stage: Validation planning and evidence collection
-Current Task: اجرای Problem interviews، Search-demand study و Concierge Quick Match
+Current Phase: PHASE 04 — PRODUCT DEFINITION
+Current Stage: PRD, scope and MVP reconciliation
+Current Task: نهایی‌کردن Age scope و Product Gate
 Overall Status: PLANNING
 
 Last Completed:
@@ -14,23 +14,24 @@ Last Completed:
 - PHASE 00 — PROJECT FOUNDATION تکمیل و Gate آن PASS شد.
 - PHASE 01 — IDEA DEVELOPMENT تکمیل و Gate آن PASS شد.
 - PHASE 02 — MARKET RESEARCH با `CONDITIONAL PASS` بسته شد.
+- PHASE 03 — IDEA VALIDATION با تصمیم `GO` اعلام‌شده توسط مالک بسته شد.
 - تعارض Stack بریف نسخه ۱.۰ با دستور جدید مالک حل و ثبت شد.
 - Requirement تیله تعاملی صفحه نخست و Motion هویتی ثبت شد.
 
 Currently Working On:
 
-- PHASE 03 آغاز شده؛ Plan و Risk baseline آماده است، اما آزمون‌های Demand هنوز اجرا نشده‌اند.
+- PHASE 04 آغاز شده و PRD، Scope، MVP، Feature Catalog و Non-goals تدوین شده‌اند.
 
 Next:
 
-- اجرای `VAL-001` تا `VAL-007`
-- جمع‌آوری Evidence مستقیم فارسی‌زبان
-- تکمیل `docs/03-validation/02-demand-validation.md`
-- تصمیم `GO / GO WITH CONDITIONS / PIVOT / NO-GO`
+- تعیین و تصویب Age range دقیق Website MVP
+- نهایی‌کردن Coverage threshold هر Release stage
+- اجرای Product Gate
+- پس از PASS، ورود به PHASE 05 — PRODUCT RULES
 
 Blocked By:
 
-- تصمیم Go/No-Go بدون دسترسی به مشارکت‌کنندگان واقعی و داده Search معتبر قابل تکمیل نیست.
+- Product Gate بدون Age scope دقیق و Coverage acceptance قابل PASS کامل نیست.
 
 Open Questions:
 
@@ -50,7 +51,7 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 IN PROGRESS
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 IN PROGRESS
 Implementation Status: LOCKED
 Testing Status: NOT APPLICABLE — no application code
 Launch Status: NOT STARTED

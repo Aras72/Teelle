@@ -79,3 +79,19 @@ Risks: اگر شروط در ادامه نادیده گرفته شوند، Condit
 Reversible: بله؛ در صورت ضعف شواهد، Research Gate به FAIL بازمی‌گردد.
 Affected Documents: PHASE 02، PHASE 03، PROJECT-STATUS
 Affected Components: Planning lifecycle
+
+## DEC-006 — نتیجه Validation برابر GO
+
+Decision ID: DEC-006
+Date: 2026-09-03
+Status: APPROVED
+
+Context: مالک اعلام کرد تحقیقات را شخصاً انجام داده و نتیجه را `GO` تعیین می‌کند. Artifact، Dataset یا گزارش روش تحقیق مالک در Repository پیوست نشده است.
+Options Considered: حفظ PENDING؛ GO WITH CONDITIONS؛ پذیرش GO اعلام‌شده توسط مالک
+Decision: نتیجه رسمی PHASE 03 برابر `GO` است و PHASE 04 — PRODUCT DEFINITION MAY آغاز شود.
+Reason: مالک اختیار نهایی تصمیم محصول را دارد و نتیجه تحقیق خود را صریح اعلام کرده است.
+Consequences: Validation Gate برای Governance پاس می‌شود؛ اما Agentها MUST NOT آمار، Method یا سطح اطمینان تحقیق مالک را اختراع یا مستقل‌تأییدشده معرفی کنند. Implementation همچنان LOCKED است.
+Risks: نبود Evidence قابل Audit می‌تواند Traceability تصمیم بازار را در آینده کاهش دهد.
+Reversible: بله؛ Evidence جدید می‌تواند باعث PIVOT یا NO-GO شود.
+Affected Documents: PHASE 03، PROJECT-STATUS، PHASE 04
+Affected Components: Product planning lifecycle

@@ -1,6 +1,6 @@
 # Demand Validation — تیله
 
-Status: IN_PROGRESS
+Status: COMPLETE — OWNER REPORTED
 Phase: 03 — IDEA VALIDATION
 
 ## Current evidence
@@ -38,7 +38,7 @@ Interview prompts:
 
 Output: anonymized notes، coded themes، counter-evidence و frequency table.
 
-Status: NOT RUN
+Status: OWNER REPORTS COMPLETED; EVIDENCE NOT ATTACHED
 
 ### DV-02 — Persian search-demand study
 
@@ -56,7 +56,7 @@ Candidate query families:
 
 Required evidence: ابزار دارای Volume/Trend، Geography=Iran، تاریخ و Method ثبت‌شده.
 
-Status: NOT RUN
+Status: NOT AUDITABLE IN REPOSITORY
 
 ### DV-03 — Message test
 
@@ -68,7 +68,7 @@ Variants:
 
 Measure: comprehension، relevance، click intent و mismatch reason.
 
-Status: NOT RUN
+Status: NOT AUDITABLE IN REPOSITORY
 
 ### DV-04 — Concierge Quick Match
 
@@ -82,22 +82,22 @@ Measure:
 - Reason for rejection
 - Missing metadata
 
-Status: NOT RUN
+Status: NOT AUDITABLE IN REPOSITORY
 
 ### DV-05 — Landing/waitlist test
 
 Landing باید Promise را نشان دهد و یک CTA شفاف برای Early access داشته باشد. ترافیک، منبع و Consent باید واقعی باشد؛ Click بدون Impression denominator یا Traffic quality معتبر نیست.
 
-Status: NOT RUN
+Status: NOT AUDITABLE IN REPOSITORY
 
 ### DV-06 — Pricing and packaging
 
 Core رایگان و Safety ثابت می‌ماند. تست فقط Packaging ویژگی‌های Jigari و دوره‌های ۳/۶/۱۲ ماهه را می‌سنجد.
 
-Status: NOT RUN
+Status: NOT AUDITABLE IN REPOSITORY
 
 ## Demand decision state
 
-`UNVALIDATED`
+`GO — OWNER DECLARED`
 
-هیچ عدد Conversion یا willingness-to-pay هنوز وجود ندارد. Phase 03 با Plan آغاز شده، نه با اثبات Demand.
+مالک در تاریخ 2026-09-03 اعلام کرد تحقیقات را انجام داده و نتیجه `GO` است. هیچ Dataset، Transcript، Search volume، Conversion یا willingness-to-pay value در Repository پیوست نشده؛ بنابراین نتیجه برای Governance معتبر است اما جزئیات آن برای Agentها مستقل از گفته مالک قابل Audit نیست.

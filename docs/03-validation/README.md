@@ -1,8 +1,9 @@
 # PHASE 03 — IDEA VALIDATION
 
-Status: IN_PROGRESS
-Gate: NOT EVALUATED
+Status: COMPLETE — OWNER DECLARED
+Gate: PASS — OWNER-DECLARED; EVIDENCE NOT ATTACHED
 Started: 2026-09-03
+Closed: 2026-09-03
 
 ## Purpose
 
@@ -19,12 +20,12 @@ Started: 2026-09-03
 
 - Validation plan: READY
 - Desk evidence: AVAILABLE BUT INSUFFICIENT
-- Direct user evidence: NOT COLLECTED
-- Search demand: NOT MEASURED
-- Prototype test: NOT RUN
-- Pricing test: NOT RUN
-- Go/No-Go decision: PENDING
+- Direct user evidence: OWNER REPORTS RESEARCH COMPLETE; DATA NOT ATTACHED
+- Search demand: NOT AUDITABLE IN REPOSITORY
+- Prototype test: NOT AUDITABLE IN REPOSITORY
+- Pricing test: NOT AUDITABLE IN REPOSITORY
+- Go/No-Go decision: GO — OWNER DECLARED
 
 ## Gate rule
 
-ایجاد فایل یا طراحی آزمون به معنی Validation نیست. Gate تا اجرای حداقل آزمون‌های Critical و ثبت Evidence قابل ممیزی `PASS` نمی‌شود.
+مالک در تاریخ 2026-09-03 اعلام کرد تحقیق را شخصاً انجام داده و نتیجه `GO` است. طبق Owner Authority این تصمیم رسمی پروژه است و اجازه ورود به Product Definition را می‌دهد. نبود داده خام در Repository صریحاً ثبت می‌شود و نباید در گزارش‌های بعدی به‌عنوان Validation مستقل Codex معرفی شود.

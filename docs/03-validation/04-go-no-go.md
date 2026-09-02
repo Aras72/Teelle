@@ -1,8 +1,8 @@
 # Go / No-Go Decision — تیله
 
-Status: PENDING
+Status: APPROVED
 Phase: 03 — IDEA VALIDATION
-Decision date: NOT SET
+Decision date: 2026-09-03
 
 ## Allowed outcomes
 
@@ -13,7 +13,16 @@ Decision date: NOT SET
 
 ## Current decision
 
-`PENDING — INSUFFICIENT DIRECT EVIDENCE`
+`GO — OWNER DECLARED`
+
+## Decision source
+
+مالک پروژه صریحاً اعلام کرد تحقیقات را شخصاً انجام داده و نتیجه را `GO` می‌داند. داده خام و گزارش روش تحقیق در Repository موجود نیست؛ بنابراین:
+
+- `FACT`: مالک نتیجه GO را اعلام کرده است.
+- `UNKNOWN`: Sample، Method، نتایج عددی، Counter-evidence و Confidence تحقیق مالک.
+- `DECISION`: پروژه وارد PHASE 04 — PRODUCT DEFINITION می‌شود.
+- `CONSTRAINT`: نبود Evidence پیوست‌شده نباید بعداً به آمار یا ادعای تأییدشده تبدیل شود.
 
 ## Minimum evidence before decision
 
@@ -54,4 +63,4 @@ Decision date: NOT SET
 
 ## Decision integrity
 
-دستور «ادامه بده» مجوز شروع Validation است، نه نتیجه Validation. تا تکمیل Evidence، Product Definition و Implementation قفل می‌مانند.
+تصمیم مالک Product Definition را باز می‌کند. Implementation همچنان تا عبور تمام Gateهای Product، Rules، User Model، Brand، UI/UX، Architecture، Data، Security و Planning قفل می‌ماند.
