@@ -16,6 +16,11 @@
 - PHASE 04 با PRD، Scope، MVP، Feature Catalog و Non-goals آغاز شد.
 - بازه سنی Website MVP برابر ۶ماهگی تا پیش از تولد ۱۳سالگی تصویب و Product Gate پاس شد.
 - PHASE 05 با Business/Product rules، Permissions، State machines، Edge cases و Invariants آغاز شد.
+- قراردادهای Safety، Material availability، Multi-child و deterministic Ranking اضافه شدند؛ Rules Gate با Calibration Hold به `CONDITIONAL PASS` رسید.
+- PHASE 06 با Segments، Proto-personas، JTBD، Journeys و Pain points برای Design تکمیل شد.
+- PHASE 07 با Brand strategy، Voice، Visual direction و Copy system تکمیل و Gate آن PASS شد.
+- PHASE 08 با IA، Navigation، Priority flows، Screen inventory/specs، Accessibility، Design system، Motion system و Homepage Hero spec آغاز شد.
+- تصویر مرجع تیله Hero در `docs/08-ux/assets/teelle-hero-marble-reference-v1.png` ثبت شد.
 
 ### Changed
 

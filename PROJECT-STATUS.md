@@ -2,9 +2,9 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 05 — PRODUCT RULES
-Current Stage: Domain rule formalization
-Current Task: نهایی‌کردن Safety restrictions، Material semantics و Multi-child rules
+Current Phase: PHASE 08 — UI / UX DESIGN
+Current Stage: Priority experience design
+Current Task: طراحی Home و مسیر Guest Quick Match با تیله تعاملی
 Overall Status: PLANNING
 
 Last Completed:
@@ -16,25 +16,30 @@ Last Completed:
 - PHASE 02 — MARKET RESEARCH با `CONDITIONAL PASS` بسته شد.
 - PHASE 03 — IDEA VALIDATION با تصمیم `GO` اعلام‌شده توسط مالک بسته شد.
 - PHASE 04 — PRODUCT DEFINITION تکمیل و Gate آن PASS شد.
+- PHASE 05 با `CONDITIONAL PASS` بسته شد؛ Safety، Material و Multi-child تصویب و Weightهای Ranking تا Calibration قفل شدند.
+- PHASE 06 برای Design تکمیل شد؛ Personaها به‌علت نبود Evidence خام مالک در Repository به‌صورت Proto-persona ثبت شدند.
+- PHASE 07 — BRAND IDENTITY تکمیل و Gate آن PASS شد.
+- PHASE 08 — UI/UX DESIGN بلافاصله پس از Brand آغاز شد.
 - بازه سنی ۶ماهگی تا پیش از ۱۳سالگی تصویب شد.
 - تعارض Stack بریف نسخه ۱.۰ با دستور جدید مالک حل و ثبت شد.
 - Requirement تیله تعاملی صفحه نخست و Motion هویتی ثبت شد.
 
 Currently Working On:
 
-- PHASE 05 آغاز شده و Business/Product rules، Permissions، State machines، Edge cases و Invariants تدوین اولیه شده‌اند.
+- Information Architecture، Navigation، Priority flows و Screen baseline تدوین شدند.
+- Design system، Motion system و Homepage Interactive Marble Spec در Draft review هستند.
+- مرجع تصویری Hero داخل Repository ثبت شد.
 
 Next:
 
-- تعریف Structured Safety restrictions
-- تعریف Required/Optional Material availability semantics
-- تعریف Multi-child compatibility و conflict rules
-- تبدیل Ruleها به مثال‌های قابل تست
-- اجرای Product Rules Gate
+- Wireframe و Visual composition صفحه Home در Mobile و Desktop
+- طراحی حالت‌های Quick Match، Result، no-result، Detail و Active Play
+- بررسی Contrast، RTL، Touch و reduced-motion
+- Visual review مالک و اجرای UI/UX Gate
 
 Blocked By:
 
-- Rules Gate تا تکمیل Safety، Materials و Multi-child contracts آماده نیست.
+- UI/UX Gate تا Visual review اندازه‌های هدف و تأیید مالک آماده PASS نیست.
 
 Open Questions:
 
@@ -46,6 +51,7 @@ Open Decisions:
 
 - مدل Hosting و مسیر Production.
 - Scope دقیق نسخه TWA؛ شروع آن تا Website Complete Gate ممنوع است.
+- Weightهای عددی Ranking تا Golden-set calibration.
 
 Critical Risks:
 
@@ -54,7 +60,7 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 IN PROGRESS
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 IN PROGRESS
 Implementation Status: LOCKED
 Testing Status: NOT APPLICABLE — no application code
 Launch Status: NOT STARTED

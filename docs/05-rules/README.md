@@ -1,7 +1,7 @@
 # PHASE 05 — PRODUCT RULES
 
-Status: IN_PROGRESS
-Gate: NOT EVALUATED
+Status: COMPLETE
+Gate: CONDITIONAL PASS
 Started: 2026-09-03
 
 ## Documents
@@ -12,6 +12,10 @@ Started: 2026-09-03
 - `04-state-machines.md`
 - `05-edge-cases.md`
 - `06-invariants.md`
+- `07-safety-contract.md`
+- `08-material-contract.md`
+- `09-multi-child-contract.md`
+- `10-ranking-contract.md`
 
 ## Current assessment
 
@@ -21,13 +25,13 @@ Started: 2026-09-03
 - Role/permission baseline: DOCUMENTED
 - Core state machines: DOCUMENTED
 - Edge cases and invariants: DOCUMENTED
-- Exact scoring weights: OPEN
-- Detailed Safety restriction schema: OPEN
-- Material availability semantics: OPEN
-- Multi-child compatibility rules: OPEN
+- Exact scoring weights: CALIBRATION HOLD
+- Detailed Safety restriction schema: APPROVED BASELINE
+- Material availability semantics: APPROVED BASELINE
+- Multi-child compatibility rules: APPROVED BASELINE
 
 ## Gate state
 
-`NOT READY`
+`CONDITIONAL PASS`
 
-Rule baseline آماده است، اما Rule Gate تا مشخص‌شدن سه قرارداد Domain بالا و تبدیل آن‌ها به مثال‌های قابل تست PASS نمی‌شود.
+Safety، Material و Multi-child با مثال‌های قابل تست بسته شدند. Ranking deterministic نیز Contract قطعی دارد، اما Weightهای عددی تا Golden-set calibration عمداً Hold هستند. این Hold مانع User Model، Brand و UI/UX نیست و فقط Implementation الگوریتم Matching را قفل نگه می‌دارد.

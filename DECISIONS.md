@@ -111,3 +111,51 @@ Risks: بازه وسیع می‌تواند هزینه Library، Safety review و
 Reversible: بله، فقط با Change Impact Analysis و تصمیم جدید مالک.
 Affected Documents: PRD، Scope، MVP، Product Rules، Data و Tests آینده
 Affected Components: Matching، Profiles، Content، UX
+
+## DEC-008 — قراردادهای Safety، Materials و Multi-child
+
+Decision ID: DEC-008
+Date: 2026-09-03
+Status: APPROVED
+
+Context: Rule Gate به تعریف صریح رفتار Safety، موجودی وسایل و خانواده چندکودکی نیاز داشت.
+Options Considered: فرض خوش‌بینانه؛ Relax برای ساخت سه نتیجه؛ Fail-closed و no-result صادقانه
+Decision: Safety و Required material Hard filter هستند؛ unknown به‌معنای available نیست. در Multi-child تمام کودکان باید Eligibility مشترک داشته باشند و محدودیت سخت‌گیرانه‌تر غالب است. کمتر از سه Survivor همیشه no-result است.
+Reason: حفظ اعتماد، Safety و قابلیت تست.
+Consequences: UI باید Unknown clarification، هشدار پیش از Start و no-result recovery را طراحی کند.
+Risks: Coverage library ممکن است در Contextهای سخت ناکافی شود.
+Reversible: فقط با Evidence و Change Impact Analysis؛ Safety relaxation ممنوع است.
+Affected Documents: docs/05-rules، docs/08-ux
+Affected Components: Matching، Content، Result، Multi-child
+
+## DEC-009 — عبور مشروط Rules با Calibration Hold
+
+Decision ID: DEC-009
+Date: 2026-09-03
+Status: APPROVED
+
+Context: وزن‌های عددی Ranking بدون Golden set دقت کاذب می‌سازند، اما Brand و UI به عدد نهایی وابسته نیستند.
+Options Considered: وزن ساختگی؛ توقف همه فازها؛ قرارداد قطعی با Hold اجرایی
+Decision: Phase 05 برابر CONDITIONAL PASS است. Dimensionها و قواعد Ranking قطعی‌اند، اما Weightها تا Golden-set calibration FROZEN نمی‌شوند و Implementation Matching قفل می‌ماند.
+Reason: سرعت در Design بدون جعل Evidence یا بدهی الگوریتمی.
+Consequences: Phase 06 تا 08 مجازند؛ Phase 09 باید این Hold را در Dependencyها نگه دارد.
+Risks: تأخیر Calibration می‌تواند Implementation Match را متوقف کند.
+Reversible: Hold با Decision ثبت‌شده و Test evidence رفع می‌شود.
+Affected Documents: docs/05-rules/10-ranking-contract.md، PROJECT-STATUS.md
+Affected Components: Matching engine
+
+## DEC-010 — جهت UI و Hero مرجع
+
+Decision ID: DEC-010
+Date: 2026-09-03
+Status: APPROVED FOR DESIGN
+
+Context: مالک خواست UI در اولویت قرار گیرد و تیله بزرگ مرکزی با Pointer، Click و Drag تعامل داشته باشد.
+Options Considered: Hero تصویری ثابت؛ 3D نمایشی بدون کنترل؛ Marble تعاملی با fallback
+Decision: Design direction با Dials برابر 8/7/4 و Palette بریف تثبیت می‌شود. Home یک Marble مرکزی با Ambient، Pointer orientation، Click impulse، Drag/Touch rotation، Keyboard و reduced-motion دارد. تصویر `docs/08-ux/assets/teelle-hero-marble-reference-v1.png` مرجع Material است، نه Asset نهایی Production.
+Reason: تبدیل مستقیم هویت Brand به Interaction قابل قبول‌سنجی.
+Consequences: UI/UX پیش از Architecture تکمیل می‌شود و Rendering stack بعداً بر اساس این Contract انتخاب خواهد شد.
+Risks: GPU cost و Motion sensitivity؛ Fallback و Budget اجباری است.
+Reversible: جزئیات Visual بله؛ اصل تعامل طبق DEC-003 فقط با تصمیم جدید مالک.
+Affected Documents: docs/07-brand، docs/08-ux
+Affected Components: Homepage، Motion system، Accessibility
