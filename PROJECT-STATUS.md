@@ -1,6 +1,7 @@
 # PROJECT STATUS
 
 Project: Teelle / تیله
+Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 02 — MARKET RESEARCH
 Current Stage: Research planning and evidence collection
 Current Task: تعریف Research plan، رقبا، درد کاربران، Market gaps و Source register

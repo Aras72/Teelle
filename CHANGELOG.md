@@ -14,3 +14,4 @@
 
 - معماری TypeScript-first بریف v1.0 برای Implementation با تصمیم PHP/Laravel جایگزین شد.
 - وضعیت پروژه پس از PASS شدن Gate فاز ۰۱ به PHASE 02 — MARKET RESEARCH منتقل شد.
+- Checkout اصلی پروژه به `C:\Users\Aras\Downloads\Teelle` منتقل و به‌عنوان مسیر محلی Canonical ثبت شد.
