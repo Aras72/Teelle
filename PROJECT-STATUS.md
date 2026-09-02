@@ -1,9 +1,9 @@
 # PROJECT STATUS
 
 Project: Teelle / تیله
-Current Phase: PHASE 01 — IDEA DEVELOPMENT
-Current Stage: Problem and solution framing
-Current Task: تدوین تعریف مسئله، فرضیه‌های راه‌حل، فرضیات و سؤال‌های حیاتی
+Current Phase: PHASE 02 — MARKET RESEARCH
+Current Stage: Research planning and evidence collection
+Current Task: تعریف Research plan، رقبا، درد کاربران، Market gaps و Source register
 Overall Status: PLANNING
 
 Last Completed:
@@ -11,24 +11,27 @@ Last Completed:
 - مخزن GitHub به‌عنوان حافظه و Source of Truth پروژه فعال شد.
 - سه سند ورودی اصلی بدون تغییر محتوا داخل Repository ذخیره شدند.
 - PHASE 00 — PROJECT FOUNDATION تکمیل و Gate آن PASS شد.
+- PHASE 01 — IDEA DEVELOPMENT تکمیل و Gate آن PASS شد.
 - تعارض Stack بریف نسخه ۱.۰ با دستور جدید مالک حل و ثبت شد.
 - Requirement تیله تعاملی صفحه نخست و Motion هویتی ثبت شد.
 
 Currently Working On:
 
-- شروع PHASE 01 و تحلیل ایده پیش از Research و Implementation.
+- آماده‌سازی Research plan و ثبت منابع واقعی و به‌روز.
 
 Next:
 
-- `docs/01-idea/01-problem-definition.md`
-- `docs/01-idea/02-solution-hypotheses.md`
-- `docs/01-idea/03-assumptions.md`
-- `docs/01-idea/04-critical-questions.md`
-- اجرای Gate فاز ۰۱
+- `docs/02-research/01-market-overview.md`
+- `docs/02-research/02-competitors.md`
+- `docs/02-research/03-competitive-matrix.md`
+- `docs/02-research/04-user-pain-research.md`
+- `docs/02-research/05-market-gaps.md`
+- `docs/02-research/06-research-sources.md`
+- اجرای Research Gate
 
 Blocked By:
 
-- مورد مسدودکننده‌ای برای شروع فاز ۰۱ وجود ندارد.
+- مورد مسدودکننده‌ای برای شروع Research وجود ندارد.
 
 Open Questions:
 
@@ -47,7 +50,7 @@ Critical Risks:
 - Safety و Metadata ناقص می‌تواند Matching قطعی را تضعیف کند.
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 NOT STARTED
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 NOT STARTED
 Implementation Status: LOCKED
 Testing Status: NOT APPLICABLE — no application code
 Launch Status: NOT STARTED
