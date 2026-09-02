@@ -63,3 +63,19 @@ Risks: شلوغی، حواس‌پرتی و افت Performance در صورت نب
 Reversible: بله، با Design validation و تصمیم ثبت‌شده
 Affected Documents: Brand و UI/UX آینده
 Affected Components: تمام Surfaceهای کاربر
+
+## DEC-005 — عبور مشروط از Research به Validation
+
+Decision ID: DEC-005
+Date: 2026-09-03
+Status: APPROVED
+
+Context: Desk Research اولیه، Competitor landscape و User-pain signals موجود است، اما شواهد مستقیم بازار ایران، Search demand و willingness-to-pay هنوز جمع‌آوری نشده‌اند. مالک صریحاً دستور ادامه و ورود به فاز بعد را داده است.
+Options Considered: توقف کامل تا پایان تحقیق مستقیم؛ اعلام PASS کامل؛ عبور مشروط و انتقال Gapها به Validation
+Decision: Research Gate برابر `CONDITIONAL PASS` است و PHASE 03 MAY آغاز شود. Gapهای تحقیق به شروط اجباری Validation تبدیل می‌شوند. اعلام `GO` پیش از شواهد مستقیم ممنوع است.
+Reason: امکان پیشرفت ساختاریافته بدون پنهان‌کردن عدم‌قطعیت یا جعل کامل‌بودن Research.
+Consequences: PHASE 03 آغاز می‌شود؛ Product Definition و Implementation همچنان قفل هستند.
+Risks: اگر شروط در ادامه نادیده گرفته شوند، Conditional Pass می‌تواند به تأیید کاذب بازار تبدیل شود.
+Reversible: بله؛ در صورت ضعف شواهد، Research Gate به FAIL بازمی‌گردد.
+Affected Documents: PHASE 02، PHASE 03، PROJECT-STATUS
+Affected Components: Planning lifecycle

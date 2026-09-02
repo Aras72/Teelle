@@ -1,8 +1,9 @@
 # PHASE 02 — MARKET RESEARCH
 
-Status: IN_PROGRESS
-Gate: NOT READY
+Status: COMPLETE WITH CONDITIONS
+Gate: CONDITIONAL PASS
 Started: 2026-09-03
+Closed: 2026-09-03
 
 ## Completed in initial evidence sweep
 
@@ -12,7 +13,7 @@ Started: 2026-09-03
 - ساخت Competitive Matrix اولیه
 - ثبت Source register با تاریخ دسترسی
 
-## Required before Research Gate
+## Conditions carried into Phase 03
 
 - شواهد مستقیم از والد/همراه فارسی‌زبان در ایران
 - حداقل مجموعه مصاحبه یا Survey با روش و Sample ثبت‌شده
@@ -22,8 +23,15 @@ Started: 2026-09-03
 - بررسی دقیق دسترسی/پرداخت/Platform در ایران
 - Cross-check رقبای محلی و وضعیت واقعی Productهای آن‌ها
 
-## Current Gate Assessment
+## Research Gate Assessment
 
-`NOT READY`
+`CONDITIONAL PASS`
 
-داده فعلی برای شکل‌دادن Research direction کافی است، اما برای ادعای Problem validation، Market size درآمدی یا ورود به PHASE 03 کافی نیست.
+Problem، Competitor landscape، User-pain signals و Critical assumptions به‌اندازه کافی برای طراحی Validation مشخص شده‌اند. دستور صریح مالک ادامه به فاز بعد است، بنابراین Phase 03 MAY آغاز شود؛ اما هیچ‌کدام از Gapهای بالا حل‌شده تلقی نمی‌شوند و تصمیم `GO` تا جمع‌آوری شواهد مستقیم ممنوع است.
+
+## Gate conditions
+
+- Phase 03 MUST شواهد مستقیم کاربر فارسی‌زبان را جمع‌آوری کند.
+- Phase 03 MUST Search demand و willingness-to-pay را آزمایش کند یا صریحاً `UNVERIFIED` نگه دارد.
+- Market size درآمدی، SAM و SOM MUST تا وجود داده کافی `UNKNOWN` بمانند.
+- Product Definition MUST بر نتیجه Go/No-Go معتبر تکیه کند، نه صرفاً Desk Research.

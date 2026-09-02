@@ -2,9 +2,9 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 02 — MARKET RESEARCH
-Current Stage: Research planning and evidence collection
-Current Task: جمع‌آوری شواهد مستقیم بازار ایران، Search demand و willingness-to-pay
+Current Phase: PHASE 03 — IDEA VALIDATION
+Current Stage: Validation planning and evidence collection
+Current Task: اجرای Problem interviews، Search-demand study و Concierge Quick Match
 Overall Status: PLANNING
 
 Last Completed:
@@ -13,26 +13,24 @@ Last Completed:
 - سه سند ورودی اصلی بدون تغییر محتوا داخل Repository ذخیره شدند.
 - PHASE 00 — PROJECT FOUNDATION تکمیل و Gate آن PASS شد.
 - PHASE 01 — IDEA DEVELOPMENT تکمیل و Gate آن PASS شد.
+- PHASE 02 — MARKET RESEARCH با `CONDITIONAL PASS` بسته شد.
 - تعارض Stack بریف نسخه ۱.۰ با دستور جدید مالک حل و ثبت شد.
 - Requirement تیله تعاملی صفحه نخست و Motion هویتی ثبت شد.
 
 Currently Working On:
 
-- تکمیل PHASE 02؛ Desk research اولیه انجام شده و تحقیق مستقیم بازار ایران باقی مانده است.
+- PHASE 03 آغاز شده؛ Plan و Risk baseline آماده است، اما آزمون‌های Demand هنوز اجرا نشده‌اند.
 
 Next:
 
-- `docs/02-research/01-market-overview.md`
-- `docs/02-research/02-competitors.md`
-- `docs/02-research/03-competitive-matrix.md`
-- `docs/02-research/04-user-pain-research.md`
-- `docs/02-research/05-market-gaps.md`
-- `docs/02-research/06-research-sources.md`
-- اجرای Research Gate
+- اجرای `VAL-001` تا `VAL-007`
+- جمع‌آوری Evidence مستقیم فارسی‌زبان
+- تکمیل `docs/03-validation/02-demand-validation.md`
+- تصمیم `GO / GO WITH CONDITIONS / PIVOT / NO-GO`
 
 Blocked By:
 
-- مورد مسدودکننده‌ای برای شروع Research وجود ندارد.
+- تصمیم Go/No-Go بدون دسترسی به مشارکت‌کنندگان واقعی و داده Search معتبر قابل تکمیل نیست.
 
 Open Questions:
 
@@ -52,7 +50,7 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 IN PROGRESS
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 IN PROGRESS
 Implementation Status: LOCKED
 Testing Status: NOT APPLICABLE — no application code
 Launch Status: NOT STARTED
