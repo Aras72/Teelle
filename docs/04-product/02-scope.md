@@ -23,6 +23,7 @@ Phase: 04 — PRODUCT DEFINITION
 - Responsive RTL، Accessibility، Security، Privacy و Performance
 - PWA readiness لازم برای سایت
 - حداقل Library مصوب هر Release stage
+- پوشش سنی از ۶ماهگی تا پیش از ۱۳سالگی
 
 ## SHOULD HAVE
 
@@ -63,6 +64,6 @@ Phase: 04 — PRODUCT DEFINITION
 
 Android در Brief v1.0 به‌عنوان MVP آمده بود، اما با `DEC-001` superseded است. Mobile delivery فقط TWA و فقط پس از تکمیل و تأیید وب‌سایت است؛ بنابراین جزو Website MVP نیست.
 
-## Open scope decision
+## Approved age boundary
 
-Age range دقیق بازی‌های Website MVP هنوز تعیین نشده و MUST پیش از Product Gate مشخص شود.
+Website MVP کودکان با `6 ≤ age_months < 156` را پشتیبانی می‌کند. خارج این بازه، محصول MUST محدودیت را شفاف اعلام کند و Match نسازد.

@@ -11,6 +11,8 @@ Phase: 04 — PRODUCT DEFINITION
 
 MVP یک وب‌سایت Responsive فارسی با Backend واقعی مشترک، PWA readiness و Admin عملیاتی است. Mobile package جزو این MVP نیست.
 
+Supported age: از تکمیل ۶ماهگی تا پیش از تولد ۱۳سالگی (`6 ≤ age_months < 156`).
+
 ## Core loop
 
 1. کاربر وارد Landing می‌شود.
@@ -75,6 +77,6 @@ MVP یک وب‌سایت Responsive فارسی با Backend واقعی مشتر�
 - عملیات Content/Admin بدون نیاز مالک به Terminal عملی باشد.
 - Critical tests، Security و Production readiness پاس شوند.
 
-## Open decision
+## Coverage boundary
 
-Age range دقیق MVP و Coverage threshold هر گروه سنی هنوز باید تصویب شود.
+Golden Coverage Matrix باید بازه سنی مصوب و Situationهای Critical را پوشش دهد. هر سلول Critical پیش از ادعای Support باید پس از Hard Filter حداقل سه بازی Published/Reviewed داشته باشد. تعداد حدود ۲۵۰ بازی Target محتوا است، اما جای Coverage Gate را نمی‌گیرد.

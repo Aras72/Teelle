@@ -21,7 +21,7 @@ Version: 0.1
 - Complex: خانواده چندکودکی
 - High-value: والد برنامه‌ریز
 
-Exact child age range: `OPEN DECISION`
+Exact child age range: از تکمیل ۶ماهگی تا پیش از تولد ۱۳سالگی (`6 ≤ age_months < 156`)
 
 ## Value proposition
 
@@ -49,10 +49,12 @@ Guest MUST بتواند Quick Match، Result، Game Detail و Start را بدو�
 
 ### Game content
 
+- `PRD-AGE-001`: سیستم MUST فقط برای سن `6 ≤ age_months < 156` Match تولید کند.
 - `PRD-GAME-001`: هر بازی MUST Metadata سن، زمان، Prep، Location، Space، Noise، Mess، Players، Adult requirement، Materials، Energy، Mood، Interaction، Skills، Involvement، Setup، Safety، Source و Cultural origin داشته باشد.
 - `PRD-GAME-002`: Game facts، Editorial judgment و Behavioral data MUST جدا بمانند.
 - `PRD-GAME-003`: هر بازی MUST آزمون فهم ۳۰ثانیه‌ای را در فرایند Editorial پاس کند.
 - `PRD-GAME-004`: Variation MUST زیر Core Game مدل شود، نه به‌عنوان Duplicate مستقل.
+- `PRD-GAME-005`: هر Context بحرانی در Golden Coverage Matrix MUST پس از Hard Filter حداقل سه بازی Published/Reviewed داشته باشد؛ Gap آن Context را از ادعای Support خارج می‌کند.
 
 ### Play lifecycle
 

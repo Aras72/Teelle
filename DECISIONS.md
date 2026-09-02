@@ -95,3 +95,19 @@ Risks: نبود Evidence قابل Audit می‌تواند Traceability تصمی�
 Reversible: بله؛ Evidence جدید می‌تواند باعث PIVOT یا NO-GO شود.
 Affected Documents: PHASE 03، PROJECT-STATUS، PHASE 04
 Affected Components: Product planning lifecycle
+
+## DEC-007 — بازه سنی Website MVP
+
+Decision ID: DEC-007
+Date: 2026-09-03
+Status: APPROVED
+
+Context: Product Gate به بازه سنی دقیق نیاز داشت. مالک بازه «از نوزاد ۶ماهه تا کودک ۱۲ساله» را تعیین کرد.
+Options Considered: بازه محدودتر؛ بازه ۶ ماه تا ۱۲ سال؛ بازه بدون سقف روشن
+Decision: Website MVP MUST کودکان از تکمیل ۶ماهگی تا پیش از تولد ۱۳سالگی را پشتیبانی کند. نمایش محاسباتی این مرز `6 ≤ age_months < 156` است.
+Reason: تبدیل دستور مالک به مرز دقیق، بدون ابهام در انتهای ۱۲سالگی.
+Consequences: Taxonomy، Coverage، UI ورودی سن، Matching، Content و Tests باید کل این بازه را پوشش دهند. سن خارج از بازه نتیجه Match دریافت نمی‌کند.
+Risks: بازه وسیع می‌تواند هزینه Library، Safety review و Coverage را افزایش دهد.
+Reversible: بله، فقط با Change Impact Analysis و تصمیم جدید مالک.
+Affected Documents: PRD، Scope، MVP، Product Rules، Data و Tests آینده
+Affected Components: Matching، Profiles، Content، UX

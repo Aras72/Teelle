@@ -1,8 +1,9 @@
 # PHASE 04 — PRODUCT DEFINITION
 
-Status: IN_PROGRESS
-Gate: NOT EVALUATED
+Status: COMPLETE
+Gate: PASS
 Started: 2026-09-03
+Closed: 2026-09-03
 
 ## Documents
 
@@ -18,12 +19,12 @@ Started: 2026-09-03
 - Website MVP: DOCUMENTED
 - Feature scope: DOCUMENTED
 - Non-goals: DOCUMENTED
-- Exact supported child age range: OPEN DECISION
-- Public-launch content acceptance threshold: NEEDS FORMALIZATION
+- Exact supported child age range: APPROVED — 6 to less than 156 months
+- Public-launch content acceptance threshold: DEFINED BY CRITICAL GOLDEN COVERAGE MATRIX
 - Payment provider/pricing amounts: OPEN; architecture/commercial dependency
 
 ## Gate state
 
-`NOT READY`
+`PASS`
 
-Product Definition artifacts now exist, but Gate remains open until the exact child age scope and critical acceptance boundaries are reconciled. This does not authorize implementation.
+PRD، Scope، MVP، Feature Catalog و Non-goals مستند شده‌اند. بازه سنی و Coverage boundary مشخص‌اند. Payment provider و قیمت مبلغی وابستگی‌های فازهای بعد هستند و Product identity را مسدود نمی‌کنند. عبور Gate اجازه ورود به Product Rules را می‌دهد، نه Implementation.

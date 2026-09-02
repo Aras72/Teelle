@@ -14,6 +14,8 @@
 - PHASE 03 با Validation plan، Demand tests، Risk register و Go/No-Go `PENDING` آغاز شد.
 - نتیجه PHASE 03 طبق تحقیق اعلام‌شده مالک به `GO` تغییر کرد؛ نبود Evidence خام در Repository ثبت شد.
 - PHASE 04 با PRD، Scope، MVP، Feature Catalog و Non-goals آغاز شد.
+- بازه سنی Website MVP برابر ۶ماهگی تا پیش از تولد ۱۳سالگی تصویب و Product Gate پاس شد.
+- PHASE 05 با Business/Product rules، Permissions، State machines، Edge cases و Invariants آغاز شد.
 
 ### Changed
 
