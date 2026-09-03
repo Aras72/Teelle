@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+:root {
+    color-scheme: light;
+    font-family: Tahoma, Arial, sans-serif;
+    color: #25231f;
+    background: #f7f4ed;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 20rem;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.foundation-shell {
+    display: grid;
+    min-height: 100vh;
+    place-content: center;
+    justify-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+.foundation-mark {
+    width: 4.5rem;
+    aspect-ratio: 1;
+    border: 0.5rem solid #25231f;
+    border-radius: 50%;
+    background: #f28f6b;
+}
+
+.foundation-eyebrow,
+.foundation-copy,
+.foundation-note,
+h1 {
+    margin: 0;
+}
+
+.foundation-eyebrow {
+    color: #6b655c;
+    font-size: 0.875rem;
+}
+
+h1 {
+    font-size: clamp(3rem, 12vw, 7rem);
+    line-height: 0.9;
+}
+
+.foundation-copy {
+    max-width: 32rem;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    line-height: 1.8;
+}
+
+.foundation-note {
+    max-width: 34rem;
+    color: #6b655c;
+    font-size: 0.875rem;
+    line-height: 1.8;
+}

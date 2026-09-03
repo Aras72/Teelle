@@ -46,6 +46,9 @@
 - ایمیل/رمز به‌عنوان ورود فعال MVP ثبت شد؛ OTP موبایل پشت Adapter و Feature flag تا انتخاب سرویس پیامک غیرفعال ماند.
 - PHASE 12 با Roadmap، Dependencies، Task breakdown، Definition of Done، Coding standards و Git strategy تکمیل و Architecture Gate پاس شد.
 - PHASE 13 با ترتیب Promptهای اجرایی Foundation، MySQL، UI، Homepage و Interactive Marble آغاز شد.
+- Promptهای 001 تا 005 Freeze و در Repository ثبت شدند.
+- Prompt 001 اجرا شد و پایه Laravel 13 / Livewire 4 در `apps/web` با Composer و pnpm lockfile اضافه شد.
+- پوسته موقت فارسی RTL، تنظیمات locale/timezone، Health endpoint و تست‌های Foundation اضافه شدند؛ Quality Gate برابر PASS شد.
 
 ### Changed
 
