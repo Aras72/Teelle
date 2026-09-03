@@ -7,7 +7,7 @@
 ## وضعیت فعلی
 
 - مرحله: برنامه‌ریزی محصول
-- فاز: `PHASE 11 — SECURITY & PRIVACY`
+- فاز: `PHASE 12 — DEVELOPMENT PLANNING`
 - پیاده‌سازی: `LOCKED`
 - پشته قطعی وب: PHP + Laravel
 - تحویل اصلی: وب‌سایت کامل و Responsive

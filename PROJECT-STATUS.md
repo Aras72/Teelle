@@ -2,9 +2,9 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 11 — SECURITY & PRIVACY
-Current Stage: Security baseline
-Current Task: Threat model، Authentication، Authorization، Data security و Privacy review
+Current Phase: PHASE 12 — DEVELOPMENT PLANNING
+Current Stage: Roadmap and executable slices
+Current Task: Development roadmap، dependencies، task breakdown، Definition of Done، coding standards و Git strategy
 Overall Status: PLANNING
 
 Last Completed:
@@ -41,12 +41,13 @@ Currently Working On:
 - قرارداد یکپارچگی تصویر و توضیح برای رشد Game Library تصویب شد.
 - PHASE 09 با Laravel Modular Monolith، Tech stack پیشنهادی و Component boundaries آغاز شد.
 - PHASE 09 با API، Integration، Environment و ADRهای نهایی تکمیل شد.
-- PHP 8.5، Laravel 13، Livewire 4 و MySQL مبنای معماری شدند؛ نسخه دقیق MySQL از پنل هاست باید ثبت شود.
+- PHP 8.5، Laravel 13، Livewire 4 و MySQL 8 پارس‌پک مبنای معماری شدند.
 - PHASE 10 مدل داده، Schema منطقی Game Library، lifecycle، backup و migration strategy را تکمیل کرد.
+- پارس‌پک و MySQL 8 به‌عنوان Hosting/Database اعلام‌شده مالک ثبت شدند.
+- PHASE 11 مدل تهدید، Auth boundary، Authorization، Data security، Privacy، Abuse prevention و Security checklist را تکمیل کرد.
 
 Next:
 
-- تکمیل PHASE 11 Security & Privacy و تعیین مدت‌های دقیق Retention
 - تکمیل PHASE 12 Development Planning و Definition of Done
 - اجرای Architecture Gate کل پروژه
 - ساخت Migration، Seeder و Game content pipeline در PHASE 14 پس از بازشدن Implementation
@@ -59,13 +60,14 @@ Blocked By:
 Open Questions:
 
 - بازار جغرافیایی اولیه خارج از تمرکز فارسی/ایران هنوز باید در Research دقیق شود.
-- نسخه دقیق MySQL ارائه‌شده در پنل هاست و اینکه سرویس واقعاً MySQL است یا MariaDB باید تأیید شود.
-- Provider Hosting و S3-compatible storage هنوز باید بر اساس capability contract انتخاب شوند.
-- مدت‌های قانونی Retention برای بازار هدف در PHASE 11 باید نهایی شوند.
+- Minor/Patch واقعی MySQL 8 در شروع Implementation باید ثبت شود.
+- قابلیت‌های PHP 8.5، Cron/Queue، Backup و S3-compatible storage در پلن پارس‌پک باید بررسی شوند.
+- مدت قانونی نگهداری Payment/accounting برای بازار هدف باید پیش از Commerce implementation نهایی شود.
+- روش اصلی ورود حساب—ایمیل/رمز یا موبایل/OTP—باید با مالک انتخاب شود.
 
 Open Decisions:
 
-- مدل Hosting و مسیر Production.
+- پلن دقیق پارس‌پک و مسیر Production deployment.
 - Scope دقیق نسخه TWA؛ شروع آن تا Website Complete Gate ممنوع است.
 - Weightهای عددی Ranking تا Golden-set calibration.
 
@@ -84,7 +86,7 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 IN PROGRESS
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 IN PROGRESS
 Implementation Status: LOCKED
 Testing Status: NOT APPLICABLE — no application code
 Launch Status: NOT STARTED

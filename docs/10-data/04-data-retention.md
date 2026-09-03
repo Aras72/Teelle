@@ -1,6 +1,6 @@
 # Data Retention
 
-Status: BASELINE WITH LEGAL HOLD
+Status: ACCEPTED OPERATIONAL BASELINE WITH LEGAL FINANCIAL HOLD
 Phase: 10 - DATA
 
 ## Rules
@@ -28,4 +28,4 @@ Phase: 10 - DATA
 - Logs must not contain password، token، payment credential، full cookie or free-form child PII.
 - Analytics export must not expose small cohorts that enable re-identification.
 
-Exact day/month values remain OPEN until PHASE 11 Privacy review and target-market legal confirmation. Implementation of deletion jobs remains LOCKED until then.
+PHASE 11 defaults عملیاتی 30 روز برای Guest context/log، 90 روز برای Security events، حداکثر 30 روز برای حذف eligible account data و 35 روز برای Backup rotation تعیین کرد. مدت Payment/accounting فقط پس از تأیید الزام قانونی بازار هدف Freeze می‌شود.

@@ -30,16 +30,16 @@ Sources:
 | Asset pipeline | Vite | ACCEPTED |
 | Interactive marble | Three.js isolated island | ACCEPTED WITH SPIKE |
 | General motion | CSS and Web Animations API first | ACCEPTED |
-| Database | MySQL، حداقل 8.0 | ACCEPTED BY OWNER؛ exact host version pending |
+| Database | MySQL 8 on Pars Pack | APPROVED BY OWNER |
 | Cache and Queue | Laravel database drivers baseline؛ Redis only by measured need | ACCEPTED |
 | Object storage | Laravel Filesystem with S3-compatible Production disk | ACCEPTED |
 | Testing | Pest or PHPUnit plus browser accessibility tests | Selection scheduled for PHASE 12 |
 
 ## Selection rule
 
-Hosting باید PHP 8.5، Extensionهای Laravel و MySQL 8.0 یا بالاتر را پشتیبانی کند. نسخه دقیق MySQL از پنل هاست ثبت می‌شود و پیش از Migration freeze خواهد شد. نسخه‌های patch پکیج‌ها فقط از طریق Lockfile و پس از Quality Gate ارتقا می‌یابند. Three.js پس از Spike عملکرد و Testing toolchain در PHASE 12 Freeze می‌شوند.
+Hosting انتخاب‌شده پارس‌پک است و طبق اعلام مالک MySQL 8 ارائه می‌کند. PHP 8.5، Extensionهای Laravel، Cron/Queue، Backup و deployment capabilityهای پلن مشخص باید پیش از Implementation جداگانه بررسی شوند. نسخه‌های patch پکیج‌ها فقط از طریق Lockfile و پس از Quality Gate ارتقا می‌یابند. Three.js پس از Spike عملکرد و Testing toolchain در PHASE 12 Freeze می‌شوند.
 
-Laravel 13 از MySQL 8.0 به بالا پشتیبانی می‌کند. MariaDB معادل MySQL فرض نمی‌شود؛ اگر پنل هاست در عمل MariaDB ارائه دهد، نسخه و سازگاری آن باید جداگانه بررسی و ثبت شود.
+Laravel 13 از MySQL 8.0 به بالا پشتیبانی می‌کند. Minor/Patch واقعی Server در شروع Implementation از connection ثبت می‌شود تا Migrationها در همان نسخه آزموده شوند.
 
 ## Explicit exclusions
 

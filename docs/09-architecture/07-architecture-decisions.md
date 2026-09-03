@@ -13,7 +13,7 @@ Website MVP یک Laravel Modular Monolith با Blade SSR، Livewire برای sta
 
 Status: ACCEPTED
 
-MySQL پایگاه اصلی است چون Hosting مالک آن را پشتیبانی می‌کند. حداقل سازگاری معماری MySQL 8.0 است؛ نسخه دقیق از پنل هاست ثبت می‌شود. داده Matching و Taxonomy نرمال و JSON فقط برای Context/Snapshot منعطف استفاده می‌شود.
+MySQL 8 ارائه‌شده توسط پارس‌پک پایگاه اصلی است. Minor/Patch واقعی در شروع Implementation ثبت و تست می‌شود. داده Matching و Taxonomy نرمال و JSON فقط برای Context/Snapshot منعطف استفاده می‌شود.
 
 ## ADR-003 - Database-first queue and cache
 

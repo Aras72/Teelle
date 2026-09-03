@@ -1,7 +1,7 @@
 # PHASE 10 - DATA
 
 Status: COMPLETE BASELINE
-Review: PASS WITH RETENTION HOLD
+Review: PASS WITH LEGAL FINANCIAL-RETENTION HOLD
 Started: 2026-09-03
 
 ## Documents
@@ -15,7 +15,7 @@ Started: 2026-09-03
 
 ## Result
 
-مدل داده و Schema منطقی MySQL برای Game Library، Matching، Play events، Membership و Audit تعریف شد. مدت‌های حقوقی نگهداری PII و داده مالی تا PHASE 11 باید با بازار و الزام قانونی نهایی شوند؛ این Hold مانع ورود به Security نیست اما پیش از Implementation باید بسته شود.
+مدل داده و Schema منطقی MySQL برای Game Library، Matching، Play events، Membership و Audit تعریف شد. PHASE 11 مدت‌های عملیاتی اولیه را تعیین کرد؛ فقط مدت قانونی رکوردهای مالی باید با بازار و مشاور حقوقی نهایی شود.
 
 ## Delivery distinction
 

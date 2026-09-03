@@ -262,9 +262,9 @@ Decision ID: DEC-017
 Date: 2026-09-03
 Status: APPROVED BY OWNER
 
-Context: انتخاب PostgreSQL بدون پرسش درباره قابلیت Hosting انجام شد. مالک اعلام کرد Hosting پروژه MySQL را پشتیبانی می‌کند و خواست دیتابیس جایگزین شود.
+Context: انتخاب PostgreSQL بدون پرسش درباره قابلیت Hosting انجام شد. مالک اعلام کرد Hosting پروژه پارس‌پک است و MySQL 8 ارائه می‌کند و خواست دیتابیس جایگزین شود.
 Options Considered: حفظ PostgreSQL و تغییر هاست؛ استفاده از MySQL موجود روی هاست
-Decision: MySQL دیتابیس اصلی Website است و بخش Database در DEC-016 را جایگزین می‌کند. حداقل نسخه سازگار معماری 8.0 است؛ نسخه دقیق Server MUST از پنل هاست تأیید و پیش از Migration ثبت شود. MariaDB بدون بررسی جداگانه MySQL تلقی نمی‌شود.
+Decision: MySQL 8 ارائه‌شده توسط پارس‌پک دیتابیس اصلی Website است و بخش Database در DEC-016 را جایگزین می‌کند. Minor/Patch واقعی Server MUST در شروع Implementation ثبت و Migrationها روی همان نسخه آزموده شوند.
 Reason: هم‌راستایی معماری با زیرساخت واقعی مالک و جلوگیری از طراحی غیرقابل استقرار.
 Consequences: JSONB، GIN، Partial Index و Materialized Viewهای مخصوص PostgreSQL در Schema استفاده نمی‌شوند؛ Schema و projectionها با MySQL طراحی می‌شوند.
 Risks: نسخه قدیمی MySQL یا محدودیت worker/scheduler هاست ممکن است با Laravel 13 یا Queue سازگار نباشد و باید پیش از Implementation بررسی شود.

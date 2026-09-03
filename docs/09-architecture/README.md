@@ -25,4 +25,4 @@ Started: 2026-09-03
 
 ## Current architecture slice
 
-Laravel Modular Monolith، مرز Componentها، API، Integrationها، Environmentها و Rendering تیله تعاملی تعریف شدند. PHP 8.5، Laravel 13، Livewire 4 و MySQL مبنای معماری‌اند؛ نسخه دقیق MySQL پس از مشاهده نسخه ارائه‌شده در پنل هاست Freeze می‌شود. Architecture Gate کل پروژه پس از تکمیل Data، Security و Development Planning ارزیابی خواهد شد.
+Laravel Modular Monolith، مرز Componentها، API، Integrationها، Environmentها و Rendering تیله تعاملی تعریف شدند. PHP 8.5، Laravel 13، Livewire 4 و MySQL 8 ارائه‌شده توسط پارس‌پک مبنای معماری‌اند. Architecture Gate کل پروژه پس از تکمیل Data، Security و Development Planning ارزیابی خواهد شد.

@@ -5,7 +5,7 @@ Phase: 10 - DATA
 
 ## Modeling principles
 
-- MySQL منبع اصلی داده است؛ حداقل نسخه قابل قبول 8.0 و نسخه دقیق وابسته به پنل هاست است.
+- MySQL 8 ارائه‌شده توسط پارس‌پک منبع اصلی داده است؛ Minor/Patch واقعی هنگام اتصال محیط ثبت می‌شود.
 - داده رابطه‌ای برای Rules و Filtering نرمال می‌شود؛ نوع `JSON` فقط برای Snapshot و Context واقعاً متغیر است.
 - شناسه داخلی bigint و شناسه عمومی ULID/UUID opaque است.
 - زمان‌ها UTC و timestamp سرور authoritative است.

@@ -40,6 +40,9 @@
 - PHASE 10 با مدل داده، Schema منطقی Game Library، lifecycle، retention baseline، backup/recovery و migration strategy تکمیل شد.
 - پروژه وارد PHASE 11 — SECURITY & PRIVACY شد.
 - با اعلام مالک، MySQL جایگزین PostgreSQL شد؛ Schema، Index strategy، Heartbeat projection و Backup contract برای MySQL اصلاح شدند و نسخه دقیق هاست برای تأیید باقی ماند.
+- پارس‌پک و MySQL 8 به‌عنوان Hosting/Database اعلام‌شده توسط مالک ثبت شدند؛ بررسی capabilityهای دیگر پلن برای پیش از Implementation باقی ماند.
+- PHASE 11 Security & Privacy با Threat model، Auth/Authz، Data security، Privacy defaults، Abuse controls و checklist تکمیل شد.
+- PHASE 12 Development Planning با ترتیب اولیه Sliceهای Laravel/MySQL/UI/Marble/Matching آغاز شد.
 
 ### Changed
 
