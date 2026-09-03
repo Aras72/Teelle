@@ -23,7 +23,7 @@ Source decision: DEC-003
 
 - Tagline exact: «کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد»
 - H1، توضیح Hero و Tagline نمایشی بدون نقطه پایانی رندر می‌شوند.
-- Heartbeat exact pattern: «{PLAY_STARTS} بازی با تیله شروع شده»
+- Heartbeat exact pattern: «{PLAY_STARTS} بار بازی با تیله انجام شده»
 - عدد فقط aggregate رویدادهای معتبر `started` است.
 - Animation عدد فقط هنگام تغییر واقعی یک pulse کوتاه دارد؛ loop تزئینی ندارد.
 - مقدار `۱۲٬۳۴۵` در Prototype v2 فقط Sample layout است و داده واقعی نیست.

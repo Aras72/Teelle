@@ -207,3 +207,19 @@ Risks: بازگشت ناخواسته نقطه در ترجمه یا CMS؛ Copy re
 Reversible: بله، با تصمیم جدید مالک.
 Affected Documents: Copy System، Homepage Hero Spec، UI Prototypes
 Affected Components: Homepage UI، Content rendering
+
+## DEC-014 — تأیید قالب اصلی Homepage و Microcopy نهایی Heartbeat
+
+Decision ID: DEC-014
+Date: 2026-09-03
+Status: APPROVED BY OWNER
+
+Context: یک خروجی آزمایشی با چیدمان دونیمه‌ای از قالب اصلی فاصله گرفت. مالک آن قالب را رد و بازگشت به چیدمان اصلیِ تیله بزرگ و مرکزی را تأیید کرد؛ همچنین متن Heartbeat را تغییر داد.
+Options Considered: قالب دونیمه‌ای آزمایشی؛ قالب اصلی مرکزی؛ بازطراحی کامل
+Decision: مرجع نهایی Homepage تصاویر v4 با قالب اصلی و تیله مرکزی است. الگوی نمایشی Heartbeat MUST برابر «{PLAY_STARTS} بار بازی با تیله انجام شده» باشد. مقدار همچنان فقط شمارش aggregate رویدادهای معتبر `started` است.
+Reason: حفظ جهت بصری تأییدشده و بیان طبیعی‌تر تعداد دفعات بازی بدون تغییر North Star.
+Consequences: طراحی و پیاده‌سازی Homepage باید فقط از v4 پیروی کنند؛ Prototype دونیمه‌ای مرجع نیست.
+Risks: واژه «انجام شده» ممکن است با Event فنی `completed` اشتباه شود؛ قرارداد داده صریحاً شمارش `started` را حفظ می‌کند.
+Reversible: Copy با تصمیم مالک قابل تغییر است؛ قالب مرجع فقط با Review جدید تغییر می‌کند.
+Affected Documents: Copy System، Screen Specifications، Homepage Hero Spec، UI Prototypes
+Affected Components: Homepage UI، Heartbeat presentation، Analytics mapping

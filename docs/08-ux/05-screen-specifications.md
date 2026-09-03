@@ -13,7 +13,7 @@ Phase: 08 - UI/UX DESIGN
 - Error: Static/CSS marble fallback، CTA همیشه فعال
 - Responsive: Mobile تک‌ستونه؛ تیله 44-58vw با حداقل Hit area 160px؛ Desktop حداکثر 440px
 - Permission: Public
-- Heartbeat: الگوی «{PLAY_STARTS} بازی با تیله شروع شده» و فقط از aggregate معتبر `started`
+- Heartbeat: الگوی «{PLAY_STARTS} بار بازی با تیله انجام شده» و فقط از aggregate معتبر `started`
 - Tagline: در Section مستقل بلافاصله پس از Hero، نه به‌عنوان عنصر پنجم Hero
 
 ## Quick Match Context

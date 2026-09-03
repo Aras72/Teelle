@@ -4,7 +4,7 @@ Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 08 — UI / UX DESIGN
 Current Stage: Priority experience design
-Current Task: Owner review Homepage v3؛ سپس طراحی no-result و system states
+Current Task: Owner review برد System states v1 و تکمیل نسخه تیره
 Overall Status: PLANNING
 
 Last Completed:
@@ -33,11 +33,12 @@ Currently Working On:
 - Dark Home و برد چهارصفحه‌ای مسیر اصلی Mobile ثبت شدند.
 - شش نکته Owner review در Prototype v2 اعمال شد: Tagline، Heartbeat، Dark cleanup، Theme persistence، Context questions و Return microcopy.
 - نقطه پایانی تیتر، توضیح Hero و شعار Home در Prototype v3 روشن و تیره حذف شد.
+- Homepage v4 با قالب اصلیِ تیله مرکزی و Microcopy جدید Heartbeat به تأیید مالک رسید.
+- برد روشن System states v1 برای no-result، Loading، Empty، Error و Offline ثبت شد.
 
 Next:
 
-- Owner review نسخه v3 Home، سؤال‌ها و Dark flow
-- طراحی no-result، Loading، Empty، Error و Offline states
+- Owner review برد روشن System states v1 و طراحی نسخه تیره آن
 - طراحی Variantهای Desktop برای Result و Detail
 - بررسی Dark-mode Mobile و Contrast
 - بررسی Contrast، RTL، Touch و reduced-motion
@@ -64,6 +65,7 @@ Resolved Decisions:
 - Dark theme طبق DEC-011 جزو Website MVP و سراسری است.
 - CTA Completion طبق DEC-012 برابر «بازی کردیم، برگشتیم» است.
 - تیترها، توضیح Hero و شعارهای نمایشی طبق DEC-013 بدون نقطه پایانی هستند.
+- قالب اصلی Homepage و عبارت Heartbeat طبق DEC-014 تأیید نهایی شدند.
 
 Critical Risks:
 

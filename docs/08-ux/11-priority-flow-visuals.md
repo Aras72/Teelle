@@ -34,7 +34,7 @@ Type: HIGH-FIDELITY STATIC MOCKUPS
 
 ## Still required before UI/UX Gate
 
-- طراحی no-result، Loading، Empty، Error و Offline states
+- بازبینی برد v1 حالت‌های no-result، Loading، Empty، Error و Offline و تکمیل نسخه تیره
 - Variantهای Desktop برای Result و Detail
 - Dark-mode Mobile و Contrast measurement
 - بررسی 320px، 390px، 768px، 1024px و 1440px

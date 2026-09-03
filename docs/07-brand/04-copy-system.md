@@ -16,7 +16,7 @@ Phase: 07 - BRAND IDENTITY
 - CTA اصلی Home فقط «چی بازی کنیم؟» است.
 - CTA فروش در مسیر Core مزاحم Start نمی‌شود.
 - Tagline رسمی MUST در یک بخش مستقل و قابل دیدن روی Home نمایش داده شود: «کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد»
-- Heartbeat pattern: «{PLAY_STARTS} بازی با تیله شروع شده»؛ مقدار از داده معتبر `started` می‌آید.
+- Heartbeat pattern: «{PLAY_STARTS} بار بازی با تیله انجام شده»؛ مقدار از داده معتبر `started` می‌آید.
 
 ## Display punctuation
 

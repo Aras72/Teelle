@@ -30,6 +30,8 @@ Priority: Homepage and Quick Match
 - `11-priority-flow-visuals.md`
 - `12-owner-review-revisions-v2.md`
 - `13-homepage-copy-punctuation-v3.md`
+- `14-homepage-approved-v4.md`
+- `15-system-states-v1.md`
 - `assets/teelle-hero-marble-reference-v1.png`
 - `prototypes/homepage-desktop-v1.png`
 - `prototypes/homepage-mobile-v1.png`
@@ -42,7 +44,10 @@ Priority: Homepage and Quick Match
 - `prototypes/core-flow-mobile-dark-v2.png`
 - `prototypes/homepage-desktop-light-v3.png`
 - `prototypes/homepage-desktop-dark-v3.png`
+- `prototypes/homepage-desktop-light-v4.png`
+- `prototypes/homepage-desktop-dark-v4.png`
+- `prototypes/system-states-mobile-light-v1.png`
 
 ## Gate state
 
-Owner review v2 اعمال شد: Tagline و Heartbeat به Home اضافه شدند، Dark surface اصلاح شد، Theme سراسری شد، Question set تکمیل شد و Return microcopy تغییر کرد. اصلاح نگارشی v3 نیز نقطه پایانی تیترها، توضیح Hero و شعار Home را در هر دو Theme حذف کرد. Gate پس از تأیید v3، طراحی Stateهای خطا/خالی/آفلاین، Variantهای Desktop مسیر اصلی و بررسی اندازه‌ها ارزیابی می‌شود. Architecture و Implementation تا آن زمان LOCKED هستند.
+Homepage v4 با همان قالب اصلی و تیله مرکزی به تأیید مالک رسید. Microcopy نهایی Heartbeat برابر «{PLAY_STARTS} بار بازی با تیله انجام شده» است و تصاویر v4 مرجع جاری‌اند. برد روشن System states v1 برای no-result، Loading، Empty، Error و Offline آماده Review است. Gate پس از نسخه تیره Stateها، Variantهای Desktop مسیر اصلی و بررسی اندازه‌ها ارزیابی می‌شود. Architecture و Implementation تا آن زمان LOCKED هستند.
