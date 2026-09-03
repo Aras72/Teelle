@@ -2,9 +2,9 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 09 — TECHNICAL ARCHITECTURE
-Current Stage: Architecture baseline
-Current Task: تکمیل API، Integration و Environment architecture و ارزیابی Architecture Gate
+Current Phase: PHASE 11 — SECURITY & PRIVACY
+Current Stage: Security baseline
+Current Task: Threat model، Authentication، Authorization، Data security و Privacy review
 Overall Status: PLANNING
 
 Last Completed:
@@ -40,24 +40,27 @@ Currently Working On:
 - مالک بسته UI/UX را تأیید کرد؛ PHASE 08 Gate برابر PASS شد.
 - قرارداد یکپارچگی تصویر و توضیح برای رشد Game Library تصویب شد.
 - PHASE 09 با Laravel Modular Monolith، Tech stack پیشنهادی و Component boundaries آغاز شد.
+- PHASE 09 با API، Integration، Environment و ADRهای نهایی تکمیل شد.
+- PHP 8.5، Laravel 13، Livewire 4 و PostgreSQL 17 مبنای معماری شدند.
+- PHASE 10 مدل داده، Schema منطقی Game Library، lifecycle، backup و migration strategy را تکمیل کرد.
 
 Next:
 
-- تکمیل API design و Integration boundaries
-- تعریف LOCAL، DEVELOPMENT، STAGING و PRODUCTION بدون وابستگی مالک به Terminal
-- انتخاب Database، Queue، Cache و Storage با توجه به Hosting
-- Spike معماری تیله تعاملی و Freeze نسخه Packageها
-- اجرای Architecture Gate
+- تکمیل PHASE 11 Security & Privacy و تعیین مدت‌های دقیق Retention
+- تکمیل PHASE 12 Development Planning و Definition of Done
+- اجرای Architecture Gate کل پروژه
+- ساخت Migration، Seeder و Game content pipeline در PHASE 14 پس از بازشدن Implementation
+- Spike اجرایی تیله و Freeze نسخه Three.js در برنامه توسعه
 
 Blocked By:
 
-- Freeze نهایی PHP 8.5 و Laravel 13 به تأیید سازگاری Hosting وابسته است.
+- Implementation تا تکمیل Security، Development Planning و Architecture Gate قفل است.
 
 Open Questions:
 
 - بازار جغرافیایی اولیه خارج از تمرکز فارسی/ایران هنوز باید در Research دقیق شود.
-- Provider و محدودیت‌های Hosting هنوز انتخاب نشده‌اند.
-- Engine دقیق Database و Backend مربوط به Object storage هنوز باید با Hosting تطبیق داده شود.
+- Provider Hosting و S3-compatible storage هنوز باید بر اساس capability contract انتخاب شوند.
+- مدت‌های قانونی Retention برای بازار هدف در PHASE 11 باید نهایی شوند.
 
 Open Decisions:
 
@@ -80,7 +83,7 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 IN PROGRESS
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 IN PROGRESS
 Implementation Status: LOCKED
 Testing Status: NOT APPLICABLE — no application code
 Launch Status: NOT STARTED

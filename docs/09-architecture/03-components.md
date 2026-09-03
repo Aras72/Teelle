@@ -1,6 +1,6 @@
 # Architecture Components
 
-Status: PROPOSED
+Status: ACCEPTED
 Phase: 09 - TECHNICAL ARCHITECTURE
 
 ## Web shell

@@ -1,6 +1,6 @@
-# Proposed Tech Stack
+# Selected Tech Stack
 
-Status: PROPOSED
+Status: ACCEPTED BASELINE
 Phase: 09 - TECHNICAL ARCHITECTURE
 Reviewed: 2026-09-03
 
@@ -21,22 +21,24 @@ Sources:
 
 | Layer | Choice | State |
 | --- | --- | --- |
-| Language | PHP 8.5 | PROPOSED، نیازمند Hosting verification |
-| Framework | Laravel 13.x | PROPOSED |
-| Rendering | Blade SSR | PROPOSED |
-| Stateful UI | Livewire | MAJOR VERSION PENDING |
-| Small UI behavior | Alpine.js or native modules | PENDING dependency audit |
-| Asset pipeline | Vite | PROPOSED |
-| Interactive marble | Three.js isolated island | PROPOSED، spike required |
-| General motion | CSS and Web Animations API first | PROPOSED |
-| Database | Relational SQL | ENGINE PENDING hosting decision |
-| Cache and Queue | Database-capable baseline، Redis optional | PENDING load and hosting decision |
-| Object storage | Laravel Filesystem adapter | BACKEND PENDING |
-| Testing | Pest or PHPUnit plus browser accessibility tests | PENDING final tool selection |
+| Language | PHP 8.5 | ACCEPTED؛ Hosting MUST support it |
+| Framework | Laravel 13.x | ACCEPTED |
+| Rendering | Blade SSR | ACCEPTED |
+| Stateful UI | Livewire 4، حداقل patched `4.3.4` | ACCEPTED؛ patch در Lockfile |
+| Small UI behavior | Alpine bundled with Livewire or native ES modules | ACCEPTED؛ dependency اضافه فقط با دلیل |
+| Asset pipeline | Vite | ACCEPTED |
+| Interactive marble | Three.js isolated island | ACCEPTED WITH SPIKE |
+| General motion | CSS and Web Animations API first | ACCEPTED |
+| Database | PostgreSQL 17، current minor | ACCEPTED |
+| Cache and Queue | Laravel database drivers baseline؛ Redis only by measured need | ACCEPTED |
+| Object storage | Laravel Filesystem with S3-compatible Production disk | ACCEPTED |
+| Testing | Pest or PHPUnit plus browser accessibility tests | Selection scheduled for PHASE 12 |
 
 ## Selection rule
 
-PHP 8.5 و Laravel 13 فقط پس از تأیید سازگاری Hosting و Extensionهای لازم FROZEN می‌شوند. اگر Hosting انتخاب‌شده PHP 8.5 را پشتیبانی نکند، Hosting یا نسخه PHP با Change Impact Analysis تعیین می‌شود؛ اصل PHP/Laravel تغییر نمی‌کند.
+Hosting باید PHP 8.5، Extensionهای Laravel و PostgreSQL 17 را پشتیبانی کند. نسخه‌های patch فقط از طریق Lockfile و پس از Quality Gate ارتقا می‌یابند. Three.js پس از Spike عملکرد و Testing toolchain در PHASE 12 Freeze می‌شوند.
+
+PostgreSQL 17 به‌جای 18 انتخاب شد تا ضمن داشتن پشتیبانی تا نوامبر 2029، ریسک استفاده از جدیدترین Major برای شروع محصول کاهش یابد. Laravel 13 نیز PostgreSQL 12 به بالا را پشتیبانی می‌کند.
 
 ## Explicit exclusions
 

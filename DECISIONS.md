@@ -239,3 +239,19 @@ Risks: تولید Asset هماهنگ برای Library بزرگ هزینه دار
 Reversible: Gate با Change Impact Analysis قابل بازگشایی است؛ Style contract با تصمیم جدید مالک اصلاح می‌شود.
 Affected Documents: PHASE 08 Gate، Game Content Visual Contract، PHASE 09 Architecture
 Affected Components: Game Library، Admin Publish flow، Cards، Detail، Media pipeline
+
+## DEC-016 — مبنای فنی و دیتابیس Website
+
+Decision ID: DEC-016
+Date: 2026-09-03
+Status: ACCEPTED ARCHITECTURE BASELINE
+
+Context: پس از PASS شدن UI/UX، پروژه به Stack اجرایی PHP/Laravel، دیتابیس بازی‌ها و مسیر عملیاتی بدون Terminal نیاز داشت.
+Options Considered: PostgreSQL یا MySQL؛ Queue/Cache دیتابیس یا Redis اجباری؛ Media روی disk یا Object storage
+Decision: Website با PHP 8.5، Laravel 13، Blade SSR و Livewire 4 ساخته می‌شود. PostgreSQL 17 پایگاه اصلی است؛ Queue/Cache در شروع database-backed و Media در Production روی S3-compatible storage است. Redis فقط با نیاز اندازه‌گیری‌شده اضافه می‌شود.
+Reason: حفظ مدل رابطه‌ای قدرتمند برای Taxonomy/Matching، سادگی عملیات MVP و امکان رشد بدون Backend موازی.
+Consequences: Hosting MUST قابلیت‌های این Stack را فراهم کند. Schema منطقی در PHASE 10 و Migration واقعی در PHASE 14 ساخته می‌شود.
+Risks: Provider نامناسب یا نبود worker/scheduler می‌تواند Deployment را مسدود کند؛ capability check پیش از قرارداد Hosting اجباری است.
+Reversible: Adapterهای Laravel تغییر Provider را ممکن می‌کنند؛ تغییر Engine دیتابیس نیازمند Change Impact Analysis و Migration plan است.
+Affected Documents: PHASE 09 Architecture، PHASE 10 Data، PROJECT-STATUS
+Affected Components: Website، Game Library، Matching، Queue، Cache، Media

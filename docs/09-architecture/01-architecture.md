@@ -1,6 +1,6 @@
 # Technical Architecture
 
-Status: PROPOSED
+Status: ACCEPTED
 Phase: 09 - TECHNICAL ARCHITECTURE
 
 ## Architecture style
