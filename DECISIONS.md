@@ -191,3 +191,19 @@ Risks: Branching پیچیده یا سؤال اضافی؛ فقط داده لاز�
 Reversible: Question wording بله؛ معنای Domain فقط با Product Decision جدید.
 Affected Documents: Product Rules، User Flow، Screen Specs، Copy System
 Affected Components: Quick Match، Active Play، Analytics
+
+## DEC-013 — حذف نقطه پایانی از Copy نمایشی
+
+Decision ID: DEC-013
+Date: 2026-09-03
+Status: APPROVED BY OWNER
+
+Context: مالک خواست علامت نقطه از انتهای جمله‌های نوشته‌شده در تیترهای صفحه اصلی حذف شود.
+Options Considered: حفظ نقطه مطابق نثر؛ حذف فقط از H1؛ حذف یکپارچه از تیتر، توضیح Hero و شعار نمایشی
+Decision: تیترها، توضیح Hero و شعارهای نمایشی صفحه اصلی MUST بدون نقطه پایانی `.` نمایش داده شوند. علامت سؤال یا تعجب در صورت داشتن نقش معنایی حفظ می‌شود.
+Reason: ایجاد ریتم بصری تمیزتر و هماهنگی Copy با زبان رابط تیله.
+Consequences: Prototype، Design spec و Copy system باید همین قرارداد را رعایت کنند؛ متن اسناد منبع بدون تغییر می‌ماند.
+Risks: بازگشت ناخواسته نقطه در ترجمه یا CMS؛ Copy review باید آن را کنترل کند.
+Reversible: بله، با تصمیم جدید مالک.
+Affected Documents: Copy System، Homepage Hero Spec، UI Prototypes
+Affected Components: Homepage UI، Content rendering

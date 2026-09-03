@@ -13,7 +13,7 @@ Phase: 07 - BRAND IDENTITY
 
 ## Promise
 
-بازی مناسب، برای همین لحظه.
+بازی مناسب، برای همین لحظه
 
 ## Personality
 

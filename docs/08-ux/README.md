@@ -29,6 +29,7 @@ Priority: Homepage and Quick Match
 - `10-homepage-visual-prototype.md`
 - `11-priority-flow-visuals.md`
 - `12-owner-review-revisions-v2.md`
+- `13-homepage-copy-punctuation-v3.md`
 - `assets/teelle-hero-marble-reference-v1.png`
 - `prototypes/homepage-desktop-v1.png`
 - `prototypes/homepage-mobile-v1.png`
@@ -39,7 +40,9 @@ Priority: Homepage and Quick Match
 - `prototypes/quick-match-essential-questions-v2.png`
 - `prototypes/quick-match-adaptive-questions-v2.png`
 - `prototypes/core-flow-mobile-dark-v2.png`
+- `prototypes/homepage-desktop-light-v3.png`
+- `prototypes/homepage-desktop-dark-v3.png`
 
 ## Gate state
 
-Owner review v2 اعمال شد: Tagline و Heartbeat به Home اضافه شدند، Dark surface اصلاح شد، Theme سراسری شد، Question set تکمیل شد و Return microcopy تغییر کرد. Gate پس از تأیید v2، طراحی Stateهای خطا/خالی/آفلاین، Variantهای Desktop مسیر اصلی و بررسی اندازه‌ها ارزیابی می‌شود. Architecture و Implementation تا آن زمان LOCKED هستند.
+Owner review v2 اعمال شد: Tagline و Heartbeat به Home اضافه شدند، Dark surface اصلاح شد، Theme سراسری شد، Question set تکمیل شد و Return microcopy تغییر کرد. اصلاح نگارشی v3 نیز نقطه پایانی تیترها، توضیح Hero و شعار Home را در هر دو Theme حذف کرد. Gate پس از تأیید v3، طراحی Stateهای خطا/خالی/آفلاین، Variantهای Desktop مسیر اصلی و بررسی اندازه‌ها ارزیابی می‌شود. Architecture و Implementation تا آن زمان LOCKED هستند.

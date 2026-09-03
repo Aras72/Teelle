@@ -27,6 +27,8 @@
 - سؤال‌های Quick Match به Essential و Adaptive تفکیک شدند؛ Age تنها سؤال ثابت و Mood/Energy مستقل ثبت شدند.
 - Active Play با Return microcopy و CTA «بازی کردیم، برگشتیم» اصلاح شد.
 - تصمیم‌های DEC-011 و DEC-012 برای Dark Theme سراسری و Context/Completion copy ثبت شدند.
+- Prototype v3 روشن و تیره Home با حذف نقطه پایانی از تیتر، توضیح Hero و شعار ثبت شد.
+- تصمیم DEC-013 قاعده حذف نقطه پایانی از Copy نمایشی را تثبیت کرد.
 
 ### Changed
 
