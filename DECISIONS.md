@@ -223,3 +223,19 @@ Risks: واژه «انجام شده» ممکن است با Event فنی `complet
 Reversible: Copy با تصمیم مالک قابل تغییر است؛ قالب مرجع فقط با Review جدید تغییر می‌کند.
 Affected Documents: Copy System، Screen Specifications، Homepage Hero Spec، UI Prototypes
 Affected Components: Homepage UI، Heartbeat presentation، Analytics mapping
+
+## DEC-015 — تأیید UI/UX و یکپارچگی محتوای بازی‌های آینده
+
+Decision ID: DEC-015
+Date: 2026-09-03
+Status: APPROVED BY OWNER
+
+Context: بسته تکمیلی UI/UX شامل Stateها، Desktop Results/Detail، دو Theme و قرارداد Responsive ارائه شد. مالک آن را تأیید کرد و خواست تصویر و توضیح بازی‌های آینده با همین سبک ادامه یابد.
+Options Considered: تأیید موردی بدون Contract؛ Style آزاد برای هر بازی؛ قرارداد یکپارچه Asset و Copy
+Decision: UI/UX Gate برای Scope جاری PASS است. هر بازی جدید MUST از Game Content Visual Contract پیروی کند و پیش از Publish تصویر، توضیح، Metadata، Alt text و Safety کامل و تأییدشده داشته باشد.
+Reason: ورود کنترل‌شده به Architecture و جلوگیری از ناهمگونی Library هنگام افزایش تعداد بازی‌ها.
+Consequences: بررسی‌های فنی `NOT RUN` به Acceptance Implementation منتقل می‌شوند و Content pipeline باید completeness و visual review را enforce کند.
+Risks: تولید Asset هماهنگ برای Library بزرگ هزینه دارد؛ Template، Batch review و versioning برای کنترل آن لازم است.
+Reversible: Gate با Change Impact Analysis قابل بازگشایی است؛ Style contract با تصمیم جدید مالک اصلاح می‌شود.
+Affected Documents: PHASE 08 Gate، Game Content Visual Contract، PHASE 09 Architecture
+Affected Components: Game Library، Admin Publish flow، Cards، Detail، Media pipeline

@@ -1,6 +1,6 @@
 # System States v1
 
-Status: READY FOR OWNER REVIEW
+Status: APPROVED BY OWNER
 Phase: 08 - UI/UX DESIGN
 
 Design read: رابط محصول برای والدین و مراقبان با زبان Modern Nostalgia × Playful Intelligence و ادامه مستقیم سیستم بصری تأییدشده تیله

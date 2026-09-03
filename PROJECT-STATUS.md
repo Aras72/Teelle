@@ -2,9 +2,9 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 08 — UI / UX DESIGN
-Current Stage: Priority experience design
-Current Task: Owner review بسته تکمیلی UI/UX و ارزیابی Gate
+Current Phase: PHASE 09 — TECHNICAL ARCHITECTURE
+Current Stage: Architecture baseline
+Current Task: تکمیل API، Integration و Environment architecture و ارزیابی Architecture Gate
 Overall Status: PLANNING
 
 Last Completed:
@@ -37,22 +37,27 @@ Currently Working On:
 - برد روشن System states v1 برای no-result، Loading، Empty، Error و Offline ثبت شد.
 - برد تیره System states v1 و Variantهای Desktop Results/Detail در هر دو Theme ثبت شدند.
 - قرارداد Responsive و Accessibility برای عرض‌های 320، 390، 768، 1024 و 1440 ثبت شد.
+- مالک بسته UI/UX را تأیید کرد؛ PHASE 08 Gate برابر PASS شد.
+- قرارداد یکپارچگی تصویر و توضیح برای رشد Game Library تصویب شد.
+- PHASE 09 با Laravel Modular Monolith، Tech stack پیشنهادی و Component boundaries آغاز شد.
 
 Next:
 
-- Owner review حالت‌های سیستمی و Desktop Results/Detail
-- Visual review مالک و اجرای UI/UX Gate
-- انتقال معیارهای `NOT RUN` به Acceptance فاز Implementation
+- تکمیل API design و Integration boundaries
+- تعریف LOCAL، DEVELOPMENT، STAGING و PRODUCTION بدون وابستگی مالک به Terminal
+- انتخاب Database، Queue، Cache و Storage با توجه به Hosting
+- Spike معماری تیله تعاملی و Freeze نسخه Packageها
+- اجرای Architecture Gate
 
 Blocked By:
 
-- UI/UX Gate تا Visual review اندازه‌های هدف و تأیید مالک آماده PASS نیست.
+- Freeze نهایی PHP 8.5 و Laravel 13 به تأیید سازگاری Hosting وابسته است.
 
 Open Questions:
 
 - بازار جغرافیایی اولیه خارج از تمرکز فارسی/ایران هنوز باید در Research دقیق شود.
-- نسخه‌های دقیق PHP و Laravel در فاز معماری و با بررسی سازگاری Hosting تعیین می‌شوند.
-- جزئیات فنی Rendering تیله Hero تا Design و Architecture باز می‌ماند.
+- Provider و محدودیت‌های Hosting هنوز انتخاب نشده‌اند.
+- Engine دقیق Database و Backend مربوط به Object storage هنوز باید با Hosting تطبیق داده شود.
 
 Open Decisions:
 
@@ -66,6 +71,7 @@ Resolved Decisions:
 - CTA Completion طبق DEC-012 برابر «بازی کردیم، برگشتیم» است.
 - تیترها، توضیح Hero و شعارهای نمایشی طبق DEC-013 بدون نقطه پایانی هستند.
 - قالب اصلی Homepage و عبارت Heartbeat طبق DEC-014 تأیید نهایی شدند.
+- UI/UX Gate و قرارداد رشد بصری Game Library طبق DEC-015 تصویب شدند.
 
 Critical Risks:
 
@@ -74,7 +80,7 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 IN PROGRESS
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 IN PROGRESS
 Implementation Status: LOCKED
 Testing Status: NOT APPLICABLE — no application code
 Launch Status: NOT STARTED

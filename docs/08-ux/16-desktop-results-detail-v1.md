@@ -1,6 +1,6 @@
 # Desktop Results and Game Detail v1
 
-Status: READY FOR OWNER REVIEW
+Status: APPROVED BY OWNER
 Phase: 08 - UI/UX DESIGN
 
 ## Light

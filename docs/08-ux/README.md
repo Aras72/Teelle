@@ -1,7 +1,7 @@
 # PHASE 08 - UI / UX DESIGN
 
-Status: IN_PROGRESS
-Gate: NOT EVALUATED
+Status: COMPLETE
+Gate: PASS
 Started: 2026-09-03
 Priority: Homepage and Quick Match
 
@@ -34,6 +34,8 @@ Priority: Homepage and Quick Match
 - `15-system-states-v1.md`
 - `16-desktop-results-detail-v1.md`
 - `17-responsive-accessibility-review.md`
+- `18-game-content-visual-contract.md`
+- `19-uiux-gate.md`
 - `assets/teelle-hero-marble-reference-v1.png`
 - `prototypes/homepage-desktop-v1.png`
 - `prototypes/homepage-mobile-v1.png`
@@ -55,4 +57,4 @@ Priority: Homepage and Quick Match
 
 ## Gate state
 
-Homepage v4 با همان قالب اصلی و تیله مرکزی به تأیید مالک رسید. Microcopy نهایی Heartbeat برابر «{PLAY_STARTS} بار بازی با تیله انجام شده» است و تصاویر v4 مرجع جاری‌اند. System states و Desktop Results/Detail در هر دو Theme آماده Review هستند و قرارداد Responsive/Accessibility پنج عرض هدف ثبت شده است. Static design review کامل است، اما Browser reflow، Keyboard، Screen reader، Contrast عددی و Performance تا Prototype اجرایی `NOT RUN` هستند. Gate پس از تأیید مالک ارزیابی می‌شود. Architecture و Implementation تا آن زمان LOCKED هستند.
+مالک بسته تکمیلی را تأیید کرد و UI/UX Gate برابر PASS است. Homepage v4، Flowهای اولویت‌دار، Stateهای دو Theme، Desktop variants و قرارداد رشد بصری Game Library مرجع فاز Architecture و Implementation هستند. بررسی‌های Browser، Accessibility عددی و Performance به Acceptance اجباری Prototype اجرایی منتقل شدند.

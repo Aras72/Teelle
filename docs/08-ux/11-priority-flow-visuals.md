@@ -1,6 +1,6 @@
 # Priority Flow Visuals v1
 
-Status: READY FOR OWNER REVIEW
+Status: APPROVED BY OWNER
 Phase: 08 - UI/UX DESIGN
 Type: HIGH-FIDELITY STATIC MOCKUPS
 
@@ -32,10 +32,10 @@ Type: HIGH-FIDELITY STATIC MOCKUPS
 - Active Play از نظر بصری آرام‌تر از Match است.
 - صفحات یک Theme پیوسته و یک Radius system دارند.
 
-## Still required before UI/UX Gate
+## Transferred validation after UI/UX Gate
 
-- بازبینی برد v1 حالت‌های no-result، Loading، Empty، Error و Offline در دو Theme
-- بازبینی Variantهای Desktop برای Result و Detail در دو Theme
+- حالت‌های no-result، Loading، Empty، Error و Offline در دو Theme توسط مالک تأیید شدند.
+- Variantهای Desktop برای Result و Detail در دو Theme توسط مالک تأیید شدند.
 - Contrast measurement پس از Freeze شدن Tokenهای پیاده‌سازی
-- بررسی 320px، 390px، 768px، 1024px و 1440px
-- Owner review و ثبت اصلاحات
+- بررسی اجرایی Reflow در 320px، 390px، 768px، 1024px و 1440px
+- بررسی Keyboard، Screen reader و Performance در Prototype اجرایی

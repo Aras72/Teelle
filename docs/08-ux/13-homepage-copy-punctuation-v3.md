@@ -1,6 +1,6 @@
 # Homepage Copy Punctuation v3
 
-Status: READY FOR OWNER REVIEW
+Status: CLOSED - SUPERSEDED BY APPROVED V4
 Phase: 08 - UI/UX DESIGN
 Source decision: DEC-013
 
