@@ -14,7 +14,7 @@ Phase: 09 - TECHNICAL ARCHITECTURE
 
 ## Required capabilities
 
-Production hosting MUST provide PHP 8.5، Laravel 13 requirements، PostgreSQL 17، scheduled tasks، long-running or supervised queue processing، HTTPS، atomic/releasable deployments، secret management، object-storage access، backup export و health monitoring.
+Production hosting MUST provide PHP 8.5، Laravel 13 requirements، MySQL 8.0+، scheduled tasks، queue processing قابل اتکا، HTTPS، releasable deployments، secret management، object-storage access، backup export و health monitoring. نسخه دقیق MySQL و امکان worker/scheduler از پنل هاست باید پیش از Implementation مستند شوند.
 
 Host/provider نام مشخصی در Domain یا code ندارد. انتخاب Provider در Release planning با اثبات همین capabilityها انجام می‌شود.
 

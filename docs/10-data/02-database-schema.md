@@ -1,4 +1,4 @@
-# PostgreSQL Schema Baseline
+# MySQL Schema Baseline
 
 Status: ACCEPTED BASELINE
 Phase: 10 - DATA
@@ -9,7 +9,7 @@ Phase: 10 - DATA
 | --- | --- | --- |
 | `games` | id، public_id، slug، status، created_at | unique public_id/slug؛ controlled status |
 | `game_versions` | id، game_id، version_no، title، summary، instructions، safety_copy، content_hash | unique `(game_id, version_no)`؛ approved content immutable |
-| `game_publications` | game_id، game_version_id، published_at، unpublished_at | one active publication per game |
+| `game_publications` | game_id، game_version_id، published_at، unpublished_at | publication history; active version referenced by `games.current_published_version_id` |
 | `content_reviews` | game_version_id، reviewer_id، decision، reviewed_at، scope_hash | approval hash must match version content |
 | `media_assets` | public_id، disk، path، mime، width، height، checksum، status، alt_text | no public publish before review |
 | `game_media` | game_version_id، media_asset_id، role، sort_order، crop_data | unique role/order per version |
@@ -42,14 +42,15 @@ Successful match rows MUST be committed atomically with exactly three unique Res
 ## Index strategy
 
 - B-tree: publication status/time، game slug، foreign keys، actor/time، event type/time.
-- Partial index: active `game_publications` and active entitlements.
-- Matching hot path uses normalized join columns and bounded enums; JSONB is not the primary hard-filter path.
-- GIN may be added for approved JSONB analytics/search only after query evidence.
-- Heartbeat uses a pre-aggregated daily counter/materialized projection; public request never counts the full event table.
+- Unique and composite B-tree indexes cover publication pointer، active entitlement lookup and actor/time queries.
+- Matching hot path uses normalized join columns and bounded values؛ JSON is not the primary hard-filter path.
+- Generated columns or `FULLTEXT` indexes are added only for stable approved search needs and after query evidence.
+- Heartbeat uses a pre-aggregated counter table/projection؛ public request never counts the full event table.
 
 ## Integrity enforcement
 
-- Database constraints enforce unique ranks، idempotency، referential integrity and bounded status values.
+- Database constraints enforce unique ranks، idempotency and referential integrity؛ bounded state transitions remain in Domain code plus database-safe values.
+- `games.current_published_version_id` is changed transactionally with publication history so only one version is active.
 - Domain service plus transaction enforces cross-table invariants such as exactly three Results and valid state transition.
 - Publish transaction verifies Review، Safety، Metadata، image package and current content hash.
 - Raw SQL access is not exposed to Admin or owner workflows.

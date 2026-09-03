@@ -244,7 +244,7 @@ Affected Components: Game Library، Admin Publish flow، Cards، Detail، Media 
 
 Decision ID: DEC-016
 Date: 2026-09-03
-Status: ACCEPTED ARCHITECTURE BASELINE
+Status: SUPERSEDED IN DATABASE PORTION BY DEC-017
 
 Context: پس از PASS شدن UI/UX، پروژه به Stack اجرایی PHP/Laravel، دیتابیس بازی‌ها و مسیر عملیاتی بدون Terminal نیاز داشت.
 Options Considered: PostgreSQL یا MySQL؛ Queue/Cache دیتابیس یا Redis اجباری؛ Media روی disk یا Object storage
@@ -255,3 +255,19 @@ Risks: Provider نامناسب یا نبود worker/scheduler می‌تواند 
 Reversible: Adapterهای Laravel تغییر Provider را ممکن می‌کنند؛ تغییر Engine دیتابیس نیازمند Change Impact Analysis و Migration plan است.
 Affected Documents: PHASE 09 Architecture، PHASE 10 Data، PROJECT-STATUS
 Affected Components: Website، Game Library، Matching، Queue، Cache، Media
+
+## DEC-017 — جایگزینی PostgreSQL با MySQL هاست مالک
+
+Decision ID: DEC-017
+Date: 2026-09-03
+Status: APPROVED BY OWNER
+
+Context: انتخاب PostgreSQL بدون پرسش درباره قابلیت Hosting انجام شد. مالک اعلام کرد Hosting پروژه MySQL را پشتیبانی می‌کند و خواست دیتابیس جایگزین شود.
+Options Considered: حفظ PostgreSQL و تغییر هاست؛ استفاده از MySQL موجود روی هاست
+Decision: MySQL دیتابیس اصلی Website است و بخش Database در DEC-016 را جایگزین می‌کند. حداقل نسخه سازگار معماری 8.0 است؛ نسخه دقیق Server MUST از پنل هاست تأیید و پیش از Migration ثبت شود. MariaDB بدون بررسی جداگانه MySQL تلقی نمی‌شود.
+Reason: هم‌راستایی معماری با زیرساخت واقعی مالک و جلوگیری از طراحی غیرقابل استقرار.
+Consequences: JSONB، GIN، Partial Index و Materialized Viewهای مخصوص PostgreSQL در Schema استفاده نمی‌شوند؛ Schema و projectionها با MySQL طراحی می‌شوند.
+Risks: نسخه قدیمی MySQL یا محدودیت worker/scheduler هاست ممکن است با Laravel 13 یا Queue سازگار نباشد و باید پیش از Implementation بررسی شود.
+Reversible: تغییر Engine فقط با تصمیم جدید، export/import plan و آزمون سازگاری داده.
+Affected Documents: PHASE 09 Architecture، PHASE 10 Data، PROJECT-STATUS، CHANGELOG
+Affected Components: Database، Matching، Heartbeat projection، Migration، Backup

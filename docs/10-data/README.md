@@ -15,7 +15,7 @@ Started: 2026-09-03
 
 ## Result
 
-مدل داده و Schema منطقی PostgreSQL برای Game Library، Matching، Play events، Membership و Audit تعریف شد. مدت‌های حقوقی نگهداری PII و داده مالی تا PHASE 11 باید با بازار و الزام قانونی نهایی شوند؛ این Hold مانع ورود به Security نیست اما پیش از Implementation باید بسته شود.
+مدل داده و Schema منطقی MySQL برای Game Library، Matching، Play events، Membership و Audit تعریف شد. مدت‌های حقوقی نگهداری PII و داده مالی تا PHASE 11 باید با بازار و الزام قانونی نهایی شوند؛ این Hold مانع ورود به Security نیست اما پیش از Implementation باید بسته شود.
 
 ## Delivery distinction
 

@@ -16,6 +16,7 @@ Sources:
 - https://laravel.com/blog/laravel-march-product-updates
 - https://www.php.net/supported-versions.php
 - https://www.php.net/
+- https://laravel.com/framework/docs/13.x/queries
 
 ## Proposed baseline
 
@@ -29,16 +30,16 @@ Sources:
 | Asset pipeline | Vite | ACCEPTED |
 | Interactive marble | Three.js isolated island | ACCEPTED WITH SPIKE |
 | General motion | CSS and Web Animations API first | ACCEPTED |
-| Database | PostgreSQL 17، current minor | ACCEPTED |
+| Database | MySQL، حداقل 8.0 | ACCEPTED BY OWNER؛ exact host version pending |
 | Cache and Queue | Laravel database drivers baseline؛ Redis only by measured need | ACCEPTED |
 | Object storage | Laravel Filesystem with S3-compatible Production disk | ACCEPTED |
 | Testing | Pest or PHPUnit plus browser accessibility tests | Selection scheduled for PHASE 12 |
 
 ## Selection rule
 
-Hosting باید PHP 8.5، Extensionهای Laravel و PostgreSQL 17 را پشتیبانی کند. نسخه‌های patch فقط از طریق Lockfile و پس از Quality Gate ارتقا می‌یابند. Three.js پس از Spike عملکرد و Testing toolchain در PHASE 12 Freeze می‌شوند.
+Hosting باید PHP 8.5، Extensionهای Laravel و MySQL 8.0 یا بالاتر را پشتیبانی کند. نسخه دقیق MySQL از پنل هاست ثبت می‌شود و پیش از Migration freeze خواهد شد. نسخه‌های patch پکیج‌ها فقط از طریق Lockfile و پس از Quality Gate ارتقا می‌یابند. Three.js پس از Spike عملکرد و Testing toolchain در PHASE 12 Freeze می‌شوند.
 
-PostgreSQL 17 به‌جای 18 انتخاب شد تا ضمن داشتن پشتیبانی تا نوامبر 2029، ریسک استفاده از جدیدترین Major برای شروع محصول کاهش یابد. Laravel 13 نیز PostgreSQL 12 به بالا را پشتیبانی می‌کند.
+Laravel 13 از MySQL 8.0 به بالا پشتیبانی می‌کند. MariaDB معادل MySQL فرض نمی‌شود؛ اگر پنل هاست در عمل MariaDB ارائه دهد، نسخه و سازگاری آن باید جداگانه بررسی و ثبت شود.
 
 ## Explicit exclusions
 

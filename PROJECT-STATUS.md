@@ -41,7 +41,7 @@ Currently Working On:
 - قرارداد یکپارچگی تصویر و توضیح برای رشد Game Library تصویب شد.
 - PHASE 09 با Laravel Modular Monolith، Tech stack پیشنهادی و Component boundaries آغاز شد.
 - PHASE 09 با API، Integration، Environment و ADRهای نهایی تکمیل شد.
-- PHP 8.5، Laravel 13، Livewire 4 و PostgreSQL 17 مبنای معماری شدند.
+- PHP 8.5، Laravel 13، Livewire 4 و MySQL مبنای معماری شدند؛ نسخه دقیق MySQL از پنل هاست باید ثبت شود.
 - PHASE 10 مدل داده، Schema منطقی Game Library، lifecycle، backup و migration strategy را تکمیل کرد.
 
 Next:
@@ -59,6 +59,7 @@ Blocked By:
 Open Questions:
 
 - بازار جغرافیایی اولیه خارج از تمرکز فارسی/ایران هنوز باید در Research دقیق شود.
+- نسخه دقیق MySQL ارائه‌شده در پنل هاست و اینکه سرویس واقعاً MySQL است یا MariaDB باید تأیید شود.
 - Provider Hosting و S3-compatible storage هنوز باید بر اساس capability contract انتخاب شوند.
 - مدت‌های قانونی Retention برای بازار هدف در PHASE 11 باید نهایی شوند.
 

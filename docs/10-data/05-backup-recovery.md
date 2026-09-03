@@ -11,7 +11,7 @@ Phase: 10 - DATA
 
 ## Backup set
 
-- PostgreSQL encrypted automated backup plus point-in-time recovery when available
+- MySQL encrypted automated backup plus binary-log point-in-time recovery when Hosting supports it
 - S3-compatible media versioning or replicated backup
 - Application release artifact، migration version and non-secret configuration manifest
 - Secret recovery through provider secret manager؛ secrets are not stored in Git backup

@@ -11,7 +11,7 @@ Quick Match، مشاهده بازی، Start و Safety به سرویس خارجی
 
 | Integration | Adapter boundary | Baseline | Failure behavior |
 | --- | --- | --- | --- |
-| PostgreSQL | Laravel database connection | Required | fail closed; health alert |
+| MySQL | Laravel database connection | Required | fail closed; health alert |
 | Queue/Cache | Laravel contracts | Database driver first | synchronous safe fallback only where explicitly allowed |
 | Game media | Laravel Filesystem | S3-compatible in Production | placeholder approved; never broken layout |
 | Email | Notification channel | Provider pending | retry with backoff; no duplicate send |

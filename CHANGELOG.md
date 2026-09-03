@@ -39,6 +39,7 @@
 - PHASE 09 با API v1، Integration boundaries، چهار Environment و ADRهای Laravel/PostgreSQL تکمیل شد.
 - PHASE 10 با مدل داده، Schema منطقی Game Library، lifecycle، retention baseline، backup/recovery و migration strategy تکمیل شد.
 - پروژه وارد PHASE 11 — SECURITY & PRIVACY شد.
+- با اعلام مالک، MySQL جایگزین PostgreSQL شد؛ Schema، Index strategy، Heartbeat projection و Backup contract برای MySQL اصلاح شدند و نسخه دقیق هاست برای تأیید باقی ماند.
 
 ### Changed
 

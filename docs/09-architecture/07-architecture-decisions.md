@@ -9,11 +9,11 @@ Status: ACCEPTED
 
 Website MVP یک Laravel Modular Monolith با Blade SSR، Livewire برای stateهای محصول و JavaScript island مستقل برای تیله تعاملی است. Microservice، Backend موازی و SPA مستقل خارج از Scope هستند.
 
-## ADR-002 - PostgreSQL 17
+## ADR-002 - MySQL on owner hosting
 
 Status: ACCEPTED
 
-PostgreSQL 17 با current minor پایگاه اصلی است. داده Matching و Taxonomy نرمال می‌شود و JSONB فقط برای Context/Snapshot منعطف به‌کار می‌رود. Hosting باید این الزام را پشتیبانی کند.
+MySQL پایگاه اصلی است چون Hosting مالک آن را پشتیبانی می‌کند. حداقل سازگاری معماری MySQL 8.0 است؛ نسخه دقیق از پنل هاست ثبت می‌شود. داده Matching و Taxonomy نرمال و JSON فقط برای Context/Snapshot منعطف استفاده می‌شود.
 
 ## ADR-003 - Database-first queue and cache
 
