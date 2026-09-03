@@ -21,6 +21,7 @@
 - PHASE 07 با Brand strategy، Voice، Visual direction و Copy system تکمیل و Gate آن PASS شد.
 - PHASE 08 با IA، Navigation، Priority flows، Screen inventory/specs، Accessibility، Design system، Motion system و Homepage Hero spec آغاز شد.
 - تصویر مرجع تیله Hero در `docs/08-ux/assets/teelle-hero-marble-reference-v1.png` ثبت شد.
+- نمونه High-fidelity صفحه Home برای Desktop و Mobile در `docs/08-ux/prototypes/` اضافه شد و برای Owner review آماده است.
 
 ### Changed
 
