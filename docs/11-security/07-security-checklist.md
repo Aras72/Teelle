@@ -14,7 +14,7 @@ Verification target: OWASP ASVS 5.0 risk-based baseline
 - [x] Payment replay/idempotency specified
 - [x] Child data minimization and privacy controls specified
 - [x] Secrets، logging، backup and recovery boundaries specified
-- [ ] Primary account identifier/auth channel approved by owner
+- [x] Email/password approved as MVP primary login؛ optional mobile OTP remains provider-gated
 - [ ] Legal duration for payment/accounting retention confirmed
 - [ ] Exact Pars Pack plan capabilities verified
 

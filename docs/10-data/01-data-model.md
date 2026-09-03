@@ -16,7 +16,8 @@ Phase: 10 - DATA
 
 ### Identity and family
 
-- `users`: حساب بزرگسال، locale، timezone و auth state
+- `users`: حساب بزرگسال، email verified unique، password hash، optional verified `phone_e164`، locale، timezone و auth state
+- `login_otps`: optional phone challenge with hashed code، expiry، attempts and consumed timestamp؛ created only when OTP feature is enabled
 - `guest_identities`: شناسه pseudonymous امضاشده و تاریخ انقضا
 - `households`: مرز مالکیت حساب خانوادگی
 - `household_members`: نقش بزرگسال در Household

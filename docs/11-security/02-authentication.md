@@ -1,13 +1,14 @@
 # Authentication
 
-Status: ACCEPTED SECURITY CONTRACT; PRIMARY LOGIN CHANNEL OPEN
+Status: ACCEPTED BASELINE
 Phase: 11 - SECURITY & PRIVACY
 
 ## Product boundary
 
 - Guest MUST complete Quick Match، Result، Detail and Start without login.
 - Account is for Saved/History and Jigari features؛ auth cannot obstruct first value.
-- Primary identifier—email/password or mobile OTP—must be selected with the owner in PHASE 12 after provider/cost review. Neither is silently assumed here.
+- Email and password is the active MVP login method.
+- Mobile number and OTP is an optional second login method behind a disabled feature flag until an SMS provider، cost and delivery reliability are approved.
 
 ## First-party Web session
 
@@ -17,12 +18,21 @@ Phase: 11 - SECURITY & PRIVACY
 - Logout، password reset/recovery and suspected compromise revoke relevant sessions
 - Authentication token/session ID MUST NOT be stored in `localStorage` or URL
 
-## Credential requirements
+## Email and password baseline
 
-- If password is selected: Laravel hashing with a modern adaptive algorithm، breached/common-password rejection، long password/passphrase support and no forced periodic reset without compromise.
-- If OTP is selected: short expiry، one-time use، attempt limit، resend cooldown and protection against phone-number enumeration/SIM-swap risk.
+- Laravel built-in authentication، email verification and password reset are used through the Livewire starter baseline.
+- Password uses Laravel hashing with a modern adaptive algorithm، breached/common-password rejection، long password/passphrase support and no forced periodic reset without compromise.
+- Login itself does not require an external identity service. Verification and password-reset delivery require configured SMTP/email transport؛ Pars Pack mail capability or an external provider must be verified before Production.
 - Recovery responses do not disclose whether an account exists.
 - Sensitive changes require recent authentication.
+
+## Optional mobile OTP
+
+- OTP delivery requires an external SMS gateway/provider and remains disabled until one is selected.
+- Phone numbers are normalized to E.164، unique only after verification and attached to the existing `user_id`.
+- OTP has short expiry، one-time use، hashed storage، attempt limit، resend cooldown and SIM-swap/enumeration protections.
+- Adding or replacing a phone requires an authenticated/re-authenticated session plus OTP verification.
+- If verified email and phone resolve to different accounts، automatic merge is prohibited؛ recovery/support workflow must resolve ownership.
 
 ## Admin
 
@@ -37,4 +47,4 @@ Guest identity is random and signed. Merge occurs only after successful account 
 
 ## Testing obligations
 
-Enumeration، brute force، fixation، session reuse after logout، recovery abuse، privilege-change rotation and guest merge conflicts require automated tests.
+Enumeration، brute force، fixation، session reuse after logout، email verification/reset، recovery abuse، privilege-change rotation، optional OTP and guest merge conflicts require automated tests.

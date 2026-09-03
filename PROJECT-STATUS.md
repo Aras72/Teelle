@@ -2,9 +2,9 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 12 — DEVELOPMENT PLANNING
-Current Stage: Roadmap and executable slices
-Current Task: Development roadmap، dependencies، task breakdown، Definition of Done، coding standards و Git strategy
+Current Phase: PHASE 13 — EXECUTION PROMPTS
+Current Stage: Prompt authoring
+Current Task: ساخت Promptهای اجرایی کوچک و متوالی با اولویت Foundation، UI و تیله تعاملی
 Overall Status: PLANNING
 
 Last Completed:
@@ -45,17 +45,18 @@ Currently Working On:
 - PHASE 10 مدل داده، Schema منطقی Game Library، lifecycle، backup و migration strategy را تکمیل کرد.
 - پارس‌پک و MySQL 8 به‌عنوان Hosting/Database اعلام‌شده مالک ثبت شدند.
 - PHASE 11 مدل تهدید، Auth boundary، Authorization، Data security، Privacy، Abuse prevention و Security checklist را تکمیل کرد.
+- ایمیل/رمز روش فعال MVP شد و OTP موبایل به‌صورت اختیاری و وابسته به Provider باقی ماند.
+- PHASE 12 Roadmap، Dependency graph، Task breakdown، Definition of Done، Coding standards و Git strategy را تکمیل کرد؛ Architecture Gate برابر PASS شد.
 
 Next:
 
-- تکمیل PHASE 12 Development Planning و Definition of Done
-- اجرای Architecture Gate کل پروژه
-- ساخت Migration، Seeder و Game content pipeline در PHASE 14 پس از بازشدن Implementation
-- Spike اجرایی تیله و Freeze نسخه Three.js در برنامه توسعه
+- ساخت و Freeze کردن Promptهای 001 تا 005 برای Laravel، MySQL، Design system، Homepage و تیله تعاملی
+- اجرای هر Prompt به‌ترتیب و فقط پس از PASS شدن Quality Gate قبلی
+- ساخت Game content pipeline و نخستین Batchهای تأییدشده پس از Foundation/UI
 
 Blocked By:
 
-- Implementation تا تکمیل Security، Development Planning و Architecture Gate قفل است.
+- هر Slice از Implementation تا Freeze شدن Prompt همان Slice قفل است.
 
 Open Questions:
 
@@ -63,7 +64,8 @@ Open Questions:
 - Minor/Patch واقعی MySQL 8 در شروع Implementation باید ثبت شود.
 - قابلیت‌های PHP 8.5، Cron/Queue، Backup و S3-compatible storage در پلن پارس‌پک باید بررسی شوند.
 - مدت قانونی نگهداری Payment/accounting برای بازار هدف باید پیش از Commerce implementation نهایی شود.
-- روش اصلی ورود حساب—ایمیل/رمز یا موبایل/OTP—باید با مالک انتخاب شود.
+- SMTP پارس‌پک یا Provider ایمیل برای verification/reset باید پیش از Auth release تأیید شود.
+- SMS Provider فقط پیش از فعال‌سازی OTP اختیاری لازم است.
 
 Open Decisions:
 
@@ -78,6 +80,7 @@ Resolved Decisions:
 - تیترها، توضیح Hero و شعارهای نمایشی طبق DEC-013 بدون نقطه پایانی هستند.
 - قالب اصلی Homepage و عبارت Heartbeat طبق DEC-014 تأیید نهایی شدند.
 - UI/UX Gate و قرارداد رشد بصری Game Library طبق DEC-015 تصویب شدند.
+- ورود ایمیل/رمز برای MVP و آمادگی OTP اختیاری طبق DEC-018 تصویب شد.
 
 Critical Risks:
 
@@ -86,7 +89,7 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 IN PROGRESS
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PHASE 13 IN PROGRESS
 Implementation Status: LOCKED
 Testing Status: NOT APPLICABLE — no application code
 Launch Status: NOT STARTED

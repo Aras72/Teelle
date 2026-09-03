@@ -14,8 +14,8 @@ Quick Match، مشاهده بازی، Start و Safety به سرویس خارجی
 | MySQL | Laravel database connection | Required | fail closed; health alert |
 | Queue/Cache | Laravel contracts | Database driver first | synchronous safe fallback only where explicitly allowed |
 | Game media | Laravel Filesystem | S3-compatible in Production | placeholder approved; never broken layout |
-| Email | Notification channel | Provider pending | retry with backoff; no duplicate send |
-| SMS/OTP | Notification/Auth adapter | Deferred until need confirmed | email/session auth remains independent |
+| Email | Laravel Mail/Notification | REQUIRED for verification/reset؛ Pars Pack SMTP or provider pending | retry with backoff؛ generic user response |
+| SMS/OTP | `OtpSender` adapter | OPTIONAL and disabled until provider approval | email/password auth remains independent |
 | Payment | `PaymentGateway` interface | Provider pending | no entitlement before verified callback |
 | Analytics | first-party event store/export | Required | queue/retry; no Core flow blocking |
 | Error monitoring | PSR/Laravel reporting adapter | Provider pending | local structured log remains |

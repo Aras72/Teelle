@@ -43,6 +43,9 @@
 - پارس‌پک و MySQL 8 به‌عنوان Hosting/Database اعلام‌شده توسط مالک ثبت شدند؛ بررسی capabilityهای دیگر پلن برای پیش از Implementation باقی ماند.
 - PHASE 11 Security & Privacy با Threat model، Auth/Authz، Data security، Privacy defaults، Abuse controls و checklist تکمیل شد.
 - PHASE 12 Development Planning با ترتیب اولیه Sliceهای Laravel/MySQL/UI/Marble/Matching آغاز شد.
+- ایمیل/رمز به‌عنوان ورود فعال MVP ثبت شد؛ OTP موبایل پشت Adapter و Feature flag تا انتخاب سرویس پیامک غیرفعال ماند.
+- PHASE 12 با Roadmap، Dependencies، Task breakdown، Definition of Done، Coding standards و Git strategy تکمیل و Architecture Gate پاس شد.
+- PHASE 13 با ترتیب Promptهای اجرایی Foundation، MySQL، UI، Homepage و Interactive Marble آغاز شد.
 
 ### Changed
 

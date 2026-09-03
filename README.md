@@ -7,7 +7,7 @@
 ## وضعیت فعلی
 
 - مرحله: برنامه‌ریزی محصول
-- فاز: `PHASE 12 — DEVELOPMENT PLANNING`
+- فاز: `PHASE 13 — EXECUTION PROMPTS`
 - پیاده‌سازی: `LOCKED`
 - پشته قطعی وب: PHP + Laravel
 - تحویل اصلی: وب‌سایت کامل و Responsive

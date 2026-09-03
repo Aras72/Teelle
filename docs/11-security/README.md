@@ -1,7 +1,7 @@
 # PHASE 11 - SECURITY & PRIVACY
 
 Status: COMPLETE BASELINE
-Review: DESIGN PASS WITH THREE OPEN PRE-IMPLEMENTATION ITEMS
+Review: DESIGN PASS WITH TWO OPEN PRE-IMPLEMENTATION ITEMS
 Started: 2026-09-03
 
 ## Scope
@@ -25,4 +25,4 @@ Started: 2026-09-03
 
 ## Result
 
-Threats، controls، roles، operational retention defaults and security verification are explicit. Login identifier، statutory financial retention and exact Pars Pack plan capability check remain open and MUST close before their affected Implementation slice. ورود به Development Planning مجاز است؛ Implementation remains locked.
+Threats، controls، roles، operational retention defaults and security verification are explicit. Email/password is the active MVP method and mobile OTP is provider-gated. Statutory financial retention and exact Pars Pack plan capability check remain open and MUST close before their affected Implementation slice. ورود به Development Planning مجاز است؛ Implementation remains locked.

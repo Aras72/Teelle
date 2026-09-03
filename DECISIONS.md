@@ -271,3 +271,19 @@ Risks: نسخه قدیمی MySQL یا محدودیت worker/scheduler هاست �
 Reversible: تغییر Engine فقط با تصمیم جدید، export/import plan و آزمون سازگاری داده.
 Affected Documents: PHASE 09 Architecture، PHASE 10 Data، PROJECT-STATUS، CHANGELOG
 Affected Components: Database، Matching، Heartbeat projection، Migration، Backup
+
+## DEC-018 — ورود ایمیلی با آمادگی برای OTP موبایل
+
+Decision ID: DEC-018
+Date: 2026-09-03
+Status: APPROVED BY OWNER
+
+Context: ارسال OTP موبایل به سرویس پیامک بیرونی نیاز دارد. مالک در صورت این وابستگی، ایمیل/رمز را برای شروع ترجیح داد و خواست امکان هر دو روش در آینده حفظ شود.
+Options Considered: فقط OTP؛ فقط ایمیل/رمز؛ ایمیل/رمز فعال با OTP اختیاری provider-gated
+Decision: MVP با ایمیل و رمز عبور، تأیید ایمیل و بازیابی رمز ساخته می‌شود. OTP موبایل به‌صورت Adapter و Feature flag از ابتدا پیش‌بینی، اما تا انتخاب Provider خاموش است. هر دو روش به یک User متصل می‌شوند و حساب‌های متعارض خودکار merge نمی‌شوند.
+Reason: حذف وابستگی SMS از مسیر اولیه، حفظ امنیت بازیابی و امکان افزودن ورود موبایلی بدون بازطراحی Account.
+Consequences: Production به SMTP قابل اتکا نیاز دارد؛ SMS provider هزینه/امنیت/تحویل جداگانه دارد. Guest Core همچنان بدون Login است.
+Risks: ایمیل نامعتبر مانع verification/reset می‌شود؛ OTP آینده با SIM-swap، spam و account collision ریسک اضافه دارد.
+Reversible: روش اصلی یا فعال‌سازی OTP با Decision و Migration سازگار قابل تغییر است.
+Affected Documents: Authentication، Integrations، Data Model، Development Planning
+Affected Components: User، Auth، Notification، Recovery، Guest merge
