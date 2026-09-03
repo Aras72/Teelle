@@ -159,3 +159,35 @@ Risks: GPU cost و Motion sensitivity؛ Fallback و Budget اجباری است.
 Reversible: جزئیات Visual بله؛ اصل تعامل طبق DEC-003 فقط با تصمیم جدید مالک.
 Affected Documents: docs/07-brand، docs/08-ux
 Affected Components: Homepage، Motion system، Accessibility
+
+## DEC-011 — Dark Theme سراسری Website
+
+Decision ID: DEC-011
+Date: 2026-09-03
+Status: APPROVED BY OWNER
+
+Context: Brief v1.0، Dark Mode را از MVP خارج کرده بود. در Owner review نمونه UI، مالک صریحاً خواست Theme تیره پس از انتخاب تا انتهای مسیر ادامه یابد و محدود به Home نباشد.
+Options Considered: حذف Dark Mode؛ Dark فقط در Home؛ Light/Dark سراسری و پایدار
+Decision: Website MVP MUST Light و Dark theme داشته باشد. انتخاب Theme MUST در تمام Screenها، Branchها و Session پایدار بماند و از Home تا Quick Match، Results، Detail، Active Play، Account، Jigari و Admin ادامه یابد. Dark Mode non-goal در Brief v1.0 برای Scope اجرایی SUPERSEDED است.
+Reason: انسجام تجربه و احترام به Preference کاربر؛ جلوگیری از جهش ناخواسته بین Themeها.
+Consequences: Design tokenهای دو Theme، persistence، پیشگیری از flash، Contrast test و Visual regression هر دو Theme لازم‌اند.
+Risks: افزایش ماتریس QA و احتمال Contrast regression؛ استفاده از سطح‌های ساده و tokenized ریسک را کنترل می‌کند.
+Reversible: بله، فقط با تصمیم جدید مالک و Change Impact Analysis.
+Affected Documents: PRD، Scope، Product Rules، UI Design System، Screen Specs
+Affected Components: تمام Surfaceهای Website
+
+## DEC-012 — Context تطبیقی و Completion copy
+
+Decision ID: DEC-012
+Date: 2026-09-03
+Status: APPROVED FOR DESIGN
+
+Context: Prototype v1 فقط سؤال سن را نشان می‌داد و CTA «برگشتیم» بدون راهنمای بازگشت برای کاربر مبهم بود.
+Options Considered: فقط سن؛ فرم ثابت طولانی؛ Question flow تطبیقی و Microcopy صریح
+Decision: Age تنها سؤال ثابت است. Situation، Duration، Location/Space، Materials، Players/Adult presence، Energy، Mood، Noise و Mess بر اساس نیاز Ruleها پرسیده می‌شوند. Mood و Energy مستقل‌اند. Active Play MUST راه بازگشت را توضیح دهد و CTA Completion برابر «بازی کردیم، برگشتیم» باشد.
+Reason: پوشش Metadata بریف بدون ساخت فرم طولانی و افزایش فهم رویداد Complete.
+Consequences: Flow branching و Analytics باید سؤال‌های نمایش‌داده‌شده را قابل Audit کنند؛ Label جدید همچنان Event `completed` ثبت می‌کند.
+Risks: Branching پیچیده یا سؤال اضافی؛ فقط داده لازم پرسیده می‌شود.
+Reversible: Question wording بله؛ معنای Domain فقط با Product Decision جدید.
+Affected Documents: Product Rules، User Flow، Screen Specs، Copy System
+Affected Components: Quick Match، Active Play، Analytics

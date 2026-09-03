@@ -7,17 +7,20 @@ Phase: 08 - UI/UX DESIGN
 
 - Purpose: فهم Promise و شروع Match در اولین Viewport
 - Entry: URL اصلی، Search، Share
-- Components: Header، تیله تعاملی مرکزی، H1، Value line، CTA، بخش کوتاه «چطور کار می‌کند»، نمونه سه Result، Safety trust، Jigari teaser، Footer
+- Components: Header و Theme toggle، تیله تعاملی مرکزی، H1، Value line، CTA، Tagline band، Public Heartbeat، بخش کوتاه «چطور کار می‌کند»، نمونه سه Result، Safety trust، Jigari teaser، Footer
 - Primary action: «چی بازی کنیم؟»
 - Loading: تیله Static poster تا Interactive layer آماده شود
 - Error: Static/CSS marble fallback، CTA همیشه فعال
 - Responsive: Mobile تک‌ستونه؛ تیله 44-58vw با حداقل Hit area 160px؛ Desktop حداکثر 440px
 - Permission: Public
+- Heartbeat: الگوی «{PLAY_STARTS} بازی با تیله شروع شده» و فقط از aggregate معتبر `started`
+- Tagline: در Section مستقل بلافاصله پس از Hero، نه به‌عنوان عنصر پنجم Hero
 
 ## Quick Match Context
 
 - Purpose: گرفتن حداقل Context لازم
 - Components: یک سؤال غالب در هر View، پاسخ‌های Tap-friendly، Back، progress معنایی
+- Question set: Age ثابت؛ Situation/Duration معمول؛ Location/Space، Materials و Players شرطی؛ Energy و Mood مستقل؛ Noise/Mess فقط در صورت نیاز
 - Loading: Skeleton هم‌شکل گزینه‌ها
 - Error: inline و کنار سؤال
 - Success: Transition کوتاه قوسی به سؤال بعد
@@ -52,9 +55,10 @@ Phase: 08 - UI/UX DESIGN
 ## Active Play
 
 - Purpose: خروج از Screen و بازگشت بعد از بازی
-- Components: نام، یادآوری ضروری، «گوشی را کنار بگذار»، برگشتیم
+- Components: نام، «گوشی را کنار بگذارید و با هم بازی کنید»، راهنمای بازگشت، CTA «بازی کردیم، برگشتیم»
 - Motion: پس از Start آرام می‌شود؛ صفحه نباید توجه طلب کند
 - Offline: Event queue با وضعیت قابل فهم
+- Return microcopy: «وقتی تمام شد، برگردید و روی «بازی کردیم، برگشتیم» بزنید.»
 
 ## Complete and Feedback
 

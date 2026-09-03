@@ -90,6 +90,8 @@ Guest MUST بتواند Quick Match، Result، Game Detail و Start را بدو�
 - `PRD-BRAND-002`: Homepage Hero MUST تیله شیشه‌ای بزرگ و مرکزی مطابق `DEC-003` داشته باشد.
 - `PRD-BRAND-003`: تیله Hero MUST Ambient motion، Pointer response و Drag/Touch rotation داشته باشد.
 - `PRD-BRAND-004`: reduced-motion، Keyboard fallback و Performance budget MUST در Design Spec تعریف شوند.
+- `PRD-BRAND-005`: انتخاب Light/Dark theme MUST در تمام صفحات و مراحل همان Session پایدار بماند و با Preference ذخیره‌شده یا System preference مقداردهی شود.
+- `PRD-BRAND-006`: Home MUST Tagline رسمی و Public Heartbeat مبتنی بر شمارش معتبر `started` را نمایش دهد.
 
 ## Non-functional requirements
 

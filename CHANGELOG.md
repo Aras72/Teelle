@@ -23,6 +23,10 @@
 - تصویر مرجع تیله Hero در `docs/08-ux/assets/teelle-hero-marble-reference-v1.png` ثبت شد.
 - نمونه High-fidelity صفحه Home برای Desktop و Mobile در `docs/08-ux/prototypes/` اضافه شد و برای Owner review آماده است.
 - Dark-mode Desktop Home و برد High-fidelity مسیر Mobile از Context تا Active Play اضافه شدند.
+- Owner review UI v2 اعمال شد: Tagline و Heartbeat به Home افزوده شدند، Dark surface بدون Noise بازطراحی شد و Theme تیره در کل Flow ادامه یافت.
+- سؤال‌های Quick Match به Essential و Adaptive تفکیک شدند؛ Age تنها سؤال ثابت و Mood/Energy مستقل ثبت شدند.
+- Active Play با Return microcopy و CTA «بازی کردیم، برگشتیم» اصلاح شد.
+- تصمیم‌های DEC-011 و DEC-012 برای Dark Theme سراسری و Context/Completion copy ثبت شدند.
 
 ### Changed
 

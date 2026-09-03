@@ -8,7 +8,16 @@ Phase: 08 - UI/UX DESIGN
 - Custom semantic tokens برای Laravel/Blade؛ Design system عمومی به‌عنوان ظاهر نهایی استفاده نمی‌شود.
 - Typography: Vazirmatn Variable self-hosted.
 - Icon family: یک خانواده واحد در Implementation پس از dependency audit؛ stroke ثابت 1.75.
-- Theme: Light-first Cream با Dark mode هم‌ارز از ابتدا؛ هر صفحه Theme lock دارد.
+- Theme: Light-first Cream و Dark Petrol هم‌ارز؛ انتخاب کاربر در تمام Application و Flowها پایدار است.
+
+## Theme behavior
+
+- Default از Preference ذخیره‌شده و سپس `prefers-color-scheme` می‌آید.
+- Theme toggle در Header و Settings در دسترس است.
+- Navigation بین Screenها Theme را Reset نمی‌کند.
+- Server-rendered shell باید Theme اولیه را پیش از Paint اعمال کند تا Flash Light/Dark رخ ندهد.
+- Dark surface از رنگ‌های تخت و tonal separation استفاده می‌کند؛ Grain، Noise، Banding و Pattern تکراری ممنوع است.
+- هر Component در Light و Dark همان hierarchy، semantics و stateها را حفظ می‌کند.
 
 ## Semantic colors
 

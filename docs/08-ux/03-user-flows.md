@@ -5,7 +5,7 @@ Phase: 08 - UI/UX DESIGN
 
 ## Guest Quick Match
 
-Home -> چی بازی کنیم؟ -> سن -> Context لازم -> Match -> سه Result -> Detail -> شروع بازی -> Active Play -> برگشتیم -> Feedback اختیاری
+Home -> چی بازی کنیم؟ -> سن -> Situation -> Context لازم و تطبیقی -> Match -> سه Result -> Detail -> شروع بازی -> Active Play -> بازی کردیم، برگشتیم -> Feedback اختیاری
 
 Branchها:
 
@@ -13,6 +13,20 @@ Branchها:
 - داده Required ناشناخته -> سؤال حداقلی
 - کمتر از سه Survivor -> no-result و Constraint امن قابل تغییر
 - بازی Unpublish شود -> توضیح و Re-match
+
+## Adaptive context policy
+
+- همیشه: Age
+- معمولاً: Situation و Duration
+- در صورت نیاز Hard filter: Location/Space، Required materials و Players/Adult presence
+- در صورت اثر Ranking مصوب: Energy و Mood به‌صورت مستقل
+- شرطی: Noise و Mess
+
+سیستم همه سؤال‌ها را در هر Match نمایش نمی‌دهد. پاسخ قبلی یا Situation می‌تواند سؤال بعدی را حذف یا لازم کند.
+
+## Theme continuity
+
+Theme انتخاب‌شده یک State سطح Application است و در تمام Branchهای Guest، Account و Jigari حفظ می‌شود. هیچ Transition بین Screenها حق بازگرداندن ناخواسته Theme به Light را ندارد.
 
 ## Signup after value
 

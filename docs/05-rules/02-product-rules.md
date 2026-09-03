@@ -10,6 +10,9 @@ Phase: 05 — PRODUCT RULES
 - `PR-QM-003`: Input UI SHOULD برای ۶ تا ۲۳ ماه از ماه و برای ۲ تا ۱۲ سال از سال/ماه قابل فهم استفاده کند؛ Domain همیشه ماه ذخیره می‌کند.
 - `PR-QM-004`: Context MUST فقط داده لازم برای Hard Filter و Ranking مصوب را بگیرد.
 - `PR-QM-005`: سیستم MUST داده قابل استنتاج را دوباره نپرسد.
+- `PR-QM-006`: Age تنها سؤال ثابت است؛ سؤال‌های Situation، Duration، Location/Space، Required materials، Players/Adult presence، Energy و Mood MUST فقط در صورت نیاز Context پرسیده شوند.
+- `PR-QM-007`: Mood و Energy MUST دو ورودی مستقل باشند.
+- `PR-QM-008`: Noise و Mess MAY به‌صورت سؤال شرطی ظاهر شوند و MUST به‌صورت پیش‌فرض فرم را طولانی نکنند.
 
 ## Matching pipeline
 
@@ -64,3 +67,11 @@ Phase: 05 — PRODUCT RULES
 - `PR-MOT-003`: Direct drag/touch MUST کنترل چرخش را به کاربر بدهد.
 - `PR-MOT-004`: Keyboard alternative و reduced-motion MUST وجود داشته باشند.
 - `PR-MOT-005`: Motion MUST CTA را نپوشاند، Input را Block نکند و Scroll hijack نسازد.
+
+## Theme and heartbeat
+
+- `PR-THEME-001`: Theme انتخاب‌شده MUST از Home تا Match، Result، Detail، Active Play، Account، Jigari و Admin ادامه یابد.
+- `PR-THEME-002`: تغییر Theme MAY در Header/Settings انجام شود و MUST بدون Flash ناسازگار اعمال شود.
+- `PR-THEME-003`: Dark surfaces MUST تمیز، بدون Noise/Grain/Pattern تکراری و با Contrast قابل اندازه‌گیری باشند.
+- `PR-HB-001`: Heartbeat عمومی MUST فقط شمارش aggregate رویدادهای معتبر `started` را نمایش دهد.
+- `PR-HB-002`: عدد Mockup MUST به‌عنوان Sample ثبت شود و MUST در Implementation hard-code نشود.

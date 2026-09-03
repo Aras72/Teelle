@@ -16,6 +16,16 @@ Source decision: DEC-003
 - Subtext حداکثر ۲۰ واژه.
 - CTA اصلی «چی بازی کنیم؟» بدون Scroll دیده می‌شود.
 - Hero حداکثر چهار عنصر متنی دارد و Trust/Featureها پایین‌تر می‌روند.
+- Tagline و Heartbeat در یک Section مستقل بلافاصله پس از Hero کامل دیده می‌شوند.
+- Header یک Theme toggle قابل دسترس دارد و انتخاب آن در تمام مسیر پایدار می‌ماند.
+
+## Tagline and heartbeat band
+
+- Tagline exact: «کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد.»
+- Heartbeat exact pattern: «{PLAY_STARTS} بازی با تیله شروع شده»
+- عدد فقط aggregate رویدادهای معتبر `started` است.
+- Animation عدد فقط هنگام تغییر واقعی یک pulse کوتاه دارد؛ loop تزئینی ندارد.
+- مقدار `۱۲٬۳۴۵` در Prototype v2 فقط Sample layout است و داده واقعی نیست.
 
 ## Marble anatomy
 

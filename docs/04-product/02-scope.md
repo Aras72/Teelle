@@ -21,6 +21,7 @@ Phase: 04 — PRODUCT DEFINITION
 - Admin Content CRUD، Import، Review/Publish و Audit
 - Coverage Dashboard و Analytics/Reports
 - Responsive RTL، Accessibility، Security، Privacy و Performance
+- Light/Dark theme سراسری و پایدار در تمام مسیرهای Website
 - PWA readiness لازم برای سایت
 - حداقل Library مصوب هر Release stage
 - پوشش سنی از ۶ماهگی تا پیش از ۱۳سالگی
@@ -48,7 +49,6 @@ Phase: 04 — PRODUCT DEFINITION
 - UGC
 - Social network مستقیم
 - Marketplace
-- Dark Mode
 - iOS app
 - Native Android، React Native یا Flutter
 - TWA پیش از Website Complete
