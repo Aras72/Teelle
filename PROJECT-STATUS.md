@@ -4,7 +4,7 @@ Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 08 — UI / UX DESIGN
 Current Stage: Priority experience design
-Current Task: Owner review برد System states v1 و تکمیل نسخه تیره
+Current Task: Owner review بسته تکمیلی UI/UX و ارزیابی Gate
 Overall Status: PLANNING
 
 Last Completed:
@@ -35,14 +35,14 @@ Currently Working On:
 - نقطه پایانی تیتر، توضیح Hero و شعار Home در Prototype v3 روشن و تیره حذف شد.
 - Homepage v4 با قالب اصلیِ تیله مرکزی و Microcopy جدید Heartbeat به تأیید مالک رسید.
 - برد روشن System states v1 برای no-result، Loading، Empty، Error و Offline ثبت شد.
+- برد تیره System states v1 و Variantهای Desktop Results/Detail در هر دو Theme ثبت شدند.
+- قرارداد Responsive و Accessibility برای عرض‌های 320، 390، 768، 1024 و 1440 ثبت شد.
 
 Next:
 
-- Owner review برد روشن System states v1 و طراحی نسخه تیره آن
-- طراحی Variantهای Desktop برای Result و Detail
-- بررسی Dark-mode Mobile و Contrast
-- بررسی Contrast، RTL، Touch و reduced-motion
+- Owner review حالت‌های سیستمی و Desktop Results/Detail
 - Visual review مالک و اجرای UI/UX Gate
+- انتقال معیارهای `NOT RUN` به Acceptance فاز Implementation
 
 Blocked By:
 

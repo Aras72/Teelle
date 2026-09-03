@@ -32,6 +32,8 @@ Priority: Homepage and Quick Match
 - `13-homepage-copy-punctuation-v3.md`
 - `14-homepage-approved-v4.md`
 - `15-system-states-v1.md`
+- `16-desktop-results-detail-v1.md`
+- `17-responsive-accessibility-review.md`
 - `assets/teelle-hero-marble-reference-v1.png`
 - `prototypes/homepage-desktop-v1.png`
 - `prototypes/homepage-mobile-v1.png`
@@ -47,7 +49,10 @@ Priority: Homepage and Quick Match
 - `prototypes/homepage-desktop-light-v4.png`
 - `prototypes/homepage-desktop-dark-v4.png`
 - `prototypes/system-states-mobile-light-v1.png`
+- `prototypes/system-states-mobile-dark-v1.png`
+- `prototypes/desktop-results-detail-light-v1.png`
+- `prototypes/desktop-results-detail-dark-v1.png`
 
 ## Gate state
 
-Homepage v4 با همان قالب اصلی و تیله مرکزی به تأیید مالک رسید. Microcopy نهایی Heartbeat برابر «{PLAY_STARTS} بار بازی با تیله انجام شده» است و تصاویر v4 مرجع جاری‌اند. برد روشن System states v1 برای no-result، Loading، Empty، Error و Offline آماده Review است. Gate پس از نسخه تیره Stateها، Variantهای Desktop مسیر اصلی و بررسی اندازه‌ها ارزیابی می‌شود. Architecture و Implementation تا آن زمان LOCKED هستند.
+Homepage v4 با همان قالب اصلی و تیله مرکزی به تأیید مالک رسید. Microcopy نهایی Heartbeat برابر «{PLAY_STARTS} بار بازی با تیله انجام شده» است و تصاویر v4 مرجع جاری‌اند. System states و Desktop Results/Detail در هر دو Theme آماده Review هستند و قرارداد Responsive/Accessibility پنج عرض هدف ثبت شده است. Static design review کامل است، اما Browser reflow، Keyboard، Screen reader، Contrast عددی و Performance تا Prototype اجرایی `NOT RUN` هستند. Gate پس از تأیید مالک ارزیابی می‌شود. Architecture و Implementation تا آن زمان LOCKED هستند.

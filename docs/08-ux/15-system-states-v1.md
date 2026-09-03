@@ -9,6 +9,8 @@ Design dials: `8 / 7 / 4`
 
 ![حالت‌های سیستمی تیله در موبایل و تم روشن](prototypes/system-states-mobile-light-v1.png)
 
+![حالت‌های سیستمی تیله در موبایل و تم تیره](prototypes/system-states-mobile-dark-v1.png)
+
 ## No-result
 
 - Heading: «سه بازی امن پیدا نکردیم»
@@ -50,4 +52,5 @@ Design dials: `8 / 7 / 4`
 - وضعیت‌ها در live region مناسب اعلام می‌شوند.
 - Focus پس از تغییر State روی Heading یا Recovery action منطقی قرار می‌گیرد.
 - حرکت فقط Feedback یا State transition را توضیح می‌دهد و Loop تزئینی ندارد.
-- Theme در تمام مسیر پایدار می‌ماند؛ نسخه تیره همین Stateها پیش از Gate تکمیل و Contrast آن اندازه‌گیری می‌شود.
+- Theme در تمام مسیر پایدار می‌ماند و هر پنج State در نسخه روشن و تیره مرجع دارند.
+- Visual review کنتراست هر دو Theme انجام شده است؛ اندازه‌گیری عددی WCAG پس از Freeze شدن Tokenهای پیاده‌سازی انجام می‌شود.

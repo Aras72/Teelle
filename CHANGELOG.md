@@ -32,6 +32,8 @@
 - Homepage v4 روشن و تیره با حفظ قالب اصلی و عبارت «بار بازی با تیله انجام شده» نهایی و تأیید شد.
 - تصمیم DEC-014 خروجی دونیمه‌ای آزمایشی را رد و قالب تیله مرکزی را مرجع پیاده‌سازی کرد.
 - مرحله بعد UI/UX با برد روشن System states v1 شامل no-result، Loading، Empty، Error و Offline آغاز شد.
+- نسخه تیره System states v1 و Variantهای Desktop برای Results و Game Detail در هر دو Theme اضافه شدند.
+- قرارداد Responsive و Accessibility پنج عرض هدف با تفکیک بررسی‌های کامل و `NOT RUN` ثبت شد.
 
 ### Changed
 
