@@ -4,7 +4,7 @@ Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 08 — UI / UX DESIGN
 Current Stage: Priority experience design
-Current Task: Owner review نمونه تصویری Home و ادامه Design family مسیر Guest Quick Match
+Current Task: Owner review Home و Core Mobile Flow؛ طراحی no-result و system states
 Overall Status: PLANNING
 
 Last Completed:
@@ -30,11 +30,14 @@ Currently Working On:
 - Design system، Motion system و Homepage Interactive Marble Spec در Draft review هستند.
 - مرجع تصویری Hero داخل Repository ثبت شد.
 - نمونه تصویری High-fidelity صفحه Home در Desktop و Mobile داخل Repository ثبت شد.
+- Dark Home و برد چهارصفحه‌ای مسیر اصلی Mobile ثبت شدند.
 
 Next:
 
 - Owner review نسخه Home در Mobile و Desktop
-- طراحی Dark-mode Home و حالت‌های Quick Match، Result، no-result، Detail و Active Play
+- طراحی no-result، Loading، Empty، Error و Offline states
+- طراحی Variantهای Desktop برای Result و Detail
+- بررسی Dark-mode Mobile و Contrast
 - بررسی Contrast، RTL، Touch و reduced-motion
 - Visual review مالک و اجرای UI/UX Gate
 

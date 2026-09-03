@@ -27,10 +27,13 @@ Priority: Homepage and Quick Match
 - `08-motion-system.md`
 - `09-homepage-hero-spec.md`
 - `10-homepage-visual-prototype.md`
+- `11-priority-flow-visuals.md`
 - `assets/teelle-hero-marble-reference-v1.png`
 - `prototypes/homepage-desktop-v1.png`
 - `prototypes/homepage-mobile-v1.png`
+- `prototypes/homepage-desktop-dark-v1.png`
+- `prototypes/core-flow-mobile-board-v1.png`
 
 ## Gate state
 
-Foundation و Priority flowها مستند شده‌اند و Homepage visual prototype برای Mobile و Desktop آماده Owner review است. Gate پس از Dark-mode variant، طراحی Priority screen family، بررسی حالت‌ها و تأیید مالک ارزیابی می‌شود. Architecture و Implementation تا آن زمان LOCKED هستند.
+Foundation و Priority flowها مستند شده‌اند. Home روشن در Mobile/Desktop، Home تاریک در Desktop و برد مسیر اصلی Mobile آماده Owner review هستند. Gate پس از طراحی Stateهای خطا/خالی/آفلاین، Variantهای Desktop مسیر اصلی، بررسی اندازه‌ها و تأیید مالک ارزیابی می‌شود. Architecture و Implementation تا آن زمان LOCKED هستند.
