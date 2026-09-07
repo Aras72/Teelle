@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 — IMPLEMENTATION
-Current Stage: Prompt 005 implemented؛ validation partial؛ owner approval hold
-Current Task: بازبینی تیله تعاملی؛ Prompt 006 شروع نشده است
+Current Stage: Prompt 005 interactive visual rejected؛ approved static poster restored per DEC-020
+Current Task: تصویر طبیعی ثابت و شعار Desktop بزرگ‌تر؛ Prompt 006 شروع نشده است
 Overall Status: IMPLEMENTING
 
 Last Completed:
@@ -95,8 +95,8 @@ Critical Risks:
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-005 FROZEN
-Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 IMPLEMENTED; PROMPT 006 OWNER-APPROVAL LOCKED
-Testing Status: Prompt 005 PHP 14 passed / 75 assertions, 7 DB tests skipped; JS 8 passed; build/audit/Pint passed; browser checks and limitations in reports/prompt-005-report.md
+Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 INTERACTIVE VISUAL REJECTED / STATIC POSTER ACTIVE (DEC-020); PROMPT 006 OWNER-APPROVAL LOCKED
+Testing Status: DEC-020 PHP 14 passed / 78 assertions, 7 DB tests skipped; production build passed with no marble dynamic chunk; visual/responsive checks in reports/prompt-005-report.md
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

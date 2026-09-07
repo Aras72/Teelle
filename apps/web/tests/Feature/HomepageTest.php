@@ -64,6 +64,9 @@ class HomepageTest extends TestCase
             ->assertSee('width="1536"', false)
             ->assertSee('height="1024"', false)
             ->assertSee('home-marble-stage__fallback', false)
+            ->assertDontSee('data-marble-control', false)
+            ->assertDontSee('تیله را بکش و بچرخان')
+            ->assertDontSee('data-marble>', false)
             ->assertSee('href="/match"', false);
 
         $this->assertFileExists(public_path('images/teelle-hero-marble-poster-v1.png'));

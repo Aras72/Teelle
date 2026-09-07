@@ -845,6 +845,7 @@ body:has(.home-hero) #main-content {
     .teelle-wordmark { justify-self: start; }
     .teelle-header-actions { justify-self: end; }
     .home-heartbeat__content { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); }
+    .home-heartbeat__tagline { font-size: clamp(1.125rem, 2.35vw, 2rem); }
     .home-heartbeat__metric { padding-inline-start: 1.25rem; }
 }
 @media (max-width: 47.99rem) {

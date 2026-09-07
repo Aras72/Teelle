@@ -1,14 +1,6 @@
 import './bootstrap';
 
-const marbleStage = document.querySelector('[data-marble]');
-if (marbleStage) {
-    const load = () => import('./marble').then(({ mountMarble }) => mountMarble(marbleStage)).catch(() => {
-        marbleStage.dataset.marbleState = 'fallback';
-        marbleStage.querySelector('[data-marble-control]').hidden = true;
-    });
-    if ('requestIdleCallback' in window) window.requestIdleCallback(load, { timeout: 800 });
-    else window.setTimeout(load, 100);
-}
+// DEC-020: approved photographic poster until a realistic interactive asset is accepted.
 
 const storageKey = 'teelle-theme';
 const validThemes = new Set(['light', 'dark']);

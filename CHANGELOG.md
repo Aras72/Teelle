@@ -2,6 +2,8 @@
 
 ## 2026-09-08
 
+- DEC-020: restored approved static marble poster after owner rejected the real-time material; removed interactive loader/control/help from Homepage. Increased desktop tagline while preserving one-line layout.
+
 - Prompt 004 pushed and remote HEAD verified; pnpm audit rerun successfully.
 - Prompt 005 isolated, lazy-loaded Three.js glass marble with pointer/drag/keyboard controls, reduced-motion, lifecycle cleanup, fallback and adaptive rendering.
 - Owner-requested homepage alignment, one-line tagline, natural heartbeat image and 110 baseline (DEC-019).

@@ -1,5 +1,13 @@
 # Prompt 005 — Interactive marble
 
+## Current correction: DEC-020 (2026-09-08)
+
+The owner accepted the interaction but rejected the synthetic appearance and explicitly authorized restoring the approved static photo if natural real-time quality could not be achieved. The current implementation uses that fallback: unchanged photographic poster, no rotation control/help, no Three.js import from the entrypoint. The module remains dormant for a separately approved visual revision. The implementation/results below are historical and do not imply the interactive version is currently active.
+
+Desktop tagline increased from a 26.4px ceiling to 32px (24.064px at width 1024), remaining on one line; mobile font rules unchanged. Approved palette, Vazirmatn, centered layout, copy and heartbeat baseline preserved. Design-taste-frontend preservation workflow applied; no new image or redesign was introduced.
+
+Validation: PHP 14 tests / 78 assertions PASS, 7 database tests SKIPPED. Build PASS; manifest has no marble dynamic entry, JS entry is 52.75kB / 20.04kB gzip. Browser confirms zero canvas/control, poster visible, tagline one line, no overflow at tested desktop/tablet/short-mobile sizes; light/dark screenshots reviewed. Lighthouse NOT RUN. Prompt 006 remains locked.
+
 Date: 2026-09-08
 Implementation: IMPLEMENTED
 Full quality gate: PARTIAL — hardware/browser coverage below remains unverified

@@ -1,12 +1,10 @@
 <x-layouts.app description="تیله، بازی مناسب برای همین لحظه">
     <section class="home-hero" aria-labelledby="home-title">
         <div class="teelle-container home-hero__content teelle-enter">
-            <div class="home-marble-stage" data-marble>
+            <div class="home-marble-stage" aria-hidden="true">
                 <div class="home-marble-stage__fallback"></div>
                 <img class="home-marble-stage__poster" src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" width="1536" height="1024" alt="" fetchpriority="high" decoding="async">
-                <button class="marble-control" type="button" aria-label="چرخاندن تیله" aria-describedby="marble-help" data-marble-control></button>
             </div>
-            <p id="marble-help" class="marble-help">تیله را بکش و بچرخان <span class="sr-only">با کلیدهای جهت‌دار بچرخانید، با Home بازنشانی و با Escape متوقف کنید</span></p>
 
             <h1 class="home-hero__title" id="home-title">بازی مناسب، برای همین لحظه</h1>
             <p class="home-hero__copy">چند سؤال کوتاه، سه بازی مناسب برای همین حالا</p>
