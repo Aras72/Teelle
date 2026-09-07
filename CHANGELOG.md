@@ -49,6 +49,10 @@
 - Promptهای 001 تا 005 Freeze و در Repository ثبت شدند.
 - Prompt 001 اجرا شد و پایه Laravel 13 / Livewire 4 در `apps/web` با Composer و pnpm lockfile اضافه شد.
 - پوسته موقت فارسی RTL، تنظیمات locale/timezone، Health endpoint و تست‌های Foundation اضافه شدند؛ Quality Gate برابر PASS شد.
+- Prompt 002 با ۵ گروه Migration برای Identity، Game Library، Publication، Match/Play/Heartbeat و Commerce/Operations اجرا شد.
+- قیود MySQL برای مالکیت نسخه Published، Actor، سن ۶ تا کمتر از ۱۵۶ ماه، idempotency و Eventهای append-only اضافه شدند.
+- Seederهای idempotent نقش‌ها، Taxonomy، Safety، پلن‌های غیرفعال جیگری و Heartbeat صفر به‌همراه Factoryهای صرفاً Draft اضافه شدند.
+- Schema روی MySQL 8.4.11 رسمی با ۵۷ جدول InnoDB، Rollback/Forward و ۷ تست یکپارچگی پاس شد.
 
 ### Changed
 

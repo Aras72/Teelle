@@ -24,3 +24,7 @@ Started: 2026-09-03
 - پنل ورود، Review و Publish بازی: Slice محتوای PHASE 14.
 - Library اولیه: به‌صورت Batch و با Coverage Gate تا پیش از Beta پر می‌شود.
 - هدف حدود 250 بازی فقط وقتی معتبر است که تمام رکوردها Reviewed/Published و Coverage بحرانی تأیید شده باشد.
+
+## Implementation evidence
+
+Prompt 002 در 2026-09-07 روی MySQL Community Server 8.4.11 LTS اجرا شد. Migration از دیتابیس خالی، Seed تکرارشونده، Rollback/Forward و ۷ تست Integrity با ۳۴ Assertion پاس شدند. نسخه دقیق MySQL محیط Production پارس‌پک تا زمان دسترسی Staging/Production همچنان `UNVERIFIED` است.
