@@ -48,3 +48,9 @@ The Marble is a production-shaped poster/CSS fallback. Pointer، drag، touch، 
 
 Prompt 004 Quality Gate: PASS
 Prompt 005 may start only from the pushed Prompt 004 commit.
+
+## Delivery follow-up — 2026-09-08
+
+- Commit 4f449d3ed2aca0dbee5cea040382909d1ff29485 pushed successfully to origin/main; remote SHA verified before Prompt 005 implementation.
+- Retried pnpm audit --prod: PASS, no known vulnerabilities. Full pnpm audit after adding Three.js in Prompt 005 also PASS.
+- Homepage counting baseline is subsequently amended by owner-approved DEC-019; historical tests above describe Prompt 004, not current behavior.

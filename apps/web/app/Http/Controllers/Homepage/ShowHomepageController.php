@@ -10,11 +10,13 @@ final class ShowHomepageController extends Controller
 {
     public function __invoke(ReadPublicHeartbeat $readHeartbeat): View
     {
-        $heartbeatCount = $readHeartbeat();
+        $recordedCount = $readHeartbeat();
+        $heartbeatCount = max(0, (int) config('teelle.heartbeat_baseline')) + max(0, $recordedCount ?? 0);
 
         return view('welcome', [
             'heartbeatCount' => $heartbeatCount,
-            'heartbeatDisplay' => $heartbeatCount === null ? null : $this->toPersianNumber($heartbeatCount),
+            'heartbeatStale' => $recordedCount === null,
+            'heartbeatDisplay' => $this->toPersianNumber($heartbeatCount),
         ]);
     }
 

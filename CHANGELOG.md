@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-09-08
+
+- Prompt 004 pushed and remote HEAD verified; pnpm audit rerun successfully.
+- Prompt 005 isolated, lazy-loaded Three.js glass marble with pointer/drag/keyboard controls, reduced-motion, lifecycle cleanup, fallback and adaptive rendering.
+- Owner-requested homepage alignment, one-line tagline, natural heartbeat image and 110 baseline (DEC-019).
+- Local MySQL port 3500 recorded without touching existing data. Prompt 006 remains locked pending owner approval.
+
 ## 2026-09-03
 
 ### Added

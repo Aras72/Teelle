@@ -287,3 +287,16 @@ Risks: ایمیل نامعتبر مانع verification/reset می‌شود؛ OTP
 Reversible: روش اصلی یا فعال‌سازی OTP با Decision و Migration سازگار قابل تغییر است.
 Affected Documents: Authentication، Integrations، Data Model، Development Planning
 Affected Components: User، Auth، Notification، Recovery، Guest merge
+
+## DEC-019 — مقدار پایه Heartbeat و اصلاحات Homepage
+
+Date: 2026-09-08
+Status: APPROVED BY OWNER
+
+Decision: به درخواست مستقیم مالک نمایش Heartbeat از ۱۱۰ شروع می‌شود. این مقدار، baseline نمایشی مستقل از رویدادهاست؛ مقدار نمایش برابر ۱۱۰ + started_count واقعی projection با کلید public_play_starts است. هیچ Play event ساختگی درج نمی‌شود. در نبود اتصال، baseline همراه با پیام عدم دسترسی به به‌روزرسانی نمایش داده می‌شود. این تصمیم بر الزام قبلی نمایش صرفاً شمار رویدادهای واقعی در Homepage اولویت دارد؛ گزارش‌های تحلیلی همچنان فقط داده واقعی را مصرف می‌کنند.
+
+Homepage: شعار بدون نقطه در یک خط، منوی Desktop هم‌محور با تیله، تصویر طبیعی برای Heartbeat و چیدمان متناسب با ارتفاع viewport. بزرگ‌نمایی و نمایشگرهای بسیار کوتاه اجازه reflow دارند؛ محتوا با overflow مخفی نمی‌شود.
+
+Local infrastructure: مالک MySQL محلی روی پورت 3500 را معرفی کرد. در Prompt 005 اتصال/credential/نسخه آن تأیید نشده و هیچ migration یا تغییری روی داده آن انجام نشده است. استفاده بعدی فقط با دیتابیس مشخص پروژه و تست روی دیتابیس disposable جداگانه.
+
+Boundary: Prompt 006 تا تأیید مجدد مالک شروع نمی‌شود.

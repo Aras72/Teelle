@@ -12,7 +12,7 @@ class ReadPublicHeartbeat
     {
         try {
             $count = Cache::remember('public-heartbeat-started-count', now()->addMinute(), function (): int {
-                return (int) (HeartbeatProjection::query()->whereKey('global')->value('started_count') ?? 0);
+                return (int) (HeartbeatProjection::query()->whereKey('public_play_starts')->value('started_count') ?? 0);
             });
 
             return max(0, (int) ($count ?? 0));

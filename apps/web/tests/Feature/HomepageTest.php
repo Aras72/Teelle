@@ -16,31 +16,31 @@ class HomepageTest extends TestCase
             ->assertSee('بازی مناسب، برای همین لحظه')
             ->assertSee('چند سؤال کوتاه، سه بازی مناسب برای همین حالا')
             ->assertSee('کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد')
-            ->assertSee('۱۲٬۳۴۵')
+            ->assertSee('۱۲٬۴۵۵')
             ->assertSee('بار بازی با تیله انجام شده')
             ->assertSee('چی بازی کنیم؟')
-            ->assertSee('data-heartbeat-count="12345"', false);
+            ->assertSee('data-heartbeat-count="12455"', false);
     }
 
-    public function test_homepage_uses_zero_without_inventing_activity(): void
+    public function test_homepage_adds_owner_approved_baseline_without_inserting_events(): void
     {
         $this->fakeHeartbeat(0);
 
         $this->get('/')
             ->assertOk()
-            ->assertSee('۰')
-            ->assertSee('data-heartbeat-count="0"', false)
+            ->assertSee('۱۱۰')
+            ->assertSee('data-heartbeat-count="110"', false)
             ->assertDontSee('۱۲٬۳۴۵');
     }
 
-    public function test_homepage_handles_an_unavailable_projection_without_a_fake_count(): void
+    public function test_homepage_discloses_unavailable_projection_with_baseline(): void
     {
         $this->fakeHeartbeat(null);
 
         $this->get('/')
             ->assertOk()
-            ->assertSee('آمار بازی‌ها فعلاً در دسترس نیست')
-            ->assertDontSee('data-heartbeat-count', false)
+            ->assertSee('به‌روزرسانی آمار موقتاً در دسترس نیست')
+            ->assertSee('data-heartbeat-count="110"', false)
             ->assertDontSee('۱۲٬۳۴۵');
     }
 
