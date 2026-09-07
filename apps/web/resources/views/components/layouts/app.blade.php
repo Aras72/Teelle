@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="{{ $description ?? 'تیله، همراه خانواده برای پیدا کردن بازی‌های متناسب با کودک' }}">
+        <meta name="theme-color" content="#fffaf0">
+
+        <title>{{ isset($title) ? $title.' | تیله' : 'تیله' }}</title>
+
+        @include('partials.theme-bootstrap')
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body>
+        <a class="teelle-skip-link" href="#main-content">رفتن به محتوای اصلی</a>
+
+        <x-site-header />
+
+        <main id="main-content" tabindex="-1">
+            {{ $slot }}
+        </main>
+    </body>
+</html>

@@ -53,6 +53,9 @@
 - قیود MySQL برای مالکیت نسخه Published، Actor، سن ۶ تا کمتر از ۱۵۶ ماه، idempotency و Eventهای append-only اضافه شدند.
 - Seederهای idempotent نقش‌ها، Taxonomy، Safety، پلن‌های غیرفعال جیگری و Heartbeat صفر به‌همراه Factoryهای صرفاً Draft اضافه شدند.
 - Schema روی MySQL 8.4.11 رسمی با ۵۷ جدول InnoDB، Rollback/Forward و ۷ تست یکپارچگی پاس شد.
+- Prompt 003 با Design tokenهای اختصاصی، Vazirmatn self-hosted، اجزای مشترک Blade و Theme سراسری روشن/تیره اجرا شد.
+- Theme bootstrap پیش از Paint، پاک‌سازی Preference نامعتبر، پیروی از تنظیم سیستم و persistence بین بارگذاری‌ها اضافه شد.
+- Reflow در عرض‌های ۳۲۰، ۳۹۰، ۷۶۸، ۱۰۲۴ و ۱۴۴۰، ترتیب Focus و Contrast دو Theme بررسی و ثبت شدند.
 
 ### Changed
 

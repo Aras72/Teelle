@@ -6,14 +6,36 @@ use Tests\TestCase;
 
 class FoundationTest extends TestCase
 {
-    public function test_home_page_is_a_persian_rtl_teelle_shell(): void
+    public function test_home_page_uses_the_persian_rtl_teelle_design_shell(): void
     {
         $this->get('/')
             ->assertOk()
-            ->assertSee('<html lang="fa" dir="rtl">', false)
+            ->assertSee('<html lang="fa" dir="rtl" class="no-js">', false)
             ->assertSee('تیله')
-            ->assertSee('کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد')
-            ->assertSee('این صفحه موقت است');
+            ->assertSee('پایه رابط تیله آماده است')
+            ->assertSee('چی بازی کنیم؟')
+            ->assertSee('data-theme-toggle', false)
+            ->assertSee('رفتن به محتوای اصلی');
+    }
+
+    public function test_theme_bootstrap_precedes_compiled_assets(): void
+    {
+        $response = $this->get('/')->assertOk();
+        $html = $response->getContent();
+
+        $this->assertIsString($html);
+        $this->assertStringContainsString("const key = 'teelle-theme'", $html);
+        $this->assertStringContainsString("allowed = ['light', 'dark']", $html);
+        $assetPosition = strpos($html, '<link rel="stylesheet"');
+        $bootstrapPosition = strpos($html, "const key = 'teelle-theme'");
+
+        $this->assertNotFalse($assetPosition);
+        $this->assertNotFalse($bootstrapPosition);
+        $this->assertLessThan(
+            $assetPosition,
+            $bootstrapPosition,
+            'Theme bootstrap must run before the compiled stylesheet is requested.',
+        );
     }
 
     public function test_health_endpoint_is_available_without_secret_output(): void

@@ -1,22 +1,34 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="تیله؛ همراه خانواده برای پیدا کردن بازی‌های متناسب با کودک">
-        <meta name="theme-color" content="#f7f4ed">
+<x-layouts.app title="پایه رابط کاربری">
+    <div class="teelle-container teelle-page design-foundation teelle-enter">
+        <section class="design-foundation__intro" aria-labelledby="foundation-title">
+            <p class="design-foundation__eyebrow">پایه رابط تیله آماده است</p>
+            <h1 class="design-foundation__title" id="foundation-title">یک زبان زنده برای بازی‌های واقعی</h1>
+            <p class="design-foundation__copy">فونت، رنگ، حرکت و تم سراسری آماده‌اند تا صفحه اصلی تأییدشده روی یک پایه منسجم ساخته شود</p>
+            <div class="design-foundation__actions">
+                <x-ui.button>چی بازی کنیم؟</x-ui.button>
+                <x-ui.button variant="secondary">حالت دوم دکمه</x-ui.button>
+            </div>
+        </section>
 
-        <title>تیله</title>
+        <x-ui.surface class="design-foundation__sample" aria-label="نمونه سیستم طراحی">
+            <div class="design-foundation__token-row" aria-label="رنگ‌های اصلی تیله">
+                <span class="design-foundation__token design-foundation__token--petrol" title="پترول"></span>
+                <span class="design-foundation__token design-foundation__token--cream" title="کرم"></span>
+                <span class="design-foundation__token design-foundation__token--peach" title="هلویی"></span>
+                <span class="design-foundation__token design-foundation__token--ruby" title="یاقوتی"></span>
+            </div>
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body>
-        <main class="foundation-shell">
-            <div class="foundation-mark" aria-hidden="true"></div>
-            <p class="foundation-eyebrow">پایه‌ی وب‌سایت آماده است</p>
-            <h1>تیله</h1>
-            <p class="foundation-copy">کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد</p>
-            <p class="foundation-note">این صفحه موقت است و طراحی تأییدشده در مرحله‌ی رابط کاربری پیاده‌سازی می‌شود</p>
-        </main>
-    </body>
-</html>
+            <x-ui.field
+                label="یک نمونه ورودی"
+                name="design-sample"
+                hint="متن راهنما در هر دو تم خوانا می‌ماند"
+                placeholder="مثلاً توپ پارچه‌ای"
+            />
+
+            <x-ui.state-message tone="success">
+                <strong>وضعیت موفق فقط با رنگ منتقل نمی‌شود</strong>
+                <span>متن و نشانه ساختاری، معنی وضعیت را حفظ می‌کنند</span>
+            </x-ui.state-message>
+        </x-ui.surface>
+    </div>
+</x-layouts.app>
