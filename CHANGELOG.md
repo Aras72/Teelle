@@ -56,6 +56,9 @@
 - Prompt 003 با Design tokenهای اختصاصی، Vazirmatn self-hosted، اجزای مشترک Blade و Theme سراسری روشن/تیره اجرا شد.
 - Theme bootstrap پیش از Paint، پاک‌سازی Preference نامعتبر، پیروی از تنظیم سیستم و persistence بین بارگذاری‌ها اضافه شد.
 - Reflow در عرض‌های ۳۲۰، ۳۹۰، ۷۶۸، ۱۰۲۴ و ۱۴۴۰، ترتیب Focus و Contrast دو Theme بررسی و ثبت شدند.
+- Prompt 004 با Homepage v4 مرکزی، Copy نهایی بدون نقطه، شعار مستقل و CTA ثابت اجرا شد.
+- Heartbeat صفحه اصلی به Projection معتبر `started_count` متصل شد و حالت unavailable بدون عدد ساختگی اضافه شد.
+- Poster واقعی تیله و fallback مستقل در دو Theme اضافه و در پنج عرض هدف بررسی شدند.
 
 ### Changed
 

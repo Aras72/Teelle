@@ -642,3 +642,174 @@ a {
         width: 100%;
     }
 }
+
+.home-hero {
+    display: grid;
+    min-height: calc(100dvh - 14rem);
+    align-items: center;
+    padding-block: var(--space-4) var(--space-10);
+}
+
+.home-hero__content {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+    text-align: center;
+}
+
+.home-marble-stage {
+    position: relative;
+    isolation: isolate;
+    width: clamp(15rem, 32vw, 22rem);
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--surface-primary);
+    box-shadow: var(--shadow-medium);
+}
+
+.home-marble-stage__fallback {
+    position: absolute;
+    inset: 7%;
+    z-index: var(--layer-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 31% 24%, var(--surface-elevated) 0 7%, transparent 8%),
+        conic-gradient(from 140deg, var(--teelle-petrol), #28838a, var(--teelle-peach), var(--teelle-ruby), var(--teelle-petrol));
+    box-shadow:
+        inset 1rem 1rem 2rem rgb(255 248 230 / 0.28),
+        inset -1rem -1rem 2rem rgb(18 63 70 / 0.3);
+}
+
+.home-marble-stage__poster {
+    position: absolute;
+    inset-block-start: 50%;
+    left: 50%;
+    width: 300%;
+    max-width: none;
+    height: auto;
+    clip-path: circle(25% at 50% 50%);
+    transform: translate(-50%, -50%);
+}
+
+:root[data-theme='dark'] .home-marble-stage {
+    background: var(--surface-sunken);
+}
+
+:root[data-theme='dark'] .home-marble-stage__poster {
+    filter: brightness(0.78) contrast(1.15) saturate(1.2);
+}
+
+.home-hero__title,
+.home-hero__copy,
+.home-heartbeat p {
+    margin: 0;
+}
+
+.home-hero__title {
+    max-width: 26ch;
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+    font-weight: var(--font-weight-black);
+    letter-spacing: -0.04em;
+    line-height: var(--line-height-tight);
+}
+
+.home-hero__copy {
+    max-width: 32rem;
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: var(--font-weight-medium);
+}
+
+.home-hero__cta {
+    min-width: min(17.5rem, 100%);
+    margin-block-start: var(--space-2);
+}
+
+.home-heartbeat {
+    border-block: 1px solid var(--border-subtle);
+    background: var(--surface-warm);
+}
+
+.home-heartbeat__content {
+    display: grid;
+    gap: var(--space-8);
+    align-items: center;
+    padding-block: var(--space-8);
+}
+
+.home-heartbeat__tagline {
+    max-width: 30ch;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: var(--font-weight-black);
+    line-height: 1.45;
+}
+
+.home-heartbeat__metric {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: var(--font-weight-medium);
+}
+
+.home-heartbeat__metric strong {
+    display: block;
+    color: var(--action-primary);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: var(--font-weight-black);
+    line-height: 1;
+}
+
+.home-heartbeat__marble {
+    flex: 0 0 auto;
+    width: 3.5rem;
+    aspect-ratio: 1;
+    border: 1px solid var(--border-subtle);
+    border-radius: 50%;
+    background: conic-gradient(from 140deg, var(--teelle-petrol), #28838a, var(--teelle-peach), var(--teelle-ruby), var(--teelle-petrol));
+    box-shadow: inset 0.25rem 0.25rem 0.5rem rgb(255 248 230 / 0.3);
+}
+
+@media (min-width: 48rem) {
+    .home-heartbeat__content {
+        grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+    }
+
+    .home-heartbeat__metric {
+        padding-inline-start: var(--space-8);
+        border-inline-start: 1px solid var(--border-strong);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .home-marble-stage__fallback {
+        animation: home-marble-breathe 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes home-marble-breathe {
+        from {
+            transform: rotate(-2deg) scale(0.985);
+        }
+
+        to {
+            transform: rotate(2deg) scale(1);
+        }
+    }
+}
+
+@media (max-width: 24.375rem) {
+    .home-hero {
+        min-height: calc(100dvh - 12rem);
+        padding-block-start: 0;
+    }
+
+    .home-marble-stage {
+        width: clamp(12rem, 64vw, 15rem);
+    }
+
+    .home-heartbeat__metric {
+        align-items: flex-start;
+    }
+}

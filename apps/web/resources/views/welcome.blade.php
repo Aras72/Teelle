@@ -1,34 +1,29 @@
-<x-layouts.app title="پایه رابط کاربری">
-    <div class="teelle-container teelle-page design-foundation teelle-enter">
-        <section class="design-foundation__intro" aria-labelledby="foundation-title">
-            <p class="design-foundation__eyebrow">پایه رابط تیله آماده است</p>
-            <h1 class="design-foundation__title" id="foundation-title">یک زبان زنده برای بازی‌های واقعی</h1>
-            <p class="design-foundation__copy">فونت، رنگ، حرکت و تم سراسری آماده‌اند تا صفحه اصلی تأییدشده روی یک پایه منسجم ساخته شود</p>
-            <div class="design-foundation__actions">
-                <x-ui.button>چی بازی کنیم؟</x-ui.button>
-                <x-ui.button variant="secondary">حالت دوم دکمه</x-ui.button>
-            </div>
-        </section>
-
-        <x-ui.surface class="design-foundation__sample" aria-label="نمونه سیستم طراحی">
-            <div class="design-foundation__token-row" aria-label="رنگ‌های اصلی تیله">
-                <span class="design-foundation__token design-foundation__token--petrol" title="پترول"></span>
-                <span class="design-foundation__token design-foundation__token--cream" title="کرم"></span>
-                <span class="design-foundation__token design-foundation__token--peach" title="هلویی"></span>
-                <span class="design-foundation__token design-foundation__token--ruby" title="یاقوتی"></span>
+<x-layouts.app description="تیله، بازی مناسب برای همین لحظه">
+    <section class="home-hero" aria-labelledby="home-title">
+        <div class="teelle-container home-hero__content teelle-enter">
+            <div class="home-marble-stage" aria-hidden="true">
+                <div class="home-marble-stage__fallback"></div>
+                <img class="home-marble-stage__poster" src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" width="1536" height="1024" alt="" fetchpriority="high" decoding="async">
             </div>
 
-            <x-ui.field
-                label="یک نمونه ورودی"
-                name="design-sample"
-                hint="متن راهنما در هر دو تم خوانا می‌ماند"
-                placeholder="مثلاً توپ پارچه‌ای"
-            />
+            <h1 class="home-hero__title" id="home-title">بازی مناسب، برای همین لحظه</h1>
+            <p class="home-hero__copy">چند سؤال کوتاه، سه بازی مناسب برای همین حالا</p>
+            <x-ui.button class="home-hero__cta" href="/match">چی بازی کنیم؟</x-ui.button>
+        </div>
+    </section>
 
-            <x-ui.state-message tone="success">
-                <strong>وضعیت موفق فقط با رنگ منتقل نمی‌شود</strong>
-                <span>متن و نشانه ساختاری، معنی وضعیت را حفظ می‌کنند</span>
-            </x-ui.state-message>
-        </x-ui.surface>
-    </div>
+    <section class="home-heartbeat" id="heartbeat" aria-label="هم‌بازی‌های تیله">
+        <div class="teelle-container home-heartbeat__content">
+            <p class="home-heartbeat__tagline">کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد</p>
+
+            <div class="home-heartbeat__metric" @if ($heartbeatCount !== null) data-heartbeat-count="{{ $heartbeatCount }}" @endif>
+                <span class="home-heartbeat__marble" aria-hidden="true"></span>
+                @if ($heartbeatDisplay !== null)
+                    <p><strong dir="ltr">{{ $heartbeatDisplay }}</strong> بار بازی با تیله انجام شده</p>
+                @else
+                    <p role="status">آمار بازی‌ها فعلاً در دسترس نیست</p>
+                @endif
+            </div>
+        </div>
+    </section>
 </x-layouts.app>

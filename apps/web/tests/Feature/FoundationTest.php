@@ -12,7 +12,7 @@ class FoundationTest extends TestCase
             ->assertOk()
             ->assertSee('<html lang="fa" dir="rtl" class="no-js">', false)
             ->assertSee('تیله')
-            ->assertSee('پایه رابط تیله آماده است')
+            ->assertSee('بازی مناسب، برای همین لحظه')
             ->assertSee('چی بازی کنیم؟')
             ->assertSee('data-theme-toggle', false)
             ->assertSee('رفتن به محتوای اصلی');
