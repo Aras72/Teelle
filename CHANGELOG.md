@@ -2,6 +2,9 @@
 
 ## 2026-09-08
 
+- Prompt 006 Content/Admin foundation: server-side staff permissions, protected RTL Admin shell, versioned draft/review/publish/unpublish workflow, private media quarantine/review, atomic import preview/confirm/rollback and append-only audit.
+- Prompt 006 behavior tested on isolated MySQL 26.7; exact MySQL 8 migration evidence remains open, so the gate is conditional and Prompt 007 remains locked.
+
 - DEC-020: restored approved static marble poster after owner rejected the real-time material; removed interactive loader/control/help from Homepage. Increased desktop tagline while preserving one-line layout.
 
 - Prompt 004 pushed and remote HEAD verified; pnpm audit rerun successfully.

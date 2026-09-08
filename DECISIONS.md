@@ -309,3 +309,14 @@ Status: APPROVED FALLBACK BY OWNER
 مالک تعامل مدل سه‌بعدی را مناسب، اما ظاهر آن را مصنوعی ارزیابی کرد و صریحاً اجازه داد در صورت نرسیدن به کیفیت طبیعی، تصویر ثابت قبلی بازگردد. مدل فعلی به کیفیت تصویر مرجع نمی‌رسد؛ Homepage اکنون همان poster تأییدشده را بدون کنترل Drag یا ادعای تعامل نمایش می‌دهد. Loader سه‌بعدی از entrypoint حذف شده و Three.js در خروجی صفحه بارگذاری نمی‌شود. ماژول و تست‌های قبلی برای بازطراحی احتمالی نگه داشته شده‌اند؛ فعال‌سازی مجدد نیازمند تأیید بصری تازه است. این تصمیم اجرای فعلی DEC-003/Prompt 005 را موقتاً تعلیق می‌کند، نه اینکه تصویر ثابت را تعامل واقعی بنامد.
 
 شعار Desktop از سقف 26.4px به 32px بزرگ‌تر می‌شود و همچنان یک‌خطی است؛ اندازه Mobile و قالب مرکزی مصوب حفظ می‌شوند. Prompt 006 همچنان تا تأیید مالک قفل است.
+
+## DEC-021 - شروع Prompt 006 و مرز Content Admin
+
+Date: 2026-09-08
+Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL GATE
+
+مالک پس از بازگشت تصویر طبیعی تیله، اجازه عبور به مرحله بعد را داد. Prompt 006 به Content/Admin foundation محدود شد: نقش و مجوز، Draft/version، Review/Publish/Unpublish، رسانه قرنطینه‌ای، Import preview/confirm/rollback و Audit. Batch واقعی بازی‌ها، Public Library، Matching و Auth UI وارد این Prompt نمی‌شوند.
+
+پیاده‌سازی فقط نسخه‌ای را منتشر می‌کند که hash تأیید مستقل فعلی، حداقل متادیتای Hard filter و Cover بازبینی‌شده دارد. Self-review و Self-publish مسدودند. Import ابتدا Preview بدون mutation می‌سازد و rollback فقط Draftهای منتشرنشده همان Batch را حذف می‌کند.
+
+پورت محلی 3500 قابل دسترس است اما credential در Repository وجود ندارد؛ هیچ داده‌ای روی آن تغییر نکرد. تست رفتار روی MySQL موقت 26.7 پاس شد، ولی assertion نسخه دقیق 8 به‌درستی پاس نشد. بنابراین Gate فاز `CONDITIONAL PASS` است و Prompt 007 تا تأیید مالک و evidence نسخه MySQL 8 قفل می‌ماند.

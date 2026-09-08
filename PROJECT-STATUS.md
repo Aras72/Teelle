@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 — IMPLEMENTATION
-Current Stage: Prompt 005 interactive visual rejected؛ approved static poster restored per DEC-020
-Current Task: تصویر طبیعی ثابت و شعار Desktop بزرگ‌تر؛ Prompt 006 شروع نشده است
+Current Stage: Prompt 006 IMPLEMENTED / CONDITIONAL PASS
+Current Task: انتظار برای MySQL 8 evidence و تأیید مالک؛ Prompt 007 شروع نشده است
 Overall Status: IMPLEMENTING
 
 Last Completed:
@@ -55,13 +55,14 @@ Currently Working On:
 
 Next:
 
-- تأیید بصری مالک و تکمیل اعتبارسنجی سخت‌افزار ضعیف برای Prompt 005
-- Freeze و اجرای Prompt 006 برای Content/Admin foundation فقط پس از تأیید مجدد مالک
-- ساخت Game content pipeline و نخستین Batchهای تأییدشده پس از Foundation/UI
+- اجرای migration/test فاز 006 روی دیتابیس disposable با نسخه دقیق MySQL 8
+- بازبینی مرورگری Admin پس از آماده‌شدن Auth UI یا session تست کنترل‌شده
+- Freeze و اجرای Prompt 007 برای نخستین Batch بازی‌ها فقط پس از تأیید مالک
 
 Blocked By:
 
-- اعتبارسنجی لمس واقعی، reduced-motion در مرورگر و performance trace دستگاه ضعیف هنوز انجام نشده؛ تست‌های deterministic معادل اثبات سخت‌افزاری نیستند.
+- Credential سرویس MySQL 8 روی پورت 3500 موجود نیست؛ نمونه موقت در دسترس نسخه 26.7 است و assertion نسخه دقیق 8 را پاس نمی‌کند.
+- Auth UI طبق Roadmap در Prompt 010 است؛ Browser audit صفحه Admin با session واقعی هنوز NOT RUN است.
 
 Open Questions:
 
@@ -95,8 +96,8 @@ Critical Risks:
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-005 FROZEN
-Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 INTERACTIVE VISUAL REJECTED / STATIC POSTER ACTIVE (DEC-020); PROMPT 006 OWNER-APPROVAL LOCKED
-Testing Status: DEC-020 PHP 14 passed / 78 assertions, 7 DB tests skipped; production build passed with no marble dynamic chunk; visual/responsive checks in reports/prompt-005-report.md
+Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 STATIC POSTER ACTIVE; PROMPT 006 IMPLEMENTED / CONDITIONAL PASS; PROMPT 007 LOCKED
+Testing Status: Prompt 006 Content/Admin MySQL 7/42 PASS; prior UI 14/78 PASS; MySQL behavior 6/10 PASS; exact MySQL 8 version assertion NOT VERIFIED; build/Pint/audits PASS
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

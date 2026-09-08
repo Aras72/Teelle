@@ -864,3 +864,41 @@ body:has(.home-hero) #main-content {
 @media (min-width: 48rem) and (max-height: 50rem) {
     .home-marble-stage { width: clamp(8rem, min(28vw, 34dvh), 20rem); }
 }
+
+/* Content operations use the existing Teelle tokens in both themes. */
+.admin-shell { display: grid; gap: var(--space-6); padding-block: var(--space-8); }
+.admin-heading { display: flex; align-items: end; justify-content: space-between; gap: var(--space-5); }
+.admin-heading h1, .admin-panel h2, .admin-kicker { margin: 0; }
+.admin-kicker { color: var(--action-primary); font-weight: var(--font-weight-bold); }
+.admin-actions, .admin-row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.admin-panel { padding: clamp(1rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
+.admin-notice, .admin-error { margin: 0; padding: var(--space-4); border-radius: var(--radius-input); }
+.admin-notice { background: var(--surface-warm); color: var(--text-primary); }
+.admin-error { border: 1px solid var(--action-primary); background: var(--surface-primary); color: var(--action-primary); }
+.admin-form { display: grid; gap: var(--space-5); }
+.admin-form label { display: grid; gap: var(--space-2); font-weight: var(--font-weight-bold); }
+.admin-form textarea { resize: vertical; line-height: 1.8; }
+.admin-form select { appearance: auto; }
+.admin-code { direction: ltr; font-family: ui-monospace, Consolas, monospace; text-align: left; }
+.admin-table-wrap { overflow-x: auto; margin-block: var(--space-4); }
+.admin-table { width: 100%; border-collapse: collapse; min-width: 48rem; }
+.admin-table th, .admin-table td { padding: var(--space-3); border-block-end: 1px solid var(--border-subtle); text-align: start; vertical-align: top; }
+.admin-table th { color: var(--text-secondary); font-size: 0.85rem; }
+.admin-row-actions form { margin: 0; }
+.admin-row-actions button, .admin-media button { padding: 0; border: 0; background: none; color: var(--action-primary); text-decoration: underline; cursor: pointer; }
+.admin-row-actions .admin-unpublish { display: inline-flex; align-items: center; gap: var(--space-2); }
+.admin-row-actions .admin-unpublish .teelle-input { width: min(13rem, 42vw); padding: .45rem .65rem; }
+.admin-audit, .admin-preview, .admin-media { display: grid; gap: var(--space-3); margin-block: var(--space-4) 0; padding: 0; list-style-position: inside; }
+.admin-audit li, .admin-preview li, .admin-media li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); padding-block-end: var(--space-3); border-block-end: 1px solid var(--border-subtle); }
+.admin-preview li span { flex-basis: 100%; color: var(--text-secondary); }
+.admin-media img { width: 8rem; aspect-ratio: 4 / 3; border-radius: var(--radius-input); object-fit: cover; }
+.admin-theme-preview { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin-block-start: var(--space-4); }
+.admin-theme-preview article { min-height: 10rem; padding: var(--space-5); border-radius: var(--radius-card); }
+.admin-theme-preview .is-light { background: #fffaf0; color: #123f46; }
+.admin-theme-preview .is-dark { background: #07323a; color: #f9e9c5; }
+.admin-theme-preview p { color: inherit; }
+@media (max-width: 47.99rem) {
+    .admin-heading { align-items: start; flex-direction: column; }
+    .admin-actions .teelle-button { width: 100%; }
+    .admin-theme-preview { grid-template-columns: 1fr; }
+}

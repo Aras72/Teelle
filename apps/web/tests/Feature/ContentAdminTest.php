@@ -1,0 +1,195 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Content\ContentImportService;
+use App\Content\GameContentWorkflow;
+use App\Enums\GameStatus;
+use App\Models\ContentImportBatch;
+use App\Models\Game;
+use App\Models\GameVersion;
+use App\Models\MediaAsset;
+use App\Models\Role;
+use App\Models\User;
+use Database\Seeders\RolePermissionSeeder;
+use DomainException;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
+
+class ContentAdminTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        if (config('database.default') !== 'mysql') {
+            $this->markTestSkipped('Content Admin integration requires a disposable MySQL database.');
+        }
+        $this->seed(RolePermissionSeeder::class);
+    }
+
+    public function test_admin_shell_denies_anonymous_and_ordinary_members(): void
+    {
+        $this->get('/admin/content')->assertUnauthorized();
+        $this->actingAs(User::factory()->create())->get('/admin/content')->assertForbidden();
+    }
+
+    public function test_editor_can_create_edit_and_submit_but_cannot_review_or_publish(): void
+    {
+        $editor = $this->staff('content_editor');
+        $workflow = app(GameContentWorkflow::class);
+        $game = $workflow->createDraft($editor, $this->draft('shadow-play'));
+        $version = $game->versions()->firstOrFail();
+
+        $this->actingAs($editor)->get('/admin/content')->assertOk()->assertSee('بازی‌ها و چرخه انتشار');
+        $this->actingAs($editor)->get(route('admin.content.edit', $version))->assertOk()->assertSee('پیش‌نمایش متن در دو تم');
+        $this->actingAs($editor)->put(route('admin.content.update', $version), $this->form('عنوان تازه'))->assertRedirect();
+        $this->actingAs($editor)->post(route('admin.content.submit', $version))->assertRedirect();
+        $this->actingAs($editor)->post(route('admin.content.review', $version), ['decision' => 'approved'])->assertForbidden();
+        $this->actingAs($editor)->post(route('admin.content.publish', $version))->assertForbidden();
+        $this->assertDatabaseHas('game_versions', ['id' => $version->id, 'status' => 'in_review', 'title' => 'عنوان تازه']);
+    }
+
+    public function test_self_review_fails_and_independent_review_preserves_hash(): void
+    {
+        $editor = $this->staff('reviewer');
+        $reviewer = $this->staff('reviewer');
+        $workflow = app(GameContentWorkflow::class);
+        $version = $workflow->createDraft($editor, $this->draft('independent-review'))->versions()->firstOrFail();
+        $workflow->submit($editor, $version);
+
+        $this->expectException(DomainException::class);
+        try {
+            $workflow->review($editor, $version->fresh(), 'approved');
+        } finally {
+            $workflow->review($reviewer, $version->fresh(), 'approved', 'ایمنی و محتوا بررسی شد');
+            $this->assertDatabaseHas('content_reviews', ['game_version_id' => $version->id, 'scope_hash' => $version->content_hash, 'decision' => 'approved']);
+        }
+    }
+
+    public function test_publication_requires_complete_reviewed_metadata_and_unpublish_is_audited(): void
+    {
+        [$editor, $reviewer] = [$this->staff('content_editor'), $this->staff('reviewer')];
+        $workflow = app(GameContentWorkflow::class);
+        $version = $workflow->createDraft($editor, $this->draft('complete-game'))->versions()->firstOrFail();
+        $workflow->submit($editor, $version);
+        $workflow->review($reviewer, $version->fresh(), 'approved');
+        try {
+            $workflow->publish($reviewer, $version->fresh());
+            $this->fail('Incomplete content was published.');
+        } catch (DomainException) {
+            $this->assertNull($version->game->fresh()->current_published_version_id);
+        }
+        $this->completeMetadata($version, $editor, $reviewer);
+        $workflow->publish($reviewer, $version->fresh());
+        $game = $version->game->fresh();
+        $this->assertSame(GameStatus::Published, $game->status);
+        $this->assertSame($version->id, $game->current_published_version_id);
+
+        $workflow->unpublish($reviewer, $game, 'گزارش ایمنی فوری');
+        $this->assertDatabaseHas('games', ['id' => $game->id, 'status' => 'unpublished', 'current_published_version_id' => null]);
+        $this->assertDatabaseHas('audit_logs', ['action' => 'content.game.unpublished', 'reason' => 'گزارش ایمنی فوری']);
+
+        $revisionData = $this->draft('ignored');
+        $revisionData['title'] = 'سایه‌بازی، نسخه دوم';
+        $revision = $workflow->createRevision($editor, $game->fresh(), $revisionData);
+        $this->assertSame(2, $revision->version_no);
+        $this->assertSame('draft', $revision->status->value);
+        $this->assertSame(1, DB::table('game_media')->where('game_version_id', $revision->id)->count());
+    }
+
+    public function test_import_preview_confirm_is_idempotent_and_draft_rollback_is_safe(): void
+    {
+        $editor = $this->staff('content_editor');
+        $service = app(ContentImportService::class);
+        $before = Game::query()->count();
+        $batch = $service->preview($editor, json_encode([$this->draft('batch-one'), $this->draft('batch-two')], JSON_THROW_ON_ERROR));
+        $this->assertSame($before, Game::query()->count());
+        $this->actingAs($editor)->get(route('admin.content.imports.index'))->assertOk()->assertSee('پیش‌نمایش Import');
+        $this->actingAs($editor)->get(route('admin.content.imports.show', $batch))->assertOk()->assertSee('batch-one');
+        $service->confirm($editor, $batch);
+        $service->confirm($editor, $batch->fresh());
+        $this->assertSame($before + 2, Game::query()->count());
+        $service->rollback($editor, $batch->fresh());
+        $service->rollback($editor, $batch->fresh());
+        $this->assertSame($before, Game::query()->count());
+        $this->assertSame('rolled_back', ContentImportBatch::query()->find($batch->id)->status);
+    }
+
+    public function test_image_upload_uses_private_quarantine_and_rejects_duplicate_or_self_review(): void
+    {
+        Storage::fake('local');
+        $reviewer = $this->staff('reviewer');
+        $version = app(GameContentWorkflow::class)->createDraft($reviewer, $this->draft('media-game'))->versions()->firstOrFail();
+        $image = new UploadedFile(public_path('images/teelle-hero-marble-poster-v1.png'), 'cover.png', 'image/png', null, true);
+        $payload = ['image' => $image, 'alt_text' => 'کودک و مراقب در حال بازی با کارت‌ها', 'role' => 'cover', 'sort_order' => 0, 'crop_json' => '{"x":0.5,"y":0.5,"ratio":"4:3"}'];
+        $this->actingAs($reviewer)->post(route('admin.content.media.store', $version), $payload)->assertRedirect();
+        $asset = MediaAsset::query()->firstOrFail();
+        Storage::disk('local')->assertExists($asset->path);
+        $this->assertSame('quarantined', $asset->status);
+        $this->actingAs($reviewer)->get(route('admin.content.media.show', $asset))->assertOk()->assertHeader('X-Content-Type-Options', 'nosniff');
+        $this->actingAs($reviewer)->post(route('admin.content.media.review', $asset))->assertSessionHasErrors('media');
+        $this->assertSame('quarantined', $asset->fresh()->status);
+    }
+
+    public function test_invalid_image_signature_and_unsafe_batch_rollback_fail_closed(): void
+    {
+        Storage::fake('local');
+        $editor = $this->staff('content_editor');
+        $version = app(GameContentWorkflow::class)->createDraft($editor, $this->draft('invalid-image'))->versions()->firstOrFail();
+        $invalid = UploadedFile::fake()->createWithContent('payload.png', '<?php echo "bad";');
+        $this->actingAs($editor)->post(route('admin.content.media.store', $version), [
+            'image' => $invalid, 'alt_text' => 'تصویر نامعتبر آزمایشی', 'role' => 'cover', 'sort_order' => 0,
+            'crop_json' => '{"x":0.5,"y":0.5,"ratio":"4:3"}',
+        ])->assertSessionHasErrors('image');
+        $this->assertDatabaseCount('media_assets', 0);
+
+        $service = app(ContentImportService::class);
+        $batch = $service->preview($editor, json_encode([$this->draft('rollback-guard')], JSON_THROW_ON_ERROR));
+        $service->confirm($editor, $batch);
+        $gameId = $batch->fresh()->manifest_json[0]['game_id'];
+        Game::query()->whereKey($gameId)->update(['status' => GameStatus::Published->value]);
+        $this->expectException(DomainException::class);
+        $service->rollback($editor, $batch->fresh());
+    }
+
+    private function staff(string $role): User
+    {
+        $user = User::factory()->create();
+        $user->roles()->attach(Role::query()->where('code', $role)->value('id'));
+
+        return $user;
+    }
+
+    private function draft(string $slug): array
+    {
+        return ['slug' => $slug] + $this->form('سایه‌بازی');
+    }
+
+    private function form(string $title): array
+    {
+        return ['title' => $title, 'summary' => 'یک بازی کوتاه و روشن برای همراهی کودک',
+            'instructions' => ['نور را آماده کنید', 'با کودک سایه بسازید'], 'instructions_text' => "نور را آماده کنید\nبا کودک سایه بسازید",
+            'safety_copy' => 'چراغ داغ را دور از دسترس کودک نگه دارید', 'contraindications' => [], 'contraindications_text' => '',
+            'supervision_level' => 'same_room'];
+    }
+
+    private function completeMetadata(GameVersion $version, User $uploader, User $reviewer): void
+    {
+        $ageBand = DB::table('age_bands')->insertGetId(['code' => 'test', 'title' => 'آزمون', 'minimum_age_months' => 6, 'maximum_age_months_exclusive' => 36, 'created_at' => now(), 'updated_at' => now()]);
+        $location = DB::table('locations')->insertGetId(['slug' => 'home-test', 'title' => 'خانه', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
+        $players = DB::table('player_requirements')->insertGetId(['slug' => 'two-test', 'title' => 'دو نفر', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
+        $safety = DB::table('safety_rules')->insertGetId(['code' => 'TEST-SAFE', 'severity' => 'caution', 'rule_type' => 'supervision', 'copy' => 'نظارت شود', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
+        DB::table('game_age_ranges')->insert(['game_version_id' => $version->id, 'age_band_id' => $ageBand, 'minimum_age_months' => 6, 'maximum_age_months_exclusive' => 36]);
+        DB::table('game_locations')->insert(['game_version_id' => $version->id, 'location_id' => $location, 'weight' => 1, 'is_constraint' => true]);
+        DB::table('game_player_requirements')->insert(['game_version_id' => $version->id, 'player_requirement_id' => $players, 'weight' => 1, 'is_constraint' => true]);
+        DB::table('game_safety_rules')->insert(['game_version_id' => $version->id, 'safety_rule_id' => $safety, 'hard_filter' => true]);
+        $asset = MediaAsset::query()->create(['uploaded_by' => $uploader->id, 'disk' => 'local', 'path' => 'quarantine/test.jpg', 'original_name' => 'test.jpg', 'mime' => 'image/jpeg', 'width' => 800, 'height' => 600, 'checksum' => hash('sha256', 'test-'.$version->id), 'status' => 'quarantined', 'alt_text' => 'شرح تصویری روشن و دقیق']);
+        DB::table('game_media')->insert(['game_version_id' => $version->id, 'media_asset_id' => $asset->id, 'role' => 'cover', 'sort_order' => 0, 'crop_data' => '{"x":0.5,"y":0.5,"ratio":"4:3"}']);
+        app(GameContentWorkflow::class)->reviewMedia($reviewer, $asset);
+    }
+}
