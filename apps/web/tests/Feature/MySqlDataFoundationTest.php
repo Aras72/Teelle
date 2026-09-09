@@ -39,11 +39,14 @@ class MySqlDataFoundationTest extends TestCase
         Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
     }
 
-    public function test_mysql_8_and_required_schema_are_present(): void
+    public function test_mysql_8_is_present(): void
     {
         $version = (string) DB::scalar('SELECT VERSION()');
         $this->assertMatchesRegularExpression('/^8\./', $version);
+    }
 
+    public function test_required_schema_are_present(): void
+    {
         foreach ($this->requiredTables() as $table) {
             $this->assertTrue(Schema::hasTable($table), "Missing table: {$table}");
         }
@@ -129,6 +132,7 @@ class MySqlDataFoundationTest extends TestCase
         return [
             'users', 'guest_identities', 'households', 'child_profiles',
             'games', 'game_versions', 'game_publications', 'content_reviews',
+            'game_facts', 'coverage_matrix_cells',
             'materials', 'safety_rules', 'media_assets', 'match_sessions',
             'match_results', 'play_sessions', 'play_events', 'heartbeat_projections',
             'coverage_observations', 'plans', 'purchases', 'payment_events',

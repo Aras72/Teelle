@@ -8,6 +8,11 @@
             <p>پیش‌نمایش هیچ بازی‌ای ایجاد نمی‌کند. هر ردیف پس از تأیید فقط به‌صورت Draft وارد می‌شود</p>
             <x-ui.button type="submit">اعتبارسنجی و پیش‌نمایش</x-ui.button>
         </form>
+        <section class="admin-panel">
+            <h2>Pilot پیشنهادی تیله</h2>
+            <p>این فایل ۲۵ بازی پیشنهادی را فقط به مرحله پیش‌نمایش می‌آورد. تأیید Import نیز همه را در وضعیت Draft نگه می‌دارد و بدون تصویر و بازبینی مستقل قابل انتشار نیستند</p>
+            <form method="post" action="{{ route('admin.content.imports.pilot.preview') }}">@csrf<x-ui.button type="submit" variant="secondary">پیش‌نمایش Pilot پیشنهادی</x-ui.button></form>
+        </section>
         <section class="admin-panel"><h2>Batchهای اخیر</h2><ol class="admin-audit">@forelse($batches as $batch)<li><a href="{{ route('admin.content.imports.show', $batch) }}">{{ $batch->public_id }}</a><span>{{ $batch->status }} - {{ count($batch->payload_json) }} ردیف</span></li>@empty<li>هنوز Batchی ساخته نشده است</li>@endforelse</ol>{{ $batches->links() }}</section>
     </div>
 </x-layouts.app>

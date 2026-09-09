@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-09-09
+
+- Prompt 007 added a repository-versioned 25-game Persian Draft pilot across all five approved age bands, with sources, safety copy and complete structured metadata.
+- Added `game_facts`, a conservative 25-cell Golden Coverage Matrix and protected fail-closed Admin coverage dashboard.
+- Added built-in pilot preview plus reusable validated individual/batch metadata workflows so future games can be managed without owner Terminal dependency after Auth UI is available.
+- Expanded review scope and publication completeness to cover facts, taxonomy, materials, safety and media associations; no pilot game is auto-published.
+- DEC-022 records the owner-approved proposed-file boundary, human review/image requirements and Prompt 008 lock.
+
 ## 2026-09-08
 
 - Prompt 006 Content/Admin foundation: server-side staff permissions, protected RTL Admin shell, versioned draft/review/publish/unpublish workflow, private media quarantine/review, atomic import preview/confirm/rollback and append-only audit.

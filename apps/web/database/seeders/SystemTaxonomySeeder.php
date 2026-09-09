@@ -52,6 +52,21 @@ class SystemTaxonomySeeder extends Seeder
                 ['severity' => 'warning', 'rule_type' => 'flag', 'copy' => $copy, 'is_active' => true],
             );
         }
+
+        $this->seedCoverageMatrix();
+    }
+
+    private function seedCoverageMatrix(): void
+    {
+        $now = now();
+        foreach (DB::table('age_bands')->pluck('id') as $ageBandId) {
+            foreach (DB::table('situations')->where('is_active', true)->pluck('id') as $situationId) {
+                DB::table('coverage_matrix_cells')->updateOrInsert(
+                    ['age_band_id' => $ageBandId, 'situation_id' => $situationId],
+                    ['is_critical' => true, 'minimum_survivors' => 3, 'updated_at' => $now, 'created_at' => $now],
+                );
+            }
+        }
     }
 
     private function seedAgeBands(): void

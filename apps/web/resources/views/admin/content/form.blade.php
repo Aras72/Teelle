@@ -18,17 +18,12 @@
         </form>
 
         @if($version)
-        <section class="admin-panel"><h2>حداقل متادیتای انتشار</h2><p>این چهار مورد Hard filter هستند و پیش از ارسال برای بازبینی باید دقیق ثبت شوند</p>
-            <form class="admin-form" method="post" action="{{ route('admin.content.metadata', $version) }}">@csrf
-                <label>سن شروع به ماه<input class="teelle-input" type="number" name="minimum_age_months" min="6" max="155" required></label>
-                <label>سن پایان غیرشامل به ماه<input class="teelle-input" type="number" name="maximum_age_months_exclusive" min="7" max="156" required></label>
-                <label>مکان<select class="teelle-input" name="location_id" required>@foreach($locations as $item)<option value="{{ $item->id }}">{{ $item->title }}</option>@endforeach</select></label>
-                <label>تعداد/ترکیب بازیکن<select class="teelle-input" name="player_requirement_id" required>@foreach($playerRequirements as $item)<option value="{{ $item->id }}">{{ $item->title }}</option>@endforeach</select></label>
-                <label>قاعده ایمنی اصلی<select class="teelle-input" name="safety_rule_id" required>@foreach($safetyRules as $item)<option value="{{ $item->id }}">{{ $item->code }} - {{ $item->copy }}</option>@endforeach</select></label>
-                <x-ui.button type="submit" variant="secondary">ذخیره متادیتا</x-ui.button>
+        <section class="admin-panel"><h2>Metadata کامل بازی</h2><p>تمام Factها، Taxonomyها، منبع و Safety این نسخه در JSON زیر ثبت می‌شود. مقدارها قبل از ذخیره با Vocabulary تیله اعتبارسنجی می‌شوند</p>
+            <form class="admin-form" method="post" action="{{ route('admin.content.structured-metadata', $version) }}">@csrf
+                <label>Metadata JSON<textarea class="teelle-input admin-code" name="metadata_json" rows="22" dir="ltr" required>{{ old('metadata_json', $metadataJson) }}</textarea></label>
+                <x-ui.button type="submit" variant="secondary">اعتبارسنجی و ذخیره Metadata</x-ui.button>
             </form>
         </section>
-
         <section class="admin-panel"><h2>رسانه قرنطینه‌ای</h2><p>تصویر تا تأیید یک بازبین دیگر خصوصی می‌ماند</p>
             <form class="admin-form" method="post" enctype="multipart/form-data" action="{{ route('admin.content.media.store', $version) }}">@csrf
                 <label>تصویر<input class="teelle-input" type="file" name="image" accept="image/jpeg,image/png,image/webp" required></label>

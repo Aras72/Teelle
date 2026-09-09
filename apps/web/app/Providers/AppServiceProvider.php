@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        foreach (['content.edit', 'content.review', 'content.publish'] as $ability) {
+        foreach (['content.edit', 'content.review', 'content.publish', 'coverage.view'] as $ability) {
             Gate::define($ability, fn (User $user): bool => $user->hasPermission($ability));
         }
     }

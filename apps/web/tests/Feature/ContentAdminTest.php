@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Content\ContentHash;
 use App\Content\ContentImportService;
+use App\Content\CoverageMatrix;
 use App\Content\GameContentWorkflow;
 use App\Enums\GameStatus;
 use App\Models\ContentImportBatch;
@@ -12,6 +14,7 @@ use App\Models\MediaAsset;
 use App\Models\Role;
 use App\Models\User;
 use Database\Seeders\RolePermissionSeeder;
+use Database\Seeders\SystemTaxonomySeeder;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -29,7 +32,7 @@ class ContentAdminTest extends TestCase
         if (config('database.default') !== 'mysql') {
             $this->markTestSkipped('Content Admin integration requires a disposable MySQL database.');
         }
-        $this->seed(RolePermissionSeeder::class);
+        $this->seed([RolePermissionSeeder::class, SystemTaxonomySeeder::class]);
     }
 
     public function test_admin_shell_denies_anonymous_and_ordinary_members(): void
@@ -67,7 +70,8 @@ class ContentAdminTest extends TestCase
             $workflow->review($editor, $version->fresh(), 'approved');
         } finally {
             $workflow->review($reviewer, $version->fresh(), 'approved', 'ایمنی و محتوا بررسی شد');
-            $this->assertDatabaseHas('content_reviews', ['game_version_id' => $version->id, 'scope_hash' => $version->content_hash, 'decision' => 'approved']);
+            $this->assertDatabaseHas('content_reviews', ['game_version_id' => $version->id,
+                'scope_hash' => app(ContentHash::class)->reviewScope($version), 'decision' => 'approved']);
         }
     }
 
@@ -76,15 +80,9 @@ class ContentAdminTest extends TestCase
         [$editor, $reviewer] = [$this->staff('content_editor'), $this->staff('reviewer')];
         $workflow = app(GameContentWorkflow::class);
         $version = $workflow->createDraft($editor, $this->draft('complete-game'))->versions()->firstOrFail();
+        $this->completeMetadata($version, $editor, $reviewer);
         $workflow->submit($editor, $version);
         $workflow->review($reviewer, $version->fresh(), 'approved');
-        try {
-            $workflow->publish($reviewer, $version->fresh());
-            $this->fail('Incomplete content was published.');
-        } catch (DomainException) {
-            $this->assertNull($version->game->fresh()->current_published_version_id);
-        }
-        $this->completeMetadata($version, $editor, $reviewer);
         $workflow->publish($reviewer, $version->fresh());
         $game = $version->game->fresh();
         $this->assertSame(GameStatus::Published, $game->status);
@@ -100,6 +98,22 @@ class ContentAdminTest extends TestCase
         $this->assertSame(2, $revision->version_no);
         $this->assertSame('draft', $revision->status->value);
         $this->assertSame(1, DB::table('game_media')->where('game_version_id', $revision->id)->count());
+    }
+
+    public function test_publication_rejects_a_reviewed_version_without_a_reviewed_cover(): void
+    {
+        [$editor, $reviewer] = [$this->staff('content_editor'), $this->staff('reviewer')];
+        $workflow = app(GameContentWorkflow::class);
+        $version = $workflow->createDraft($editor, $this->draft('missing-cover'))->versions()->firstOrFail();
+        $workflow->submit($editor, $version);
+        $workflow->review($reviewer, $version->fresh(), 'approved');
+
+        $this->expectException(DomainException::class);
+        try {
+            $workflow->publish($reviewer, $version->fresh());
+        } finally {
+            $this->assertNull($version->game->fresh()->current_published_version_id);
+        }
     }
 
     public function test_import_preview_confirm_is_idempotent_and_draft_rollback_is_safe(): void
@@ -118,6 +132,37 @@ class ContentAdminTest extends TestCase
         $service->rollback($editor, $batch->fresh());
         $this->assertSame($before, Game::query()->count());
         $this->assertSame('rolled_back', ContentImportBatch::query()->find($batch->id)->status);
+    }
+
+    public function test_bundled_pilot_previews_and_imports_complete_drafts(): void
+    {
+        $editor = $this->staff('content_editor');
+        $service = app(ContentImportService::class);
+        $payload = require resource_path('content/pilot-games-v1.php');
+
+        $this->assertCount(25, $payload);
+        $this->actingAs($editor)->post(route('admin.content.imports.pilot.preview'))->assertRedirect();
+        $batch = ContentImportBatch::query()->latest('id')->firstOrFail();
+        $this->assertSame(0, Game::query()->count());
+
+        $service->confirm($editor, $batch);
+
+        $this->assertSame(25, Game::query()->where('status', GameStatus::Draft)->count());
+        $this->assertSame(25, DB::table('game_facts')->count());
+        $this->assertSame(0, Game::query()->where('status', GameStatus::Published)->count());
+    }
+
+    public function test_coverage_dashboard_reports_fail_closed_gaps(): void
+    {
+        $reviewer = $this->staff('reviewer');
+
+        $report = app(CoverageMatrix::class)->report();
+
+        $this->assertCount(25, $report);
+        $this->assertSame(25, app(CoverageMatrix::class)->criticalGaps());
+        $this->assertTrue($report->every(fn (object $cell): bool => (int) $cell->survivors === 0));
+        $this->actingAs($reviewer)->get(route('admin.content.coverage'))
+            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('25 شکاف بحرانی');
     }
 
     public function test_image_upload_uses_private_quarantine_and_rejects_duplicate_or_self_review(): void
@@ -167,7 +212,7 @@ class ContentAdminTest extends TestCase
 
     private function draft(string $slug): array
     {
-        return ['slug' => $slug] + $this->form('سایه‌بازی');
+        return ['slug' => $slug, 'metadata' => $this->metadata()] + $this->form('سایه‌بازی');
     }
 
     private function form(string $title): array
@@ -180,16 +225,21 @@ class ContentAdminTest extends TestCase
 
     private function completeMetadata(GameVersion $version, User $uploader, User $reviewer): void
     {
-        $ageBand = DB::table('age_bands')->insertGetId(['code' => 'test', 'title' => 'آزمون', 'minimum_age_months' => 6, 'maximum_age_months_exclusive' => 36, 'created_at' => now(), 'updated_at' => now()]);
-        $location = DB::table('locations')->insertGetId(['slug' => 'home-test', 'title' => 'خانه', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
-        $players = DB::table('player_requirements')->insertGetId(['slug' => 'two-test', 'title' => 'دو نفر', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
-        $safety = DB::table('safety_rules')->insertGetId(['code' => 'TEST-SAFE', 'severity' => 'caution', 'rule_type' => 'supervision', 'copy' => 'نظارت شود', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
-        DB::table('game_age_ranges')->insert(['game_version_id' => $version->id, 'age_band_id' => $ageBand, 'minimum_age_months' => 6, 'maximum_age_months_exclusive' => 36]);
-        DB::table('game_locations')->insert(['game_version_id' => $version->id, 'location_id' => $location, 'weight' => 1, 'is_constraint' => true]);
-        DB::table('game_player_requirements')->insert(['game_version_id' => $version->id, 'player_requirement_id' => $players, 'weight' => 1, 'is_constraint' => true]);
-        DB::table('game_safety_rules')->insert(['game_version_id' => $version->id, 'safety_rule_id' => $safety, 'hard_filter' => true]);
         $asset = MediaAsset::query()->create(['uploaded_by' => $uploader->id, 'disk' => 'local', 'path' => 'quarantine/test.jpg', 'original_name' => 'test.jpg', 'mime' => 'image/jpeg', 'width' => 800, 'height' => 600, 'checksum' => hash('sha256', 'test-'.$version->id), 'status' => 'quarantined', 'alt_text' => 'شرح تصویری روشن و دقیق']);
         DB::table('game_media')->insert(['game_version_id' => $version->id, 'media_asset_id' => $asset->id, 'role' => 'cover', 'sort_order' => 0, 'crop_data' => '{"x":0.5,"y":0.5,"ratio":"4:3"}']);
         app(GameContentWorkflow::class)->reviewMedia($reviewer, $asset);
+    }
+
+    private function metadata(): array
+    {
+        return ['age_band' => '4-6y', 'minimum_age_months' => 48, 'maximum_age_months_exclusive' => 84,
+            'duration_min_minutes' => 5, 'duration_max_minutes' => 15, 'prep_time_minutes' => 1,
+            'space_required' => 'room', 'noise_level' => 'quiet', 'mess_level' => 'none',
+            'minimum_children' => 1, 'maximum_children' => 2, 'minimum_adults' => 1, 'required_adult' => true,
+            'child_energy' => 'medium', 'caregiver_energy' => 'low', 'interaction_type' => 'cooperative',
+            'caregiver_involvement' => 'shared', 'setup_complexity' => 'simple', 'source_title' => 'Test source',
+            'source_url' => 'https://example.com/source', 'cultural_origin' => 'test', 'situations' => ['connection'],
+            'locations' => ['home-inside'], 'moods' => ['calm'], 'tags' => ['cooperative'],
+            'player_requirement' => 'child-and-adult', 'materials' => [], 'safety_flags' => ['sensory_intensity']];
     }
 }

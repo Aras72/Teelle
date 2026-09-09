@@ -320,3 +320,16 @@ Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL GATE
 پیاده‌سازی فقط نسخه‌ای را منتشر می‌کند که hash تأیید مستقل فعلی، حداقل متادیتای Hard filter و Cover بازبینی‌شده دارد. Self-review و Self-publish مسدودند. Import ابتدا Preview بدون mutation می‌سازد و rollback فقط Draftهای منتشرنشده همان Batch را حذف می‌کند.
 
 پورت محلی 3500 قابل دسترس است اما credential در Repository وجود ندارد؛ هیچ داده‌ای روی آن تغییر نکرد. تست رفتار روی MySQL موقت 26.7 پاس شد، ولی assertion نسخه دقیق 8 به‌درستی پاس نشد. بنابراین Gate فاز `CONDITIONAL PASS` است و Prompt 007 تا تأیید مالک و evidence نسخه MySQL 8 قفل می‌ماند.
+
+## DEC-022 - Pilot پیشنهادی و بستر رشد Game Library
+
+Date: 2026-09-09
+Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL GATE
+
+مالک اجازه داد فعلاً فایل پیشنهادی Agent استفاده شود و هم‌زمان بستری ساخته شود که بازی‌های آینده را بدون وابستگی روزمره به Terminal اضافه کند. نخستین Pilot شامل ۲۵ بازی پیشنهادی، پنج بازی برای هر یک از پنج بازه سنی مصوب است و فقط از مسیر Preview/Confirm کنترل‌شده Admin وارد می‌شود.
+
+تمام موارد Pilot پس از Import در وضعیت Draft می‌مانند و هیچ‌کدام صرفاً به‌دلیل حضور در فایل، Reviewed یا Published محسوب نمی‌شوند. انتشار به بازبینی مستقل انسانی درباره محتوا، Safety، تناسب سنی و منبع و نیز Cover هم‌سبک تیله با Alt/Crop تأییدشده نیاز دارد.
+
+برای آشکارماندن کمبود محتوا، ماتریس محافظه‌کارانه اولیه برابر پنج بازه سنی ضرب‌در پنج Situation فعلی است و هر سلول بحرانی حداقل سه survivor Published/Reviewed می‌خواهد. Draft، نسخه بدون Fact، Review تأییدشده یا Publication فعال شمارش نمی‌شود. این Matrix با رشد Evidence قابل بازتنظیم است، اما Relax پنهانی ممنوع است.
+
+Prompt 008 تا تکمیل Gate فاز و تأیید صریح مالک قفل می‌ماند. هدف حدود ۲۵۰ بازی و تولید Assetهای کامل خارج از این Pilot است.

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Content\GameContentWorkflow;
+use App\Content\GameMetadataPayload;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ReviewContentRequest;
 use App\Http\Requests\Admin\SaveGameDraftRequest;
+use App\Http\Requests\Admin\StructuredMetadataRequest;
 use App\Models\AuditLog;
 use App\Models\Game;
 use App\Models\GameVersion;
@@ -13,7 +15,6 @@ use App\Models\MediaAsset;
 use DomainException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -43,7 +44,7 @@ class ContentController extends Controller
         return redirect()->route('admin.content.edit', $game->versions()->first())->with('status', 'پیش‌نویس ساخته شد');
     }
 
-    public function edit(Request $request, GameVersion $version): View
+    public function edit(Request $request, GameVersion $version, GameMetadataPayload $metadata): View
     {
         $this->authorizeAbility($request, 'content.edit');
 
@@ -52,10 +53,14 @@ class ContentController extends Controller
             'media' => MediaAsset::query()->select('media_assets.*')
                 ->join('game_media', 'game_media.media_asset_id', '=', 'media_assets.id')
                 ->where('game_media.game_version_id', $version->id)->get(),
-            'locations' => DB::table('locations')->where('is_active', true)->orderBy('title')->get(),
-            'playerRequirements' => DB::table('player_requirements')->where('is_active', true)->orderBy('title')->get(),
-            'safetyRules' => DB::table('safety_rules')->where('is_active', true)->orderBy('code')->get(),
+            'metadataJson' => json_encode($metadata->forVersion($version), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
         ]);
+    }
+
+    public function structuredMetadata(StructuredMetadataRequest $request, GameVersion $version, GameContentWorkflow $workflow): RedirectResponse
+    {
+        return $this->attempt(fn () => $workflow->updateStructuredMetadata($request->user(), $version, $request->validated('metadata')),
+            back()->with('status', 'Metadata کامل بازی ذخیره شد'));
     }
 
     public function update(SaveGameDraftRequest $request, GameVersion $version, GameContentWorkflow $workflow): RedirectResponse
@@ -87,20 +92,6 @@ class ContentController extends Controller
         $this->authorizeAbility($request, 'content.edit');
 
         return $this->attempt(fn () => $workflow->submit($request->user(), $version), back()->with('status', 'برای بازبینی ارسال شد'));
-    }
-
-    public function metadata(Request $request, GameVersion $version, GameContentWorkflow $workflow): RedirectResponse
-    {
-        $this->authorizeAbility($request, 'content.edit');
-        $data = $request->validate([
-            'minimum_age_months' => ['required', 'integer', 'min:6', 'max:155'],
-            'maximum_age_months_exclusive' => ['required', 'integer', 'gt:minimum_age_months', 'max:156'],
-            'location_id' => ['required', 'integer', 'exists:locations,id'],
-            'player_requirement_id' => ['required', 'integer', 'exists:player_requirements,id'],
-            'safety_rule_id' => ['required', 'integer', 'exists:safety_rules,id'],
-        ]);
-
-        return $this->attempt(fn () => $workflow->updateRequiredMetadata($request->user(), $version, $data), back()->with('status', 'حداقل متادیتای انتشار ذخیره شد'));
     }
 
     public function review(ReviewContentRequest $request, GameVersion $version, GameContentWorkflow $workflow): RedirectResponse

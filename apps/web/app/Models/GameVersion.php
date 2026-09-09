@@ -7,6 +7,7 @@ use Database\Factories\GameVersionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class GameVersion extends Model
 {
@@ -38,6 +39,11 @@ class GameVersion extends Model
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function facts(): HasOne
+    {
+        return $this->hasOne(GameFact::class);
     }
 
     protected static function booted(): void
