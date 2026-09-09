@@ -2,6 +2,11 @@
 
 ## 2026-09-09
 
+- Prompt 008 added the public adaptive Guest Quick Match flow, server-side Back/Restart state, pseudonymous identity and idempotent Match context persistence.
+- Added active-taxonomy validation, Persian/Arabic digit normalization, the approved age boundary, material-conflict checks, Match rate limiting and same-actor recovery.
+- `indoor-time` now omits the redundant location question; Energy and Mood remain unasked until approved Ranking weights require them.
+- No recommendation is fabricated during Calibration Hold; context is stored as `Collecting` with no Match Results.
+- DEC-023 records the owner-approved Prompt 008 boundary and keeps Prompt 009 locked behind approval plus Ranking/Content prerequisites.
 - Prompt 007 added a repository-versioned 25-game Persian Draft pilot across all five approved age bands, with sources, safety copy and complete structured metadata.
 - Added `game_facts`, a conservative 25-cell Golden Coverage Matrix and protected fail-closed Admin coverage dashboard.
 - Added built-in pilot preview plus reusable validated individual/batch metadata workflows so future games can be managed without owner Terminal dependency after Auth UI is available.

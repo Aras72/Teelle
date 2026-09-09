@@ -7,6 +7,7 @@ use App\Models\Concerns\HasPublicUlid;
 use Database\Factories\MatchSessionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MatchSession extends Model
@@ -15,7 +16,7 @@ class MatchSession extends Model
     use HasFactory, HasPublicUlid;
 
     protected $fillable = [
-        'user_id', 'guest_identity_id', 'age_months', 'context_json',
+        'submission_key', 'user_id', 'guest_identity_id', 'age_months', 'context_json',
         'ruleset_version', 'outcome', 'evaluated_at', 'expires_at',
     ];
 
@@ -32,5 +33,10 @@ class MatchSession extends Model
     public function results(): HasMany
     {
         return $this->hasMany(MatchResult::class);
+    }
+
+    public function guestIdentity(): BelongsTo
+    {
+        return $this->belongsTo(GuestIdentity::class);
     }
 }

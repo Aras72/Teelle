@@ -50,6 +50,7 @@ class MySqlDataFoundationTest extends TestCase
         foreach ($this->requiredTables() as $table) {
             $this->assertTrue(Schema::hasTable($table), "Missing table: {$table}");
         }
+        $this->assertTrue(Schema::hasColumn('match_sessions', 'submission_key'));
     }
 
     public function test_system_seeders_are_idempotent_and_publish_no_demo_game(): void

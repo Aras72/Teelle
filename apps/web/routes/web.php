@@ -5,9 +5,16 @@ use App\Http\Controllers\Admin\CoverageController;
 use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Homepage\ShowHomepageController;
+use App\Http\Controllers\Match\QuickMatchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', ShowHomepageController::class)->name('home');
+Route::get('/match', [QuickMatchController::class, 'show'])->name('match.show');
+Route::middleware('throttle:match')->group(function (): void {
+    Route::post('/match/answer', [QuickMatchController::class, 'answer'])->name('match.answer');
+    Route::post('/match/back', [QuickMatchController::class, 'back'])->name('match.back');
+    Route::post('/match/restart', [QuickMatchController::class, 'restart'])->name('match.restart');
+});
 
 Route::prefix('admin/content')->name('admin.content.')->middleware('content.staff')->group(function (): void {
     Route::get('/', [ContentController::class, 'index'])->name('index');

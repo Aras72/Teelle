@@ -333,3 +333,16 @@ Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL GATE
 برای آشکارماندن کمبود محتوا، ماتریس محافظه‌کارانه اولیه برابر پنج بازه سنی ضرب‌در پنج Situation فعلی است و هر سلول بحرانی حداقل سه survivor Published/Reviewed می‌خواهد. Draft، نسخه بدون Fact، Review تأییدشده یا Publication فعال شمارش نمی‌شود. این Matrix با رشد Evidence قابل بازتنظیم است، اما Relax پنهانی ممنوع است.
 
 Prompt 008 تا تکمیل Gate فاز و تأیید صریح مالک قفل می‌ماند. هدف حدود ۲۵۰ بازی و تولید Assetهای کامل خارج از این Pilot است.
+
+## DEC-023 - اجرای Guest Quick Match بدون جعل Ranking
+
+Date: 2026-09-09
+Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL GATE
+
+مالک عبور به Prompt 008 را صریحاً تأیید کرد. Guest بدون Login از CTA صفحه اصلی وارد جریان سؤال‌به‌سؤال می‌شود؛ سن در بازه مصوب به ماه نرمال می‌شود و Context لازم شامل Situation، Duration، Location، Materials و Players/Adult presence است.
+
+جریان MUST تطبیقی بماند: `indoor-time` مکان `home-inside` را قابل استنتاج می‌کند و سؤال تکراری Location حذف می‌شود. Energy و Mood تا زمانی که Weight مصوب Ranking به آن‌ها نیاز نداشته باشد پرسیده نمی‌شوند؛ استقلال Domain آن‌ها حفظ می‌شود. Noise و Mess نیز فقط در صورت نیاز آینده ظاهر می‌شوند.
+
+Guest فقط Token تصادفی را در Session نگه می‌دارد و Hash آن در Database ذخیره می‌شود. ثبت Match idempotent، دارای TTL، محدودشده با Rate limiter و مقید به همان Guest/User است. تا پایان Calibration Hold و وجود Coverage واقعی Published/Reviewed، هیچ پیشنهاد یا no-result ساختگی تولید نمی‌شود و Match در حالت `Collecting` می‌ماند.
+
+Prompt 009 فقط با تأیید صریح بعدی مالک و پس از رفع پیش‌نیاز Ranking/Content MAY آغاز شود. تست نسخه دقیق MySQL 8 همچنان باز است و دیتابیس پورت 3500 بدون Credential لمس نشده است.
