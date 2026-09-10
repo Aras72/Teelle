@@ -225,6 +225,7 @@ a {
 
 .teelle-container {
     width: min(100% - (2 * var(--page-gutter)), var(--content-max));
+    min-width: 0;
     margin-inline: auto;
 }
 
@@ -241,6 +242,7 @@ a {
 
 .teelle-site-header__bar {
     display: flex;
+    min-width: 0;
     min-height: var(--header-height);
     align-items: center;
     justify-content: space-between;
@@ -652,6 +654,7 @@ a {
 
 .home-hero__content {
     display: grid;
+    min-width: 0;
     justify-items: center;
     gap: clamp(0.4rem, 1.5dvh, 1rem);
     text-align: center;
@@ -771,10 +774,10 @@ a {
 
 .home-heartbeat__tagline {
     max-width: none;
-    white-space: nowrap;
     font-size: clamp(0.7rem, 2vw, 1.65rem);
     font-weight: var(--font-weight-black);
     line-height: 1.45;
+    text-align: center;
 }
 
 .home-heartbeat__metric {
@@ -890,7 +893,7 @@ body:has(.home-hero) #main-content {
     .teelle-wordmark { justify-self: start; }
     .teelle-header-actions { justify-self: end; }
     .home-heartbeat__content { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); }
-    .home-heartbeat__tagline { font-size: clamp(1.125rem, 2.35vw, 2rem); }
+    .home-heartbeat__tagline { white-space: nowrap; font-size: clamp(1.125rem, 2.35vw, 2rem); }
     .home-heartbeat__metric { padding-inline-start: 1.25rem; }
 }
 @media (max-width: 47.99rem) {

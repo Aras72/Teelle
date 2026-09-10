@@ -2,10 +2,10 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 14 — IMPLEMENTATION
-Current Stage: Prompt 010 IMPLEMENTED / CONDITIONAL RELEASE GATE
-Current Task: بازبینی مالک؛ Prompt 011 فقط با تأیید صریح جدید آغاز می‌شود
-Overall Status: IMPLEMENTING
+Current Phase: PHASE 15 — TESTING & QA
+Current Stage: QA BASELINE EXECUTED / GATE NOT PASS
+Current Task: رفع Blockerهای دیتابیس، E2E، Security، Accessibility و Performance
+Overall Status: TESTING
 
 Last Completed:
 
@@ -57,6 +57,7 @@ Currently Working On:
 - Prompt 009 اجرا شد: وضعیت‌های صادقانه Result، نمایش fail-closed سه پیشنهاد معتبر، Game Detail، چرخه idempotent Play و اتصال Start واقعی به Heartbeat آماده شدند.
 - Prompt 010 اجرا شد: حساب ایمیلی مراقب، Verification/Reset، تداوم تراکنشی Guest، Account Home و Saved/History محدود با Gate مشروط آماده شدند.
 - ویدئوی طبیعی Loopشونده جای Poster اصلی Hero را گرفت؛ Poster به‌عنوان fallback حفظ شد و تعامل سه‌بعدی تا تأمین Asset همسان و تأیید بصری تازه تعلیق ماند.
+- مالک شروع PHASE 15 را تأیید کرد؛ Baseline فنی، مرورگری، امنیتی و Performance اجرا و اسناد هشت‌گانه تست ایجاد شدند.
 
 Next:
 
@@ -68,6 +69,8 @@ Next:
 - دریافت Credential یک دیتابیس ایزوله MySQL 8 برای تطبیق runtime هاست و اجرای assertion نسخه
 - تنظیم SMTP تولید، SPF/DKIM/DMARC و آزمون واقعی تحویل Verification/Reset
 - بازبینی مالک روی Prompt 010 و شروع Prompt 011 فقط پس از تأیید صریح جدید
+- تأمین Credential دیتابیس ایزوله MySQL 8 و اجرای Regression کامل فاز ۱۵
+- تکمیل E2E، Accessibility، Security header و Performance Gate پیش از PHASE 16
 
 Blocked By:
 
@@ -104,6 +107,7 @@ Resolved Decisions:
 - Result/Detail/Play و Heartbeat طبق DEC-024 به‌صورت downstream و بدون جعل Matching اجرا شدند.
 - شروع حساب ایمیلی و تداوم امن Guest طبق DEC-025 تأیید شد؛ SMTP واقعی و OTP فعال هنوز خارج از Gate هستند.
 - ویدئوی طبیعی Hero و تعلیق تعامل پرریسک با همین MP4 طبق DEC-026 تأیید شد.
+- شروع QA پیش از ادعای تکمیل MVP طبق DEC-027 تأیید شد؛ این عبور، Prompt 011 یا Launch را خودکار باز نمی‌کند.
 
 Critical Risks:
 
@@ -114,7 +118,7 @@ Critical Risks:
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-009 FROZEN
 Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 LOCKED
-Testing Status: Prompt 010 Account 10/80 PASS; Result/Play 6/61 PASS; full Laravel 46/372 PASS with 8 schema tests intentionally skipped in aggregate; MySQL schema/integrity 7/36 PASS excluding exact-version assertion; JS 8/8، build، Pint و dependency audits PASS; Desktop/Mobile Light/Dark browser review PASS; exact MySQL 8 and real SMTP delivery NOT VERIFIED
+Testing Status: PHASE 15 IN PROGRESS; JS 8/8 PASS; Foundation/Security 6/36 PASS; Design System 5/31 PASS; Homepage 5/34 PASS; Build، Pint و dependency audits PASS; browser smoke Home/Match/Login Light/Dark PASS; exact 390px horizontal overflow PASS; full Laravel current run BLOCKED by unavailable SQLite driver/MySQL credential; exact MySQL 8، SMTP، Admin E2E، Screen reader and Core Web Vitals NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

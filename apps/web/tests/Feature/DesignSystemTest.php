@@ -59,4 +59,15 @@ class DesignSystemTest extends TestCase
             ->assertSee('role="status"', false)
             ->assertSee('teelle-state-message--error', false);
     }
+
+    public function test_homepage_tagline_only_forces_a_single_line_on_desktop(): void
+    {
+        $css = file_get_contents(resource_path('css/app.css'));
+
+        $this->assertIsString($css);
+        $this->assertStringContainsString(".teelle-container {\n    width: min(100% - (2 * var(--page-gutter)), var(--content-max));\n    min-width: 0;", $css);
+        $this->assertStringContainsString('@media (min-width: 48rem) {', $css);
+        $this->assertStringContainsString('.home-heartbeat__tagline { white-space: nowrap; font-size:', $css);
+        $this->assertStringNotContainsString(".home-heartbeat__tagline {\n    max-width: none;\n    white-space: nowrap;", $css);
+    }
 }

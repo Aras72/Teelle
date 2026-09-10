@@ -45,6 +45,28 @@ class FoundationTest extends TestCase
             ->assertDontSee((string) config('app.key'));
     }
 
+    public function test_web_responses_include_baseline_security_headers(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertHeader('Content-Security-Policy', "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'")
+            ->assertHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
+            ->assertHeader('Referrer-Policy', 'strict-origin-when-cross-origin')
+            ->assertHeader('X-Content-Type-Options', 'nosniff')
+            ->assertHeader('X-Frame-Options', 'DENY')
+            ->assertHeaderMissing('Strict-Transport-Security');
+    }
+
+    public function test_hsts_is_only_added_for_secure_production_requests(): void
+    {
+        $this->app->instance('env', 'production');
+
+        $this->withServerVariables(['HTTPS' => 'on', 'SERVER_PORT' => 443])
+            ->get('https://localhost/')
+            ->assertOk()
+            ->assertHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    }
+
     public function test_persian_application_defaults_are_active(): void
     {
         $this->assertSame('Teelle', config('app.name'));

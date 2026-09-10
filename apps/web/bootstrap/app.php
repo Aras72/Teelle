@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ApplySecurityHeaders;
 use App\Http\Middleware\EnsureContentStaff;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -12,6 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->web(append: [
+            ApplySecurityHeaders::class,
+        ]);
+
         $middleware->alias([
             'content.staff' => EnsureContentStaff::class,
         ]);

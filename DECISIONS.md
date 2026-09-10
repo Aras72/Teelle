@@ -379,3 +379,12 @@ Status: APPROVED BY OWNER / INTERACTION DEFERRED
 مالک نسخه ویدئویی تیله طبیعی را پس از اصلاح کادر Dark و پوشاندن نقطه Loop برای Commit و Push تأیید کرد. Homepage ویدئوی بهینه‌شده را به‌صورت دائماً در حال چرخش نمایش می‌دهد و در `prefers-reduced-motion`، خطای Autoplay یا نبود پشتیبانی Video به Poster طبیعی مصوب برمی‌گردد.
 
 MP4 هندسه سه‌بعدی، نماهای پشتی، Normal/Depth و Material واقعی تیله را در اختیار نمی‌گذارد. افزودن Drag یا Pointer سه‌بعدی به همین فایل، بدون تغییر ظاهر، قابل تضمین نیست و می‌تواند انعکاس، جهت نقش داخلی، Loop و Performance را خراب کند. بنابراین مطابق شرط مالک، تعامل به این Asset اضافه نمی‌شود. فعال‌سازی مجدد DEC-003 فقط با Asset سه‌بعدی/Turntable کاملِ همسان و تأیید بصری تازه مجاز است؛ کنترل دوبعدی که صرفاً Video را کج یا متوقف کند، تعامل سه‌بعدی واقعی نامیده نمی‌شود.
+
+## DEC-027 - شروع فاز Testing و حفظ Gateهای باز
+
+Date: 2026-09-10
+Status: APPROVED BY OWNER / QA GATE OPEN
+
+مالک پس از تحویل Hero ویدئویی، عبور به فاز بعدی را تأیید کرد. PHASE 15 برای Scope پیاده‌سازی‌شده آغاز می‌شود، اما این تصمیم به‌معنای تکمیل همه MUSTهای MVP، PASS شدن PHASE 14 یا مجوز Launch نیست. Prompt 011 همچنان بدون Prompt منجمد اجرا نمی‌شود و قابلیت‌های باقی‌مانده، Coverage، Ranking، MySQL 8، SMTP و Production readiness در Gate فاز ۱۵ آشکار می‌مانند.
+
+Baseline فاز ۱۵ MUST نتیجه هر بررسی را با `PASS`، `FAIL`، `BLOCKED` یا `NOT VERIFIED` ثبت کند. PHASE 16 فقط پس از رفع Blockerهای Critical/High و Pass شدن Release checklist شروع می‌شود.

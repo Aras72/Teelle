@@ -6,9 +6,9 @@
 
 ## وضعیت فعلی
 
-- مرحله: برنامه‌ریزی محصول
-- فاز: `PHASE 13 — EXECUTION PROMPTS`
-- پیاده‌سازی: `LOCKED`
+- مرحله: Testing & QA روی Scope پیاده‌سازی‌شده
+- فاز: `PHASE 15 — TESTING & QA`
+- وضعیت Gate: `IN PROGRESS / NOT PASS`
 - پشته قطعی وب: PHP + Laravel
 - تحویل اصلی: وب‌سایت کامل و Responsive
 - موبایل: فقط TWA و فقط پس از عبور از `WEBSITE COMPLETE GATE`
@@ -42,9 +42,9 @@
 
 ## هویت تجربه
 
-Motion بخشی از هویت تیله است. صفحه نخست باید یک تیله شیشه‌ای بزرگ و زنده در مرکز Hero داشته باشد که به سمت نشانگر واکنش نشان دهد و کاربر بتواند آن را مستقیماً بچرخاند. UI/UX Gate پاس شده و معماری Real-time و fallback در PHASE 09 ثبت شده است؛ ساخت واقعی در Implementation انجام خواهد شد.
+Motion بخشی از هویت تیله است. صفحه نخست اکنون تیله طبیعی ویدئویی Loopشونده و Poster fallback مصوب را نمایش می‌دهد. تعامل سه‌بعدی DEC-003 طبق DEC-020 و DEC-026 تا تأمین Asset همسان و تأیید بصری تازه تعلیق شده و مدل مصنوعی فعال نیست.
 
-مدل و Schema منطقی دیتابیس بازی‌ها در PHASE 10 ثبت شده‌اند. Migration، Seeder، پنل محتوایی و Batchهای بازی پس از عبور Architecture/Planning Gate در PHASE 14 ساخته می‌شوند.
+مدل، Migration، Seeder، پنل محتوایی و Pilot Draft بازی‌ها ساخته شده‌اند؛ انتشار محتوا و پیشنهاد واقعی تا عبور Review، Coverage و Ranking Gate به‌صورت fail-closed قفل می‌ماند.
 
 ## بازیابی Context
 
