@@ -346,3 +346,14 @@ Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL GATE
 Guest فقط Token تصادفی را در Session نگه می‌دارد و Hash آن در Database ذخیره می‌شود. ثبت Match idempotent، دارای TTL، محدودشده با Rate limiter و مقید به همان Guest/User است. تا پایان Calibration Hold و وجود Coverage واقعی Published/Reviewed، هیچ پیشنهاد یا no-result ساختگی تولید نمی‌شود و Match در حالت `Collecting` می‌ماند.
 
 Prompt 009 فقط با تأیید صریح بعدی مالک و پس از رفع پیش‌نیاز Ranking/Content MAY آغاز شود. تست نسخه دقیق MySQL 8 همچنان باز است و دیتابیس پورت 3500 بدون Credential لمس نشده است.
+
+## DEC-024 - اجرای مشروط Result/Play بدون جعل Matching
+
+Date: 2026-09-10
+Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL PRODUCT GATE
+
+مالک شروع Prompt 009 را صریحاً تأیید کرد، درحالی‌که Weightهای Ranking هنوز در Calibration Hold و تمام بازی‌های Pilot در وضعیت Draft هستند. برای پیشرفت بدون نقض Safety، بخش downstream شامل وضعیت نتیجه، مجموعه موفق سه‌تایی، Game Detail، چرخه Play و Heartbeat اجرا شد؛ اما تولید Match و انتشار بازی همچنان خارج از Scope ماند.
+
+نمایش موفق فقط برای دقیقاً سه `MatchResult` ذخیره‌شده مجاز است که همگی به نسخه جاری Published، Publication فعال، آخرین Review تأییدشده، Facts کامل، Cover بازبینی‌شده و Explanation غیرخالی متصل باشند. Detail، Cover و Start از URL مستقیم نیز کل مجموعه سه‌تایی را دوباره fail-closed بررسی می‌کنند. اولین Event معتبر `started` شمارنده projection را یک‌بار افزایش می‌دهد؛ Completion و Rating نیز append-only و idempotent هستند.
+
+تا Freeze شدن Ranking و وجود Coverage واقعی، جریان واقعی Quick Match در `Collecting` می‌ماند و پیام صادقانه آماده‌نبودن پیشنهادها را نشان می‌دهد. داده Published/Reviewed مورد استفاده در تست‌ها صرفاً fixture تست است و محتوای Production محسوب نمی‌شود. Prompt 010 فقط با تأیید صریح جدید مالک آغاز می‌شود.

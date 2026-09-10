@@ -6,6 +6,10 @@ use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Homepage\ShowHomepageController;
 use App\Http\Controllers\Match\QuickMatchController;
+use App\Http\Controllers\Play\GameDetailController;
+use App\Http\Controllers\Play\MatchResultsController;
+use App\Http\Controllers\Play\PlayController;
+use App\Http\Controllers\Play\ResultCoverController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', ShowHomepageController::class)->name('home');
@@ -15,6 +19,15 @@ Route::middleware('throttle:match')->group(function (): void {
     Route::post('/match/back', [QuickMatchController::class, 'back'])->name('match.back');
     Route::post('/match/restart', [QuickMatchController::class, 'restart'])->name('match.restart');
 });
+Route::get('/matches/{match:public_id}', MatchResultsController::class)->name('matches.show');
+Route::get('/matches/{match:public_id}/games/{rank}', GameDetailController::class)->whereNumber('rank')->name('matches.games.show');
+Route::get('/matches/{match:public_id}/games/{rank}/cover', ResultCoverController::class)->whereNumber('rank')->name('matches.games.cover');
+Route::middleware('throttle:play')->group(function (): void {
+    Route::post('/matches/{match:public_id}/games/{rank}/start', [PlayController::class, 'start'])->whereNumber('rank')->name('matches.games.start');
+    Route::post('/plays/{play:public_id}/complete', [PlayController::class, 'complete'])->name('plays.complete');
+    Route::post('/plays/{play:public_id}/rate', [PlayController::class, 'rate'])->name('plays.rate');
+});
+Route::get('/plays/{play:public_id}', [PlayController::class, 'show'])->name('plays.show');
 
 Route::prefix('admin/content')->name('admin.content.')->middleware('content.staff')->group(function (): void {
     Route::get('/', [ContentController::class, 'index'])->name('index');

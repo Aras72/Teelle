@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 — IMPLEMENTATION
-Current Stage: Prompt 008 IMPLEMENTED / CONDITIONAL PASS
-Current Task: انتظار برای بازبینی مالک؛ Prompt 009 شروع نشده است
+Current Stage: Prompt 009 IMPLEMENTED / CONDITIONAL PRODUCT GATE
+Current Task: نهایی‌سازی و تحویل Prompt 009؛ Prompt 010 شروع نشده است
 Overall Status: IMPLEMENTING
 
 Last Completed:
@@ -54,6 +54,7 @@ Currently Working On:
 - Prompt 004 اجرا شد: Homepage v4 مرکزی در دو Theme، شعار مستقل، Poster fallback و Heartbeat متصل به Projection واقعی با Gate برابر PASS آماده شدند.
 - Prompt 007 اجرا شد: فایل پیشنهادی ۲۵ بازی کامل به‌صورت Draft، Metadata ساختاریافته، Import قابل‌مدیریت از Admin و Golden Coverage Matrix fail-closed آماده شدند.
 - Prompt 008 اجرا شد: Guest Quick Match تطبیقی، Context حداقلی، Session ناشناس، ثبت idempotent و Theme سراسری آماده شدند؛ هیچ Result ساختگی تولید نمی‌شود.
+- Prompt 009 اجرا شد: وضعیت‌های صادقانه Result، نمایش fail-closed سه پیشنهاد معتبر، Game Detail، چرخه idempotent Play و اتصال Start واقعی به Heartbeat آماده شدند.
 
 Next:
 
@@ -62,14 +63,14 @@ Next:
 - بازبینی مرورگری Admin پس از آماده‌شدن Auth UI یا session تست کنترل‌شده
 - بازبینی مالک روی جریان Guest Quick Match
 - Freeze کردن Weightهای Ranking با Golden-set calibration و تأمین حداقل سه بازی Published/Reviewed برای Contextهای پشتیبانی‌شده
-- شروع Prompt 009 فقط پس از تأیید صریح مالک و رفع پیش‌نیاز Ranking/Content
+- بازبینی مالک روی خروجی Prompt 009 و شروع Prompt 010 فقط پس از تأیید صریح جدید
 
 Blocked By:
 
 - Credential سرویس MySQL 8 روی پورت 3500 موجود نیست؛ نمونه موقت در دسترس نسخه 26.7 است و assertion نسخه دقیق 8 را پاس نمی‌کند.
 - Auth UI طبق Roadmap در Prompt 010 است؛ Browser audit صفحه Admin با session واقعی هنوز NOT RUN است.
 - ۲۵ بازی Pilot عمداً Draft هستند؛ تا تصویر Reviewed و Human editorial/safety review وارد Candidate set نمی‌شوند.
-- Weightهای Ranking هنوز در Calibration Hold هستند؛ بنابراین Result/Detail/Play در Prompt 009 فعلاً قفل است.
+- Weightهای Ranking هنوز در Calibration Hold هستند؛ بنابراین تولید واقعی پیشنهادها قفل است و Quick Match در وضعیت صادقانه `Collecting` می‌ماند.
 
 Open Questions:
 
@@ -96,6 +97,7 @@ Resolved Decisions:
 - ورود ایمیل/رمز برای MVP و آمادگی OTP اختیاری طبق DEC-018 تصویب شد.
 - فایل Pilot پیشنهادی و Foundation توسعه کتابخانه طبق DEC-022 تصویب و بدون انتشار خودکار اجرا شد.
 - Guest Quick Match حداقلی و بدون Ranking ساختگی طبق DEC-023 اجرا شد.
+- Result/Detail/Play و Heartbeat طبق DEC-024 به‌صورت downstream و بدون جعل Matching اجرا شدند.
 
 Critical Risks:
 
@@ -104,9 +106,9 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-008 FROZEN
-Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 STATIC POSTER ACTIVE; PROMPTS 006-008 IMPLEMENTED / CONDITIONAL PASS; PROMPT 009 LOCKED
-Testing Status: Prompt 008 Quick Match MySQL 6/96 PASS; full Laravel 30/229 PASS; MySQL schema/integrity 7/36 PASS excluding exact-version assertion; JS 8/8، build، Pint، browser review و audits PASS; exact MySQL 8 NOT VERIFIED
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-009 FROZEN
+Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 STATIC POSTER ACTIVE; PROMPTS 006-009 IMPLEMENTED / CONDITIONAL PASS; PROMPT 010 LOCKED
+Testing Status: Prompt 009 MySQL 5/57 PASS; full Laravel 35/288 PASS; MySQL schema/integrity 7/36 PASS excluding exact-version assertion; JS 8/8، build، Pint و dependency audits PASS; exact MySQL 8 NOT VERIFIED; real successful-result browser review NOT RUN
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

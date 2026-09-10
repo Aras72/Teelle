@@ -35,6 +35,11 @@ class MatchSession extends Model
         return $this->hasMany(MatchResult::class);
     }
 
+    public function orderedResults(): HasMany
+    {
+        return $this->results()->orderBy('rank');
+    }
+
     public function guestIdentity(): BelongsTo
     {
         return $this->belongsTo(GuestIdentity::class);

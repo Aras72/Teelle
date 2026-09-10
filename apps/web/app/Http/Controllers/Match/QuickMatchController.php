@@ -43,6 +43,8 @@ final class QuickMatchController extends Controller
         if ($state['current'] === null) {
             $match = $submission->submit($request->session(), $state, $request->user());
             $flow->markSubmitted($request->session(), $match->public_id);
+
+            return redirect()->route('matches.show', $match);
         }
 
         return redirect()->route('match.show');

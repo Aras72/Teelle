@@ -900,6 +900,68 @@ body:has(.home-hero) #main-content {
     .match-back { position: static; margin-block-start: 1rem; }
     .match-actions, .match-actions form, .match-actions .teelle-button { width: 100%; }
 }
+
+/* Results, game detail and the quiet screen-to-play loop. */
+.results-page, .game-page, .play-page { position: relative; min-height: calc(100dvh - 7.5rem); padding-block: clamp(2rem, 6vw, 5rem); }
+.results-orbit { position: absolute; inset: 2rem 0 auto; height: 22rem; border: 1px solid var(--border-subtle); border-radius: 50%; transform: rotate(-5deg); pointer-events: none; }
+.results-orbit span { position: absolute; inset-block-start: 1.5rem; inset-inline-start: 18%; width: 2.75rem; overflow: hidden; aspect-ratio: 1; border-radius: 50%; box-shadow: var(--shadow-low); }
+.results-orbit img, .play-marble img { position: absolute; top: 50%; left: 50%; width: 300%; max-width: none; transform: translate(-50%, -50%); }
+.results-heading { position: relative; z-index: 1; display: grid; gap: .75rem; max-width: 48rem; margin-block-end: 2rem; }
+.results-heading h1, .results-state h1, .game-hero h1, .play-active h1, .play-complete h1 { margin: 0; font-size: clamp(2rem, 6vw, 4.5rem); font-weight: var(--font-weight-black); letter-spacing: -.04em; line-height: 1.22; }
+.results-heading > p, .results-state > p, .game-hero p, .play-active > p, .play-complete > p { margin: 0; color: var(--text-secondary); }
+.results-state { position: relative; z-index: 1; display: grid; width: min(100%, 48rem); gap: 1.25rem; margin-inline: auto; padding: clamp(1.5rem, 5vw, 3.5rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-medium); }
+.results-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.result-card { display: grid; overflow: hidden; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
+.result-card:first-child { grid-row: span 2; }
+.result-card__image { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; background: var(--surface-warm); }
+.result-card:first-child .result-card__image { aspect-ratio: 4 / 3; }
+.result-card__body { display: grid; align-content: start; gap: .9rem; padding: clamp(1rem, 3vw, 2rem); }
+.result-card h2 { margin: 0; font-size: clamp(1.35rem, 3vw, 2.25rem); }
+.result-card p { margin: 0; color: var(--text-secondary); }
+.result-rank { color: var(--action-primary); font-size: .8rem; font-weight: var(--font-weight-black); }
+.result-facts, .game-meta { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.result-facts li { padding: .4rem .7rem; border-radius: var(--radius-pill); background: var(--surface-warm); font-size: .82rem; }
+.game-back { display: inline-flex; margin-block-end: 1.25rem; color: var(--text-secondary); }
+.game-hero { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
+.game-hero > img { width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-card); object-fit: cover; box-shadow: var(--shadow-medium); }
+.game-hero > div { display: grid; gap: 1rem; }
+.game-meta { display: grid; gap: .65rem; }
+.game-meta li { display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; padding-block: .65rem; border-block-end: 1px solid var(--border-subtle); }
+.game-meta span { color: var(--text-secondary); }
+.game-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-block-start: 2rem; }
+.game-panel { padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); }
+.game-panel h2 { margin-block-start: 0; }
+.game-panel li { margin-block: .55rem; }
+.game-panel--safety { grid-column: 1 / -1; border-inline-start: .35rem solid var(--status-warning); }
+.game-start { position: sticky; z-index: 2; inset-block-end: 1rem; display: flex; justify-content: end; margin-block-start: 1.25rem; pointer-events: none; }
+.game-start .teelle-button { min-width: min(18rem, 100%); pointer-events: auto; box-shadow: var(--shadow-medium); }
+.play-page { display: grid; place-items: center; }
+.play-active, .play-complete { display: grid; width: min(100%, 46rem); justify-items: center; gap: 1.25rem; padding: clamp(1.5rem, 6vw, 4rem); border: 1px solid var(--border-subtle); border-radius: clamp(1.5rem, 5vw, 3rem); background: var(--surface-elevated); text-align: center; box-shadow: var(--shadow-medium); }
+.play-put-phone { color: var(--text-primary) !important; font-size: clamp(1.3rem, 3vw, 2rem); font-weight: var(--font-weight-black); }
+.play-marble { position: relative; width: clamp(4rem, 12vw, 7rem); overflow: hidden; aspect-ratio: 1; border: 1px solid rgb(255 255 255 / .42); border-radius: 50%; box-shadow: 0 1.5rem 3rem rgb(18 63 70 / .2); }
+.rating-form, .rating-form fieldset { display: grid; width: 100%; gap: 1rem; }
+.rating-form fieldset { margin: 0; padding: 0; border: 0; }
+.rating-form legend { margin-block-end: .75rem; font-weight: var(--font-weight-black); }
+.rating-form fieldset div { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .5rem; }
+.rating-form label input { position: absolute; opacity: 0; pointer-events: none; }
+.rating-form label span { display: grid; min-height: 3.25rem; place-items: center; border: 1px solid var(--border-subtle); border-radius: .8rem; cursor: pointer; }
+.rating-form label input:checked + span { border-color: var(--action-primary); background: var(--surface-warm); box-shadow: inset 0 0 0 2px var(--action-primary); }
+.rating-form label input:focus-visible + span { outline: .1875rem solid var(--focus-ring); outline-offset: .1875rem; }
+.play-rating-done { padding: .75rem 1rem; border-radius: var(--radius-pill); background: var(--surface-warm); color: var(--text-primary) !important; }
+@media (prefers-reduced-motion: no-preference) {
+    .result-card { animation: result-card-enter var(--duration-emphasis) var(--ease-enter) both; animation-delay: calc(var(--result-order) * 70ms); }
+    .play-marble { animation: play-marble-settle 6s ease-in-out infinite alternate; }
+    @keyframes result-card-enter { from { opacity: 0; transform: translateY(1rem) rotate(.3deg); } }
+    @keyframes play-marble-settle { to { transform: rotate(8deg) translateY(-.2rem); } }
+}
+@media (max-width: 47.99rem) {
+    .results-grid, .game-hero, .game-detail-grid { grid-template-columns: 1fr; }
+    .result-card:first-child { grid-row: auto; }
+    .result-card:first-child .result-card__image, .result-card__image { aspect-ratio: 16 / 10; }
+    .game-panel--safety { grid-column: auto; }
+    .game-start, .game-start .teelle-button { width: 100%; }
+    .rating-form fieldset div { grid-template-columns: 1fr; }
+}
 @media (max-width: 47.99rem) and (max-height: 43.75rem) {
     .home-marble-stage { width: clamp(6rem, 22dvh, 10rem); }
     .home-hero__content { gap: 0.375rem; }

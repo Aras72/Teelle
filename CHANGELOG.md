@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-09-10
+
+- Prompt 009 added actor-scoped Results states, exactly-three successful cards, private reviewed Covers and safety-first Game Detail.
+- Added transactional idempotent Play Start/Complete/Rate lifecycle and wired first valid Start events to the real Heartbeat projection.
+- Direct Result, Detail, Cover and Start access now fails closed when ownership, publication or the complete three-result invariant is missing.
+- Quick Match completion redirects to its honest result status; no Ranking or recommendation is fabricated during Calibration Hold.
+- DEC-024 records the owner-approved conditional downstream delivery and keeps Prompt 010 locked behind a new approval.
+
 ## 2026-09-09
 
 - Prompt 008 added the public adaptive Guest Quick Match flow, server-side Back/Restart state, pseudonymous identity and idempotent Match context persistence.

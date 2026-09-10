@@ -26,8 +26,8 @@
                 <div class="match-ready-mark" aria-hidden="true"><span></span></div>
                 <p class="match-hold-note" role="status">انتخاب سه بازی پس از نهایی‌شدن قواعد تطبیق فعال می‌شود؛ تیله برای پرکردن نتیجه، قانون ایمنی را کنار نمی‌گذارد</p>
                 <div class="match-actions">
-                    <form method="post" action="{{ route('match.restart') }}">@csrf<x-ui.button type="submit">یک موقعیت تازه</x-ui.button></form>
-                    <x-ui.button href="{{ route('home') }}" variant="secondary">بازگشت به خانه</x-ui.button>
+                    <x-ui.button href="{{ route('matches.show', $match) }}">دیدن وضعیت پیشنهادها</x-ui.button>
+                    <form method="post" action="{{ route('match.restart') }}">@csrf<x-ui.button type="submit" variant="secondary">یک موقعیت تازه</x-ui.button></form>
                 </div>
             </article>
         @elseif($step)

@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Enums\PlayState;
 use App\Models\Concerns\HasPublicUlid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PlaySession extends Model
 {
@@ -23,5 +25,20 @@ class PlaySession extends Model
             'completed_at' => 'immutable_datetime',
             'abandoned_at' => 'immutable_datetime',
         ];
+    }
+
+    public function result(): BelongsTo
+    {
+        return $this->belongsTo(MatchResult::class, 'match_result_id');
+    }
+
+    public function guestIdentity(): BelongsTo
+    {
+        return $this->belongsTo(GuestIdentity::class);
+    }
+
+    public function events(): HasMany
+    {
+        return $this->hasMany(PlayEvent::class);
     }
 }

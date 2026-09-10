@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MatchResult extends Model
 {
@@ -13,5 +14,20 @@ class MatchResult extends Model
     protected function casts(): array
     {
         return ['explanation_json' => 'array'];
+    }
+
+    public function matchSession(): BelongsTo
+    {
+        return $this->belongsTo(MatchSession::class);
+    }
+
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Game::class);
+    }
+
+    public function gameVersion(): BelongsTo
+    {
+        return $this->belongsTo(GameVersion::class);
     }
 }

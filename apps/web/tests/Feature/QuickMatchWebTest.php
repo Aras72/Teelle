@@ -46,15 +46,17 @@ class QuickMatchWebTest extends TestCase
         $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 15]);
         $this->post(route('match.answer'), ['step' => 'location', 'answer' => 'home-inside']);
         $this->post(route('match.answer'), ['step' => 'materials', 'answer' => ['paper', 'ball']]);
-        $this->post(route('match.answer'), ['step' => 'players', 'answer' => 'one-child-adult'])->assertRedirect(route('match.show'));
+        $response = $this->post(route('match.answer'), ['step' => 'players', 'answer' => 'one-child-adult']);
 
         $match = MatchSession::query()->firstOrFail();
+        $response->assertRedirect(route('matches.show', $match));
         $this->assertSame(50, $match->age_months);
         $this->assertSame(MatchOutcome::Collecting, $match->outcome);
         $this->assertSame(['paper', 'ball'], $match->context_json['available_materials']);
         $this->assertTrue($match->context_json['adult_present']);
         $this->assertDatabaseCount('guest_identities', 1);
         $this->assertDatabaseCount('match_results', 0);
+        $this->get(route('matches.show', $match))->assertOk()->assertSee('پیشنهادها هنوز آماده نیستند');
         $this->get(route('match.show'))->assertOk()->assertSee('حالا تیله این لحظه را می‌شناسد');
 
         $this->post(route('match.back'));
