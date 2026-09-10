@@ -6,6 +6,7 @@
 - Jigari now uses only the original project-owned ruby marble across three independently moving planet tracks; Auth uses a distinct emerald/red marble with a reliable visible orbit on desktop, tablet and mobile.
 - Added source-level asset separation tests and completed responsive browser QA at 390×844, 768×900 and desktop widths.
 - Full Laravel regression passed on a fresh isolated MySQL 8.4.11 database: 65 tests / 554 assertions; Build, Pint and JavaScript 8/8 also pass.
+- Prompt 012 is frozen for entitlement-protected Jigari Search/Filter over the fail-closed public catalog; Ranking، Multi-child، Weekly Plan and Commerce remain outside the slice.
 - Prompt 011 added the server-authoritative Jigari entitlement boundary, honest 3/6/12-month plan surface and own-household Child Profile create/edit/archive flows.
 - Child Profiles collect only optional nickname, birth month and caregiver relationship; free, expired, refunded and revoked memberships fail closed without deleting stored profiles.
 - Prompt 011 and full MySQL 8.4.11 regression passed; checkout, pricing, payment activation and later Jigari features remain locked.

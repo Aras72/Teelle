@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: PROMPT 011 IMPLEMENTED / PHOTOREAL MARBLE REFRESH VERIFIED / QA GATE NOT PASS
-Current Task: Freeze کردن Scope دقیق Prompt 012 بدون فعال‌سازی Commerce تأییدنشده
+Current Stage: PROMPT 012 FROZEN / READY FOR EXECUTION / QA GATE NOT PASS
+Current Task: اجرای Prompt 012 برای Search/Filter جیگری بدون Ranking یا Commerce ساختگی
 Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
 Last Completed:
@@ -64,12 +64,13 @@ Currently Working On:
 - شش Asset فوتورئال و بهینه تیله برای Heartbeat، Auth، Match، Play، Account و Jigari جایگزین نمونه‌های مصنوعی شدند؛ Hero مصوب بدون تغییر باقی ماند.
 - مدار جیگری با سه Track مستقل و مدار Auth با حرکت قابل مشاهده در Desktop، تبلت 768 و موبایل 390 بازطراحی و در مرورگر زنده تأیید شدند.
 - Regression تازه MySQL 8.4.11 برابر 65/65 با 554 assertion پاس شد؛ Build، Pint و JavaScript 8/8 نیز PASS هستند.
+- Prompt 012 با Scope محدود Search/Filter جیگری، Catalog عمومی fail-closed، ترتیب خنثی و بدون Ranking/Commerce تولید و Freeze شد.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
 - `PHASE 11 — SECURITY & PRIVACY`: مستندات پایه کامل؛ کنترل‌های Production مانند SMTP، TLS و Privacy release هنوز در Gate انتشار بررسی می‌شوند.
 - `PHASE 12 — DEVELOPMENT PLANNING`: کامل و Architecture Gate برابر PASS.
-- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 011 تولید و Freeze شده‌اند؛ Prompt 012 هنوز LOCKED است.
+- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 012 تولید و Freeze شده‌اند؛ Prompt 012 آماده اجرای مستقل است.
 - `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 011 اجرا شده‌اند، اما به‌دلیل Scope باقی‌مانده، محتوای Published/Reviewed، Ranking calibration، Commerce و Hardening هنوز COMPLETE نیست.
 - `PHASE 15 — TESTING & QA`: برای Scope موجود فعال است؛ گیت MySQL 8 پاس شده ولی Gate کامل QA هنوز NOT PASS است.
 
@@ -80,7 +81,7 @@ Next:
 - بازبینی مالک روی جریان Guest Quick Match
 - Freeze کردن Weightهای Ranking با Golden-set calibration و تأمین حداقل سه بازی Published/Reviewed برای Contextهای پشتیبانی‌شده
 - تنظیم SMTP تولید، SPF/DKIM/DMARC و آزمون واقعی تحویل Verification/Reset
-- بازبینی مالک روی Prompt 011 و شروع Prompt 012 فقط پس از تأیید صریح جدید
+- اجرای مستقل Prompt 012 و ثبت گیت کامل آن پیش از Freeze شدن Prompt 013
 - تکمیل E2E، Accessibility، Security header و Performance Gate پیش از PHASE 16
 
 Blocked By:
@@ -130,8 +131,8 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-011 FROZEN; PROMPT 012 LOCKED
-Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 IMPLEMENTED / PASS; PROMPT 012 LOCKED
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-012 FROZEN; PROMPT 012 READY FOR EXECUTION
+Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 IMPLEMENTED / PASS; PROMPT 012 FROZEN / NOT STARTED
 Testing Status: PHASE 15 IN PROGRESS; MySQL 8.4.11 full Laravel 65/65 PASS with 554 assertions; Jigari 7/7 PASS with 51 assertions; MySQL schema contract 8/8 PASS with 37 assertions; JS 8/8 PASS; Build، Pint و dependency audits PASS; browser smoke Home/Match/Login/Jigari Light/Dark PASS; photoreal marble motion at desktop، 768×900 and 390×844 PASS; exact 390px horizontal overflow PASS; SMTP، Admin E2E، authenticated Child Profile browser QA، Screen reader، Staging TLS and Core Web Vitals NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED

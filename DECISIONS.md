@@ -423,3 +423,12 @@ Status: APPROVED BY OWNER / IMPLEMENTED
 حرکت جیگری بر Trackهای چرخان مستقل با سرعت و جهت متفاوت بنا شد تا به پشتیبانی ناپایدار `offset-path` وابسته نباشد. مدار Auth نیز با Keyframe موقعیتی صریح بازطراحی شد و در Mobile فضای تزئینی جدا از فرم دارد، بنابراین تیله پشت ورودی‌ها پنهان نمی‌شود. `prefers-reduced-motion` همچنان حرکت غیرضروری را متوقف می‌کند.
 
 بازبینی زنده Desktop، 768×900 و 390×844 برای Jigari و Login پاس شد. Regression کامل روی دیتابیس تازه و disposable MySQL 8.4.11 برابر 65 test / 554 assertion، JavaScript برابر 8/8، Build و Pint همگی PASS هستند. این تصمیم قیمت، Checkout، Publication بازی یا Prompt 012 را به‌طور ضمنی فعال نمی‌کند.
+
+## DEC-031 - Freeze شدن Prompt 012 برای Search/Filter جیگری
+
+Date: 2026-09-10
+Status: APPROVED BY OWNER / FROZEN
+
+مالک پس از تأیید سایر تغییرات بصری، ادامه فازهای ۱۳ تا ۱۶ را به‌ترتیب خواست. Prompt 012 به کوچک‌ترین Slice مستقل بعدی یعنی Search/Filter کامل جیگری محدود شد؛ Child Profile و Entitlement موجود پیش‌نیازند، اما Multi-child، Weekly Plan، Personalization و Commerce هنوز وارد اجرا نمی‌شوند.
+
+Search فقط روی Candidateهای کامل Published/Reviewed با Facts، Safety و Cover بازبینی‌شده کار می‌کند و ترتیب آن خنثی و قطعی است، نه پیشنهاد شخصی یا Ranking. نبود محتوای Production به Empty state صادقانه منجر می‌شود و هیچ Draft تستی منتشر نمی‌شود. اجرای Prompt 012 باید پیش از Prompt بعدی گیت کامل MySQL 8، مرورگر واکنش‌گرا، Accessibility، Build، Pint و Audit خود را پاس کند.
