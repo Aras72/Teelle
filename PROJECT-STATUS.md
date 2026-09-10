@@ -2,10 +2,10 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 15 — TESTING & QA
-Current Stage: QA BASELINE EXECUTED / GATE NOT PASS
-Current Task: رفع Blockerهای دیتابیس، E2E، Security، Accessibility و Performance
-Overall Status: TESTING
+Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
+Current Stage: MYSQL 8 REGRESSION PASS / QA GATE NOT PASS
+Current Task: بستن Scope باقی‌مانده Implementation و رفع Blockerهای E2E، Security، Accessibility و Performance
+Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
 Last Completed:
 
@@ -58,23 +58,29 @@ Currently Working On:
 - Prompt 010 اجرا شد: حساب ایمیلی مراقب، Verification/Reset، تداوم تراکنشی Guest، Account Home و Saved/History محدود با Gate مشروط آماده شدند.
 - ویدئوی طبیعی Loopشونده جای Poster اصلی Hero را گرفت؛ Poster به‌عنوان fallback حفظ شد و تعامل سه‌بعدی تا تأمین Asset همسان و تأیید بصری تازه تعلیق ماند.
 - مالک شروع PHASE 15 را تأیید کرد؛ Baseline فنی، مرورگری، امنیتی و Performance اجرا و اسناد هشت‌گانه تست ایجاد شدند.
+- Regression کامل Laravel روی MySQL 8.4.11 ایزوله با 57 test و 433 assertion پاس شد؛ قرارداد Schema نیز 8 test و 37 assertion پاس دارد.
+
+## نقشه صریح فازهای ۱۱ تا ۱۵
+
+- `PHASE 11 — SECURITY & PRIVACY`: مستندات پایه کامل؛ کنترل‌های Production مانند SMTP، TLS و Privacy release هنوز در Gate انتشار بررسی می‌شوند.
+- `PHASE 12 — DEVELOPMENT PLANNING`: کامل و Architecture Gate برابر PASS.
+- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 010 تولید و Freeze شده‌اند؛ Prompt 011 هنوز تولید/Freeze نشده و LOCKED است.
+- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 010 اجرا شده‌اند، اما به‌دلیل Scope باقی‌مانده، محتوای Published/Reviewed، Ranking calibration و Prompt 011 هنوز COMPLETE نیست.
+- `PHASE 15 — TESTING & QA`: برای Scope موجود فعال است؛ گیت MySQL 8 پاس شده ولی Gate کامل QA هنوز NOT PASS است.
 
 Next:
 
 - بازبینی انسانی محتوا، Safety، تناسب سنی و منبع هر Draft و تولید/تأیید Coverهای هم‌سبک تیله
-- اجرای migration/test فازهای 006-007 روی دیتابیس disposable با نسخه دقیق MySQL 8
 - بازبینی مرورگری Admin پس از آماده‌شدن Auth UI یا session تست کنترل‌شده
 - بازبینی مالک روی جریان Guest Quick Match
 - Freeze کردن Weightهای Ranking با Golden-set calibration و تأمین حداقل سه بازی Published/Reviewed برای Contextهای پشتیبانی‌شده
-- دریافت Credential یک دیتابیس ایزوله MySQL 8 برای تطبیق runtime هاست و اجرای assertion نسخه
 - تنظیم SMTP تولید، SPF/DKIM/DMARC و آزمون واقعی تحویل Verification/Reset
 - بازبینی مالک روی Prompt 010 و شروع Prompt 011 فقط پس از تأیید صریح جدید
-- تأمین Credential دیتابیس ایزوله MySQL 8 و اجرای Regression کامل فاز ۱۵
 - تکمیل E2E، Accessibility، Security header و Performance Gate پیش از PHASE 16
 
 Blocked By:
 
-- Credential سرویس MySQL 8 روی پورت 3500 موجود نیست؛ نمونه موقت در دسترس نسخه 26.7 است و assertion نسخه دقیق 8 را پاس نمی‌کند.
+- نسخه دقیق MySQL سرویس هاست پارس‌پک و migration rehearsal روی Staging هنوز تأیید نشده است؛ پورت محلی 3500 نسخه 26.7 دارد و مبنای گیت MySQL 8 قرار نگرفت.
 - Browser audit صفحه Admin با session واقعی Staff هنوز NOT RUN است.
 - ۲۵ بازی Pilot عمداً Draft هستند؛ تا تصویر Reviewed و Human editorial/safety review وارد Candidate set نمی‌شوند.
 - Weightهای Ranking هنوز در Calibration Hold هستند؛ بنابراین تولید واقعی پیشنهادها قفل است و Quick Match در وضعیت صادقانه `Collecting` می‌ماند.
@@ -82,7 +88,7 @@ Blocked By:
 Open Questions:
 
 - بازار جغرافیایی اولیه خارج از تمرکز فارسی/ایران هنوز باید در Research دقیق شود.
-- Minor/Patch واقعی MySQL 8 در شروع Implementation باید ثبت شود.
+- Minor/Patch محلی QA برابر MySQL 8.4.11 ثبت شد؛ نسخه واقعی هاست هنوز باید تأیید شود.
 - قابلیت‌های PHP 8.5، Cron/Queue، Backup و S3-compatible storage در پلن پارس‌پک باید بررسی شوند.
 - مدت قانونی نگهداری Payment/accounting برای بازار هدف باید پیش از Commerce implementation نهایی شود.
 - SMTP پارس‌پک یا Provider ایمیل برای verification/reset باید پیش از Auth release تأیید شود.
@@ -116,9 +122,9 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-009 FROZEN
-Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 LOCKED
-Testing Status: PHASE 15 IN PROGRESS; JS 8/8 PASS; Foundation/Security 6/36 PASS; Design System 5/31 PASS; Homepage 5/34 PASS; Build، Pint و dependency audits PASS; browser smoke Home/Match/Login Light/Dark PASS; exact 390px horizontal overflow PASS; full Laravel current run BLOCKED by unavailable SQLite driver/MySQL credential; exact MySQL 8، SMTP، Admin E2E، Screen reader and Core Web Vitals NOT VERIFIED
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-010 FROZEN; PROMPT 011 LOCKED
+Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 LOCKED
+Testing Status: PHASE 15 IN PROGRESS; MySQL 8.4.11 full Laravel 57/57 PASS with 433 assertions; MySQL schema contract 8/8 PASS with 37 assertions; JS 8/8 PASS; Build، Pint و dependency audits PASS; browser smoke Home/Match/Login Light/Dark PASS; exact 390px horizontal overflow PASS; SMTP، Admin E2E، Screen reader، Staging TLS and Core Web Vitals NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

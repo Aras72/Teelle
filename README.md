@@ -6,14 +6,16 @@
 
 ## وضعیت فعلی
 
-- مرحله: Testing & QA روی Scope پیاده‌سازی‌شده
-- فاز: `PHASE 15 — TESTING & QA`
+- مرحله: بستن Implementation و Testing & QA روی Scope پیاده‌سازی‌شده
+- فاز: `PHASE 14 CLOSURE + PHASE 15 — TESTING & QA`
 - وضعیت Gate: `IN PROGRESS / NOT PASS`
 - پشته قطعی وب: PHP + Laravel
 - تحویل اصلی: وب‌سایت کامل و Responsive
 - موبایل: فقط TWA و فقط پس از عبور از `WEBSITE COMPLETE GATE`
 
 وضعیت دقیق و جاری در [PROJECT-STATUS.md](PROJECT-STATUS.md) ثبت می‌شود.
+
+فازهای ۱۱ و ۱۲ کامل‌اند. فاز ۱۳ Promptهای 001 تا 010 را Freeze کرده، اما Prompt 011 هنوز LOCKED است؛ بنابراین فاز ۱۴ با وجود اجرای Promptهای 001 تا 010 کامل اعلام نمی‌شود. فاز ۱۵ برای QA همین Scope فعال است و Regression محلی MySQL 8.4.11 پاس شده، اما Release Gate تا تکمیل کنترل‌های باقی‌مانده باز می‌ماند.
 
 ## منابع حقیقت
 

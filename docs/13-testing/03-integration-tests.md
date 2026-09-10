@@ -1,16 +1,20 @@
 # Integration Tests
 
 Date: 2026-09-10
-Status: BLOCKED BY TEST DATABASE CREDENTIAL
+Status: MYSQL 8 REGRESSION PASS
 
-اجرای `php artisan test` در محیط جاری 14 test را پاس کرد، 8 تست MySQL را طبق Guard صریح Skip کرد و 32 تست دیتابیسی پیش از منطق برنامه با `could not find driver` متوقف شدند. PHP جاری `pdo_mysql` دارد اما `pdo_sqlite` ندارد و `.env` فعلی روی SQLite است.
+نسخه رسمی MySQL Community Server `8.4.11` با checksum رسمی در محیط موقت ایزوله نصب و روی `127.0.0.1:14008` اجرا شد. دیتابیس disposable با نام `teelle_phase15_test` و کاربر اختصاصی بدون ذخیره Credential در Repository ساخته شد.
 
-پورت `127.0.0.1:3500` در دسترس است، اما ورود فقط‌خواندنی Root بدون Password با `ERROR 1045` رد شد و Credential پروژه در Repository موجود نیست. بنابراین نسخه Server و Regression کامل در این اجرای QA تأیید نشدند.
+پورت اعلام‌شده `127.0.0.1:3500` سالم و در حال Listen است، اما handshake آن نسخه `26.7.0` را گزارش می‌کند و بنابراین برای assertion قطعی MySQL 8 استفاده نشد. سرویس و داده‌های آن بدون تغییر باقی ماندند.
 
-برای بستن Gate باید یک Database ایزوله MySQL 8 با مجوز create/drop table در اختیار تست قرار گیرد و موارد زیر پاس شوند:
+## Evidence
 
-- migration و integrity هشت تست Schema
-- Auth و Guest merge
-- Content/Admin lifecycle و media quarantine
-- Quick Match، Result، Play و Heartbeat
-- full regression بدون Skip ناشی از Environment
+- `MySqlDataFoundationTest`: `8 passed`، `37 assertions`
+- Full Laravel regression: `57 passed`، `433 assertions`
+- Server version assertion: `8.4.11`
+- migration، Seeder idempotency و تمام integrity constraintها: PASS
+- Auth و Guest merge، Content/Admin، Quick Match، Result/Play و Heartbeat: PASS
+
+در اجرای اولیه full suite، اجرای `migrate:fresh` داخل کلاس schema وضعیت مشترک `RefreshDatabase` را برای تست‌های بعدی آلوده کرد. تست schema به `RefreshDatabase` و seed تراکنشی هر تست منتقل شد؛ سپس full suite بدون Skip یا Failure دوباره اجرا و پاس شد.
+
+این Evidence گیت دیتابیس و Integration محلی را می‌بندد، اما نسخه دقیق MySQL هاست پارس‌پک و migration rehearsal روی محیط همسان Staging هنوز `NOT VERIFIED` است.

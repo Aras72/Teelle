@@ -388,3 +388,12 @@ Status: APPROVED BY OWNER / QA GATE OPEN
 مالک پس از تحویل Hero ویدئویی، عبور به فاز بعدی را تأیید کرد. PHASE 15 برای Scope پیاده‌سازی‌شده آغاز می‌شود، اما این تصمیم به‌معنای تکمیل همه MUSTهای MVP، PASS شدن PHASE 14 یا مجوز Launch نیست. Prompt 011 همچنان بدون Prompt منجمد اجرا نمی‌شود و قابلیت‌های باقی‌مانده، Coverage، Ranking، MySQL 8، SMTP و Production readiness در Gate فاز ۱۵ آشکار می‌مانند.
 
 Baseline فاز ۱۵ MUST نتیجه هر بررسی را با `PASS`، `FAIL`، `BLOCKED` یا `NOT VERIFIED` ثبت کند. PHASE 16 فقط پس از رفع Blockerهای Critical/High و Pass شدن Release checklist شروع می‌شود.
+
+## DEC-028 - تصحیح مرز فاز ۱۴ و عبور گیت MySQL 8
+
+Date: 2026-09-10
+Status: VERIFIED / PHASE BOUNDARY CLARIFIED
+
+نمایش صرف `PHASE 15` در وضعیت پروژه می‌توانست به‌اشتباه تکمیل PHASE 14 را القا کند. فازهای 11 و 12 کامل‌اند؛ PHASE 13 برای Promptهای 001 تا 010 انجام شده، اما Prompt 011 هنوز تولید و Freeze نشده است. PHASE 14 نیز با وجود اجرای Promptهای 001 تا 010، تا بسته‌شدن Scope باقیمانده، Content/Ranking gate و Prompt بعدی موردنیاز، `INCOMPLETE` می‌ماند. اجرای QA روی Scope موجود طبق DEC-027 مجاز است، ولی جایگزین Gate فاز 14 نیست.
+
+برای رفع Blocker دیتابیس، MySQL Community Server 8.4.11 رسمی در محیط موقت ایزوله روی پورت 14008 اجرا شد. سرویس موجود روی پورت 3500 سالم است اما handshake آن نسخه 26.7.0 را گزارش می‌کند و دست‌نخورده باقی ماند. تست schema برابر 8/8 با 37 assertion و Regression کامل Laravel برابر 57/57 با 433 assertion پاس شد. نسخه دقیق MySQL هاست پارس‌پک و rehearsal روی Staging همچنان `NOT VERIFIED` هستند؛ بنابراین این تصمیم فقط گیت دیتابیس محلی را می‌بندد و PHASE 15 را به‌تنهایی PASS نمی‌کند.

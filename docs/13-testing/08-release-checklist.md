@@ -14,10 +14,11 @@ Phase 15 Gate: NOT PASS
 - [x] Home/Match/Login browser smoke در Light/Dark
 - [x] Mobile 390px بدون overflow افقی
 - [x] Application-level baseline security headers
+- [x] Regression کامل Laravel روی MySQL 8.4.11 ایزوله — 57 test / 433 assertion
+- [x] MySQL schema، migration، Seeder و integrity contract — 8 test / 37 assertion
 
 ## مسدودکننده انتشار
 
-- [ ] Regression کامل روی MySQL 8 ایزوله
 - [ ] نسخه دقیق MySQL 8 هاست و migration rehearsal
 - [ ] Ranking weights تأییدشده و Coverage بدون Gap بحرانی
 - [ ] بازی‌های Published/Reviewed با Cover و Safety review

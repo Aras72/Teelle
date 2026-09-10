@@ -14,6 +14,7 @@ use App\Models\PlayEvent;
 use App\Models\PlaySession;
 use App\Models\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,8 @@ use Tests\TestCase;
 
 class MySqlDataFoundationTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -36,7 +39,7 @@ class MySqlDataFoundationTest extends TestCase
             throw new \RuntimeException('Refusing destructive schema validation outside a *_test database.');
         }
 
-        Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+        Artisan::call('db:seed', ['--force' => true]);
     }
 
     public function test_mysql_8_is_present(): void
