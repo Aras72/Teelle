@@ -14,8 +14,9 @@ Phase 15 Gate: NOT PASS
 - [x] Home/Match/Login browser smoke در Light/Dark
 - [x] Mobile 390px بدون overflow افقی
 - [x] Application-level baseline security headers
-- [x] Regression کامل Laravel روی MySQL 8.4.11 ایزوله — 57 test / 433 assertion
+- [x] Regression کامل Laravel روی MySQL 8.4.11 ایزوله — 64 test / 483 assertion
 - [x] MySQL schema، migration، Seeder و integrity contract — 8 test / 37 assertion
+- [x] Jigari entitlement/ownership/age boundary — 7 test / 50 assertion
 
 ## مسدودکننده انتشار
 

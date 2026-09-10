@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Account\ChildProfileController;
 use App\Http\Controllers\Account\SavedGameController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\CoverageController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Homepage\ShowHomepageController;
+use App\Http\Controllers\Jigari\JigariController;
 use App\Http\Controllers\Match\QuickMatchController;
 use App\Http\Controllers\Play\GameDetailController;
 use App\Http\Controllers\Play\MatchResultsController;
@@ -19,6 +21,7 @@ use App\Http\Controllers\Play\ResultCoverController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', ShowHomepageController::class)->name('home');
+Route::get('/jigari', JigariController::class)->name('jigari.show');
 Route::middleware('guest')->group(function (): void {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('throttle:auth')->name('register.store');
@@ -40,6 +43,14 @@ Route::middleware('auth')->group(function (): void {
         Route::post('/plays/{play:public_id}/save', [SavedGameController::class, 'store'])->name('plays.save');
         Route::delete('/account/saved/{game:public_id}', [SavedGameController::class, 'destroy'])->name('account.saved.destroy');
         Route::get('/account/saved/{game:public_id}/cover', [SavedGameController::class, 'cover'])->name('account.saved.cover');
+        Route::prefix('/account/children')->name('account.children.')->middleware('jigari')->group(function (): void {
+            Route::get('/', [ChildProfileController::class, 'index'])->name('index');
+            Route::get('/new', [ChildProfileController::class, 'create'])->name('create');
+            Route::post('/', [ChildProfileController::class, 'store'])->name('store');
+            Route::get('/{child}/edit', [ChildProfileController::class, 'edit'])->name('edit');
+            Route::put('/{child}', [ChildProfileController::class, 'update'])->name('update');
+            Route::post('/{child}/archive', [ChildProfileController::class, 'archive'])->name('archive');
+        });
     });
 });
 Route::get('/match', [QuickMatchController::class, 'show'])->name('match.show');

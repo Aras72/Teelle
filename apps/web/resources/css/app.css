@@ -1115,3 +1115,50 @@ body:has(.home-hero) #main-content {
     .account-heading { grid-template-columns: 1fr; }
     .account-heading .account-marble { width: 4.5rem; }
 }
+
+/* Jigari uses orbiting marbles and warm editorial surfaces without inventing commerce state. */
+.jigari-page, .children-page { display: grid; gap: clamp(2rem, 6vw, 5rem); padding-block: clamp(2rem, 6vw, 5rem); }
+.jigari-hero { position: relative; display: grid; min-height: min(34rem, 70dvh); place-items: center; align-content: center; gap: 1rem; overflow: hidden; padding: clamp(2rem, 7vw, 6rem); border: 1px solid var(--border-subtle); border-radius: clamp(1.5rem, 5vw, 3.5rem); background: var(--surface-elevated); text-align: center; box-shadow: var(--shadow-low); }
+.jigari-hero > *:not(.jigari-orbit) { position: relative; z-index: 1; }
+.jigari-hero h1, .children-heading h1, .child-form-card h1 { margin: 0; font-size: clamp(2.4rem, 8vw, 6rem); font-weight: var(--font-weight-black); letter-spacing: -.055em; line-height: 1.05; }
+.jigari-hero > p:not(.match-kicker) { max-width: 45rem; margin: 0; color: var(--text-secondary); font-size: clamp(1rem, 2vw, 1.3rem); line-height: 2; }
+.jigari-orbit { position: absolute; width: min(85%, 48rem); aspect-ratio: 2 / 1; border: 1px solid var(--border-subtle); border-radius: 50%; transform: rotate(-9deg); }
+.jigari-orbit span, .jigari-plan__marble, .child-card__marble { display: block; border: 1px solid rgb(255 255 255 / .35); border-radius: 50%; background: radial-gradient(circle at 30% 25%, #fff 0 5%, transparent 6%), conic-gradient(from 20deg, var(--teelle-yellow), var(--teelle-peach), var(--teelle-blue), var(--teelle-mint), var(--teelle-yellow)); box-shadow: var(--shadow-medium); }
+.jigari-orbit span { position: absolute; width: clamp(2.5rem, 7vw, 5rem); aspect-ratio: 1; }
+.jigari-orbit span:nth-child(1) { inset-block-start: 4%; inset-inline-start: 12%; }
+.jigari-orbit span:nth-child(2) { inset-block-end: 3%; inset-inline-end: 17%; width: clamp(1.75rem, 5vw, 3.5rem); }
+.jigari-orbit span:nth-child(3) { inset-block-start: 38%; inset-inline-end: -2%; width: clamp(1.25rem, 3vw, 2.25rem); }
+.jigari-benefits { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(1.5rem, 5vw, 5rem); align-items: start; }
+.jigari-benefits h2, .jigari-section-heading h2 { margin: .3rem 0 0; font-size: clamp(1.8rem, 4vw, 3.5rem); line-height: 1.35; }
+.jigari-benefits ul { display: grid; gap: .85rem; margin: 0; padding: 0; list-style: none; }
+.jigari-benefits li { padding: 1rem 1.25rem; border-inline-start: .3rem solid var(--teelle-peach); border-radius: var(--radius-input); background: var(--surface-warm); }
+.jigari-section-heading { margin-block-end: 1.5rem; }
+.jigari-plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.jigari-plan { display: grid; justify-items: start; gap: .75rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
+.jigari-plan__marble, .child-card__marble { width: 3rem; aspect-ratio: 1; }
+.jigari-plan h3 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.25rem); }
+.jigari-plan p, .jigari-plan strong { margin: 0; color: var(--text-secondary); }
+.children-heading { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; }
+.children-heading p, .child-form-card > p { margin: .4rem 0 0; color: var(--text-secondary); }
+.children-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.child-card, .children-empty, .child-form-card { position: relative; display: grid; gap: 1.25rem; padding: clamp(1.25rem, 4vw, 2.5rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
+.child-card.is-archived { opacity: .68; }
+.child-card h2, .children-empty h2 { margin: 0; font-size: clamp(1.5rem, 4vw, 2.5rem); }
+.child-card p, .children-empty p { margin: 0; color: var(--text-secondary); }
+.child-card__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.children-empty { justify-items: center; max-width: 42rem; margin-inline: auto; text-align: center; }
+.children-empty > span, .child-form-card__marble { width: 5rem; aspect-ratio: 1; border: .7rem solid var(--teelle-peach); border-radius: 50%; box-shadow: inset 0 0 0 .45rem var(--surface-elevated), inset 0 0 0 .8rem var(--teelle-yellow); }
+.child-form-page { display: grid; min-height: calc(100dvh - 7.5rem); place-items: center; padding-block: clamp(2rem, 6vw, 5rem); }
+.child-form-card { width: min(100%, 42rem); overflow: hidden; }
+.child-form-card__marble { position: absolute; inset-block-start: -2rem; inset-inline-end: -1.5rem; opacity: .7; }
+@media (prefers-reduced-motion: no-preference) {
+    .jigari-orbit { animation: jigari-orbit-drift 10s ease-in-out infinite alternate; }
+    .jigari-orbit span { animation: jigari-marble-spin 7s linear infinite; }
+    @keyframes jigari-orbit-drift { to { transform: rotate(-4deg) scale(1.03); } }
+    @keyframes jigari-marble-spin { to { rotate: 1turn; } }
+}
+@media (max-width: 47.99rem) {
+    .jigari-benefits, .jigari-plans, .children-grid { grid-template-columns: 1fr; }
+    .children-heading { align-items: start; flex-direction: column; }
+    .children-heading .teelle-button { width: 100%; }
+}

@@ -15,7 +15,7 @@
 
 وضعیت دقیق و جاری در [PROJECT-STATUS.md](PROJECT-STATUS.md) ثبت می‌شود.
 
-فازهای ۱۱ و ۱۲ کامل‌اند. فاز ۱۳ Promptهای 001 تا 010 را Freeze کرده، اما Prompt 011 هنوز LOCKED است؛ بنابراین فاز ۱۴ با وجود اجرای Promptهای 001 تا 010 کامل اعلام نمی‌شود. فاز ۱۵ برای QA همین Scope فعال است و Regression محلی MySQL 8.4.11 پاس شده، اما Release Gate تا تکمیل کنترل‌های باقی‌مانده باز می‌ماند.
+فازهای ۱۱ و ۱۲ کامل‌اند. فاز ۱۳ Promptهای 001 تا 011 را Freeze کرده و Prompt 012 هنوز LOCKED است؛ فاز ۱۴ با وجود اجرای Promptهای 001 تا 011 تا تکمیل Scope، Content/Ranking، Commerce و Hardening کامل اعلام نمی‌شود. فاز ۱۵ برای QA همین Scope فعال است و Regression محلی MySQL 8.4.11 پاس شده، اما Release Gate تا تکمیل کنترل‌های باقی‌مانده باز می‌ماند.
 
 ## منابع حقیقت
 

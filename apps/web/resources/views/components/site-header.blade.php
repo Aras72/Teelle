@@ -5,7 +5,7 @@
         <nav class="teelle-nav" aria-label="فهرست اصلی">
             <ul class="teelle-nav__list">
                 <li><span class="teelle-nav__item" aria-disabled="true">بازی‌ها</span></li>
-                <li><span class="teelle-nav__item" aria-disabled="true">تیله جیگری</span></li>
+                <li><a class="teelle-nav__item" href="{{ route('jigari.show') }}">تیله جیگری</a></li>
                 <li><span class="teelle-nav__item" aria-disabled="true">درباره تیله</span></li>
             </ul>
         </nav>

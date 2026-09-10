@@ -2,6 +2,9 @@
 
 ## 2026-09-10
 
+- Prompt 011 added the server-authoritative Jigari entitlement boundary, honest 3/6/12-month plan surface and own-household Child Profile create/edit/archive flows.
+- Child Profiles collect only optional nickname, birth month and caregiver relationship; free, expired, refunded and revoked memberships fail closed without deleting stored profiles.
+- Prompt 011 and full MySQL 8.4.11 regression passed; checkout, pricing, payment activation and later Jigari features remain locked.
 - Prompt 010 implemented adult email/password auth, verification/reset notifications, transactional Guest continuity, limited Saved/History, Account Home and a fail-closed disabled OTP adapter.
 - Added actor-scoped save/unsave, private reviewed Saved covers, Account settings, secure Logout, auth/recovery throttles and generic enumeration-safe recovery responses.
 - Prompt 010 quality gates passed on an isolated MySQL instance with desktop/mobile Light/Dark browser review; exact MySQL 8 hosting runtime and Production SMTP delivery remain unverified.

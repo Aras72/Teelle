@@ -59,6 +59,17 @@
                     <x-ui.button type="submit">ذخیره تنظیمات</x-ui.button>
                 </form>
             </section>
+
+            <section class="account-panel" aria-labelledby="jigari-account-title">
+                <div class="account-panel__heading"><div><p class="match-kicker">تیله جیگری</p><h2 id="jigari-account-title">پروفایل کودکان</h2></div></div>
+                @if($jigariActive)
+                    <p class="account-empty">عضویت فعال است و {{ strtr((string) $childCount, $digits) }} پروفایل فعال دارید</p>
+                    <x-ui.button href="{{ route('account.children.index') }}">مدیریت پروفایل‌ها</x-ui.button>
+                @else
+                    <p class="account-empty">پروفایل کودک فقط با عضویت فعال جیگری در دسترس است؛ اطلاعات قبلی پس از پایان عضویت حذف نمی‌شوند</p>
+                    <x-ui.button href="{{ route('jigari.show') }}" variant="secondary">آشنایی با تیله جیگری</x-ui.button>
+                @endif
+            </section>
         </div>
     </section>
 </x-layouts.app>

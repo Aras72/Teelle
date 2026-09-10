@@ -397,3 +397,16 @@ Status: VERIFIED / PHASE BOUNDARY CLARIFIED
 نمایش صرف `PHASE 15` در وضعیت پروژه می‌توانست به‌اشتباه تکمیل PHASE 14 را القا کند. فازهای 11 و 12 کامل‌اند؛ PHASE 13 برای Promptهای 001 تا 010 انجام شده، اما Prompt 011 هنوز تولید و Freeze نشده است. PHASE 14 نیز با وجود اجرای Promptهای 001 تا 010، تا بسته‌شدن Scope باقیمانده، Content/Ranking gate و Prompt بعدی موردنیاز، `INCOMPLETE` می‌ماند. اجرای QA روی Scope موجود طبق DEC-027 مجاز است، ولی جایگزین Gate فاز 14 نیست.
 
 برای رفع Blocker دیتابیس، MySQL Community Server 8.4.11 رسمی در محیط موقت ایزوله روی پورت 14008 اجرا شد. سرویس موجود روی پورت 3500 سالم است اما handshake آن نسخه 26.7.0 را گزارش می‌کند و دست‌نخورده باقی ماند. تست schema برابر 8/8 با 37 assertion و Regression کامل Laravel برابر 57/57 با 433 assertion پاس شد. نسخه دقیق MySQL هاست پارس‌پک و rehearsal روی Staging همچنان `NOT VERIFIED` هستند؛ بنابراین این تصمیم فقط گیت دیتابیس محلی را می‌بندد و PHASE 15 را به‌تنهایی PASS نمی‌کند.
+
+## DEC-029 - هسته جیگری بدون Commerce ساختگی
+
+Date: 2026-09-10
+Status: APPROVED BY OWNER / IMPLEMENTED
+
+دستور «ادامه بده» پس از اعلام صریح اینکه مرحله بعد Freeze و اجرای Prompt 011 است، مجوز شروع این Slice محسوب شد. Prompt 011 به Entitlement مرکزی `JIGARI_ACTIVE`، صفحه عمومی سه دوره مصوب ۳/۶/۱۲ماهه و پروفایل حداقلی کودک محدود شد.
+
+تا نبود قیمت و Payment Provider مصوب، Planها غیرفعال‌اند و صفحه هیچ Checkout، Purchase یا فعال‌سازی ساختگی ارائه نمی‌کند. تمام دوره‌ها Feature set یکسان دارند؛ Trial و دوره یک‌ماهه ممنوع‌اند. Child Profile فقط برای کاربر تأییدشده با Entitlement فعال، داخل بازه و بدون revoke قابل مدیریت است و مالکیت پیش از lookup اعمال می‌شود.
+
+پروفایل فقط nickname اختیاری، ماه تولد و نسبت مراقب را می‌گیرد؛ نام خانوادگی، روز دقیق تولد، جنسیت و تصویر جمع‌آوری نمی‌شوند. پایان، Refund یا Revocation عضویت دسترسی آینده را می‌بندد اما داده پروفایل را حذف نمی‌کند. Search، Weekly Plan، Multi-child Match، Personalization، Checkout و مدیریت Subscription خارج از Prompt 011 و Prompt 012 همچنان LOCKED هستند.
+
+تست Prompt 011 برابر 7/7 با 50 assertion و Regression کامل روی MySQL 8.4.11 برابر 64/64 با 483 assertion پاس شد.

@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: MYSQL 8 REGRESSION PASS / QA GATE NOT PASS
-Current Task: بستن Scope باقی‌مانده Implementation و رفع Blockerهای E2E، Security، Accessibility و Performance
+Current Stage: PROMPT 011 IMPLEMENTED / QA GATE NOT PASS
+Current Task: بازبینی مالک Prompt 011 و انتخاب Slice بعدی بدون فعال‌سازی Commerce تأییدنشده
 Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
 Last Completed:
@@ -58,14 +58,16 @@ Currently Working On:
 - Prompt 010 اجرا شد: حساب ایمیلی مراقب، Verification/Reset، تداوم تراکنشی Guest، Account Home و Saved/History محدود با Gate مشروط آماده شدند.
 - ویدئوی طبیعی Loopشونده جای Poster اصلی Hero را گرفت؛ Poster به‌عنوان fallback حفظ شد و تعامل سه‌بعدی تا تأمین Asset همسان و تأیید بصری تازه تعلیق ماند.
 - مالک شروع PHASE 15 را تأیید کرد؛ Baseline فنی، مرورگری، امنیتی و Performance اجرا و اسناد هشت‌گانه تست ایجاد شدند.
-- Regression کامل Laravel روی MySQL 8.4.11 ایزوله با 57 test و 433 assertion پاس شد؛ قرارداد Schema نیز 8 test و 37 assertion پاس دارد.
+- گیت دیتابیس MySQL 8.4.11 و قرارداد Schema با 8 test و 37 assertion پاس شد.
+- Prompt 011 اجرا شد: Entitlement مرکزی تیله جیگری، صفحه صادقانه سه دوره مصوب و پروفایل حداقلی کودک با مجوز server-side آماده شدند.
+- تست اختصاصی جیگری 7/7 با 50 assertion و Regression کامل MySQL 8.4.11 برابر 64/64 با 483 assertion پاس شد؛ QA مرورگری صفحه عمومی جیگری در Desktop Light/Dark نیز PASS است.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
 - `PHASE 11 — SECURITY & PRIVACY`: مستندات پایه کامل؛ کنترل‌های Production مانند SMTP، TLS و Privacy release هنوز در Gate انتشار بررسی می‌شوند.
 - `PHASE 12 — DEVELOPMENT PLANNING`: کامل و Architecture Gate برابر PASS.
-- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 010 تولید و Freeze شده‌اند؛ Prompt 011 هنوز تولید/Freeze نشده و LOCKED است.
-- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 010 اجرا شده‌اند، اما به‌دلیل Scope باقی‌مانده، محتوای Published/Reviewed، Ranking calibration و Prompt 011 هنوز COMPLETE نیست.
+- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 011 تولید و Freeze شده‌اند؛ Prompt 012 هنوز LOCKED است.
+- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 011 اجرا شده‌اند، اما به‌دلیل Scope باقی‌مانده، محتوای Published/Reviewed، Ranking calibration، Commerce و Hardening هنوز COMPLETE نیست.
 - `PHASE 15 — TESTING & QA`: برای Scope موجود فعال است؛ گیت MySQL 8 پاس شده ولی Gate کامل QA هنوز NOT PASS است.
 
 Next:
@@ -75,7 +77,7 @@ Next:
 - بازبینی مالک روی جریان Guest Quick Match
 - Freeze کردن Weightهای Ranking با Golden-set calibration و تأمین حداقل سه بازی Published/Reviewed برای Contextهای پشتیبانی‌شده
 - تنظیم SMTP تولید، SPF/DKIM/DMARC و آزمون واقعی تحویل Verification/Reset
-- بازبینی مالک روی Prompt 010 و شروع Prompt 011 فقط پس از تأیید صریح جدید
+- بازبینی مالک روی Prompt 011 و شروع Prompt 012 فقط پس از تأیید صریح جدید
 - تکمیل E2E، Accessibility، Security header و Performance Gate پیش از PHASE 16
 
 Blocked By:
@@ -99,6 +101,7 @@ Open Decisions:
 - پلن دقیق پارس‌پک و مسیر Production deployment.
 - Scope دقیق نسخه TWA؛ شروع آن تا Website Complete Gate ممنوع است.
 - Weightهای عددی Ranking تا Golden-set calibration.
+- قیمت دوره‌های ۳/۶/۱۲ماهه و Payment Provider تیله جیگری پیش از Checkout.
 
 Resolved Decisions:
 
@@ -114,6 +117,7 @@ Resolved Decisions:
 - شروع حساب ایمیلی و تداوم امن Guest طبق DEC-025 تأیید شد؛ SMTP واقعی و OTP فعال هنوز خارج از Gate هستند.
 - ویدئوی طبیعی Hero و تعلیق تعامل پرریسک با همین MP4 طبق DEC-026 تأیید شد.
 - شروع QA پیش از ادعای تکمیل MVP طبق DEC-027 تأیید شد؛ این عبور، Prompt 011 یا Launch را خودکار باز نمی‌کند.
+- هسته Entitlement و Child Profile جیگری طبق DEC-029 بدون قیمت، Checkout یا فعال‌سازی ساختگی اجرا شد.
 
 Critical Risks:
 
@@ -122,9 +126,9 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-010 FROZEN; PROMPT 011 LOCKED
-Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 LOCKED
-Testing Status: PHASE 15 IN PROGRESS; MySQL 8.4.11 full Laravel 57/57 PASS with 433 assertions; MySQL schema contract 8/8 PASS with 37 assertions; JS 8/8 PASS; Build، Pint و dependency audits PASS; browser smoke Home/Match/Login Light/Dark PASS; exact 390px horizontal overflow PASS; SMTP، Admin E2E، Screen reader، Staging TLS and Core Web Vitals NOT VERIFIED
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-011 FROZEN; PROMPT 012 LOCKED
+Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 IMPLEMENTED / PASS; PROMPT 012 LOCKED
+Testing Status: PHASE 15 IN PROGRESS; MySQL 8.4.11 full Laravel 64/64 PASS with 483 assertions; Jigari 7/7 PASS with 50 assertions; MySQL schema contract 8/8 PASS with 37 assertions; JS 8/8 PASS; Build، Pint و dependency audits PASS; browser smoke Home/Match/Login/Jigari Light/Dark PASS; exact 390px horizontal overflow PASS; SMTP، Admin E2E، authenticated Child Profile browser QA، Screen reader، Staging TLS and Core Web Vitals NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED
