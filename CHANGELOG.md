@@ -2,6 +2,7 @@
 
 ## 2026-09-10
 
+- Prompt 010 was frozen and started with email/password, Guest continuity, limited Saved/History and a disabled OTP adapter boundary; Production SMTP remains unverified.
 - Prompt 009 added actor-scoped Results states, exactly-three successful cards, private reviewed Covers and safety-first Game Detail.
 - Added transactional idempotent Play Start/Complete/Rate lifecycle and wired first valid Start events to the real Heartbeat projection.
 - Direct Result, Detail, Cover and Start access now fails closed when ownership, publication or the complete three-result invariant is missing.

@@ -357,3 +357,14 @@ Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL PRODUCT GATE
 نمایش موفق فقط برای دقیقاً سه `MatchResult` ذخیره‌شده مجاز است که همگی به نسخه جاری Published، Publication فعال، آخرین Review تأییدشده، Facts کامل، Cover بازبینی‌شده و Explanation غیرخالی متصل باشند. Detail، Cover و Start از URL مستقیم نیز کل مجموعه سه‌تایی را دوباره fail-closed بررسی می‌کنند. اولین Event معتبر `started` شمارنده projection را یک‌بار افزایش می‌دهد؛ Completion و Rating نیز append-only و idempotent هستند.
 
 تا Freeze شدن Ranking و وجود Coverage واقعی، جریان واقعی Quick Match در `Collecting` می‌ماند و پیام صادقانه آماده‌نبودن پیشنهادها را نشان می‌دهد. داده Published/Reviewed مورد استفاده در تست‌ها صرفاً fixture تست است و محتوای Production محسوب نمی‌شود. Prompt 010 فقط با تأیید صریح جدید مالک آغاز می‌شود.
+
+## DEC-025 - شروع حساب ایمیلی و تداوم Guest
+
+Date: 2026-09-10
+Status: APPROVED BY OWNER / IN PROGRESS
+
+مالک شروع Prompt 010 را صریحاً تأیید کرد. این Prompt روش فعال MVP یعنی Email/Password، تأیید ایمیل و بازیابی رمز، انتقال امن Session مهمان، Account Home، Saved/History محدود و Settings پایه را اجرا می‌کند. Signup همچنان بعد از تجربه ارزش و اختیاری است و هیچ بخش Core Guest پشت Login قرار نمی‌گیرد.
+
+SMTP واقعی پارس‌پک یا Provider دیگر هنوز ارائه و آزموده نشده است. پیاده‌سازی Notification و تست تحویل Fake مجاز است، اما Deliverability محیط Production تا ثبت Credential و SPF/DKIM/DMARC برابر `NOT VERIFIED` می‌ماند. OTP فقط با Interface و پیاده‌سازی fail-closed خاموش آماده می‌شود؛ Route، Code generation یا SMS واقعی بدون تصمیم Provider ممنوع است.
+
+Child Profile و قابلیت‌های جیگری، Commerce، Admin MFA و Privacy deletion/export workflow خارج از Prompt 010 هستند. شروع Prompt بعدی به تأیید صریح جدید مالک نیاز دارد.

@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 — IMPLEMENTATION
-Current Stage: Prompt 009 IMPLEMENTED / CONDITIONAL PRODUCT GATE
-Current Task: نهایی‌سازی و تحویل Prompt 009؛ Prompt 010 شروع نشده است
+Current Stage: Prompt 010 FROZEN / IN PROGRESS
+Current Task: Email account، Guest continuity، Saved/History و OTP disabled boundary
 Overall Status: IMPLEMENTING
 
 Last Completed:
@@ -63,7 +63,7 @@ Next:
 - بازبینی مرورگری Admin پس از آماده‌شدن Auth UI یا session تست کنترل‌شده
 - بازبینی مالک روی جریان Guest Quick Match
 - Freeze کردن Weightهای Ranking با Golden-set calibration و تأمین حداقل سه بازی Published/Reviewed برای Contextهای پشتیبانی‌شده
-- بازبینی مالک روی خروجی Prompt 009 و شروع Prompt 010 فقط پس از تأیید صریح جدید
+- اجرای Prompt 010 و بستن Account lifecycle quality gate
 
 Blocked By:
 
@@ -98,6 +98,7 @@ Resolved Decisions:
 - فایل Pilot پیشنهادی و Foundation توسعه کتابخانه طبق DEC-022 تصویب و بدون انتشار خودکار اجرا شد.
 - Guest Quick Match حداقلی و بدون Ranking ساختگی طبق DEC-023 اجرا شد.
 - Result/Detail/Play و Heartbeat طبق DEC-024 به‌صورت downstream و بدون جعل Matching اجرا شدند.
+- شروع حساب ایمیلی و تداوم امن Guest طبق DEC-025 تأیید شد؛ SMTP واقعی و OTP فعال هنوز خارج از Gate هستند.
 
 Critical Risks:
 
@@ -107,7 +108,7 @@ Critical Risks:
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-009 FROZEN
-Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 STATIC POSTER ACTIVE; PROMPTS 006-009 IMPLEMENTED / CONDITIONAL PASS; PROMPT 010 LOCKED
+Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 STATIC POSTER ACTIVE; PROMPTS 006-009 IMPLEMENTED / CONDITIONAL PASS; PROMPT 010 IN PROGRESS
 Testing Status: Prompt 009 MySQL 5/57 PASS; full Laravel 35/288 PASS; MySQL schema/integrity 7/36 PASS excluding exact-version assertion; JS 8/8، build، Pint و dependency audits PASS; exact MySQL 8 NOT VERIFIED; real successful-result browser review NOT RUN
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
