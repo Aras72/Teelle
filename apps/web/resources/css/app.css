@@ -1011,3 +1011,59 @@ body:has(.home-hero) #main-content {
     .admin-actions .teelle-button { width: 100%; }
     .admin-theme-preview { grid-template-columns: 1fr; }
 }
+
+/* Adult account lifecycle keeps the same Teelle materials, marble imagery and two-theme contract. */
+.teelle-account-link { display: inline-flex; min-height: 2.75rem; align-items: center; padding-inline: .85rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); color: var(--text-primary); font-size: .9rem; font-weight: var(--font-weight-bold); text-decoration: none; }
+.teelle-account-link:hover { border-color: var(--border-strong); background: var(--surface-warm); }
+.auth-page { position: relative; display: grid; min-height: calc(100dvh - 7.5rem); place-items: center; overflow: hidden; padding-block: clamp(2rem, 6vw, 5rem); }
+.auth-card { position: relative; z-index: 1; display: grid; width: min(100%, 36rem); gap: 1.25rem; padding: clamp(1.5rem, 5vw, 3.25rem); border: 1px solid var(--border-subtle); border-radius: clamp(1.25rem, 4vw, 2.5rem); background: var(--surface-elevated); box-shadow: var(--shadow-medium); }
+.auth-card h1, .account-heading h1 { margin: 0; font-size: clamp(2rem, 6vw, 4rem); font-weight: var(--font-weight-black); letter-spacing: -.04em; line-height: 1.25; }
+.auth-card > p, .account-heading p { margin: 0; color: var(--text-secondary); }
+.auth-card--center { justify-items: center; text-align: center; }
+.auth-form { display: grid; gap: 1rem; }
+.auth-form .teelle-button { width: 100%; margin-block-start: .35rem; }
+.auth-check { display: flex; align-items: center; gap: .65rem; color: var(--text-secondary); cursor: pointer; }
+.auth-check input { width: 1.1rem; height: 1.1rem; accent-color: var(--action-primary); }
+.auth-links, .auth-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1rem; }
+.auth-links a { color: var(--action-primary); font-weight: var(--font-weight-bold); }
+.auth-orbit { position: absolute; width: min(76vw, 54rem); aspect-ratio: 2 / 1; border: 1px solid var(--border-subtle); border-radius: 50%; transform: rotate(-8deg); pointer-events: none; }
+.auth-orbit span, .account-marble { position: absolute; width: 4.5rem; overflow: hidden; aspect-ratio: 1; border: 1px solid rgb(255 255 255 / .35); border-radius: 50%; box-shadow: var(--shadow-medium); }
+.auth-orbit span { inset-block-start: 8%; inset-inline-start: 13%; }
+.auth-orbit img, .account-marble img { position: absolute; top: 50%; left: 50%; width: 300%; max-width: none; transform: translate(-50%, -50%); }
+.account-page { display: grid; gap: 1.25rem; padding-block: clamp(2rem, 6vw, 5rem); }
+.account-heading { display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; align-items: center; padding-block-end: 1rem; }
+.account-heading .account-marble { position: relative; width: clamp(4.75rem, 10vw, 7rem); }
+.account-heading__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block-start: 1rem; }
+.account-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.account-panel { display: grid; align-content: start; gap: 1.25rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
+.account-panel--wide { grid-column: 1 / -1; }
+.account-panel__heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
+.account-panel__heading h2 { margin: .2rem 0 0; font-size: clamp(1.4rem, 3vw, 2rem); }
+.account-panel__heading > span { color: var(--text-secondary); }
+.account-empty { margin: 0; padding: 1rem; border-inline-start: .25rem solid var(--teelle-peach); border-radius: var(--radius-input); background: var(--surface-warm); color: var(--text-secondary); }
+.saved-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.saved-card { display: grid; overflow: hidden; align-content: start; border: 1px solid var(--border-subtle); border-radius: 1rem; background: var(--surface-primary); }
+.saved-card > img, .saved-card__unavailable { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--surface-warm); }
+.saved-card__unavailable { display: grid; place-items: center; }
+.saved-card__unavailable span { width: 3.5rem; aspect-ratio: 1; border: .45rem solid var(--border-strong); border-radius: 50%; opacity: .55; }
+.saved-card > div:not(.saved-card__unavailable) { display: grid; gap: .4rem; padding: 1rem; }
+.saved-card h3, .saved-card p { margin: 0; }
+.saved-card p { color: var(--text-secondary); font-size: .9rem; }
+.saved-card form { padding: 0 1rem 1rem; }
+.saved-card button { padding: 0; border: 0; background: transparent; color: var(--action-primary); font: inherit; font-weight: var(--font-weight-bold); cursor: pointer; text-decoration: underline; }
+.history-list { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.history-list li { display: grid; grid-template-columns: auto 1fr; gap: .8rem; align-items: start; }
+.history-list li > div { display: grid; gap: .2rem; }
+.history-list li span:not(.history-dot) { color: var(--text-secondary); font-size: .85rem; }
+.history-dot { width: .9rem; margin-block-start: .3rem; aspect-ratio: 1; border: .18rem solid var(--surface-elevated); border-radius: 50%; background: var(--action-primary); box-shadow: 0 0 0 1px var(--action-primary); }
+@media (prefers-reduced-motion: no-preference) {
+    .auth-orbit span { animation: account-orbit 8s ease-in-out infinite alternate; }
+    @keyframes account-orbit { to { transform: translate(2rem, .6rem) rotate(24deg); } }
+}
+@media (max-width: 47.99rem) {
+    .teelle-account-link { min-height: 2.5rem; padding-inline: .6rem; font-size: .8rem; }
+    .account-grid, .saved-grid { grid-template-columns: 1fr; }
+    .account-panel--wide { grid-column: auto; }
+    .account-heading { grid-template-columns: 1fr; }
+    .account-heading .account-marble { width: 4.5rem; }
+}

@@ -11,6 +11,11 @@
         </nav>
 
         <div class="teelle-header-actions">
+            @auth
+                <a class="teelle-account-link" href="{{ auth()->user()->hasVerifiedEmail() ? route('account.show') : route('verification.notice') }}">حساب من</a>
+            @else
+                <a class="teelle-account-link" href="{{ route('login') }}">ورود</a>
+            @endauth
             <x-theme-toggle />
         </div>
     </div>

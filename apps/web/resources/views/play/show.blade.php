@@ -22,7 +22,18 @@
                     </form>
                 @endif
                 @if($errors->any())<div class="teelle-state-message teelle-state-message--error" role="alert">{{ $errors->first() }}</div>@endif
-                <div class="match-actions"><x-ui.button href="{{ route('home') }}" variant="secondary">بازگشت به خانه</x-ui.button></div>
+                <div class="match-actions">
+                    @auth
+                        @if(auth()->user()->hasVerifiedEmail())
+                            <form method="post" action="{{ route('plays.save', $play) }}">@csrf<x-ui.button type="submit">این بازی را نگه دار</x-ui.button></form>
+                        @else
+                            <x-ui.button href="{{ route('verification.notice') }}">تأیید ایمیل و نگهداری بازی</x-ui.button>
+                        @endif
+                    @else
+                        <x-ui.button href="{{ route('register') }}">خاطره این بازی را نگه دار</x-ui.button>
+                    @endauth
+                    <x-ui.button href="{{ route('home') }}" variant="secondary">بازگشت به خانه</x-ui.button>
+                </div>
             </article>
         @else
             <article class="play-active teelle-enter">

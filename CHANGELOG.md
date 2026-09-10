@@ -2,7 +2,9 @@
 
 ## 2026-09-10
 
-- Prompt 010 was frozen and started with email/password, Guest continuity, limited Saved/History and a disabled OTP adapter boundary; Production SMTP remains unverified.
+- Prompt 010 implemented adult email/password auth, verification/reset notifications, transactional Guest continuity, limited Saved/History, Account Home and a fail-closed disabled OTP adapter.
+- Added actor-scoped save/unsave, private reviewed Saved covers, Account settings, secure Logout, auth/recovery throttles and generic enumeration-safe recovery responses.
+- Prompt 010 quality gates passed on an isolated MySQL instance with desktop/mobile Light/Dark browser review; exact MySQL 8 hosting runtime and Production SMTP delivery remain unverified.
 - Prompt 009 added actor-scoped Results states, exactly-three successful cards, private reviewed Covers and safety-first Game Detail.
 - Added transactional idempotent Play Start/Complete/Rate lifecycle and wired first valid Start events to the real Heartbeat projection.
 - Direct Result, Detail, Cover and Start access now fails closed when ownership, publication or the complete three-result invariant is missing.

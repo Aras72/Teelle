@@ -361,10 +361,12 @@ Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL PRODUCT GATE
 ## DEC-025 - شروع حساب ایمیلی و تداوم Guest
 
 Date: 2026-09-10
-Status: APPROVED BY OWNER / IN PROGRESS
+Status: APPROVED BY OWNER / IMPLEMENTED WITH CONDITIONAL RELEASE GATE
 
 مالک شروع Prompt 010 را صریحاً تأیید کرد. این Prompt روش فعال MVP یعنی Email/Password، تأیید ایمیل و بازیابی رمز، انتقال امن Session مهمان، Account Home، Saved/History محدود و Settings پایه را اجرا می‌کند. Signup همچنان بعد از تجربه ارزش و اختیاری است و هیچ بخش Core Guest پشت Login قرار نمی‌گیرد.
 
 SMTP واقعی پارس‌پک یا Provider دیگر هنوز ارائه و آزموده نشده است. پیاده‌سازی Notification و تست تحویل Fake مجاز است، اما Deliverability محیط Production تا ثبت Credential و SPF/DKIM/DMARC برابر `NOT VERIFIED` می‌ماند. OTP فقط با Interface و پیاده‌سازی fail-closed خاموش آماده می‌شود؛ Route، Code generation یا SMS واقعی بدون تصمیم Provider ممنوع است.
 
 Child Profile و قابلیت‌های جیگری، Commerce، Admin MFA و Privacy deletion/export workflow خارج از Prompt 010 هستند. شروع Prompt بعدی به تأیید صریح جدید مالک نیاز دارد.
+
+پیاده‌سازی با Laravel session auth، Verification/Reset notification، merge تراکنشی و idempotent مهمان، Account Home، Saved/History محدود، Settings پایه و OTP adapter خاموش انجام شد. تست‌های منطق حساب، مجوز ذخیره، Regression، Schema، JS، Build، Pint و Audit پاس شدند و بازبینی مرورگری Desktop/Mobile در هر دو Theme انجام شد. تحویل واقعی SMTP و runtime دقیق MySQL 8 هاست همچنان `NOT VERIFIED` است؛ بنابراین Gate انتشار Prompt 010 مشروط باقی می‌ماند.

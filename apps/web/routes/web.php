@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Account\SavedGameController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\CoverageController;
 use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Homepage\ShowHomepageController;
 use App\Http\Controllers\Match\QuickMatchController;
 use App\Http\Controllers\Play\GameDetailController;
@@ -13,6 +19,29 @@ use App\Http\Controllers\Play\ResultCoverController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', ShowHomepageController::class)->name('home');
+Route::middleware('guest')->group(function (): void {
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('throttle:auth')->name('register.store');
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('throttle:auth')->name('login.store');
+    Route::get('/forgot-password', [PasswordResetController::class, 'request'])->name('password.request');
+    Route::post('/forgot-password', [PasswordResetController::class, 'email'])->middleware('throttle:recovery')->name('password.email');
+    Route::get('/reset-password/{token}', [PasswordResetController::class, 'resetForm'])->name('password.reset');
+    Route::post('/reset-password', [PasswordResetController::class, 'reset'])->middleware('throttle:recovery')->name('password.update');
+});
+Route::middleware('auth')->group(function (): void {
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::get('/verify-email', [EmailVerificationController::class, 'notice'])->name('verification.notice');
+    Route::get('/verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
+    Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])->middleware('throttle:6,1')->name('verification.send');
+    Route::middleware('verified')->group(function (): void {
+        Route::get('/account', [AccountController::class, 'show'])->name('account.show');
+        Route::put('/account/settings', [AccountController::class, 'update'])->name('account.update');
+        Route::post('/plays/{play:public_id}/save', [SavedGameController::class, 'store'])->name('plays.save');
+        Route::delete('/account/saved/{game:public_id}', [SavedGameController::class, 'destroy'])->name('account.saved.destroy');
+        Route::get('/account/saved/{game:public_id}/cover', [SavedGameController::class, 'cover'])->name('account.saved.cover');
+    });
+});
 Route::get('/match', [QuickMatchController::class, 'show'])->name('match.show');
 Route::middleware('throttle:match')->group(function (): void {
     Route::post('/match/answer', [QuickMatchController::class, 'answer'])->name('match.answer');

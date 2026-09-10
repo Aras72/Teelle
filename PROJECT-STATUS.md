@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 — IMPLEMENTATION
-Current Stage: Prompt 010 FROZEN / IN PROGRESS
-Current Task: Email account، Guest continuity، Saved/History و OTP disabled boundary
+Current Stage: Prompt 010 IMPLEMENTED / CONDITIONAL RELEASE GATE
+Current Task: بازبینی مالک؛ Prompt 011 فقط با تأیید صریح جدید آغاز می‌شود
 Overall Status: IMPLEMENTING
 
 Last Completed:
@@ -55,6 +55,7 @@ Currently Working On:
 - Prompt 007 اجرا شد: فایل پیشنهادی ۲۵ بازی کامل به‌صورت Draft، Metadata ساختاریافته، Import قابل‌مدیریت از Admin و Golden Coverage Matrix fail-closed آماده شدند.
 - Prompt 008 اجرا شد: Guest Quick Match تطبیقی، Context حداقلی، Session ناشناس، ثبت idempotent و Theme سراسری آماده شدند؛ هیچ Result ساختگی تولید نمی‌شود.
 - Prompt 009 اجرا شد: وضعیت‌های صادقانه Result، نمایش fail-closed سه پیشنهاد معتبر، Game Detail، چرخه idempotent Play و اتصال Start واقعی به Heartbeat آماده شدند.
+- Prompt 010 اجرا شد: حساب ایمیلی مراقب، Verification/Reset، تداوم تراکنشی Guest، Account Home و Saved/History محدود با Gate مشروط آماده شدند.
 
 Next:
 
@@ -63,12 +64,14 @@ Next:
 - بازبینی مرورگری Admin پس از آماده‌شدن Auth UI یا session تست کنترل‌شده
 - بازبینی مالک روی جریان Guest Quick Match
 - Freeze کردن Weightهای Ranking با Golden-set calibration و تأمین حداقل سه بازی Published/Reviewed برای Contextهای پشتیبانی‌شده
-- اجرای Prompt 010 و بستن Account lifecycle quality gate
+- دریافت Credential یک دیتابیس ایزوله MySQL 8 برای تطبیق runtime هاست و اجرای assertion نسخه
+- تنظیم SMTP تولید، SPF/DKIM/DMARC و آزمون واقعی تحویل Verification/Reset
+- بازبینی مالک روی Prompt 010 و شروع Prompt 011 فقط پس از تأیید صریح جدید
 
 Blocked By:
 
 - Credential سرویس MySQL 8 روی پورت 3500 موجود نیست؛ نمونه موقت در دسترس نسخه 26.7 است و assertion نسخه دقیق 8 را پاس نمی‌کند.
-- Auth UI طبق Roadmap در Prompt 010 است؛ Browser audit صفحه Admin با session واقعی هنوز NOT RUN است.
+- Browser audit صفحه Admin با session واقعی Staff هنوز NOT RUN است.
 - ۲۵ بازی Pilot عمداً Draft هستند؛ تا تصویر Reviewed و Human editorial/safety review وارد Candidate set نمی‌شوند.
 - Weightهای Ranking هنوز در Calibration Hold هستند؛ بنابراین تولید واقعی پیشنهادها قفل است و Quick Match در وضعیت صادقانه `Collecting` می‌ماند.
 
@@ -108,8 +111,8 @@ Critical Risks:
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-009 FROZEN
-Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 STATIC POSTER ACTIVE; PROMPTS 006-009 IMPLEMENTED / CONDITIONAL PASS; PROMPT 010 IN PROGRESS
-Testing Status: Prompt 009 MySQL 5/57 PASS; full Laravel 35/288 PASS; MySQL schema/integrity 7/36 PASS excluding exact-version assertion; JS 8/8، build، Pint و dependency audits PASS; exact MySQL 8 NOT VERIFIED; real successful-result browser review NOT RUN
+Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 STATIC POSTER ACTIVE; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 LOCKED
+Testing Status: Prompt 010 Account 10/80 PASS; Result/Play 6/61 PASS; full Laravel 46/372 PASS with 8 schema tests intentionally skipped in aggregate; MySQL schema/integrity 7/36 PASS excluding exact-version assertion; JS 8/8، build، Pint و dependency audits PASS; Desktop/Mobile Light/Dark browser review PASS; exact MySQL 8 and real SMTP delivery NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

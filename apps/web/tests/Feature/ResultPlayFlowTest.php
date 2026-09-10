@@ -127,6 +127,25 @@ final class ResultPlayFlowTest extends TestCase
         $this->get('/')->assertOk()->assertSee('۱۱۱');
     }
 
+    public function test_verified_owner_can_save_a_published_play_but_another_user_cannot(): void
+    {
+        [$match, $token] = $this->guestMatch(MatchOutcome::Matched);
+        foreach (range(1, 3) as $rank) {
+            $this->publishedResult($match, $rank);
+        }
+        $this->withSession(['teelle.guest_token' => $token])->post(route('matches.games.start', [$match, 1]));
+        $play = PlaySession::query()->firstOrFail();
+        $owner = User::factory()->create();
+        $other = User::factory()->create();
+        $match->update(['user_id' => $owner->id, 'guest_identity_id' => null]);
+        $play->update(['user_id' => $owner->id, 'guest_identity_id' => null]);
+
+        $this->actingAs($other)->post(route('plays.save', $play))->assertNotFound();
+        $this->assertDatabaseCount('saved_games', 0);
+        $this->actingAs($owner)->post(route('plays.save', $play))->assertRedirect();
+        $this->assertDatabaseHas('saved_games', ['user_id' => $owner->id, 'game_id' => $play->result->game_id]);
+    }
+
     /** @return array{MatchSession, string} */
     private function guestMatch(MatchOutcome $outcome): array
     {
