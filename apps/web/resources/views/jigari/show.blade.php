@@ -2,7 +2,11 @@
 <x-layouts.app title="تیله جیگری" description="عضویت تیله جیگری برای همراهی شخصی‌تر خانواده‌ها">
     <section class="jigari-page teelle-container" aria-labelledby="jigari-title">
         <header class="jigari-hero teelle-enter">
-            <div class="jigari-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="jigari-orbit" aria-hidden="true">
+                <span class="jigari-orbit__track jigari-orbit__track--one"><span class="jigari-orbit__planet jigari-orbit__planet--one"><img src="{{ asset('images/marbles/jigari-ruby-v1.webp') }}" alt="" width="768" height="768"></span></span>
+                <span class="jigari-orbit__track jigari-orbit__track--two"><span class="jigari-orbit__planet jigari-orbit__planet--two"><img src="{{ asset('images/marbles/jigari-ruby-v1.webp') }}" alt="" width="768" height="768"></span></span>
+                <span class="jigari-orbit__track jigari-orbit__track--three"><span class="jigari-orbit__planet jigari-orbit__planet--three"><img src="{{ asset('images/marbles/jigari-ruby-v1.webp') }}" alt="" width="768" height="768"></span></span>
+            </div>
             <p class="match-kicker">همراهی که با خانواده بزرگ می‌شود</p>
             <h1 id="jigari-title">تیله جیگری</h1>
             <p>پروفایل‌های حداقلی کودک، برنامه‌ریزی بازی و کشف دقیق‌تر؛ بدون اینکه کیفیت پیشنهاد یا اطلاعات ایمنی پشت پرداخت پنهان شود</p>
@@ -30,7 +34,7 @@
             <div class="jigari-plans">
                 @forelse($plans as $plan)
                     <article class="jigari-plan">
-                        <span class="jigari-plan__marble" aria-hidden="true"></span>
+                        <img class="jigari-plan__marble" src="{{ asset('images/marbles/jigari-ruby-v1.webp') }}" alt="" width="768" height="768" aria-hidden="true">
                         <h3>{{ strtr((string) $plan->duration_months, $digits) }} ماهه</h3>
                         <p>همه امکانات تیله جیگری</p>
                         <strong>قیمت و خرید هنوز فعال نشده</strong>

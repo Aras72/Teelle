@@ -410,3 +410,16 @@ Status: APPROVED BY OWNER / IMPLEMENTED
 پروفایل فقط nickname اختیاری، ماه تولد و نسبت مراقب را می‌گیرد؛ نام خانوادگی، روز دقیق تولد، جنسیت و تصویر جمع‌آوری نمی‌شوند. پایان، Refund یا Revocation عضویت دسترسی آینده را می‌بندد اما داده پروفایل را حذف نمی‌کند. Search، Weekly Plan، Multi-child Match، Personalization، Checkout و مدیریت Subscription خارج از Prompt 011 و Prompt 012 همچنان LOCKED هستند.
 
 تست Prompt 011 برابر 7/7 با 50 assertion و Regression کامل روی MySQL 8.4.11 برابر 64/64 با 483 assertion پاس شد.
+
+## DEC-030 - سامانه تیله‌های فوتورئال صفحه‌محور
+
+Date: 2026-09-10
+Status: APPROVED BY OWNER / IMPLEMENTED
+
+مالک سه تصویر تیله واقعی را به‌عنوان مرجع ماده، شکست نور، بازتاب و تنوع رنگ معرفی کرد و نتیجه سایر بخش‌های دیده‌شده را تأیید کرد. تصاویر مرجع فقط Art direction هستند؛ فایل Adobe Stock دارای Watermark مستقیماً استفاده یا دست‌کاری نشد و Asset جیگری به‌صورت Original و بدون کپی Watermark تولید شد.
+
+شش Asset مستقل و مالکیت‌پذیر پروژه برای Heartbeat، Auth، Match، Play/Result، Account/Child Profile و Jigari تولید و به WebP شفاف 768×768 بهینه شدند. تیله Heartbeat عمداً با Hero متفاوت است و هیچ View غیر Homepage از Poster/Video Hero استفاده نمی‌کند. صفحه جیگری فقط از Asset روبی/جیگری خود استفاده می‌کند؛ صفحات دیگر نیز تیله‌های متنوع شیشه‌ای دارند.
+
+حرکت جیگری بر Trackهای چرخان مستقل با سرعت و جهت متفاوت بنا شد تا به پشتیبانی ناپایدار `offset-path` وابسته نباشد. مدار Auth نیز با Keyframe موقعیتی صریح بازطراحی شد و در Mobile فضای تزئینی جدا از فرم دارد، بنابراین تیله پشت ورودی‌ها پنهان نمی‌شود. `prefers-reduced-motion` همچنان حرکت غیرضروری را متوقف می‌کند.
+
+بازبینی زنده Desktop، 768×900 و 390×844 برای Jigari و Login پاس شد. Regression کامل روی دیتابیس تازه و disposable MySQL 8.4.11 برابر 65 test / 554 assertion، JavaScript برابر 8/8، Build و Pint همگی PASS هستند. این تصمیم قیمت، Checkout، Publication بازی یا Prompt 012 را به‌طور ضمنی فعال نمی‌کند.

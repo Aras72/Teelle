@@ -2,7 +2,7 @@
 
 <x-layouts.app title="پیشنهادهای بازی" description="وضعیت پیشنهادهای بازی متناسب با همین لحظه">
     <section class="results-page teelle-container" aria-labelledby="results-title">
-        <div class="results-orbit" aria-hidden="true"><span><img src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" alt="" width="1536" height="1024"></span></div>
+        <div class="results-orbit" aria-hidden="true"><span><img src="{{ asset('images/marbles/play-amber-v1.webp') }}" alt="" width="768" height="768"></span></div>
 
         @if($match->outcome === \App\Enums\MatchOutcome::Collecting)
             <article class="results-state teelle-enter">

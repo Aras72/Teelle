@@ -1,6 +1,6 @@
 <x-layouts.app title="ورود" description="ورود مراقب بزرگسال به حساب تیله">
     <section class="auth-page teelle-container" aria-labelledby="auth-title">
-        <div class="auth-orbit" aria-hidden="true"><span><img src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" alt="" width="1536" height="1024"></span></div>
+        <div class="auth-orbit" aria-hidden="true"><span><img src="{{ asset('images/marbles/auth-emerald-v1.webp') }}" alt="" width="768" height="768"></span></div>
         <article class="auth-card teelle-enter">
             <p class="match-kicker">ادامه خاطره‌های بازی</p>
             <h1 id="auth-title">به تیله برگردید</h1>

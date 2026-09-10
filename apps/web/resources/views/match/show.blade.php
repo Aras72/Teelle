@@ -16,14 +16,17 @@
 
 <x-layouts.app title="چی بازی کنیم؟" description="چند سؤال کوتاه برای پیدا کردن بازی مناسب همین لحظه">
     <section class="match-page teelle-container" aria-labelledby="match-title">
-        <div class="match-orbit" aria-hidden="true"><span></span><i></i></div>
+        <div class="match-orbit" aria-hidden="true">
+            <span class="match-orbit__marble match-orbit__marble--primary"><img src="{{ asset('images/marbles/match-violet-v1.webp') }}" alt="" width="768" height="768"></span>
+            <span class="match-orbit__marble match-orbit__marble--secondary"><img src="{{ asset('images/marbles/auth-emerald-v1.webp') }}" alt="" width="768" height="768"></span>
+        </div>
 
         @if($match)
             <article class="match-card match-card--complete teelle-enter">
                 <p class="match-kicker">پاسخ‌ها آماده‌اند</p>
                 <h1 id="match-title">حالا تیله این لحظه را می‌شناسد</h1>
                 <p>شرایط بازی با شناسه امن <bdi dir="ltr">{{ $match->public_id }}</bdi> ثبت شد. فقط بازی‌های کامل، بازبینی‌شده و منتشرشده اجازه ورود به پیشنهادها را دارند</p>
-                <div class="match-ready-mark" aria-hidden="true"><span></span></div>
+                <div class="match-ready-mark" aria-hidden="true"><img src="{{ asset('images/marbles/match-violet-v1.webp') }}" alt="" width="768" height="768"></div>
                 <p class="match-hold-note" role="status">انتخاب سه بازی پس از نهایی‌شدن قواعد تطبیق فعال می‌شود؛ تیله برای پرکردن نتیجه، قانون ایمنی را کنار نمی‌گذارد</p>
                 <div class="match-actions">
                     <x-ui.button href="{{ route('matches.show', $match) }}">دیدن وضعیت پیشنهادها</x-ui.button>

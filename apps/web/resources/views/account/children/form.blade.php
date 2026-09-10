@@ -6,7 +6,7 @@
 <x-layouts.app :title="$editing ? 'ویرایش پروفایل کودک' : 'افزودن پروفایل کودک'" description="پروفایل حداقلی کودک در تیله جیگری">
     <section class="child-form-page teelle-container" aria-labelledby="child-form-title">
         <div class="child-form-card teelle-enter">
-            <div class="child-form-card__marble" aria-hidden="true"></div>
+            <img class="child-form-card__marble" src="{{ asset('images/marbles/account-indigo-v1.webp') }}" alt="" width="768" height="768" aria-hidden="true">
             <p class="match-kicker">تیله جیگری</p>
             <h1 id="child-form-title">{{ $editing ? 'ویرایش پروفایل' : 'افزودن یک کودک' }}</h1>
             <p>نام خانوادگی، عکس، جنسیت و روز دقیق تولد را نمی‌پرسیم</p>

@@ -4,7 +4,7 @@
 
         @if($play->state === \App\Enums\PlayState::Completed)
             <article class="play-complete teelle-enter">
-                <div class="play-marble" aria-hidden="true"><img src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" alt="" width="1536" height="1024"></div>
+                <div class="play-marble" aria-hidden="true"><img src="{{ asset('images/marbles/play-amber-v1.webp') }}" alt="" width="768" height="768"></div>
                 <p class="match-kicker">خوش برگشتید</p>
                 <h1 id="play-title">بازی تمام شد، خاطره‌اش ماند</h1>
                 <p>«{{ $play->result->gameVersion->title }}» به‌عنوان بازی انجام‌شده ثبت شد</p>
@@ -37,7 +37,7 @@
             </article>
         @else
             <article class="play-active teelle-enter">
-                <div class="play-marble" aria-hidden="true"><img src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" alt="" width="1536" height="1024"></div>
+                <div class="play-marble" aria-hidden="true"><img src="{{ asset('images/marbles/play-amber-v1.webp') }}" alt="" width="768" height="768"></div>
                 <p class="match-kicker">حالا وقت با هم بودن است</p>
                 <h1 id="play-title">{{ $play->result->gameVersion->title }}</h1>
                 <p class="play-put-phone">گوشی را کنار بگذارید و با هم بازی کنید</p>

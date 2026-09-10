@@ -1,6 +1,6 @@
 <x-layouts.app title="ساخت حساب" description="ساخت حساب مراقب بزرگسال در تیله">
     <section class="auth-page teelle-container" aria-labelledby="auth-title">
-        <div class="auth-orbit" aria-hidden="true"><span><img src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" alt="" width="1536" height="1024"></span></div>
+        <div class="auth-orbit" aria-hidden="true"><span><img src="{{ asset('images/marbles/account-indigo-v1.webp') }}" alt="" width="768" height="768"></span></div>
         <article class="auth-card teelle-enter">
             <p class="match-kicker">خاطره‌ها را نگه دارید</p>
             <h1 id="auth-title">حساب بزرگسال بسازید</h1>

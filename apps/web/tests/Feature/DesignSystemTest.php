@@ -70,4 +70,66 @@ class DesignSystemTest extends TestCase
         $this->assertStringContainsString('.home-heartbeat__tagline { white-space: nowrap; font-size:', $css);
         $this->assertStringNotContainsString(".home-heartbeat__tagline {\n    max-width: none;\n    white-space: nowrap;", $css);
     }
+
+    public function test_page_marbles_use_distinct_optimized_photorealistic_assets(): void
+    {
+        $assets = [
+            'heartbeat-cobalt-v1.webp',
+            'auth-emerald-v1.webp',
+            'match-violet-v1.webp',
+            'play-amber-v1.webp',
+            'account-indigo-v1.webp',
+            'jigari-ruby-v1.webp',
+        ];
+
+        foreach ($assets as $asset) {
+            $path = public_path('images/marbles/'.$asset);
+            $this->assertFileExists($path);
+            $this->assertGreaterThan(100_000, filesize($path), $asset.' must retain enough image detail.');
+            $this->assertLessThan(250_000, filesize($path), $asset.' must remain web optimized.');
+        }
+
+        $expectedByView = [
+            'welcome.blade.php' => ['heartbeat-cobalt-v1.webp'],
+            'match/show.blade.php' => ['match-violet-v1.webp', 'auth-emerald-v1.webp'],
+            'results/show.blade.php' => ['play-amber-v1.webp'],
+            'play/show.blade.php' => ['play-amber-v1.webp'],
+            'auth/login.blade.php' => ['auth-emerald-v1.webp'],
+            'auth/register.blade.php' => ['account-indigo-v1.webp'],
+            'account/show.blade.php' => ['account-indigo-v1.webp'],
+            'account/children/index.blade.php' => ['account-indigo-v1.webp'],
+            'account/children/form.blade.php' => ['account-indigo-v1.webp'],
+            'jigari/show.blade.php' => ['jigari-ruby-v1.webp'],
+        ];
+
+        foreach ($expectedByView as $view => $expectedAssets) {
+            $source = file_get_contents(resource_path('views/'.$view));
+            $this->assertIsString($source);
+
+            foreach ($expectedAssets as $expectedAsset) {
+                $this->assertStringContainsString($expectedAsset, $source);
+            }
+        }
+
+        $jigari = file_get_contents(resource_path('views/jigari/show.blade.php'));
+        $this->assertIsString($jigari);
+        $this->assertSame(4, substr_count($jigari, 'jigari-ruby-v1.webp'));
+        $this->assertSame(3, substr_count($jigari, 'jigari-orbit__track jigari-orbit__track--'));
+        $this->assertDoesNotMatchRegularExpression('/images\/marbles\/(?!jigari-ruby-v1\.webp)/', $jigari);
+
+        $css = file_get_contents(resource_path('css/app.css'));
+        $this->assertIsString($css);
+        $this->assertStringContainsString('.jigari-orbit__track--one { animation: jigari-track-one', $css);
+        $this->assertStringContainsString('.jigari-orbit__track--two { animation: jigari-track-two', $css);
+        $this->assertStringContainsString('.jigari-orbit__track--three { animation: jigari-track-three', $css);
+        $this->assertStringContainsString('.auth-orbit span { animation: auth-marble-orbit', $css);
+
+        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(resource_path('views'))) as $file) {
+            if (! $file->isFile() || $file->getExtension() !== 'php' || $file->getFilename() === 'welcome.blade.php') {
+                continue;
+            }
+
+            $this->assertStringNotContainsString('teelle-hero-marble-poster-v1.png', file_get_contents($file->getPathname()));
+        }
+    }
 }

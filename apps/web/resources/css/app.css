@@ -800,10 +800,7 @@ a {
     flex: 0 0 auto;
     width: 3.5rem;
     aspect-ratio: 1;
-    border: 1px solid var(--border-subtle);
-    border-radius: 50%;
-    background: conic-gradient(from 140deg, var(--teelle-petrol), #28838a, var(--teelle-peach), var(--teelle-ruby), var(--teelle-petrol));
-    box-shadow: inset 0.25rem 0.25rem 0.5rem rgb(255 248 230 / 0.3);
+    filter: drop-shadow(0 .55rem .7rem rgb(5 37 44 / .24));
 }
 
 @media (min-width: 48rem) {
@@ -873,8 +870,8 @@ body:has(.home-hero) #main-content {
 .home-heartbeat__metric { min-width: 0; font-size: clamp(0.75rem, 1.2vw, 1rem); }
 .home-heartbeat__metric strong { font-size: clamp(1.6rem, 3.5vw, 2.75rem); }
 .heartbeat-status { display: block; font-size: 0.7rem; color: var(--text-secondary); }
-.home-heartbeat__marble { position: relative; overflow: hidden; background: none; box-shadow: var(--shadow-low); }
-.home-heartbeat__marble img { position: absolute; width: 300%; max-width: none; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.home-heartbeat__marble { position: relative; background: none; }
+.home-heartbeat__marble img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .marble-control { position: absolute; inset: 0; border: 0; border-radius: 50%; background: transparent; cursor: grab; touch-action: none; }
 .marble-control.is-dragging { cursor: grabbing; }
 .marble-control:focus-visible { outline-offset: -4px; }
@@ -906,8 +903,10 @@ body:has(.home-hero) #main-content {
 .match-page { position: relative; display: grid; min-height: calc(100dvh - 7.5rem); place-items: center; overflow: hidden; padding-block: clamp(1.5rem, 6vw, 4rem); }
 .match-card { position: relative; z-index: 1; width: min(100%, 45rem); padding: clamp(1.25rem, 5vw, 3rem); border: 1px solid var(--border-subtle); border-radius: clamp(1.25rem, 4vw, 2.5rem); background: var(--surface-elevated); background: color-mix(in srgb, var(--surface-elevated) 96%, transparent); box-shadow: var(--shadow-medium); }
 .match-orbit { position: absolute; inset: 8% 3%; border: 1px solid color-mix(in srgb, var(--border-strong) 42%, transparent); border-radius: 50%; transform: rotate(-9deg); pointer-events: none; }
-.match-orbit span { position: absolute; inset-block-start: 11%; inset-inline-start: 12%; width: clamp(2.25rem, 7vw, 4.5rem); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 30% 24%, #fff 0 5%, #77b9bb 12%, var(--teelle-petrol) 45%, var(--teelle-ruby) 72%, #741221 100%); box-shadow: inset -.5rem -.55rem 1rem rgb(5 37 44 / .38), 0 .75rem 2rem rgb(18 63 70 / .2); }
-.match-orbit i { position: absolute; inset-block-end: 17%; inset-inline-end: 9%; width: 1rem; aspect-ratio: 1; border-radius: 50%; background: var(--teelle-peach); }
+.match-orbit__marble { position: absolute; aspect-ratio: 1; filter: drop-shadow(0 .8rem 1rem rgb(5 37 44 / .22)); }
+.match-orbit__marble img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.match-orbit__marble--primary { inset-block-start: 6%; inset-inline-start: 10%; width: clamp(3rem, 8vw, 5.5rem); }
+.match-orbit__marble--secondary { inset-block-end: 10%; inset-inline-end: 8%; width: clamp(1.5rem, 4vw, 2.75rem); }
 .match-progress-header { display: grid; grid-template-columns: auto 1fr; gap: .75rem 1rem; align-items: center; margin-block-end: clamp(1.5rem, 4vw, 2.5rem); }
 .match-close { display: grid; width: 2.75rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--border-subtle); border-radius: 50%; font-size: 1.75rem; line-height: 1; text-decoration: none; }
 .match-progress-copy { display: flex; justify-content: space-between; color: var(--text-secondary); font-size: .875rem; }
@@ -933,12 +932,14 @@ body:has(.home-hero) #main-content {
 .match-back button { border: 0; background: transparent; color: var(--text-secondary); cursor: pointer; text-decoration: underline; }
 .match-card--complete { display: grid; justify-items: start; gap: 1.25rem; }
 .match-kicker { color: var(--action-primary) !important; font-weight: var(--font-weight-black); }
-.match-ready-mark { display: grid; width: 5rem; aspect-ratio: 1; place-items: center; border-radius: 50%; background: var(--surface-warm); }
-.match-ready-mark span { width: 2.65rem; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 28% 23%, #fff 0 7%, #60a5a9 18%, var(--teelle-petrol) 48%, var(--teelle-ruby) 78%); box-shadow: inset -.35rem -.4rem .65rem rgb(5 37 44 / .35); }
+.match-ready-mark { width: 5rem; aspect-ratio: 1; filter: drop-shadow(0 .8rem 1rem rgb(5 37 44 / .2)); }
+.match-ready-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .match-hold-note { padding: 1rem; border-inline-start: .25rem solid var(--status-warning); border-radius: .5rem; background: var(--surface-primary); color: var(--text-primary) !important; }
 @media (prefers-reduced-motion: no-preference) {
-    .match-orbit span { animation: match-marble-orbit 9s ease-in-out infinite alternate; }
-    @keyframes match-marble-orbit { to { transform: translate(1.5rem, .75rem) rotate(32deg); } }
+    .match-orbit__marble--primary { animation: match-marble-orbit 9s ease-in-out infinite alternate; }
+    .match-orbit__marble--secondary { animation: match-marble-orbit-small 11s ease-in-out infinite alternate-reverse; }
+    @keyframes match-marble-orbit { to { transform: translate(1.5rem, .75rem) rotate(18deg); } }
+    @keyframes match-marble-orbit-small { to { transform: translate(-1rem, -.5rem) rotate(-14deg); } }
 }
 @media (max-width: 35rem) {
     .match-page { place-items: start center; overflow: visible; }
@@ -952,8 +953,8 @@ body:has(.home-hero) #main-content {
 /* Results, game detail and the quiet screen-to-play loop. */
 .results-page, .game-page, .play-page { position: relative; min-height: calc(100dvh - 7.5rem); padding-block: clamp(2rem, 6vw, 5rem); }
 .results-orbit { position: absolute; inset: 2rem 0 auto; height: 22rem; border: 1px solid var(--border-subtle); border-radius: 50%; transform: rotate(-5deg); pointer-events: none; }
-.results-orbit span { position: absolute; inset-block-start: 1.5rem; inset-inline-start: 18%; width: 2.75rem; overflow: hidden; aspect-ratio: 1; border-radius: 50%; box-shadow: var(--shadow-low); }
-.results-orbit img, .play-marble img { position: absolute; top: 50%; left: 50%; width: 300%; max-width: none; transform: translate(-50%, -50%); }
+.results-orbit span { position: absolute; inset-block-start: 1.5rem; inset-inline-start: 18%; width: 3.25rem; aspect-ratio: 1; filter: drop-shadow(0 .65rem .8rem rgb(5 37 44 / .22)); }
+.results-orbit img, .play-marble img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .results-heading { position: relative; z-index: 1; display: grid; gap: .75rem; max-width: 48rem; margin-block-end: 2rem; }
 .results-heading h1, .results-state h1, .game-hero h1, .play-active h1, .play-complete h1 { margin: 0; font-size: clamp(2rem, 6vw, 4.5rem); font-weight: var(--font-weight-black); letter-spacing: -.04em; line-height: 1.22; }
 .results-heading > p, .results-state > p, .game-hero p, .play-active > p, .play-complete > p { margin: 0; color: var(--text-secondary); }
@@ -986,7 +987,7 @@ body:has(.home-hero) #main-content {
 .play-page { display: grid; place-items: center; }
 .play-active, .play-complete { display: grid; width: min(100%, 46rem); justify-items: center; gap: 1.25rem; padding: clamp(1.5rem, 6vw, 4rem); border: 1px solid var(--border-subtle); border-radius: clamp(1.5rem, 5vw, 3rem); background: var(--surface-elevated); text-align: center; box-shadow: var(--shadow-medium); }
 .play-put-phone { color: var(--text-primary) !important; font-size: clamp(1.3rem, 3vw, 2rem); font-weight: var(--font-weight-black); }
-.play-marble { position: relative; width: clamp(4rem, 12vw, 7rem); overflow: hidden; aspect-ratio: 1; border: 1px solid rgb(255 255 255 / .42); border-radius: 50%; box-shadow: 0 1.5rem 3rem rgb(18 63 70 / .2); }
+.play-marble { position: relative; width: clamp(4rem, 12vw, 7rem); aspect-ratio: 1; filter: drop-shadow(0 1.35rem 1.25rem rgb(18 63 70 / .24)); }
 .rating-form, .rating-form fieldset { display: grid; width: 100%; gap: 1rem; }
 .rating-form fieldset { margin: 0; padding: 0; border: 0; }
 .rating-form legend { margin-block-end: .75rem; font-weight: var(--font-weight-black); }
@@ -1074,10 +1075,10 @@ body:has(.home-hero) #main-content {
 .auth-check input { width: 1.1rem; height: 1.1rem; accent-color: var(--action-primary); }
 .auth-links, .auth-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1rem; }
 .auth-links a { color: var(--action-primary); font-weight: var(--font-weight-bold); }
-.auth-orbit { position: absolute; width: min(76vw, 54rem); aspect-ratio: 2 / 1; border: 1px solid var(--border-subtle); border-radius: 50%; transform: rotate(-8deg); pointer-events: none; }
-.auth-orbit span, .account-marble { position: absolute; width: 4.5rem; overflow: hidden; aspect-ratio: 1; border: 1px solid rgb(255 255 255 / .35); border-radius: 50%; box-shadow: var(--shadow-medium); }
-.auth-orbit span { inset-block-start: 8%; inset-inline-start: 13%; }
-.auth-orbit img, .account-marble img { position: absolute; top: 50%; left: 50%; width: 300%; max-width: none; transform: translate(-50%, -50%); }
+.auth-orbit { position: absolute; width: min(88vw, 62rem); aspect-ratio: 2 / 1; border: 1px solid var(--border-subtle); border-radius: 50%; pointer-events: none; }
+.auth-orbit span { position: absolute; top: 42%; left: -3%; width: clamp(4.5rem, 9vw, 6rem); aspect-ratio: 1; filter: drop-shadow(0 1rem 1.2rem rgb(5 37 44 / .24)); }
+.account-marble { position: relative; width: 4.5rem; aspect-ratio: 1; filter: drop-shadow(0 1rem 1.2rem rgb(5 37 44 / .22)); }
+.auth-orbit img, .account-marble img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .account-page { display: grid; gap: 1.25rem; padding-block: clamp(2rem, 6vw, 5rem); }
 .account-heading { display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; align-items: center; padding-block-end: 1rem; }
 .account-heading .account-marble { position: relative; width: clamp(4.75rem, 10vw, 7rem); }
@@ -1105,8 +1106,13 @@ body:has(.home-hero) #main-content {
 .history-list li span:not(.history-dot) { color: var(--text-secondary); font-size: .85rem; }
 .history-dot { width: .9rem; margin-block-start: .3rem; aspect-ratio: 1; border: .18rem solid var(--surface-elevated); border-radius: 50%; background: var(--action-primary); box-shadow: 0 0 0 1px var(--action-primary); }
 @media (prefers-reduced-motion: no-preference) {
-    .auth-orbit span { animation: account-orbit 8s ease-in-out infinite alternate; }
-    @keyframes account-orbit { to { transform: translate(2rem, .6rem) rotate(24deg); } }
+    .auth-orbit span { animation: auth-marble-orbit 13s linear infinite; will-change: top, left, transform; }
+    @keyframes auth-marble-orbit {
+        0%, 100% { top: 42%; left: -3%; transform: rotate(0deg); }
+        25% { top: -12%; left: 44%; transform: rotate(90deg); }
+        50% { top: 42%; left: 94%; transform: rotate(180deg); }
+        75% { top: 88%; left: 44%; transform: rotate(270deg); }
+    }
 }
 @media (max-width: 47.99rem) {
     .teelle-account-link { min-height: 2.5rem; padding-inline: .6rem; font-size: .8rem; }
@@ -1114,6 +1120,17 @@ body:has(.home-hero) #main-content {
     .account-panel--wide { grid-column: auto; }
     .account-heading { grid-template-columns: 1fr; }
     .account-heading .account-marble { width: 4.5rem; }
+    .auth-page { place-items: start center; }
+    .auth-orbit { z-index: 2; inset-block-start: 1.5rem; width: 92vw; aspect-ratio: 2.4 / 1; }
+    .auth-card { margin-block-start: 8rem; }
+    @media (prefers-reduced-motion: no-preference) {
+        @keyframes auth-marble-orbit {
+            0%, 100% { top: 38%; left: -2%; transform: rotate(0deg); }
+            25% { top: -18%; left: 42%; transform: rotate(90deg); }
+            50% { top: 38%; left: 84%; transform: rotate(180deg); }
+            75% { top: 78%; left: 42%; transform: rotate(270deg); }
+        }
+    }
 }
 
 /* Jigari uses orbiting marbles and warm editorial surfaces without inventing commerce state. */
@@ -1122,12 +1139,16 @@ body:has(.home-hero) #main-content {
 .jigari-hero > *:not(.jigari-orbit) { position: relative; z-index: 1; }
 .jigari-hero h1, .children-heading h1, .child-form-card h1 { margin: 0; font-size: clamp(2.4rem, 8vw, 6rem); font-weight: var(--font-weight-black); letter-spacing: -.055em; line-height: 1.05; }
 .jigari-hero > p:not(.match-kicker) { max-width: 45rem; margin: 0; color: var(--text-secondary); font-size: clamp(1rem, 2vw, 1.3rem); line-height: 2; }
-.jigari-orbit { position: absolute; width: min(85%, 48rem); aspect-ratio: 2 / 1; border: 1px solid var(--border-subtle); border-radius: 50%; transform: rotate(-9deg); }
-.jigari-orbit span, .jigari-plan__marble, .child-card__marble { display: block; border: 1px solid rgb(255 255 255 / .35); border-radius: 50%; background: radial-gradient(circle at 30% 25%, #fff 0 5%, transparent 6%), conic-gradient(from 20deg, var(--teelle-yellow), var(--teelle-peach), var(--teelle-blue), var(--teelle-mint), var(--teelle-yellow)); box-shadow: var(--shadow-medium); }
-.jigari-orbit span { position: absolute; width: clamp(2.5rem, 7vw, 5rem); aspect-ratio: 1; }
-.jigari-orbit span:nth-child(1) { inset-block-start: 4%; inset-inline-start: 12%; }
-.jigari-orbit span:nth-child(2) { inset-block-end: 3%; inset-inline-end: 17%; width: clamp(1.75rem, 5vw, 3.5rem); }
-.jigari-orbit span:nth-child(3) { inset-block-start: 38%; inset-inline-end: -2%; width: clamp(1.25rem, 3vw, 2.25rem); }
+.jigari-orbit { position: absolute; width: min(88%, 50rem); aspect-ratio: 2 / 1; border: 1px solid color-mix(in srgb, var(--teelle-ruby) 34%, var(--border-subtle)); border-radius: 50%; transform: rotate(-8deg); pointer-events: none; }
+.jigari-orbit::after { position: absolute; inset: 14%; border: 1px solid color-mix(in srgb, var(--teelle-ruby) 20%, transparent); border-radius: 50%; content: ''; }
+.jigari-orbit__track { position: absolute; inset: 0; display: block; border-radius: 50%; }
+.jigari-orbit__track--two { inset: 14%; }
+.jigari-orbit__track--three { inset: 7%; }
+.jigari-orbit__planet { position: absolute; top: 50%; left: 0; display: block; aspect-ratio: 1; translate: -50% -50%; filter: drop-shadow(0 .85rem 1rem rgb(116 18 33 / .28)); }
+.jigari-orbit__planet img, .jigari-plan__marble, .child-card__marble, .children-empty__marble, .child-form-card__marble { display: block; width: 100%; height: 100%; object-fit: contain; }
+.jigari-orbit__planet--one { width: clamp(3rem, 6vw, 4.5rem); }
+.jigari-orbit__planet--two { width: clamp(2.25rem, 4.5vw, 3.5rem); }
+.jigari-orbit__planet--three { width: clamp(1.5rem, 3vw, 2.5rem); }
 .jigari-benefits { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(1.5rem, 5vw, 5rem); align-items: start; }
 .jigari-benefits h2, .jigari-section-heading h2 { margin: .3rem 0 0; font-size: clamp(1.8rem, 4vw, 3.5rem); line-height: 1.35; }
 .jigari-benefits ul { display: grid; gap: .85rem; margin: 0; padding: 0; list-style: none; }
@@ -1135,7 +1156,7 @@ body:has(.home-hero) #main-content {
 .jigari-section-heading { margin-block-end: 1.5rem; }
 .jigari-plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .jigari-plan { display: grid; justify-items: start; gap: .75rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
-.jigari-plan__marble, .child-card__marble { width: 3rem; aspect-ratio: 1; }
+.jigari-plan__marble, .child-card__marble { width: 3.25rem; aspect-ratio: 1; filter: drop-shadow(0 .65rem .8rem rgb(5 37 44 / .18)); }
 .jigari-plan h3 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.25rem); }
 .jigari-plan p, .jigari-plan strong { margin: 0; color: var(--text-secondary); }
 .children-heading { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; }
@@ -1147,15 +1168,19 @@ body:has(.home-hero) #main-content {
 .child-card p, .children-empty p { margin: 0; color: var(--text-secondary); }
 .child-card__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
 .children-empty { justify-items: center; max-width: 42rem; margin-inline: auto; text-align: center; }
-.children-empty > span, .child-form-card__marble { width: 5rem; aspect-ratio: 1; border: .7rem solid var(--teelle-peach); border-radius: 50%; box-shadow: inset 0 0 0 .45rem var(--surface-elevated), inset 0 0 0 .8rem var(--teelle-yellow); }
+.children-empty__marble, .child-form-card__marble { width: 5rem; aspect-ratio: 1; filter: drop-shadow(0 .9rem 1rem rgb(5 37 44 / .18)); }
 .child-form-page { display: grid; min-height: calc(100dvh - 7.5rem); place-items: center; padding-block: clamp(2rem, 6vw, 5rem); }
 .child-form-card { width: min(100%, 42rem); overflow: hidden; }
 .child-form-card__marble { position: absolute; inset-block-start: -2rem; inset-inline-end: -1.5rem; opacity: .7; }
 @media (prefers-reduced-motion: no-preference) {
-    .jigari-orbit { animation: jigari-orbit-drift 10s ease-in-out infinite alternate; }
-    .jigari-orbit span { animation: jigari-marble-spin 7s linear infinite; }
-    @keyframes jigari-orbit-drift { to { transform: rotate(-4deg) scale(1.03); } }
-    @keyframes jigari-marble-spin { to { rotate: 1turn; } }
+    .jigari-orbit__track--one { animation: jigari-track-one 14s linear infinite; }
+    .jigari-orbit__track--two { animation: jigari-track-two 19s linear infinite reverse; }
+    .jigari-orbit__track--three { animation: jigari-track-three 11s linear infinite; }
+    .jigari-orbit__planet img { animation: jigari-marble-spin 9s linear infinite reverse; }
+    @keyframes jigari-track-one { from { transform: rotate(18deg); } to { transform: rotate(378deg); } }
+    @keyframes jigari-track-two { from { transform: rotate(142deg); } to { transform: rotate(502deg); } }
+    @keyframes jigari-track-three { from { transform: rotate(258deg); } to { transform: rotate(618deg); } }
+    @keyframes jigari-marble-spin { to { transform: rotate(360deg); } }
 }
 @media (max-width: 47.99rem) {
     .jigari-benefits, .jigari-plans, .children-grid { grid-template-columns: 1fr; }

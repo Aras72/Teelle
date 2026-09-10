@@ -26,6 +26,7 @@ final class JigariChildProfileTest extends TestCase
         $this->get(route('jigari.show'))->assertOk()
             ->assertSee('تیله جیگری')
             ->assertSee('۳ ماهه')->assertSee('۶ ماهه')->assertSee('۱۲ ماهه')
+            ->assertSee('images/marbles/jigari-ruby-v1.webp', false)
             ->assertSee('قیمت و خرید هنوز فعال نشده')
             ->assertDontSee('/checkout', false)
             ->assertDontSee('یک ماهه');

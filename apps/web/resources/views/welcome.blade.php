@@ -20,7 +20,7 @@
             <p class="home-heartbeat__tagline">کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد</p>
 
             <div class="home-heartbeat__metric" @if ($heartbeatCount !== null) data-heartbeat-count="{{ $heartbeatCount }}" @endif>
-                <span class="home-heartbeat__marble" aria-hidden="true"><img src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" width="1536" height="1024" alt="" decoding="async"></span>
+                <span class="home-heartbeat__marble" aria-hidden="true"><img src="{{ asset('images/marbles/heartbeat-cobalt-v1.webp') }}" width="768" height="768" alt="" decoding="async"></span>
                 @if ($heartbeatDisplay !== null)
                     <p><strong dir="ltr">{{ $heartbeatDisplay }}</strong> بار بازی با تیله انجام شده @if ($heartbeatStale ?? false)<small class="heartbeat-status">به‌روزرسانی آمار موقتاً در دسترس نیست</small>@endif</p>
                 @else

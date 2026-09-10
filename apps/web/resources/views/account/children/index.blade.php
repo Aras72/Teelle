@@ -8,7 +8,7 @@
 
         @if($children->isEmpty())
             <div class="children-empty">
-                <span aria-hidden="true"></span>
+                <img class="children-empty__marble" src="{{ asset('images/marbles/account-indigo-v1.webp') }}" alt="" width="768" height="768" aria-hidden="true">
                 <h2>هنوز پروفایلی اینجا نیست</h2>
                 <p>برای شروع فقط ماه تولد و یک نام کوچک یا لقب اختیاری کافی است</p>
                 <x-ui.button href="{{ route('account.children.create') }}">ساخت اولین پروفایل</x-ui.button>
@@ -17,7 +17,7 @@
             <div class="children-grid">
                 @foreach($children as $child)
                     <article class="child-card {{ $child->status === 'archived' ? 'is-archived' : '' }}">
-                        <span class="child-card__marble" aria-hidden="true"></span>
+                        <img class="child-card__marble" src="{{ asset('images/marbles/account-indigo-v1.webp') }}" alt="" width="768" height="768" aria-hidden="true">
                         <div><p class="match-kicker">{{ $child->status === 'active' ? 'فعال' : 'بایگانی‌شده' }}</p><h2>{{ $child->nickname ?: 'کودک من' }}</h2><p>ماه تولد: <bdi>{{ $child->birth_month }}</bdi></p></div>
                         @if($child->status === 'active')
                             <div class="child-card__actions">

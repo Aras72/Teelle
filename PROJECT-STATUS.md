@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: PROMPT 011 IMPLEMENTED / QA GATE NOT PASS
-Current Task: بازبینی مالک Prompt 011 و انتخاب Slice بعدی بدون فعال‌سازی Commerce تأییدنشده
+Current Stage: PROMPT 011 IMPLEMENTED / PHOTOREAL MARBLE REFRESH VERIFIED / QA GATE NOT PASS
+Current Task: Freeze کردن Scope دقیق Prompt 012 بدون فعال‌سازی Commerce تأییدنشده
 Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
 Last Completed:
@@ -61,6 +61,9 @@ Currently Working On:
 - گیت دیتابیس MySQL 8.4.11 و قرارداد Schema با 8 test و 37 assertion پاس شد.
 - Prompt 011 اجرا شد: Entitlement مرکزی تیله جیگری، صفحه صادقانه سه دوره مصوب و پروفایل حداقلی کودک با مجوز server-side آماده شدند.
 - تست اختصاصی جیگری 7/7 با 50 assertion و Regression کامل MySQL 8.4.11 برابر 64/64 با 483 assertion پاس شد؛ QA مرورگری صفحه عمومی جیگری در Desktop Light/Dark نیز PASS است.
+- شش Asset فوتورئال و بهینه تیله برای Heartbeat، Auth، Match، Play، Account و Jigari جایگزین نمونه‌های مصنوعی شدند؛ Hero مصوب بدون تغییر باقی ماند.
+- مدار جیگری با سه Track مستقل و مدار Auth با حرکت قابل مشاهده در Desktop، تبلت 768 و موبایل 390 بازطراحی و در مرورگر زنده تأیید شدند.
+- Regression تازه MySQL 8.4.11 برابر 65/65 با 554 assertion پاس شد؛ Build، Pint و JavaScript 8/8 نیز PASS هستند.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
@@ -118,6 +121,7 @@ Resolved Decisions:
 - ویدئوی طبیعی Hero و تعلیق تعامل پرریسک با همین MP4 طبق DEC-026 تأیید شد.
 - شروع QA پیش از ادعای تکمیل MVP طبق DEC-027 تأیید شد؛ این عبور، Prompt 011 یا Launch را خودکار باز نمی‌کند.
 - هسته Entitlement و Child Profile جیگری طبق DEC-029 بدون قیمت، Checkout یا فعال‌سازی ساختگی اجرا شد.
+- سامانه تیله‌های فوتورئال صفحه‌محور و مدارهای قابل اتکا طبق DEC-030 اجرا و در سه عرض مرورگر تأیید شد.
 
 Critical Risks:
 
@@ -128,7 +132,7 @@ Critical Risks:
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-011 FROZEN; PROMPT 012 LOCKED
 Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 IMPLEMENTED / PASS; PROMPT 012 LOCKED
-Testing Status: PHASE 15 IN PROGRESS; MySQL 8.4.11 full Laravel 64/64 PASS with 483 assertions; Jigari 7/7 PASS with 50 assertions; MySQL schema contract 8/8 PASS with 37 assertions; JS 8/8 PASS; Build، Pint و dependency audits PASS; browser smoke Home/Match/Login/Jigari Light/Dark PASS; exact 390px horizontal overflow PASS; SMTP، Admin E2E، authenticated Child Profile browser QA، Screen reader، Staging TLS and Core Web Vitals NOT VERIFIED
+Testing Status: PHASE 15 IN PROGRESS; MySQL 8.4.11 full Laravel 65/65 PASS with 554 assertions; Jigari 7/7 PASS with 51 assertions; MySQL schema contract 8/8 PASS with 37 assertions; JS 8/8 PASS; Build، Pint و dependency audits PASS; browser smoke Home/Match/Login/Jigari Light/Dark PASS; photoreal marble motion at desktop، 768×900 and 390×844 PASS; exact 390px horizontal overflow PASS; SMTP، Admin E2E، authenticated Child Profile browser QA، Screen reader، Staging TLS and Core Web Vitals NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

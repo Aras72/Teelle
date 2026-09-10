@@ -2,7 +2,7 @@
 <x-layouts.app title="حساب من" description="خاطره‌ها، بازی‌های ذخیره‌شده و تنظیمات حساب تیله">
     <section class="account-page teelle-container" aria-labelledby="account-title">
         <header class="account-heading teelle-enter">
-            <div class="account-marble" aria-hidden="true"><img src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" alt="" width="1536" height="1024"></div>
+            <div class="account-marble" aria-hidden="true"><img src="{{ asset('images/marbles/account-indigo-v1.webp') }}" alt="" width="768" height="768"></div>
             <div>
                 <p class="match-kicker">خانه شما در تیله</p><h1 id="account-title">سلام {{ auth()->user()->name }}</h1><p>بازی‌های انجام‌شده و انتخاب‌های دوست‌داشتنی شما اینجا می‌مانند</p>
                 <div class="account-heading__actions">

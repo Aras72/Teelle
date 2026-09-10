@@ -67,12 +67,14 @@ class HomepageTest extends TestCase
             ->assertSee('home-marble-stage__video', false)
             ->assertSee('video/teelle-hero-marble-loop-v1.mp4', false)
             ->assertSee('poster="'.asset('images/teelle-hero-marble-poster-v1.png').'"', false)
+            ->assertSee('images/marbles/heartbeat-cobalt-v1.webp', false)
             ->assertDontSee('data-marble-control', false)
             ->assertDontSee('تیله را بکش و بچرخان')
             ->assertDontSee('data-marble>', false)
             ->assertSee('href="/match"', false);
 
         $this->assertFileExists(public_path('images/teelle-hero-marble-poster-v1.png'));
+        $this->assertFileExists(public_path('images/marbles/heartbeat-cobalt-v1.webp'));
         $this->assertFileExists(public_path('video/teelle-hero-marble-loop-v1.mp4'));
     }
 

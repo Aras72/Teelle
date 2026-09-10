@@ -17,6 +17,8 @@ Phase 15 Gate: NOT PASS
 - [x] Regression کامل Laravel روی MySQL 8.4.11 ایزوله — 64 test / 483 assertion
 - [x] MySQL schema، migration، Seeder و integrity contract — 8 test / 37 assertion
 - [x] Jigari entitlement/ownership/age boundary — 7 test / 50 assertion
+- [x] تیله‌های فوتورئال متمایز و مدار متحرک Jigari/Auth در Desktop، 768×900 و 390×844
+- [x] Regression تازه MySQL 8.4.11 — 65 test / 554 assertion
 
 ## مسدودکننده انتشار
 
