@@ -3,6 +3,9 @@
         <div class="teelle-container home-hero__content teelle-enter">
             <div class="home-marble-stage" aria-hidden="true">
                 <div class="home-marble-stage__fallback"></div>
+                <video class="home-marble-stage__video" autoplay muted loop playsinline preload="metadata" poster="{{ asset('images/teelle-hero-marble-poster-v1.png') }}">
+                    <source src="{{ asset('video/teelle-hero-marble-loop-v1.mp4') }}" type="video/mp4">
+                </video>
                 <img class="home-marble-stage__poster" src="{{ asset('images/teelle-hero-marble-poster-v1.png') }}" width="1536" height="1024" alt="" fetchpriority="high" decoding="async">
             </div>
 

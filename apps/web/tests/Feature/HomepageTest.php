@@ -55,7 +55,7 @@ class HomepageTest extends TestCase
         $this->assertStringNotContainsString('دارد.</p>', $html);
     }
 
-    public function test_marble_fallback_reserves_space_and_cta_is_independent(): void
+    public function test_marble_video_keeps_the_approved_poster_fallback_and_cta_independent(): void
     {
         $this->fakeHeartbeat(1);
 
@@ -64,12 +64,16 @@ class HomepageTest extends TestCase
             ->assertSee('width="1536"', false)
             ->assertSee('height="1024"', false)
             ->assertSee('home-marble-stage__fallback', false)
+            ->assertSee('home-marble-stage__video', false)
+            ->assertSee('video/teelle-hero-marble-loop-v1.mp4', false)
+            ->assertSee('poster="'.asset('images/teelle-hero-marble-poster-v1.png').'"', false)
             ->assertDontSee('data-marble-control', false)
             ->assertDontSee('تیله را بکش و بچرخان')
             ->assertDontSee('data-marble>', false)
             ->assertSee('href="/match"', false);
 
         $this->assertFileExists(public_path('images/teelle-hero-marble-poster-v1.png'));
+        $this->assertFileExists(public_path('video/teelle-hero-marble-loop-v1.mp4'));
     }
 
     private function fakeHeartbeat(?int $count): void

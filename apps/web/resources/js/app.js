@@ -1,7 +1,5 @@
 import './bootstrap';
 
-// DEC-020: approved photographic poster until a realistic interactive asset is accepted.
-
 const storageKey = 'teelle-theme';
 const validThemes = new Set(['light', 'dark']);
 const media = window.matchMedia('(prefers-color-scheme: dark)');
@@ -78,3 +76,25 @@ media.addEventListener('change', () => {
         applyTheme(systemTheme(), 'system');
     }
 });
+
+const heroVideo = document.querySelector('.home-marble-stage__video');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+const syncHeroVideo = () => {
+    if (!heroVideo) {
+        return;
+    }
+
+    if (reducedMotion.matches || document.visibilityState !== 'visible') {
+        heroVideo.pause();
+        return;
+    }
+
+    heroVideo.play().catch(() => {
+        // The poster remains the visual fallback when autoplay is unavailable.
+    });
+};
+
+syncHeroVideo();
+reducedMotion.addEventListener('change', syncHeroVideo);
+document.addEventListener('visibilitychange', syncHeroVideo);

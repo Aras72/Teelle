@@ -56,6 +56,7 @@ Currently Working On:
 - Prompt 008 اجرا شد: Guest Quick Match تطبیقی، Context حداقلی، Session ناشناس، ثبت idempotent و Theme سراسری آماده شدند؛ هیچ Result ساختگی تولید نمی‌شود.
 - Prompt 009 اجرا شد: وضعیت‌های صادقانه Result، نمایش fail-closed سه پیشنهاد معتبر، Game Detail، چرخه idempotent Play و اتصال Start واقعی به Heartbeat آماده شدند.
 - Prompt 010 اجرا شد: حساب ایمیلی مراقب، Verification/Reset، تداوم تراکنشی Guest، Account Home و Saved/History محدود با Gate مشروط آماده شدند.
+- ویدئوی طبیعی Loopشونده جای Poster اصلی Hero را گرفت؛ Poster به‌عنوان fallback حفظ شد و تعامل سه‌بعدی تا تأمین Asset همسان و تأیید بصری تازه تعلیق ماند.
 
 Next:
 
@@ -102,6 +103,7 @@ Resolved Decisions:
 - Guest Quick Match حداقلی و بدون Ranking ساختگی طبق DEC-023 اجرا شد.
 - Result/Detail/Play و Heartbeat طبق DEC-024 به‌صورت downstream و بدون جعل Matching اجرا شدند.
 - شروع حساب ایمیلی و تداوم امن Guest طبق DEC-025 تأیید شد؛ SMTP واقعی و OTP فعال هنوز خارج از Gate هستند.
+- ویدئوی طبیعی Hero و تعلیق تعامل پرریسک با همین MP4 طبق DEC-026 تأیید شد.
 
 Critical Risks:
 
@@ -111,7 +113,7 @@ Critical Risks:
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-009 FROZEN
-Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 STATIC POSTER ACTIVE; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 LOCKED
+Implementation Status: PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPT 011 LOCKED
 Testing Status: Prompt 010 Account 10/80 PASS; Result/Play 6/61 PASS; full Laravel 46/372 PASS with 8 schema tests intentionally skipped in aggregate; MySQL schema/integrity 7/36 PASS excluding exact-version assertion; JS 8/8، build، Pint و dependency audits PASS; Desktop/Mobile Light/Dark browser review PASS; exact MySQL 8 and real SMTP delivery NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED

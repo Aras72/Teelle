@@ -370,3 +370,12 @@ SMTP واقعی پارس‌پک یا Provider دیگر هنوز ارائه و آ
 Child Profile و قابلیت‌های جیگری، Commerce، Admin MFA و Privacy deletion/export workflow خارج از Prompt 010 هستند. شروع Prompt بعدی به تأیید صریح جدید مالک نیاز دارد.
 
 پیاده‌سازی با Laravel session auth، Verification/Reset notification، merge تراکنشی و idempotent مهمان، Account Home، Saved/History محدود، Settings پایه و OTP adapter خاموش انجام شد. تست‌های منطق حساب، مجوز ذخیره، Regression، Schema، JS، Build، Pint و Audit پاس شدند و بازبینی مرورگری Desktop/Mobile در هر دو Theme انجام شد. تحویل واقعی SMTP و runtime دقیق MySQL 8 هاست همچنان `NOT VERIFIED` است؛ بنابراین Gate انتشار Prompt 010 مشروط باقی می‌ماند.
+
+## DEC-026 - ویدئوی طبیعی Hero و تعلیق تعامل سه‌بعدی
+
+Date: 2026-09-10
+Status: APPROVED BY OWNER / INTERACTION DEFERRED
+
+مالک نسخه ویدئویی تیله طبیعی را پس از اصلاح کادر Dark و پوشاندن نقطه Loop برای Commit و Push تأیید کرد. Homepage ویدئوی بهینه‌شده را به‌صورت دائماً در حال چرخش نمایش می‌دهد و در `prefers-reduced-motion`، خطای Autoplay یا نبود پشتیبانی Video به Poster طبیعی مصوب برمی‌گردد.
+
+MP4 هندسه سه‌بعدی، نماهای پشتی، Normal/Depth و Material واقعی تیله را در اختیار نمی‌گذارد. افزودن Drag یا Pointer سه‌بعدی به همین فایل، بدون تغییر ظاهر، قابل تضمین نیست و می‌تواند انعکاس، جهت نقش داخلی، Loop و Performance را خراب کند. بنابراین مطابق شرط مالک، تعامل به این Asset اضافه نمی‌شود. فعال‌سازی مجدد DEC-003 فقط با Asset سه‌بعدی/Turntable کاملِ همسان و تأیید بصری تازه مجاز است؛ کنترل دوبعدی که صرفاً Video را کج یا متوقف کند، تعامل سه‌بعدی واقعی نامیده نمی‌شود.
