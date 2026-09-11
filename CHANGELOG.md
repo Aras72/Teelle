@@ -2,6 +2,7 @@
 
 ## 2026-09-11
 
+- Completed keyboard-only traversal for authenticated Account، Child Profile and Admin Dashboard/Draft/Import/Coverage flows with logical focus order and no focus trap.
 - Hardened Home/Login accessibility after live responsive QA: restored the 44px mobile account target, expanded Login checkbox/helper-link hit areas and prevented vertical clipping of long Auth forms.
 - Current responsive checks pass at 320، 390، 768، 1024 and 1440px; Home/Login keyboard paths pass and no visible interactive target falls below the project's 44px contract.
 - Current isolated MySQL 8.4.11 regression passes at 71 tests / 605 assertions with no skips; Build، Blade compilation، JavaScript 8/8، Pint and fresh Composer/pnpm audits pass.

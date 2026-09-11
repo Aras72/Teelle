@@ -2,11 +2,17 @@
 
 Date: 2026-09-11
 Status: PARTIAL PASS
-Scope: Home responsive reflow and Home/Login keyboard and target-size behavior
+Scope: Home responsive reflow، Home/Login target-size behavior and keyboard traversal across public، authenticated and Admin paths
 
 ## Overall verdict
 
-The tested Home and Login paths are healthy after remediation. A live 320px audit found a 40px mobile account link plus undersized Login helper targets; all now use the shared 44px touch token. The Login page keeps horizontal decoration clipped without clipping a vertically long form.
+The tested public، authenticated and Admin paths are keyboard reachable without a focus trap. A live 320px audit found a 40px mobile account link plus undersized Login helper targets; all now use the shared 44px touch token. The Login page keeps horizontal decoration clipped without clipping a vertically long form.
+
+## Strengths and residual risks
+
+- Strength: Skip links، native form controls and the shared focus treatment provide a consistent path across public، member and staff surfaces.
+- Strength: the long Login form remains fully scrollable at 320px while decorative motion stays horizontally clipped.
+- Residual risk: assistive-technology announcements and browser/OS display modes still need their real runtimes; AX-tree inspection is not treated as a substitute.
 
 ## Steps and health
 
@@ -18,6 +24,12 @@ The tested Home and Login paths are healthy after remediation. A live 320px audi
 6. Home keyboard path — PASS; Skip link is visible on focus and moves focus to main content; navigation, Theme and CTA are reachable in logical order.
 7. Login at 320×720 — PASS after remediation; Email, Password, Remember, Submit, Recovery and Register are keyboard reachable and the entire form scrolls into view.
 8. Login touch targets — PASS; visible links, buttons and the checkbox label meet the 44px project contract.
+9. Account keyboard path — PASS; Skip link، header navigation، Theme، Start، Logout، account settings and Child Profile entry are reachable in logical order.
+10. Child Profile keyboard path — PASS; empty-state/create actions، nickname، native birth-month controls، relationship، Save and Cancel are reachable without a focus trap.
+11. Admin dashboard keyboard path — PASS; Skip link، global navigation، Theme and Draft/Import/Coverage actions form one logical loop.
+12. Admin Draft keyboard path — PASS; every field، supervision selector، Save and Back are reachable in document order.
+13. Admin Import keyboard path — PASS; JSON input، validation preview، Pilot preview and Back are reachable without mutation.
+14. Admin Coverage keyboard path — PASS; global controls and Back are reachable and the read-only table remains exposed in the accessibility tree.
 
 ## Verification evidence
 
@@ -30,4 +42,4 @@ The tested Home and Login paths are healthy after remediation. A live 320px audi
 
 ## Evidence limits
 
-Software screen reader announcements, complete keyboard traversal of authenticated/admin flows, true browser zoom at 200%, Forced Colors, operating-system Reduced Motion, Lighthouse/Core Web Vitals and weak-device profiling remain NOT VERIFIED. These require their real runtime or tool and are not inferred from source inspection.
+Software screen reader announcements, true browser zoom at 200%, Forced Colors, operating-system Reduced Motion, Lighthouse/Core Web Vitals and weak-device profiling remain NOT VERIFIED. These require their real runtime or tool and are not inferred from source inspection.

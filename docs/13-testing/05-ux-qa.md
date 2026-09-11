@@ -16,6 +16,8 @@ Status: PARTIAL PASS
 - Label، Heading، Status message و Reading order این Flowها در AX tree قابل تشخیص‌اند.
 - اجرای تازه Home در Viewportهای دقیق 320×720، 390×844، 768×900، 1024×900 و 1440×900 بدون Overflow افقی PASS است.
 - مسیر Keyboard-only صفحه Home شامل Skip link، Wordmark، Jigari، Login، Theme و CTA و مسیر Login شامل Email، Password، Remember، Submit و لینک‌های کمکی PASS است.
+- مسیر Keyboard-only حساب عضو، فهرست و فرم ساخت پروفایل کودک PASS است؛ کنترل بومی ماه تولد و همه CTAهای ذخیره/لغو در ترتیب منطقی فوکوس قرار دارند.
+- مسیر Keyboard-only پنل Admin در Dashboard، ساخت Draft، Import و Coverage Matrix PASS است؛ Skip link، Navigation، کنترل Theme، Actionها، Fieldها و دکمه‌های فرم بدون تله فوکوس قابل دسترسی‌اند.
 - تمام Targetهای تعاملی قابل‌مشاهده Home و Login در Mobile حداقل 44px هستند؛ Override قدیمی 40px هدر و Link/Labelهای کوچک Login اصلاح شد.
 - در Login با عرض 320px کل فرم تا انتهای لینک‌های Recovery/Register در Scroll عمودی سالم قابل دسترسی است و محتوای اصلی بریده نمی‌شود.
 
@@ -28,6 +30,5 @@ Container و Header اکنون `min-width: 0` دارند. شعار Heartbeat د�
 ## باز
 
 - Screen reader نرم‌افزاری: NOT RUN
-- Keyboard-only کامل تمام Flowهای Authenticated و Admin: NOT RUN؛ Home و Login PASS هستند
 - Zoom 200% و Forced Colors: NOT RUN
 - اجرای واقعی Reduced Motion در سطح سیستم: NOT RUN؛ قرارداد CSS و JavaScript unit tests PASS هستند
