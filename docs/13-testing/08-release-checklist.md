@@ -1,6 +1,6 @@
 # Release Checklist
 
-Date: 2026-09-10
+Date: 2026-09-11
 Phase 15 Gate: NOT PASS
 
 ## پاس‌شده
@@ -20,10 +20,12 @@ Phase 15 Gate: NOT PASS
 - [x] تیله‌های فوتورئال متمایز و مدار متحرک Jigari/Auth در Desktop، 768×900 و 390×844
 - [x] Regression تازه MySQL 8.4.11 — 65 test / 554 assertion
 - [x] Prompt 012 Search/Filter و Design System روی MySQL 8.4.11 — 12 test / 145 assertion
-- [x] Regression کامل جاری با قرارداد MySQL فعال و بدون Skip — 71 test / 601 assertion
+- [x] Regression کامل جاری با قرارداد MySQL فعال و بدون Skip — 71 test / 605 assertion
 - [x] Login و Jigari بدون خط بیضی قابل مشاهده و با حرکت حفظ‌شده تیله‌ها در مرورگر زنده
 - [x] Child Profile browser QA با عضو واجد Entitlement — Create/Edit/Archive روی MySQL موقت
 - [x] Admin browser QA با Staff session واقعی — Dashboard/Draft validation/Pilot preview/Coverage
+- [x] Home responsive reflow در 320، 390، 768، 1024 و 1440px بدون Overflow افقی
+- [x] Keyboard-only در Home و Login و Touch target حداقل 44px در Mobile
 
 ## مسدودکننده انتشار
 
@@ -33,7 +35,7 @@ Phase 15 Gate: NOT PASS
 - [ ] Result/Play واقعی E2E
 - [ ] Auth verification/reset با SMTP واقعی
 - [ ] Security header و HTTPS/TLS validation در Staging
-- [ ] Screen reader، Keyboard-only، Zoom و reduced-motion QA کامل
+- [ ] Screen reader، Keyboard-only کامل Flowهای Authenticated/Admin، Zoom، Forced Colors و reduced-motion واقعی
 - [ ] Lighthouse/Core Web Vitals و weak-device budget
 - [ ] Backup restore drill، monitoring و rollback rehearsal
 - [ ] Privacy Policy، Terms و consentهای Release

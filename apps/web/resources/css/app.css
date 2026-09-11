@@ -1064,17 +1064,17 @@ body:has(.home-hero) #main-content {
 /* Adult account lifecycle keeps the same Teelle materials, marble imagery and two-theme contract. */
 .teelle-account-link { display: inline-flex; min-height: 2.75rem; align-items: center; padding-inline: .85rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); color: var(--text-primary); font-size: .9rem; font-weight: var(--font-weight-bold); text-decoration: none; }
 .teelle-account-link:hover { border-color: var(--border-strong); background: var(--surface-warm); }
-.auth-page { position: relative; display: grid; min-height: calc(100dvh - 7.5rem); place-items: center; overflow: hidden; padding-block: clamp(2rem, 6vw, 5rem); }
+.auth-page { position: relative; display: grid; min-height: calc(100dvh - 7.5rem); place-items: center; overflow-x: clip; overflow-y: visible; padding-block: clamp(2rem, 6vw, 5rem); }
 .auth-card { position: relative; z-index: 1; display: grid; width: min(100%, 36rem); gap: 1.25rem; padding: clamp(1.5rem, 5vw, 3.25rem); border: 1px solid var(--border-subtle); border-radius: clamp(1.25rem, 4vw, 2.5rem); background: var(--surface-elevated); box-shadow: var(--shadow-medium); }
 .auth-card h1, .account-heading h1 { margin: 0; font-size: clamp(2rem, 6vw, 4rem); font-weight: var(--font-weight-black); letter-spacing: -.04em; line-height: 1.25; }
 .auth-card > p, .account-heading p { margin: 0; color: var(--text-secondary); }
 .auth-card--center { justify-items: center; text-align: center; }
 .auth-form { display: grid; gap: 1rem; }
 .auth-form .teelle-button { width: 100%; margin-block-start: .35rem; }
-.auth-check { display: flex; align-items: center; gap: .65rem; color: var(--text-secondary); cursor: pointer; }
+.auth-check { display: flex; min-height: var(--touch-target); align-items: center; gap: .65rem; color: var(--text-secondary); cursor: pointer; }
 .auth-check input { width: 1.1rem; height: 1.1rem; accent-color: var(--action-primary); }
 .auth-links, .auth-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1rem; }
-.auth-links a { color: var(--action-primary); font-weight: var(--font-weight-bold); }
+.auth-links a { display: inline-flex; min-height: var(--touch-target); align-items: center; color: var(--action-primary); font-weight: var(--font-weight-bold); }
 .auth-orbit { position: absolute; width: min(88vw, 62rem); aspect-ratio: 2 / 1; border: 0; border-radius: 50%; pointer-events: none; }
 .auth-orbit span { position: absolute; top: 42%; left: -3%; width: clamp(4.5rem, 9vw, 6rem); aspect-ratio: 1; filter: drop-shadow(0 1rem 1.2rem rgb(5 37 44 / .24)); }
 .account-marble { position: relative; width: 4.5rem; aspect-ratio: 1; filter: drop-shadow(0 1rem 1.2rem rgb(5 37 44 / .22)); }
@@ -1115,7 +1115,7 @@ body:has(.home-hero) #main-content {
     }
 }
 @media (max-width: 47.99rem) {
-    .teelle-account-link { min-height: 2.5rem; padding-inline: .6rem; font-size: .8rem; }
+    .teelle-account-link { min-height: var(--touch-target); padding-inline: .6rem; font-size: .8rem; }
     .account-grid, .saved-grid { grid-template-columns: 1fr; }
     .account-panel--wide { grid-column: auto; }
     .account-heading { grid-template-columns: 1fr; }

@@ -29,6 +29,10 @@ class DesignSystemTest extends TestCase
         $this->assertStringContainsString('--action-primary:', $css);
         $this->assertStringContainsString('--focus-ring:', $css);
         $this->assertStringContainsString('--touch-target: 2.75rem', $css);
+        $this->assertStringNotContainsString('.teelle-account-link { min-height: 2.5rem;', $css);
+        $this->assertStringContainsString('.auth-check { display: flex; min-height: var(--touch-target);', $css);
+        $this->assertStringContainsString('.auth-links a { display: inline-flex; min-height: var(--touch-target);', $css);
+        $this->assertStringContainsString('overflow-x: clip; overflow-y: visible;', $css);
         $this->assertStringNotContainsString('#000000', $css);
         $this->assertStringNotContainsString('#ffffff', $css);
     }
