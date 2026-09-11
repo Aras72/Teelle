@@ -123,6 +123,8 @@ class DesignSystemTest extends TestCase
         $this->assertStringContainsString('.jigari-orbit__track--two { animation: jigari-track-two', $css);
         $this->assertStringContainsString('.jigari-orbit__track--three { animation: jigari-track-three', $css);
         $this->assertStringContainsString('.auth-orbit span { animation: auth-marble-orbit', $css);
+        $this->assertStringContainsString('.auth-orbit { position: absolute; width: min(88vw, 62rem); aspect-ratio: 2 / 1; border: 0;', $css);
+        $this->assertStringContainsString('.jigari-orbit { position: absolute; width: min(88%, 50rem); aspect-ratio: 2 / 1; border: 0;', $css);
 
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(resource_path('views'))) as $file) {
             if (! $file->isFile() || $file->getExtension() !== 'php' || $file->getFilename() === 'welcome.blade.php') {

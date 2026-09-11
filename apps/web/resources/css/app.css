@@ -1075,7 +1075,7 @@ body:has(.home-hero) #main-content {
 .auth-check input { width: 1.1rem; height: 1.1rem; accent-color: var(--action-primary); }
 .auth-links, .auth-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1rem; }
 .auth-links a { color: var(--action-primary); font-weight: var(--font-weight-bold); }
-.auth-orbit { position: absolute; width: min(88vw, 62rem); aspect-ratio: 2 / 1; border: 1px solid var(--border-subtle); border-radius: 50%; pointer-events: none; }
+.auth-orbit { position: absolute; width: min(88vw, 62rem); aspect-ratio: 2 / 1; border: 0; border-radius: 50%; pointer-events: none; }
 .auth-orbit span { position: absolute; top: 42%; left: -3%; width: clamp(4.5rem, 9vw, 6rem); aspect-ratio: 1; filter: drop-shadow(0 1rem 1.2rem rgb(5 37 44 / .24)); }
 .account-marble { position: relative; width: 4.5rem; aspect-ratio: 1; filter: drop-shadow(0 1rem 1.2rem rgb(5 37 44 / .22)); }
 .auth-orbit img, .account-marble img { display: block; width: 100%; height: 100%; object-fit: contain; }
@@ -1139,8 +1139,8 @@ body:has(.home-hero) #main-content {
 .jigari-hero > *:not(.jigari-orbit) { position: relative; z-index: 1; }
 .jigari-hero h1, .children-heading h1, .child-form-card h1 { margin: 0; font-size: clamp(2.4rem, 8vw, 6rem); font-weight: var(--font-weight-black); letter-spacing: -.055em; line-height: 1.05; }
 .jigari-hero > p:not(.match-kicker) { max-width: 45rem; margin: 0; color: var(--text-secondary); font-size: clamp(1rem, 2vw, 1.3rem); line-height: 2; }
-.jigari-orbit { position: absolute; width: min(88%, 50rem); aspect-ratio: 2 / 1; border: 1px solid color-mix(in srgb, var(--teelle-ruby) 34%, var(--border-subtle)); border-radius: 50%; transform: rotate(-8deg); pointer-events: none; }
-.jigari-orbit::after { position: absolute; inset: 14%; border: 1px solid color-mix(in srgb, var(--teelle-ruby) 20%, transparent); border-radius: 50%; content: ''; }
+.jigari-orbit { position: absolute; width: min(88%, 50rem); aspect-ratio: 2 / 1; border: 0; border-radius: 50%; transform: rotate(-8deg); pointer-events: none; }
+.jigari-orbit::after { position: absolute; inset: 14%; border: 0; border-radius: 50%; content: ''; }
 .jigari-orbit__track { position: absolute; inset: 0; display: block; border-radius: 50%; }
 .jigari-orbit__track--two { inset: 14%; }
 .jigari-orbit__track--three { inset: 7%; }
@@ -1186,4 +1186,52 @@ body:has(.home-hero) #main-content {
     .jigari-benefits, .jigari-plans, .children-grid { grid-template-columns: 1fr; }
     .children-heading { align-items: start; flex-direction: column; }
     .children-heading .teelle-button { width: 100%; }
+}
+
+/* Jigari catalog stays a calm discovery tool, never a ranked recommendation surface. */
+.jigari-hero__actions, .catalog-filter__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .75rem; }
+.catalog-page { display: grid; gap: clamp(1.5rem, 4vw, 3rem); padding-block: clamp(2rem, 6vw, 5rem); }
+.catalog-heading { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 1.25rem; }
+.catalog-heading img { width: clamp(4.5rem, 10vw, 7rem); aspect-ratio: 1; object-fit: contain; filter: drop-shadow(0 .8rem 1rem rgb(116 18 33 / .24)); }
+.catalog-heading h1 { margin: 0; font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.15; }
+.catalog-heading p:not(.match-kicker) { margin: .4rem 0 0; color: var(--text-secondary); }
+.catalog-filter { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
+.catalog-filter > label, .catalog-filter fieldset { display: grid; min-width: 0; gap: .5rem; margin: 0; font-weight: var(--font-weight-bold); }
+.catalog-filter fieldset { grid-column: 1 / -1; padding: 0; border: 0; }
+.catalog-materials { display: flex; flex-wrap: wrap; gap: .6rem; }
+.catalog-materials label { cursor: pointer; }
+.catalog-materials input { position: absolute; opacity: 0; }
+.catalog-materials span { display: inline-flex; min-height: 2.75rem; align-items: center; padding-inline: 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); background: var(--surface-primary); }
+.catalog-materials input:checked + span { border-color: var(--action-primary); box-shadow: inset 0 0 0 1px var(--action-primary); }
+.catalog-materials input:focus-visible + span { outline: .1875rem solid var(--focus-ring); outline-offset: .1875rem; }
+.catalog-filter__actions { grid-column: 1 / -1; justify-content: start; }
+.catalog-filter__actions a { color: var(--action-primary); font-weight: var(--font-weight-bold); }
+.catalog-summary { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; color: var(--text-secondary); }
+.catalog-summary strong { color: var(--text-primary); }
+.catalog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.catalog-card { overflow: hidden; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
+.catalog-card > a { display: block; overflow: hidden; }
+.catalog-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform var(--duration-emphasis) var(--ease-enter); }
+.catalog-card:hover img { transform: scale(1.025); }
+.catalog-card > div { display: grid; gap: .5rem; padding: 1rem; }
+.catalog-card h2, .catalog-card p { margin: 0; }
+.catalog-card h2 { font-size: 1.25rem; line-height: 1.5; }
+.catalog-card h2 a { text-decoration: none; }
+.catalog-card p, .catalog-card span { color: var(--text-secondary); }
+.catalog-pagination { overflow-x: auto; }
+.catalog-detail-action { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-block-start: 1.5rem; padding: 1.25rem; border-radius: var(--radius-card); background: var(--surface-warm); }
+.catalog-detail-action p { max-width: 42rem; margin: 0; }
+@media (prefers-reduced-motion: no-preference) {
+    .catalog-heading img { animation: jigari-marble-spin 12s linear infinite; }
+}
+@media (max-width: 63.99rem) {
+    .catalog-filter { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 47.99rem) {
+    .jigari-hero__actions, .jigari-hero__actions .teelle-button { width: 100%; }
+    .catalog-heading, .catalog-filter, .catalog-grid { grid-template-columns: 1fr; }
+    .catalog-heading img { width: 4.5rem; }
+    .catalog-filter fieldset, .catalog-filter__actions { grid-column: auto; }
+    .catalog-filter__actions, .catalog-filter__actions .teelle-button { width: 100%; }
 }

@@ -11,7 +11,10 @@
             <h1 id="jigari-title">تیله جیگری</h1>
             <p>پروفایل‌های حداقلی کودک، برنامه‌ریزی بازی و کشف دقیق‌تر؛ بدون اینکه کیفیت پیشنهاد یا اطلاعات ایمنی پشت پرداخت پنهان شود</p>
             @if($active)
-                <x-ui.button href="{{ route('account.children.index') }}">مدیریت پروفایل کودکان</x-ui.button>
+                <div class="jigari-hero__actions">
+                    <x-ui.button href="{{ route('jigari.games.index') }}">جست‌وجوی بازی‌ها</x-ui.button>
+                    <x-ui.button href="{{ route('account.children.index') }}" variant="secondary">مدیریت پروفایل کودکان</x-ui.button>
+                </div>
             @elseif(auth()->check())
                 <x-ui.button href="{{ route('account.show') }}" variant="secondary">بازگشت به حساب من</x-ui.button>
             @else

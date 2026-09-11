@@ -432,3 +432,14 @@ Status: APPROVED BY OWNER / FROZEN
 مالک پس از تأیید سایر تغییرات بصری، ادامه فازهای ۱۳ تا ۱۶ را به‌ترتیب خواست. Prompt 012 به کوچک‌ترین Slice مستقل بعدی یعنی Search/Filter کامل جیگری محدود شد؛ Child Profile و Entitlement موجود پیش‌نیازند، اما Multi-child، Weekly Plan، Personalization و Commerce هنوز وارد اجرا نمی‌شوند.
 
 Search فقط روی Candidateهای کامل Published/Reviewed با Facts، Safety و Cover بازبینی‌شده کار می‌کند و ترتیب آن خنثی و قطعی است، نه پیشنهاد شخصی یا Ranking. نبود محتوای Production به Empty state صادقانه منجر می‌شود و هیچ Draft تستی منتشر نمی‌شود. اجرای Prompt 012 باید پیش از Prompt بعدی گیت کامل MySQL 8، مرورگر واکنش‌گرا، Accessibility، Build، Pint و Audit خود را پاس کند.
+
+## DEC-032 - اجرای Prompt 012 و نامرئی شدن مسیر مدارها
+
+Date: 2026-09-11
+Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
+
+مالک ادامه کار و حذف خط بیضی قابل مشاهده در Login و Jigari را خواست، با این شرط که حرکت فعلی تیله‌ها حفظ شود. Stroke خود ظرف‌های `.auth-orbit` و `.jigari-orbit` حذف شد، اما اندازه، Trackها، Keyframeها، جهت و زمان‌بندی حرکت دست‌نخورده ماندند. بازبینی دو فریم زنده در هر صفحه نبود خط و تغییر موقعیت تیله‌ها را تأیید کرد.
+
+Prompt 012 با مرز Entitlement موجود اجرا شد. Search، Detail و Cover فقط برای کاربر تأییدشده با عضویت فعال در دسترس‌اند و Catalog صرفاً نسخه جاری Published با Publication فعال، آخرین Review تأییدشده، Facts، Safety و Cover بازبینی‌شده را نشان می‌دهد. ترتیب بر اساس شناسه قطعی است و هیچ Ranking، پیشنهاد شخصی، Multi-child، Weekly Plan، قیمت یا Checkout ساخته نشده است.
+
+گیت متمرکز MySQL 8.4.11 برابر 12 test / 145 assertion پاس شد. Regression نهایی کامل با فعال‌بودن هشت تست قرارداد دیتابیس و بدون Skip برابر 71 test / 600 assertion پاس بود؛ JavaScript 8/8، Production build، Pint و Auditهای Composer/pnpm نیز PASS هستند. Phase 15 و Release Gate به‌علت SMTP واقعی، Admin E2E، Screen reader، Staging TLS/Core Web Vitals و سایر موارد Checklist هنوز باز می‌مانند.

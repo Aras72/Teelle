@@ -13,6 +13,9 @@ use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Homepage\ShowHomepageController;
 use App\Http\Controllers\Jigari\JigariController;
+use App\Http\Controllers\Jigari\JigariGameController;
+use App\Http\Controllers\Jigari\JigariGameCoverController;
+use App\Http\Controllers\Jigari\JigariSearchController;
 use App\Http\Controllers\Match\QuickMatchController;
 use App\Http\Controllers\Play\GameDetailController;
 use App\Http\Controllers\Play\MatchResultsController;
@@ -50,6 +53,11 @@ Route::middleware('auth')->group(function (): void {
             Route::get('/{child}/edit', [ChildProfileController::class, 'edit'])->name('edit');
             Route::put('/{child}', [ChildProfileController::class, 'update'])->name('update');
             Route::post('/{child}/archive', [ChildProfileController::class, 'archive'])->name('archive');
+        });
+        Route::prefix('/jigari/games')->name('jigari.games.')->middleware(['jigari', 'throttle:search'])->group(function (): void {
+            Route::get('/', JigariSearchController::class)->name('index');
+            Route::get('/{game:public_id}', JigariGameController::class)->name('show');
+            Route::get('/{game:public_id}/cover', JigariGameCoverController::class)->name('cover');
         });
     });
 });

@@ -54,6 +54,11 @@ class AppServiceProvider extends ServiceProvider
 
             return Limit::perMinute(60)->by(hash('sha256', (string) $identity));
         });
+        RateLimiter::for('search', function (Request $request): Limit {
+            $identity = $request->user()?->getAuthIdentifier() ?? $request->ip();
+
+            return Limit::perMinute(30)->by(hash('sha256', (string) $identity));
+        });
 
         foreach (['content.edit', 'content.review', 'content.publish', 'coverage.view'] as $ability) {
             Gate::define($ability, fn (User $user): bool => $user->hasPermission($ability));

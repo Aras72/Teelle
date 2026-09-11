@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-09-11
+
+- Implemented Prompt 012 as entitlement-protected Jigari catalog search/filter over complete Published/Reviewed candidates, with deterministic ordering, strict filters, private reviewed covers and honest empty states.
+- Added protected catalog detail/cover routes, Persian/Arabic text normalization, search throttling and fail-closed safety/review/publication checks without introducing Ranking, Personalization or Commerce.
+- Removed the visible elliptical orbit strokes from Login and Jigari while preserving the existing photoreal marble motion tracks.
+- Prompt 012 focused MySQL gate passes at 12 tests / 145 assertions; final full regression passes at 71 tests / 600 assertions with all database contract tests enabled, and Build, JavaScript 8/8, Pint and dependency audits pass.
+- Live browser review confirms both orbit paths are invisible and marbles continue moving on Login and Jigari.
+
 ## 2026-09-10
 
 - Replaced repeated synthetic/CSS marbles with six optimized, transparent photorealistic WebP assets for Heartbeat, Auth, Match, Play, Account and Jigari surfaces while keeping the approved Hero unchanged.

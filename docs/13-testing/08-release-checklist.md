@@ -19,6 +19,9 @@ Phase 15 Gate: NOT PASS
 - [x] Jigari entitlement/ownership/age boundary — 7 test / 50 assertion
 - [x] تیله‌های فوتورئال متمایز و مدار متحرک Jigari/Auth در Desktop، 768×900 و 390×844
 - [x] Regression تازه MySQL 8.4.11 — 65 test / 554 assertion
+- [x] Prompt 012 Search/Filter و Design System روی MySQL 8.4.11 — 12 test / 145 assertion
+- [x] Regression کامل نهایی Prompt 012 با قرارداد MySQL فعال و بدون Skip — 71 test / 600 assertion
+- [x] Login و Jigari بدون خط بیضی قابل مشاهده و با حرکت حفظ‌شده تیله‌ها در مرورگر زنده
 
 ## مسدودکننده انتشار
 
