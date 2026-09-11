@@ -35,3 +35,12 @@ Phase: 10 - DATA
 7. Record incident، RPO/RTO achieved and corrective actions.
 
 Owner can see backup health and latest verified restore date in Admin/Control Panel and is not required to run Terminal commands.
+
+## Local drill evidence — 2026-09-11
+
+- Source: isolated MySQL Community Server 8.4.11 QA database on port 14010؛ owner database on port 3500 was not touched.
+- `mysqldump` used a consistent single transaction with routines، events، triggers، no tablespaces and GTID output disabled.
+- Dump size: 88,792 bytes.
+- Source/restore parity: 60 base tables ↔ 60 base tables and 11 migration rows ↔ 11 migration rows.
+- The uniquely named restore database and temporary dump file were removed after verification.
+- Result: LOCAL RESTORE DRILL PASS. Encryption، off-site copy، media restore، RPO/RTO timing and managed Staging restore remain NOT VERIFIED.

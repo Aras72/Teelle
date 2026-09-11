@@ -26,6 +26,7 @@ Phase 15 Gate: NOT PASS
 - [x] Admin browser QA با Staff session واقعی — Dashboard/Draft validation/Pilot preview/Coverage
 - [x] Home responsive reflow در 320، 390، 768، 1024 و 1440px بدون Overflow افقی
 - [x] Keyboard-only در Home و Login و Touch target حداقل 44px در Mobile
+- [x] Local MySQL 8.4.11 dump/restore drill — 60/60 table و 11/11 migration parity
 
 ## مسدودکننده انتشار
 
@@ -37,7 +38,7 @@ Phase 15 Gate: NOT PASS
 - [ ] Security header و HTTPS/TLS validation در Staging
 - [ ] Screen reader، Keyboard-only کامل Flowهای Authenticated/Admin، Zoom، Forced Colors و reduced-motion واقعی
 - [ ] Lighthouse/Core Web Vitals و weak-device budget
-- [ ] Backup restore drill، monitoring و rollback rehearsal
+- [ ] Staging encrypted/off-site backup restore، media restore، monitoring و rollback rehearsal با سنجش RPO/RTO
 - [ ] Privacy Policy، Terms و consentهای Release
 
 شروع PHASE 16 یا اعلام Launch-ready تا بسته‌شدن موارد بالا ممنوع است.

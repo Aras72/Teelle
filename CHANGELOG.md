@@ -5,6 +5,7 @@
 - Hardened Home/Login accessibility after live responsive QA: restored the 44px mobile account target, expanded Login checkbox/helper-link hit areas and prevented vertical clipping of long Auth forms.
 - Current responsive checks pass at 320، 390، 768، 1024 and 1440px; Home/Login keyboard paths pass and no visible interactive target falls below the project's 44px contract.
 - Current isolated MySQL 8.4.11 regression passes at 71 tests / 605 assertions with no skips; Build، Blade compilation، JavaScript 8/8، Pint and fresh Composer/pnpm audits pass.
+- Completed a disposable local MySQL 8.4.11 backup/restore drill with 60/60 base-table and 11/11 migration-row parity; the temporary database and dump were cleaned after verification.
 - Completed authenticated Phase 15 browser QA for Child Profile Create/Edit/Archive and real-role Admin Dashboard, Draft validation, safe Pilot preview and fail-closed Coverage Matrix.
 - Localized stored child birth months and Admin coverage counts/timestamps to Persian digits; native month-picker chrome remains browser-locale controlled.
 - Added the accepted browser audit screenshots and an evidence-linked inline report to the Repository.

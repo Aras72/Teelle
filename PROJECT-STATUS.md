@@ -71,6 +71,7 @@ Currently Working On:
 - QA مرورگری احراز هویت‌شده پروفایل کودک از Create تا Edit/Archive و پنل Admin شامل Draft validation، Pilot preview و Coverage Matrix با نقش واقعی PASS شد؛ تمام mutationها فقط روی MySQL موقت انجام شدند.
 - Hardening دسترس‌پذیری Home/Login انجام شد: تمام Viewportهای مصوب بدون Overflow، مسیرهای Keyboard این دو صفحه و Touch target حداقل 44px PASS هستند؛ فرم بلند Login در Mobile دیگر Vertical clip نمی‌شود.
 - Regression جاری روی MySQL 8.4.11 ایزوله برابر 71/71 با 605 assertion و بدون Skip PASS شد؛ Build، Blade، JavaScript 8/8، Pint و Audit تازه Composer/pnpm نیز PASS هستند.
+- Local backup/restore drill روی MySQL 8.4.11 با Dump برابر 88,792 byte، تطبیق 60/60 جدول و 11/11 migration PASS شد؛ دیتابیس Restore و فایل موقت پس از تأیید پاک شدند.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
@@ -137,7 +138,7 @@ Critical Risks:
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-012 FROZEN AND EXECUTED; PROMPT 012 PASS
 Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPTS 011-012 IMPLEMENTED / PASS
-Testing Status: PHASE 15 IN PROGRESS; current MySQL 8.4.11 full Laravel 71/71 PASS with 605 assertions and no skipped database contract tests; current focused Design System 6/6 PASS with 113 assertions; MySQL schema contract 8/8 PASS with 37 assertions; JS 8/8 PASS; Build، Pint، Blade compilation and current dependency audits PASS; browser smoke Home/Match/Login/Jigari Light/Dark PASS; Home responsive reflow at 320/390/768/1024/1440 and Home/Login keyboard + 44px touch targets PASS; authenticated Child Profile Create/Edit/Archive and real-role Admin Dashboard/Draft validation/Pilot preview/Coverage browser QA PASS; SMTP، full software Screen reader/Authenticated keyboard/Zoom/Forced Colors/system Reduced Motion، Staging TLS and Core Web Vitals NOT VERIFIED
+Testing Status: PHASE 15 IN PROGRESS; current MySQL 8.4.11 full Laravel 71/71 PASS with 605 assertions and no skipped database contract tests; current focused Design System 6/6 PASS with 113 assertions; MySQL schema contract 8/8 PASS with 37 assertions; local MySQL backup/restore parity PASS; JS 8/8 PASS; Build، Pint، Blade compilation and current dependency audits PASS; browser smoke Home/Match/Login/Jigari Light/Dark PASS; Home responsive reflow at 320/390/768/1024/1440 and Home/Login keyboard + 44px touch targets PASS; authenticated Child Profile Create/Edit/Archive and real-role Admin Dashboard/Draft validation/Pilot preview/Coverage browser QA PASS; SMTP، full software Screen reader/Authenticated keyboard/Zoom/Forced Colors/system Reduced Motion، Staging TLS، encrypted/off-site/media restore and Core Web Vitals NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

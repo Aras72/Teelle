@@ -30,7 +30,8 @@ Verification target: OWASP ASVS 5.0 risk-based baseline
 - [ ] Webhook signature/replay and entitlement tests
 - [ ] Security headers، TLS and CSP verification in Staging
 - [ ] Secret scan and production debug-off verification
-- [ ] Backup restore drill and access review
+- [x] Local isolated MySQL 8.4.11 restore drill with schema/migration parity
+- [ ] Staging encrypted/off-site backup restore and access review
 - [ ] Privacy export/deletion workflow tests
 
 Unchecked items are `NOT RUN` or `OPEN` and MUST NOT be represented as passed. Architecture Gate remains pending through PHASE 12.
