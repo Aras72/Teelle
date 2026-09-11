@@ -443,3 +443,16 @@ Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
 Prompt 012 با مرز Entitlement موجود اجرا شد. Search، Detail و Cover فقط برای کاربر تأییدشده با عضویت فعال در دسترس‌اند و Catalog صرفاً نسخه جاری Published با Publication فعال، آخرین Review تأییدشده، Facts، Safety و Cover بازبینی‌شده را نشان می‌دهد. ترتیب بر اساس شناسه قطعی است و هیچ Ranking، پیشنهاد شخصی، Multi-child، Weekly Plan، قیمت یا Checkout ساخته نشده است.
 
 گیت متمرکز MySQL 8.4.11 برابر 12 test / 145 assertion پاس شد. Regression نهایی کامل با فعال‌بودن هشت تست قرارداد دیتابیس و بدون Skip برابر 71 test / 600 assertion پاس بود؛ JavaScript 8/8، Production build، Pint و Auditهای Composer/pnpm نیز PASS هستند. Phase 15 و Release Gate به‌علت SMTP واقعی، Admin E2E، Screen reader، Staging TLS/Core Web Vitals و سایر موارد Checklist هنوز باز می‌مانند.
+
+## DEC-033 - Freeze شدن Prompt 013 برای Privacy Self-Service
+
+Date: 2026-09-12
+Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
+
+مالک پس از مشاهده مرز صریح فازهای ۱۴ تا ۱۶ دستور ادامه داد. Prompt 013 به کوچک‌ترین Slice مستقل و بدون وابستگی به Ranking، Content publication، قیمت یا Payment Provider محدود شد: خروجی داده حساب و درخواست/لغو حذف با مهلت پذیرفته‌شده ۳۰روزه.
+
+درخواست باید فقط از Session تأییدشده همان بزرگسال و پس از تأیید رمز فعلی ایجاد شود. Export هیچ رمز، Token، Session payload، Audit خام، شناسه عددی داخلی یا داده کاربر دیگر را خارج نمی‌کند. درخواست حذف فوراً داده‌ای را پاک نمی‌کند؛ اجرای Anonymization پس از مهلت، Backup propagation و مدت قانونی نگهداری سوابق مالی تا Legal/Production Gate خارج Scope و `NOT VERIFIED` می‌مانند.
+
+این تصمیم مجوز انتشار Draftها، Freeze کردن Ranking، فعال‌سازی Commerce، ساخت Weekly Plan/Multi-child یا شروع Phase 16 نیست.
+
+پیاده‌سازی با درخواست نسخه‌دار، Export محافظت‌شده با رمز فعلی، مهلت حذف ۳۰روزه، لغو Self-service، Audit append-only و Rate limit انجام شد. گیت متمرکز 5 test / 36 assertion و Regression کامل MySQL 8.4.11 برابر 76 test / 642 assertion بدون Failure، Error یا Skip پاس شد؛ Build، JavaScript 8/8، Pint، Blade و Auditهای Composer/pnpm نیز PASS هستند. اجرای نهایی حذف و Legal/Production evidence همچنان باز است.

@@ -1,6 +1,6 @@
 # Security Testing
 
-Date: 2026-09-11
+Date: 2026-09-12
 Status: CONDITIONAL / STAGING REQUIRED
 
 ## PASS
@@ -11,6 +11,7 @@ Status: CONDITIONAL / STAGING REQUIRED
 - Middleware سراسری Laravel، CSP پایه، anti-framing، MIME nosniff، Referrer Policy و Permissions Policy را روی Web response اعمال می‌کند
 - HSTS فقط برای Request امن در Environment تولید فعال می‌شود و شاخه مثبت/منفی آن با Feature test پوشش دارد
 - تست‌های قبلی Scope، Authorization، idempotency، fail-closed publication و Guest merge در گزارش Promptهای مربوط ثبت شده‌اند
+- Privacy Self-service با تأیید رمز فعلی، Scope همان User، Export بدون Secret/Internal ID، درخواست حذف ۳۰روزه، لغو و Audit append-only برابر 5 test / 36 assertion PASS است
 
 ## باز یا نامعتبر در Local
 
@@ -18,6 +19,7 @@ Status: CONDITIONAL / STAGING REQUIRED
 - HTTPS/HSTS و Cookie `Secure` روی Local HTTP قابل ارزیابی نیستند.
 - SMTP، SPF/DKIM/DMARC و SMS Provider تأیید نشده‌اند.
 - تست نفوذ، DAST و Upload malware scanner واقعی: NOT RUN.
-- Regression کامل جاری روی MySQL 8.4.11 ایزوله با قرارداد دیتابیس فعال برابر 71 test / 605 assertion و بدون Error، Failure یا Skip PASS است.
+- Regression کامل جاری روی MySQL 8.4.11 ایزوله با قرارداد دیتابیس فعال برابر 76 test / 642 assertion و بدون Error، Failure یا Skip PASS است.
+- اجرای Anonymization پس از مهلت، حذف از Backup rotation و مدت قانونی نگهداری سوابق مالی: NOT VERIFIED.
 
 هیچ Secret یا Credential در گزارش QA ثبت نمی‌شود.

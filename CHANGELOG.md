@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-09-12
+
+- Implemented Prompt 013 account Privacy Self-service: current-password-protected JSON export، 30-day deletion request، visible status، cancellation، audit and dedicated rate limiting.
+- Added the `privacy_requests` schema and portable export with public identifiers only; passwords، session payloads، raw audit rows and internal numeric identifiers are excluded.
+- Prompt 013 focused MySQL gate passes at 5 tests / 36 assertions; full regression passes at 76 tests / 642 assertions with no skips، and Build، JavaScript 8/8، Pint، Blade and dependency audits pass.
+- Live browser QA passes for Account Privacy in Desktop/Mobile، Light/Dark and keyboard-only order with no horizontal overflow or target below 44px.
+
 ## 2026-09-11
 
 - Completed keyboard-only traversal for authenticated Account، Child Profile and Admin Dashboard/Draft/Import/Coverage flows with logical focus order and no focus trap.

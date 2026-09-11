@@ -1105,6 +1105,17 @@ body:has(.home-hero) #main-content {
 .history-list li > div { display: grid; gap: .2rem; }
 .history-list li span:not(.history-dot) { color: var(--text-secondary); font-size: .85rem; }
 .history-dot { width: .9rem; margin-block-start: .3rem; aspect-ratio: 1; border: .18rem solid var(--surface-elevated); border-radius: 50%; background: var(--action-primary); box-shadow: 0 0 0 1px var(--action-primary); }
+.privacy-panel > p { max-width: 64rem; }
+.privacy-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.privacy-form { display: grid; align-content: start; gap: 1rem; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-input); background: var(--surface-primary); }
+.privacy-form h3, .privacy-form p, .privacy-panel > div > h3 { margin: 0; }
+.privacy-form p { color: var(--text-secondary); line-height: 1.9; }
+.privacy-form--danger { border-color: color-mix(in srgb, var(--status-error) 42%, var(--border-subtle)); }
+.privacy-form__request { display: grid; gap: 1rem; }
+.privacy-warning { padding: 1rem; border-inline-start: .25rem solid var(--status-warning); border-radius: var(--radius-input); background: var(--surface-warm); }
+.privacy-request-list { display: grid; gap: .75rem; margin: .75rem 0 0; padding: 0; list-style: none; }
+.privacy-request-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; padding-block: .75rem; border-block-end: 1px solid var(--border-subtle); }
+.privacy-request-list span { color: var(--text-secondary); }
 @media (prefers-reduced-motion: no-preference) {
     .auth-orbit span { animation: auth-marble-orbit 13s linear infinite; will-change: top, left, transform; }
     @keyframes auth-marble-orbit {
@@ -1117,6 +1128,7 @@ body:has(.home-hero) #main-content {
 @media (max-width: 47.99rem) {
     .teelle-account-link { min-height: var(--touch-target); padding-inline: .6rem; font-size: .8rem; }
     .account-grid, .saved-grid { grid-template-columns: 1fr; }
+    .privacy-actions { grid-template-columns: 1fr; }
     .account-panel--wide { grid-column: auto; }
     .account-heading { grid-template-columns: 1fr; }
     .account-heading .account-marble { width: 4.5rem; }

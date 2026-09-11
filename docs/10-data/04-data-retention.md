@@ -29,3 +29,5 @@ Phase: 10 - DATA
 - Analytics export must not expose small cohorts that enable re-identification.
 
 PHASE 11 defaults عملیاتی 30 روز برای Guest context/log، 90 روز برای Security events، حداکثر 30 روز برای حذف eligible account data و 35 روز برای Backup rotation تعیین کرد. مدت Payment/accounting فقط پس از تأیید الزام قانونی بازار هدف Freeze می‌شود.
+
+Prompt 013 درخواست حذف نسخه‌دار با `scheduled_for = requested_at + 30 days` و لغو Self-service را اجرا کرد، اما عمداً هیچ داده‌ای را پیش از Executor مستقل پاک یا ناشناس نمی‌کند. Executor، Backup propagation و Legal hold باید در Slice و Gate عملیاتی جداگانه آزموده شوند.

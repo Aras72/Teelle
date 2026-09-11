@@ -70,6 +70,53 @@
                     <x-ui.button href="{{ route('jigari.show') }}" variant="secondary">آشنایی با تیله جیگری</x-ui.button>
                 @endif
             </section>
+
+            <section class="account-panel account-panel--wide privacy-panel" aria-labelledby="privacy-title">
+                <div class="account-panel__heading"><div><p class="match-kicker">کنترل داده‌ها</p><h2 id="privacy-title">حریم خصوصی حساب</h2></div></div>
+                <p class="account-empty">این حساب برای بزرگسال همراه کودک است. فایل خروجی فقط داده‌های مربوط به همین حساب را دارد و رمز عبور، نشست‌ها و شناسه‌های داخلی در آن قرار نمی‌گیرند</p>
+
+                <div class="privacy-actions">
+                    <form method="post" action="{{ route('account.privacy.export') }}" class="privacy-form">
+                        @csrf
+                        <h3>دریافت نسخه داده‌ها</h3>
+                        <p>یک فایل JSON خوانا شامل مشخصات حساب، پروفایل‌های کودک، سابقه Match و بازی، ذخیره‌ها و وضعیت عضویت دریافت می‌کنید</p>
+                        <x-ui.field label="رمز فعلی برای تأیید" name="export_password" type="password" autocomplete="current-password" required :error="$errors->first('export_password')" />
+                        <x-ui.button type="submit" variant="secondary">دریافت فایل داده‌های من</x-ui.button>
+                    </form>
+
+                    <div class="privacy-form privacy-form--danger">
+                        <h3>حذف حساب</h3>
+                        @if($pendingDeletion)
+                            <p class="privacy-warning">درخواست حذف فعال است و برای {{ strtr($pendingDeletion->scheduled_for->format('Y/m/d'), $digits) }} برنامه‌ریزی شده است. تا آن روز می‌توانید آن را لغو کنید</p>
+                            <form method="post" action="{{ route('account.privacy.deletion.destroy') }}">
+                                @csrf @method('DELETE')
+                                <x-ui.button type="submit" variant="secondary">فعلاً حسابم بماند</x-ui.button>
+                            </form>
+                        @else
+                            <p>پس از ثبت درخواست، ۳۰ روز برای لغو فرصت دارید. اجرای نهایی ممکن است بعضی داده‌ها را ناشناس کند؛ نسخه‌های پشتیبان در چرخه معمول حذف می‌شوند و سوابقی که نگهداری قانونی دارند تا پایان همان مدت باقی می‌مانند</p>
+                            <form method="post" action="{{ route('account.privacy.deletion.store') }}" class="privacy-form__request">
+                                @csrf
+                                <x-ui.field label="رمز فعلی برای تأیید حذف" name="deletion_password" type="password" autocomplete="current-password" required :error="$errors->first('deletion_password')" />
+                                <x-ui.button type="submit">درخواست حذف حساب</x-ui.button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+
+                @if($privacyRequests->isNotEmpty())
+                    <div aria-labelledby="privacy-history-title">
+                        <h3 id="privacy-history-title">سابقه درخواست‌ها</h3>
+                        <ol class="privacy-request-list">
+                            @foreach($privacyRequests as $privacyRequest)
+                                <li>
+                                    <strong>{{ $privacyRequest->request_type === 'export' ? 'خروجی داده‌ها' : 'حذف حساب' }}</strong>
+                                    <span>{{ match($privacyRequest->status) { 'completed' => 'تکمیل‌شده', 'cancelled' => 'لغوشده', default => 'در انتظار' } }} · {{ strtr($privacyRequest->requested_at->format('Y/m/d H:i'), $digits) }}</span>
+                                </li>
+                            @endforeach
+                        </ol>
+                    </div>
+                @endif
+            </section>
         </div>
     </section>
 </x-layouts.app>

@@ -141,6 +141,7 @@ class MySqlDataFoundationTest extends TestCase
             'match_results', 'play_sessions', 'play_events', 'heartbeat_projections',
             'coverage_observations', 'plans', 'purchases', 'payment_events',
             'entitlements', 'audit_logs', 'outbox_messages',
+            'privacy_requests',
         ];
     }
 

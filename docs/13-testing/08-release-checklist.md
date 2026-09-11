@@ -1,6 +1,6 @@
 # Release Checklist
 
-Date: 2026-09-11
+Date: 2026-09-12
 Phase 15 Gate: NOT PASS
 
 ## پاس‌شده
@@ -28,6 +28,8 @@ Phase 15 Gate: NOT PASS
 - [x] Keyboard-only در Home و Login و Touch target حداقل 44px در Mobile
 - [x] Keyboard-only در Account، Child Profile و Admin Dashboard/Draft/Import/Coverage بدون Focus trap
 - [x] Local MySQL 8.4.11 dump/restore drill — 60/60 table و 11/11 migration parity
+- [x] Privacy Self-service — Export، درخواست حذف 30روزه و لغو با 5 test / 36 assertion
+- [x] Regression کامل Prompt 013 روی MySQL 8.4.11 — 76 test / 642 assertion بدون Skip
 
 ## مسدودکننده انتشار
 
@@ -41,5 +43,6 @@ Phase 15 Gate: NOT PASS
 - [ ] Lighthouse/Core Web Vitals و weak-device budget
 - [ ] Staging encrypted/off-site backup restore، media restore، monitoring و rollback rehearsal با سنجش RPO/RTO
 - [ ] Privacy Policy، Terms و consentهای Release
+- [ ] اجرای حذف/Anonymization پس از مهلت، Backup propagation و Legal retention
 
 شروع PHASE 16 یا اعلام Launch-ready تا بسته‌شدن موارد بالا ممنوع است.

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Account\ChildProfileController;
+use App\Http\Controllers\Account\PrivacyController;
 use App\Http\Controllers\Account\SavedGameController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\CoverageController;
@@ -43,6 +44,11 @@ Route::middleware('auth')->group(function (): void {
     Route::middleware('verified')->group(function (): void {
         Route::get('/account', [AccountController::class, 'show'])->name('account.show');
         Route::put('/account/settings', [AccountController::class, 'update'])->name('account.update');
+        Route::prefix('/account/privacy')->name('account.privacy.')->middleware('throttle:privacy')->group(function (): void {
+            Route::post('/export', [PrivacyController::class, 'export'])->name('export');
+            Route::post('/deletion', [PrivacyController::class, 'requestDeletion'])->name('deletion.store');
+            Route::delete('/deletion', [PrivacyController::class, 'cancelDeletion'])->name('deletion.destroy');
+        });
         Route::post('/plays/{play:public_id}/save', [SavedGameController::class, 'store'])->name('plays.save');
         Route::delete('/account/saved/{game:public_id}', [SavedGameController::class, 'destroy'])->name('account.saved.destroy');
         Route::get('/account/saved/{game:public_id}/cover', [SavedGameController::class, 'cover'])->name('account.saved.cover');

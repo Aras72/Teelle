@@ -8,6 +8,7 @@ use App\Account\PublishedSavedGame;
 use App\Http\Controllers\Controller;
 use App\Jigari\JigariAccess;
 use App\Models\Household;
+use App\Models\PrivacyRequest;
 use App\Models\SavedGame;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,8 +27,11 @@ final class AccountController extends Controller
             ->withCount(['childProfiles' => fn ($query) => $query->where('status', 'active')])
             ->first();
         $childCount = $household?->child_profiles_count ?? 0;
+        $privacyRequests = PrivacyRequest::query()->where('user_id', $request->user()->id)
+            ->latest('requested_at')->limit(10)->get();
+        $pendingDeletion = $privacyRequests->first(fn (PrivacyRequest $item): bool => $item->request_type === 'deletion' && $item->status === 'pending');
 
-        return view('account.show', compact('saved', 'history', 'jigariActive', 'childCount'));
+        return view('account.show', compact('saved', 'history', 'jigariActive', 'childCount', 'privacyRequests', 'pendingDeletion'));
     }
 
     public function update(Request $request): RedirectResponse

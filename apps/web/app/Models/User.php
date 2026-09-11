@@ -50,6 +50,11 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return $this->hasMany(SavedGame::class);
     }
 
+    public function privacyRequests(): HasMany
+    {
+        return $this->hasMany(PrivacyRequest::class);
+    }
+
     public function hasPermission(string $permission): bool
     {
         return $this->roles()->whereHas('permissions', fn ($query) => $query->where('code', $permission))->exists();
