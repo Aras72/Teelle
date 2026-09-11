@@ -20,8 +20,10 @@ Phase 15 Gate: NOT PASS
 - [x] تیله‌های فوتورئال متمایز و مدار متحرک Jigari/Auth در Desktop، 768×900 و 390×844
 - [x] Regression تازه MySQL 8.4.11 — 65 test / 554 assertion
 - [x] Prompt 012 Search/Filter و Design System روی MySQL 8.4.11 — 12 test / 145 assertion
-- [x] Regression کامل نهایی Prompt 012 با قرارداد MySQL فعال و بدون Skip — 71 test / 600 assertion
+- [x] Regression کامل جاری با قرارداد MySQL فعال و بدون Skip — 71 test / 601 assertion
 - [x] Login و Jigari بدون خط بیضی قابل مشاهده و با حرکت حفظ‌شده تیله‌ها در مرورگر زنده
+- [x] Child Profile browser QA با عضو واجد Entitlement — Create/Edit/Archive روی MySQL موقت
+- [x] Admin browser QA با Staff session واقعی — Dashboard/Draft validation/Pilot preview/Coverage
 
 ## مسدودکننده انتشار
 
@@ -30,7 +32,6 @@ Phase 15 Gate: NOT PASS
 - [ ] بازی‌های Published/Reviewed با Cover و Safety review
 - [ ] Result/Play واقعی E2E
 - [ ] Auth verification/reset با SMTP واقعی
-- [ ] Admin browser QA با Staff session
 - [ ] Security header و HTTPS/TLS validation در Staging
 - [ ] Screen reader، Keyboard-only، Zoom و reduced-motion QA کامل
 - [ ] Lighthouse/Core Web Vitals و weak-device budget

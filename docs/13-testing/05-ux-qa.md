@@ -11,10 +11,14 @@ Status: PARTIAL PASS
 - AX tree شامل Skip link، Heading، Progress، Labelهای Year/Month، CTA و Theme checkbox است.
 - Focus ring در Select و Login input قابل مشاهده است.
 - Hero video از محتوای دسترس‌پذیر مخفی است و در reduced motion به Poster برمی‌گردد.
+- Flow احراز هویت‌شده پروفایل کودک از Empty state تا Create، Edit و Archive در مرورگر واقعی PASS است.
+- Admin Dashboard، Draft validation، Pilot preview و Coverage Matrix با نقش واقعی Staff در مرورگر واقعی PASS هستند.
+- Label، Heading، Status message و Reading order این Flowها در AX tree قابل تشخیص‌اند.
 
 ## اصلاح QA
 
 Container و Header اکنون `min-width: 0` دارند. شعار Heartbeat در Mobile اجازه Wrap امن دارد و Requirement یک‌خطی فقط در Desktop اعمال می‌شود.
+ماه تولد ذخیره‌شده، شمارنده‌های Coverage و زمان محاسبه در خروجی صفحه با رقم فارسی نمایش داده می‌شوند. متن داخلی کنترل بومی `input[type=month]` تابع Locale مرورگر/سیستم است و در این اجرای Chromium نام ماه را انگلیسی نشان داد؛ جایگزینی آن با Date Picker سفارشی بدون Audit مستقل Accessibility انجام نشد.
 
 ## باز
 

@@ -71,7 +71,8 @@ final class JigariChildProfileTest extends TestCase
             'child_profile_id' => $child->id, 'user_id' => $user->id, 'relationship_code' => 'parent',
         ]);
 
-        $this->get(route('account.children.index'))->assertOk()->assertSee('باران');
+        $persianBirthMonth = strtr($child->birth_month, ['0' => '۰', '1' => '۱', '2' => '۲', '3' => '۳', '4' => '۴', '5' => '۵', '6' => '۶', '7' => '۷', '8' => '۸', '9' => '۹']);
+        $this->get(route('account.children.index'))->assertOk()->assertSee('باران')->assertSee($persianBirthMonth);
         $this->put(route('account.children.update', $child->public_id), [
             'nickname' => 'نیکا',
             'birth_month' => now('Asia/Tehran')->subMonths(49)->format('Y-m'),

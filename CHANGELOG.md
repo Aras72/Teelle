@@ -2,6 +2,10 @@
 
 ## 2026-09-11
 
+- Completed authenticated Phase 15 browser QA for Child Profile Create/Edit/Archive and real-role Admin Dashboard, Draft validation, safe Pilot preview and fail-closed Coverage Matrix.
+- Localized stored child birth months and Admin coverage counts/timestamps to Persian digits; native month-picker chrome remains browser-locale controlled.
+- Added the accepted browser audit screenshots and an evidence-linked inline report to the Repository.
+- Current full Laravel regression passes on isolated MySQL 8.4.11 at 71 tests / 601 assertions with no skipped database contract tests; Pint and Blade compilation pass.
 - Implemented Prompt 012 as entitlement-protected Jigari catalog search/filter over complete Published/Reviewed candidates, with deterministic ordering, strict filters, private reviewed covers and honest empty states.
 - Added protected catalog detail/cover routes, Persian/Arabic text normalization, search throttling and fail-closed safety/review/publication checks without introducing Ranking, Personalization or Commerce.
 - Removed the visible elliptical orbit strokes from Login and Jigari while preserving the existing photoreal marble motion tracks.

@@ -67,7 +67,8 @@ Currently Working On:
 - Prompt 012 با Scope محدود Search/Filter جیگری، Catalog عمومی fail-closed، ترتیب خنثی و بدون Ranking/Commerce تولید و Freeze شد.
 - Prompt 012 اجرا شد: جست‌وجو و فیلتر جیگری فقط برای عضو واجد Entitlement و فقط روی Candidateهای Published/Reviewed کامل، با ترتیب قطعی و Empty state صادقانه آماده است.
 - خطوط بیضی مدار در Login و Jigari حذف شدند؛ Trackها و حرکت تیله‌های فوتورئال حفظ و در مرورگر زنده تأیید شدند.
-- گیت متمرکز Prompt 012 و Design System روی MySQL 8.4.11 برابر 12/12 با 145 assertion پاس شد؛ Regression نهایی کامل با فعال‌بودن قرارداد دیتابیس برابر 71/71 با 600 assertion پاس بود و Build، JavaScript 8/8، Pint و Auditها نیز PASS هستند.
+- گیت متمرکز Prompt 012 و Design System روی MySQL 8.4.11 برابر 12/12 با 145 assertion پاس شد؛ Regression جاری کامل با فعال‌بودن قرارداد دیتابیس برابر 71/71 با 601 assertion پاس بود و Build، JavaScript 8/8، Pint و Auditها نیز PASS هستند.
+- QA مرورگری احراز هویت‌شده پروفایل کودک از Create تا Edit/Archive و پنل Admin شامل Draft validation، Pilot preview و Coverage Matrix با نقش واقعی PASS شد؛ تمام mutationها فقط روی MySQL موقت انجام شدند.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
@@ -80,7 +81,6 @@ Currently Working On:
 Next:
 
 - بازبینی انسانی محتوا، Safety، تناسب سنی و منبع هر Draft و تولید/تأیید Coverهای هم‌سبک تیله
-- بازبینی مرورگری Admin پس از آماده‌شدن Auth UI یا session تست کنترل‌شده
 - بازبینی مالک روی جریان Guest Quick Match
 - Freeze کردن Weightهای Ranking با Golden-set calibration و تأمین حداقل سه بازی Published/Reviewed برای Contextهای پشتیبانی‌شده
 - تنظیم SMTP تولید، SPF/DKIM/DMARC و آزمون واقعی تحویل Verification/Reset
@@ -90,7 +90,6 @@ Next:
 Blocked By:
 
 - نسخه دقیق MySQL سرویس هاست پارس‌پک و migration rehearsal روی Staging هنوز تأیید نشده است؛ پورت محلی 3500 نسخه 26.7 دارد و مبنای گیت MySQL 8 قرار نگرفت.
-- Browser audit صفحه Admin با session واقعی Staff هنوز NOT RUN است.
 - ۲۵ بازی Pilot عمداً Draft هستند؛ تا تصویر Reviewed و Human editorial/safety review وارد Candidate set نمی‌شوند.
 - Weightهای Ranking هنوز در Calibration Hold هستند؛ بنابراین تولید واقعی پیشنهادها قفل است و Quick Match در وضعیت صادقانه `Collecting` می‌ماند.
 
@@ -136,7 +135,7 @@ Critical Risks:
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-012 FROZEN AND EXECUTED; PROMPT 012 PASS
 Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPTS 011-012 IMPLEMENTED / PASS
-Testing Status: PHASE 15 IN PROGRESS; final MySQL 8.4.11 full Laravel 71/71 PASS with 600 assertions and no skipped database contract tests; current focused Prompt 012 + Design System 12/12 PASS with 145 assertions; MySQL schema contract 8/8 PASS with 37 assertions; JS 8/8 PASS; Build، Pint و dependency audits PASS; browser smoke Home/Match/Login/Jigari Light/Dark PASS; invisible Login/Jigari tracks with preserved photoreal marble motion PASS; exact 390px horizontal overflow PASS; SMTP، Admin E2E، authenticated Child Profile browser QA، Screen reader، Staging TLS and Core Web Vitals NOT VERIFIED
+Testing Status: PHASE 15 IN PROGRESS; current MySQL 8.4.11 full Laravel 71/71 PASS with 601 assertions and no skipped database contract tests; current focused Prompt 012 + Design System 12/12 PASS with 145 assertions; MySQL schema contract 8/8 PASS with 37 assertions; JS 8/8 PASS; Build، Pint، Blade compilation and dependency audits PASS; browser smoke Home/Match/Login/Jigari Light/Dark PASS; authenticated Child Profile Create/Edit/Archive and real-role Admin Dashboard/Draft validation/Pilot preview/Coverage browser QA PASS; invisible Login/Jigari tracks with preserved photoreal marble motion PASS; exact 390px horizontal overflow PASS; SMTP، full Screen reader/Keyboard/Zoom، Staging TLS and Core Web Vitals NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED
