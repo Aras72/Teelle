@@ -43,7 +43,7 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 
 ## Phase 15 release blockers
 
-Repository-owned CI is implemented in Prompt 019. Its first Remote run must be observed before CI can be marked `PASS`; this does not replace any environment-specific evidence below.
+Repository-owned CI is `PASS` through Prompt 019 and GitHub Actions Run #3 on commit `7bcb749`. This does not replace any environment-specific evidence below.
 
 1. Exact Pars Pack MySQL 8 runtime and Staging migration rehearsal.
 2. Approved Ranking weights and zero Critical Coverage gap for claimed Contexts.
