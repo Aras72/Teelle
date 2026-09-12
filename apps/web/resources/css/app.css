@@ -1061,6 +1061,36 @@ body:has(.home-hero) #main-content {
     .admin-theme-preview { grid-template-columns: 1fr; }
 }
 
+/* Weekly product health stays aggregate, legible and export-oriented. */
+.report-page { position: relative; }
+.report-page .admin-heading > div > p:last-child { margin: .35rem 0 0; color: var(--text-secondary); }
+.report-range { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) auto; gap: 1rem; align-items: end; }
+.report-summary { display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; align-items: center; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-inline-start: .35rem solid var(--status-success); border-radius: var(--radius-card); background: var(--surface-warm); }
+.report-summary--attention { border-inline-start-color: var(--status-warning); }
+.report-summary--critical { border-inline-start-color: var(--status-error); }
+.report-summary h2, .report-summary p { margin: 0; }
+.report-summary p:last-child { color: var(--text-secondary); }
+.report-marble { width: clamp(3.75rem, 8vw, 5.5rem); aspect-ratio: 1; filter: drop-shadow(0 .75rem .8rem rgb(5 37 44 / .2)); }
+.report-marble img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.report-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.report-section { display: grid; align-content: start; gap: 1rem; }
+.report-metrics { display: grid; gap: .5rem; margin: 0; }
+.report-metric { display: flex; min-height: 3rem; align-items: center; justify-content: space-between; gap: 1rem; padding: .7rem .9rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-input); background: var(--surface-primary); }
+.report-metric dt { color: var(--text-secondary); }
+.report-metric dd { margin: 0; font-size: 1.15rem; font-weight: var(--font-weight-black); }
+.report-metric--attention { border-inline-start: .25rem solid var(--status-warning); }
+.report-metric--critical { border-inline-start: .25rem solid var(--status-error); }
+.report-footnote { margin: 0; color: var(--text-secondary); font-size: .9rem; }
+@media (prefers-reduced-motion: no-preference) {
+    .report-marble { animation: report-marble-float 7s ease-in-out infinite alternate; }
+    @keyframes report-marble-float { to { transform: translateY(-.35rem) rotate(7deg); } }
+}
+@media (max-width: 47.99rem) {
+    .report-range, .report-grid { grid-template-columns: 1fr; }
+    .report-range .teelle-button { width: 100%; }
+    .report-summary { grid-template-columns: 1fr; }
+}
+
 /* Adult account lifecycle keeps the same Teelle materials, marble imagery and two-theme contract. */
 .teelle-account-link { display: inline-flex; min-height: 2.75rem; align-items: center; padding-inline: .85rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); color: var(--text-primary); font-size: .9rem; font-weight: var(--font-weight-bold); text-decoration: none; }
 .teelle-account-link:hover { border-color: var(--border-strong); background: var(--surface-warm); }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\CoverageController;
 use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
@@ -86,6 +87,9 @@ Route::get('/plays/{play:public_id}', [PlayController::class, 'show'])->name('pl
 Route::prefix('admin/content')->name('admin.content.')->middleware('content.staff')->group(function (): void {
     Route::get('/', [ContentController::class, 'index'])->name('index');
     Route::get('/coverage', CoverageController::class)->name('coverage');
+    Route::get('/reports/weekly', [ReportController::class, 'index'])->name('reports.weekly');
+    Route::get('/reports/weekly.csv', [ReportController::class, 'csv'])->name('reports.weekly.csv');
+    Route::get('/reports/weekly.pdf', [ReportController::class, 'pdf'])->name('reports.weekly.pdf');
     Route::get('/new', [ContentController::class, 'create'])->name('create');
     Route::post('/', [ContentController::class, 'store'])->name('store');
     Route::get('/versions/{version}/edit', [ContentController::class, 'edit'])->name('edit');

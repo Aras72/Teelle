@@ -142,6 +142,7 @@ class MySqlDataFoundationTest extends TestCase
             'coverage_observations', 'plans', 'purchases', 'payment_events',
             'entitlements', 'audit_logs', 'outbox_messages',
             'privacy_requests',
+            'search_observations',
         ];
     }
 

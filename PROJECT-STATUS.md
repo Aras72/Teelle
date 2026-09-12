@@ -3,7 +3,7 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: PROMPT 013 IMPLEMENTED / PASS / PHASE 15 QA GATE STILL OPEN
+Current Stage: PROMPT 014 IMPLEMENTED / PASS / PHASE 15 QA GATE STILL OPEN
 Current Task: بستن Scope باقی‌مانده فاز ۱۴ و QA خارجی فاز ۱۵ بدون ادعای Launch-ready
 Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
@@ -75,13 +75,15 @@ Currently Working On:
 - Local backup/restore drill روی MySQL 8.4.11 با Dump برابر 88,792 byte، تطبیق 60/60 جدول و 11/11 migration PASS شد؛ دیتابیس Restore و فایل موقت پس از تأیید پاک شدند.
 - Prompt 013 اجرا شد: خروجی داده حساب با تأیید رمز، درخواست حذف ۳۰روزه، وضعیت و لغو Self-service، Audit و Rate limit بدون حذف زودهنگام داده آماده شدند.
 - تست متمرکز Privacy برابر 5/5 با 36 assertion و Regression کامل MySQL 8.4.11 برابر 76/76 با 642 assertion بدون Skip پاس شد؛ Browser QA در Desktop/Mobile و Light/Dark و Keyboard نیز PASS است.
+- Prompt 014 اجرا شد: گزارش هفتگی Admin شش‌حوزه‌ای، Summary قاعده‌محور بدون AI، Search aggregate-only و خروجی PDF/CSV سازگار با Excel آماده شد.
+- تست متمرکز گزارش برابر 4/4 با 35 assertion و Regression کامل MySQL 8.4.11 برابر 80/80 با 680 assertion بدون Skip پاس شد؛ PDF واقعی رندر و بازبینی شد و Browser QA در Desktop/Mobile، Light/Dark، Keyboard و Console PASS است.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
 - `PHASE 11 — SECURITY & PRIVACY`: مستندات پایه کامل؛ کنترل‌های Production مانند SMTP، TLS و Privacy release هنوز در Gate انتشار بررسی می‌شوند.
 - `PHASE 12 — DEVELOPMENT PLANNING`: کامل و Architecture Gate برابر PASS.
-- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 013 تولید، Freeze و اجرا شده‌اند.
-- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 013 اجرا شده‌اند، اما به‌دلیل Scope باقی‌مانده، محتوای Published/Reviewed، Ranking calibration، Commerce و Post-grace deletion هنوز COMPLETE نیست.
+- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 014 تولید، Freeze و اجرا شده‌اند.
+- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 014 اجرا شده‌اند، اما Hero interaction، Onboarding، Weekly Plan، Multi-child، Collections، PWA، محتوای Published/Reviewed، Ranking calibration، Commerce و Post-grace deletion هنوز COMPLETE نیست.
 - `PHASE 15 — TESTING & QA`: برای Scope موجود فعال است؛ گیت MySQL 8 پاس شده ولی Gate کامل QA هنوز NOT PASS است.
 
 Next:
@@ -93,6 +95,7 @@ Next:
 - تعیین و Freeze کردن کوچک‌ترین Slice بعدی فقط پس از بسته‌شدن QA جاری و تأیید مالک
 - تکمیل E2E، Accessibility، Security header و Performance Gate پیش از PHASE 16
 - طراحی Slice مستقل Executor حذف/Anonymization فقط پس از Freeze شدن Legal retention و Backup behavior
+- Freeze و اجرای Prompt 015 برای PWA readiness به‌عنوان نزدیک‌ترین Slice مستقل و بدون وابستگی به Ranking/Commerce
 
 Blocked By:
 
@@ -140,9 +143,9 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-013 FROZEN AND EXECUTED; PROMPT 013 PASS
-Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPTS 011-013 IMPLEMENTED / PASS
-Testing Status: PHASE 15 IN PROGRESS; current MySQL 8.4.11 full Laravel 76/76 PASS with 642 assertions and no skipped database contract tests; Privacy 5/5 PASS with 36 assertions; current focused Design System 6/6 PASS with 113 assertions; MySQL schema contract includes privacy_requests; local MySQL backup/restore parity PASS; JS 8/8 PASS; Build، Pint، Blade compilation and current dependency audits PASS; browser smoke Home/Match/Login/Jigari Light/Dark PASS; Home responsive reflow at 320/390/768/1024/1440، Home/Login keyboard + 44px touch targets and authenticated Account/Child Profile/Admin/Privacy keyboard traversal PASS; authenticated Child Profile Create/Edit/Archive، real-role Admin QA and Privacy Desktop/Mobile Light/Dark QA PASS; SMTP، full software Screen reader، Zoom، Forced Colors، system Reduced Motion، Staging TLS، encrypted/off-site/media restore، post-grace anonymization and Core Web Vitals NOT VERIFIED
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-014 FROZEN AND EXECUTED; PROMPT 014 PASS
+Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPTS 011-014 IMPLEMENTED / PASS
+Testing Status: PHASE 15 IN PROGRESS; current MySQL 8.4.11 full Laravel 80/80 PASS with 680 assertions and no skipped database contract tests; Admin report 4/4 PASS with 35 assertions; Privacy 5/5 PASS with 36 assertions; MySQL schema contract includes privacy_requests and search_observations; local MySQL backup/restore parity PASS; JS 8/8 PASS; Build، Pint، Blade compilation and current dependency audits PASS; browser smoke Home/Match/Login/Jigari/Admin report Light/Dark PASS; Home responsive reflow at 320/390/768/1024/1440، Home/Login keyboard + 44px touch targets and authenticated Account/Child Profile/Admin/Privacy/Report keyboard traversal PASS; authenticated Child Profile Create/Edit/Archive، real-role Admin QA and Privacy/Report Desktop/Mobile Light/Dark QA PASS; SMTP، full software Screen reader، Zoom، Forced Colors، system Reduced Motion، Staging TLS، encrypted/off-site/media restore، post-grace anonymization and Core Web Vitals NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

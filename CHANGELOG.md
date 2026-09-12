@@ -2,6 +2,9 @@
 
 ## 2026-09-12
 
+- Implemented Prompt 014 Admin weekly product report across Funnel، Matching، Content، Search، Business and Technical health with deterministic non-AI summary.
+- Added privacy-preserving aggregate Search observations، selectable date range، Excel-compatible UTF-8 CSV and hardened Dompdf PDF export.
+- Prompt 014 focused MySQL gate passes at 4 tests / 35 assertions; full regression passes at 80 tests / 680 assertions with no skips، and PDF render، Desktop/Mobile Light/Dark browser QA، Build، JavaScript، Pint، Blade and audits pass.
 - Implemented Prompt 013 account Privacy Self-service: current-password-protected JSON export، 30-day deletion request، visible status، cancellation، audit and dedicated rate limiting.
 - Added the `privacy_requests` schema and portable export with public identifiers only; passwords، session payloads، raw audit rows and internal numeric identifiers are excluded.
 - Prompt 013 focused MySQL gate passes at 5 tests / 36 assertions; full regression passes at 76 tests / 642 assertions with no skips، and Build، JavaScript 8/8، Pint، Blade and dependency audits pass.

@@ -30,6 +30,10 @@ Phase 15 Gate: NOT PASS
 - [x] Local MySQL 8.4.11 dump/restore drill — 60/60 table و 11/11 migration parity
 - [x] Privacy Self-service — Export، درخواست حذف 30روزه و لغو با 5 test / 36 assertion
 - [x] Regression کامل Prompt 013 روی MySQL 8.4.11 — 76 test / 642 assertion بدون Skip
+- [x] Prompt 014 Admin report/export — 4 test / 35 assertion، شش حوزه گزارش، Summary قاعده‌محور و Search aggregate-only
+- [x] Regression کامل جاری روی MySQL 8.4.11 — 80 test / 680 assertion بدون Skip
+- [x] PDF واقعی دوصفحه‌ای با Dompdf 3.1.6 تولید، با Poppler رندر و بدون Clip/Overlap بازبینی شد
+- [x] گزارش Admin در Desktop و Mobile 390، Light/Dark، Keyboard، Touch target و Console بدون خطا PASS شد
 
 ## مسدودکننده انتشار
 

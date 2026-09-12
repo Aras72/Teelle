@@ -456,3 +456,14 @@ Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
 این تصمیم مجوز انتشار Draftها، Freeze کردن Ranking، فعال‌سازی Commerce، ساخت Weekly Plan/Multi-child یا شروع Phase 16 نیست.
 
 پیاده‌سازی با درخواست نسخه‌دار، Export محافظت‌شده با رمز فعلی، مهلت حذف ۳۰روزه، لغو Self-service، Audit append-only و Rate limit انجام شد. گیت متمرکز 5 test / 36 assertion و Regression کامل MySQL 8.4.11 برابر 76 test / 642 assertion بدون Failure، Error یا Skip پاس شد؛ Build، JavaScript 8/8، Pint، Blade و Auditهای Composer/pnpm نیز PASS هستند. اجرای نهایی حذف و Legal/Production evidence همچنان باز است.
+
+## DEC-034 - گزارش هفتگی تجمیعی و Export بدون AI
+
+Date: 2026-09-12
+Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
+
+دستور صریح مالک برای تکمیل فازهای ۱۴ تا ۱۶، مجوز ادامه Sliceهای داخلی باقی‌مانده را داد؛ اما Gateهای Production یا تصمیم‌های تجاری/حقوقی نباید جعل شوند. Prompt 014 نزدیک‌ترین Slice مستقل، یعنی گزارش هفتگی Admin و Export، را اجرا کرد.
+
+گزارش Funnel، Matching، Content، Search، Business و Technical health را از یک منبع server-side پوشش می‌دهد. Summary فقط از Ruleهای ثابت ساخته می‌شود و AI در تولید یا تفسیر آن نقشی ندارد. Search observation فقط شمارنده روزانه نگه می‌دارد و Query، User ID یا داده کودک ذخیره نمی‌کند. خروجی PDF با Remote loading و PHP execution غیرفعال و CSV با UTF-8 BOM سازگار با Excel است.
+
+گیت متمرکز برابر 4 test / 35 assertion و Regression کامل روی MySQL 8.4.11 برابر 80 test / 680 assertion بدون Skip پاس شد. JavaScript 8/8، Build، Blade، Pint و Auditها PASS هستند؛ PDF واقعی با Poppler بازبینی شد و Browser QA Desktop/Mobile، Light/Dark، Keyboard و Console نیز PASS است. این تصمیم Admin report/export را می‌بندد، نه کل Phase 14 یا Release Gate را؛ Prompt 015 به PWA readiness محدود می‌شود.
