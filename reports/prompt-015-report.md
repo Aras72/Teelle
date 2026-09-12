@@ -1,6 +1,6 @@
 # Prompt 015 Report — PWA Readiness
 
-Date: 2026-09-12
+Date: 2026-09-13
 Result: CONDITIONAL PASS
 
 ## Delivered
@@ -21,8 +21,12 @@ Result: CONDITIONAL PASS
 - Service Worker syntax and Manifest JSON parse: PASS.
 - Production build، Blade compilation، Pint، Composer audit and pnpm production audit: PASS.
 - Browser: Manifest metadata، Persian RTL offline recovery، no horizontal overflow، 44px recovery action and zero console warning/error PASS.
-- Browser-controlled runtime did not expose `navigator.serviceWorker`; registration، update activation، forced-offline navigation and install prompt are `NOT VERIFIED` rather than mislabeled PASS.
+- Chrome Headless `152.0.0.0` on a loopback secure context exposed the real Service Worker lifecycle: registration، activation، page control and controller continuity after reload PASS.
+- After stopping the exact temporary PHP server، the controlled page reloaded through the Service Worker and rendered the Persian offline recovery heading and retry action: PASS.
+- The runtime audit used only isolated MySQL 8.4.11 QA data; owner port `3500` and every Staging/Production system remained untouched.
 
 ## Remaining production gate
 
-Production HTTPS installability، real Service Worker lifecycle/update/offline simulation، platform install audit and stale-cache rehearsal remain Phase 15 work. No TWA work was started.
+Production HTTPS installability، browser install prompt/app installation، two-version update rollout، platform install audit and stale-cache rehearsal remain Phase 15 work. No TWA work was started.
+
+Runtime evidence: `reports/phase-15-pwa-runtime-audit.md`.

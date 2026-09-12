@@ -1,6 +1,6 @@
 # Release Checklist
 
-Date: 2026-09-12
+Date: 2026-09-13
 Phase 15 Gate: NOT PASS
 
 ## پاس‌شده
@@ -47,6 +47,8 @@ Phase 15 Gate: NOT PASS
 - [x] Prompt 018 About — Route/Copy/Navigation با 2 test / 11 assertion و Browser در 390/768/1440 Light/Dark
 - [x] Regression کامل جاری روی MySQL 8.4.11 — 95 test / 800 assertion بدون Failure
 - [x] GitHub Actions Quality gate روی Push و Pull Request — Run #3 روی Commit `7bcb749` در 1m 34s PASS شد
+- [x] PWA runtime در Chrome 152 روی loopback secure context — ثبت/فعال‌سازی/کنترل Service Worker، دوام کنترل پس از Reload و Cache `teelle-static-v1`
+- [x] PWA real-outage recovery — پس از توقف دقیق سرور موقت، صفحه «فعلاً آفلاینی» و اقدام «دوباره تلاش کن» توسط Service Worker نمایش داده شد
 
 ## مسدودکننده انتشار
 
@@ -58,7 +60,7 @@ Phase 15 Gate: NOT PASS
 - [ ] Security header و HTTPS/TLS validation در Staging
 - [ ] Screen reader، Zoom، Forced Colors و reduced-motion واقعی
 - [ ] Lighthouse/Core Web Vitals و weak-device budget
-- [ ] Service Worker lifecycle، update، forced-offline navigation و installability واقعی روی HTTPS Production candidate
+- [ ] PWA update rollout دو نسخه‌ای، install prompt/app installation و installability واقعی روی HTTPS Production candidate
 - [ ] Staging encrypted/off-site backup restore، media restore، monitoring و rollback rehearsal با سنجش RPO/RTO
 - [ ] Privacy Policy، Terms و consentهای Release
 - [ ] اجرای حذف/Anonymization پس از مهلت، Backup propagation و Legal retention
