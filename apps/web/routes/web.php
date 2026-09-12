@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Account\ChildProfileController;
 use App\Http\Controllers\Account\PrivacyController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\Play\ResultCoverController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', ShowHomepageController::class)->name('home');
+Route::get('/about', AboutController::class)->name('about');
 Route::get('/collections', [CollectionController::class, 'index'])->name('collections.index');
 Route::get('/collections/{collection:slug}', [CollectionController::class, 'show'])->name('collections.show');
 Route::get('/collections/{collection:slug}/games/{game:public_id}/cover', CollectionCoverController::class)->name('collections.games.cover');

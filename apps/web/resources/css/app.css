@@ -316,6 +316,156 @@ body {
     cursor: pointer;
 }
 
+.about-page {
+    overflow-x: clip;
+}
+
+.about-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.9fr);
+    gap: clamp(var(--space-8), 7vw, var(--space-20));
+    align-items: center;
+    min-height: calc(100dvh - var(--header-height));
+    padding-block: clamp(var(--space-8), 7vw, var(--space-16));
+}
+
+.about-hero__copy {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+}
+
+.about-hero h1 {
+    max-width: 11ch;
+    margin: 0;
+    font-size: clamp(3.25rem, 8vw, 7.5rem);
+    font-weight: var(--font-weight-black);
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+}
+
+.about-hero__lead {
+    max-width: 38rem;
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+}
+
+.about-marble {
+    position: relative;
+    width: min(100%, 30rem);
+    margin: 0 auto;
+    filter: drop-shadow(0 2rem 2.5rem rgb(18 63 70 / 0.2));
+    animation: about-marble-drift 9s var(--ease-enter) infinite alternate;
+}
+
+.about-marble::after {
+    position: absolute;
+    inset: auto 18% 2% 18%;
+    height: 8%;
+    border-radius: 50%;
+    background: rgb(18 63 70 / 0.18);
+    content: '';
+    filter: blur(1rem);
+}
+
+.about-marble img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.about-promise {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(14rem, 0.5fr);
+    gap: clamp(var(--space-6), 6vw, var(--space-16));
+    align-items: end;
+    padding-block: clamp(var(--space-12), 9vw, var(--space-20));
+    border-block: 1px solid var(--border-subtle);
+}
+
+.about-promise p {
+    margin: 0;
+}
+
+.about-promise__line {
+    max-width: 18ch;
+    font-size: clamp(2.1rem, 5.5vw, 5rem);
+    font-weight: var(--font-weight-black);
+    line-height: 1.08;
+}
+
+.about-promise > p:last-child {
+    color: var(--text-secondary);
+    font-size: 1.08rem;
+}
+
+.about-principles {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(var(--space-8), 8vw, var(--space-20));
+    padding-block: clamp(var(--space-16), 10vw, 8rem);
+}
+
+.about-principles h2,
+.about-closing h2 {
+    max-width: 14ch;
+    margin: 0;
+    font-size: clamp(2rem, 4.5vw, 4.5rem);
+    line-height: 1.08;
+}
+
+.about-principles__body > p {
+    max-width: 42rem;
+    margin: 0 0 var(--space-10);
+    color: var(--text-secondary);
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+}
+
+.about-values {
+    margin: 0;
+}
+
+.about-values > div {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.45fr) minmax(0, 1fr);
+    gap: var(--space-5);
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.about-values dt {
+    font-weight: var(--font-weight-black);
+}
+
+.about-values dd {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.about-closing {
+    display: flex;
+    gap: var(--space-8);
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: clamp(var(--space-12), 8vw, var(--space-20));
+    padding: clamp(var(--space-6), 5vw, var(--space-12));
+    border: 1px solid var(--border-subtle);
+    border-radius: 1.5rem;
+    background: var(--surface-elevated);
+    box-shadow: var(--shadow-low);
+}
+
+@keyframes about-marble-drift {
+    from { transform: translate3d(0, -0.65rem, 0) rotate(-2deg); }
+    to { transform: translate3d(0, 0.75rem, 0) rotate(2deg); }
+}
+
 .collections-page,
 .collection-detail {
     padding-block: clamp(var(--space-8), 7vw, var(--space-16));
@@ -477,6 +627,41 @@ body {
 
 }
 
+@media (max-width: 48rem) {
+    .about-hero,
+    .about-promise,
+    .about-principles {
+        grid-template-columns: 1fr;
+    }
+
+    .about-hero {
+        min-height: auto;
+    }
+
+    .about-hero__copy {
+        order: 1;
+    }
+
+    .about-marble {
+        width: min(68vw, 16rem);
+    }
+
+    .about-promise,
+    .about-principles {
+        gap: var(--space-8);
+    }
+
+    .about-values > div {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+    }
+
+    .about-closing {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 64rem) {
     .collections-heading__marble {
         inset-inline-end: 0;
@@ -487,7 +672,8 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
     .onboarding-marble,
-    .collections-heading__marble {
+    .collections-heading__marble,
+    .about-marble {
         animation: none;
     }
 }

@@ -2,6 +2,10 @@
 
 ## 2026-09-12
 
+- Implemented Prompt 018 public About page from the approved Mission، Promise and Brand laws، and activated its primary-navigation link.
+- About uses one photorealistic non-Hero marble، transform-only ambient motion، reduced-motion fallback and one Core CTA without signup or subscription pressure.
+- Focused About gate passes at 2 tests / 11 assertions; full MySQL 8.4.11 regression passes at 94 tests / 776 assertions، with JavaScript 8/8، Build، Blade and Pint passing.
+- Browser QA at 390، 768 and 1440 passes in Light/Dark with a two-line Hero، first-viewport CTA، no horizontal overflow and empty Console warning/error output.
 - Implemented Prompt 017 Editorial Collections with ordered drafts، separated edit/publish permissions، audited lifecycle and public scenario-based discovery.
 - Collections fail closed against the complete Published/Reviewed candidate contract at publish and read time; no Draft، stale، unsafe or unreviewed game is exposed.
 - Fixed an order-dependent joined-column collision by selecting `games.*` explicitly; full MySQL 8.4.11 regression now passes at 92 tests / 764 assertions، with JavaScript 8/8، Build، Blade، Pint and audits passing.

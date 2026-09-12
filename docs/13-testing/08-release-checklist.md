@@ -44,6 +44,8 @@ Phase 15 Gate: NOT PASS
 - [x] Regression ترتیبی Content Admin + Collections — 14 test / 80 assertion
 - [x] Regression کامل جاری روی MySQL 8.4.11 — 92 test / 764 assertion بدون Failure و بدون Skip قرارداد دیتابیس
 - [x] Collections عمومی/Admin در 1440، 652 و 390، Light/Dark، RTL، Touch target، Overflow و Console — PASS
+- [x] Prompt 018 About — Route/Copy/Navigation با 2 test / 11 assertion و Browser در 390/768/1440 Light/Dark
+- [x] Regression کامل جاری روی MySQL 8.4.11 — 94 test / 776 assertion بدون Failure
 
 ## مسدودکننده انتشار
 

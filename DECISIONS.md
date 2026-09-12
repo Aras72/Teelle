@@ -502,3 +502,14 @@ Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
 گیت متمرکز Collections و Schema برابر 12 test / 67 assertion، Regression ترتیبی Content Admin + Collections برابر 14 test / 80 assertion و Regression کامل MySQL 8.4.11 برابر 92 test / 764 assertion بدون Failure پاس شد. JavaScript 8/8، Build، Blade، Pint و Auditها PASS هستند؛ Browser QA عمومی/Admin در 1440، 652 و 390، Light/Dark، RTL، Touch و Console نیز PASS است.
 
 هیچ بازی Pilot به‌صورت خودکار منتشر نشد؛ Production Collections تا ورود محتوای Human-reviewed خالی و صادقانه می‌ماند. این تصمیم Weekly Plan، Multi-child، Ranking، Commerce یا Phase 16 را باز نمی‌کند.
+
+## DEC-038 - صفحه About فقط از حقیقت مصوب محصول
+
+Date: 2026-09-12
+Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
+
+About در Scope صریح Website MVP و Navigation مصوب بود، اما Label آن غیرفعال مانده بود. Prompt 018 این سطح عمومی را با کمترین Slice مستقل بست و هیچ ادعای بازاریابی، Testimonial، آمار ساختگی یا متن حقوقی اختراع نکرد.
+
+صفحه فقط Mission افزایش بازی واقعی، Promise «بازی مناسب، برای همین لحظه»، اصل سه انتخاب، Matching قطعی مبتنی بر Metadata، مرز بدون AI و Safety رایگان را توضیح می‌دهد. یک تیله فوتورئال غیر Hero با حرکت transform-only استفاده شد و reduced-motion آن را متوقف می‌کند. فقط یک CTA اصلی به Quick Match رایگان وجود دارد.
+
+گیت متمرکز برابر 2 test / 11 assertion و Regression کامل MySQL 8.4.11 برابر 94 test / 776 assertion PASS شد. JavaScript 8/8، Build، Blade و Pint PASS هستند؛ Browser QA در 390، 768 و 1440، Light/Dark، RTL، Touch، Overflow و Console نیز PASS است. Legal Privacy Policy و Terms همچنان Blocker مستقل Phase 15 هستند.

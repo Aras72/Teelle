@@ -6,7 +6,7 @@
             <ul class="teelle-nav__list">
                 <li><a class="teelle-nav__item" href="{{ route('collections.index') }}">بازی‌ها</a></li>
                 <li><a class="teelle-nav__item" href="{{ route('jigari.show') }}">تیله جیگری</a></li>
-                <li><span class="teelle-nav__item" aria-disabled="true">درباره تیله</span></li>
+                <li><a class="teelle-nav__item" href="{{ route('about') }}">درباره تیله</a></li>
             </ul>
         </nav>
 

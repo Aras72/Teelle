@@ -55,6 +55,13 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 10. Release Privacy Policy، Terms and consent language.
 11. Post-grace deletion/anonymization، backup propagation and approved Legal retention.
 
+## Additional Website MVP surfaces
+
+| Surface | Current status | Closure evidence or remaining boundary |
+|---|---|---|
+| Public About | PASS | Prompt 018 approved-copy route، responsive Light/Dark browser QA and active primary navigation |
+| Release Privacy Policy and Terms | BLOCKED | Approved legal copy and owner/market review are absent |
+
 ## Phase 16 boundary
 
 Phase 16 is Production Launch. It can be executed only after every Critical/High item above is closed with environment-specific evidence. A local test pass cannot be relabeled as Production launch evidence.

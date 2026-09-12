@@ -14,6 +14,7 @@ Status: PARTIAL
 - حساب عضو جیگری با Session واقعی: ساخت، ویرایش و بایگانی پروفایل کودک PASS
 - Admin با Session و نقش واقعی: Dashboard، اعتبارسنجی Draft، Pilot preview و Coverage Matrix PASS
 - Collections عمومی و Admin با Session بازبین: index، empty state و فرم Draft در 1440، 652 و 390، Light/Dark، RTL، Touch و Overflow PASS
+- About عمومی در 390، 768 و 1440: Light/Dark، Hero دوخطی، CTA در viewport نخست، Navigation فعال، RTL، Touch و Overflow PASS
 - Console در صفحات بررسی‌شده: بدون Error/Warning
 
 ## هنوز اجرا نشده
