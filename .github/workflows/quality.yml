@@ -80,6 +80,12 @@ jobs:
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Run JavaScript tests
+        run: pnpm test
+
+      - name: Build production assets
+        run: pnpm build
+
       - name: Allow audited trigger creation in the disposable database
         run: >-
           php -r '$pdo = new PDO("mysql:host=127.0.0.1;port=3306", "root", "root_ci");
@@ -93,12 +99,6 @@ jobs:
 
       - name: Compile Blade views
         run: php artisan view:cache
-
-      - name: Run JavaScript tests
-        run: pnpm test
-
-      - name: Build production assets
-        run: pnpm build
 
       - name: Audit PHP dependencies
         run: composer audit --locked --no-interaction

@@ -31,6 +31,7 @@ class ContinuousIntegrationWorkflowTest extends TestCase
         $this->assertStringContainsString('php artisan view:cache', $workflow);
         $this->assertStringContainsString('pnpm test', $workflow);
         $this->assertStringContainsString('pnpm build', $workflow);
+        $this->assertTrue(strpos($workflow, 'pnpm build') < strpos($workflow, 'vendor/bin/phpunit'));
         $this->assertStringContainsString('composer audit --locked --no-interaction', $workflow);
         $this->assertStringContainsString('pnpm audit --prod --audit-level=low', $workflow);
         $this->assertStringNotContainsString('DB_PORT: 3500', $workflow);
