@@ -13,11 +13,11 @@ Result: LOCAL PASS / REMOTE PENDING
 
 ## Verification
 
-- Workflow structure and required-command contract: 1 test / 21 assertions، PASS; GitHub parser acceptance remains pending push.
-- Full Laravel regression on isolated MySQL 8.4.11: 95 tests / 797 assertions، PASS.
+- Workflow structure and required-command contract: 1 test / 23 assertions، PASS; GitHub parser acceptance PASS on Run #1.
+- Full Laravel regression on isolated MySQL 8.4.11: 95 tests / 799 assertions، PASS.
 - JavaScript: 8/8؛ production Build، Blade compilation and Pint: PASS.
 - Composer and pnpm production dependency audits: no known vulnerabilities.
-- GitHub Actions run: pending push and Remote observation.
+- GitHub Actions Run #1: workflow accepted، but PHPUnit failed because MySQL binary logging rejected append-only trigger creation for the limited test user (`ERROR 1419`). The workflow now enables `log_bin_trust_function_creators` through the disposable service Root before running tests، while the test suite still connects as limited user `teelle`; corrected Remote result is pending.
 
 ## Boundary
 

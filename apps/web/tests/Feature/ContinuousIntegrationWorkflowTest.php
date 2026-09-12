@@ -22,6 +22,8 @@ class ContinuousIntegrationWorkflowTest extends TestCase
         $this->assertStringContainsString('version: 11.22.0', $workflow);
         $this->assertStringContainsString('node-version: 22', $workflow);
         $this->assertStringContainsString('DB_SCHEMA_VALIDATION: "true"', $workflow);
+        $this->assertStringContainsString('MYSQL_ROOT_HOST: "%"', $workflow);
+        $this->assertStringContainsString('SET GLOBAL log_bin_trust_function_creators = 1', $workflow);
         $this->assertStringContainsString('composer install --no-interaction --prefer-dist --no-progress', $workflow);
         $this->assertStringContainsString('pnpm install --frozen-lockfile', $workflow);
         $this->assertStringContainsString('vendor/bin/phpunit', $workflow);

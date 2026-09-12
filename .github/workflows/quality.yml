@@ -41,6 +41,7 @@ jobs:
           MYSQL_USER: teelle
           MYSQL_PASSWORD: teelle_ci
           MYSQL_ROOT_PASSWORD: root_ci
+          MYSQL_ROOT_HOST: "%"
         ports:
           - 3306:3306
         options: >-
@@ -78,6 +79,11 @@ jobs:
 
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Allow audited trigger creation in the disposable database
+        run: >-
+          php -r '$pdo = new PDO("mysql:host=127.0.0.1;port=3306", "root", "root_ci");
+          $pdo->exec("SET GLOBAL log_bin_trust_function_creators = 1");'
 
       - name: Run Laravel regression on MySQL 8.4
         run: vendor/bin/phpunit
