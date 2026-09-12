@@ -478,3 +478,14 @@ Prompt 015 فقط PWA readiness همان وب‌سایت Responsive Laravel را
 Service Worker فقط Assetهای ثابت same-origin را Cache می‌کند. Navigation HTML، API، Request غیر GET و داده Account/Admin/Match/Result/Play وارد Cache نمی‌شوند. Offline Play queue و TWA خارج Scope هستند.
 
 گیت متمرکز 4 test / 30 assertion و Regression کامل MySQL 8.4.11 برابر 84 test / 710 assertion بدون Skip پاس شد. Syntax، Manifest JSON، Build، Blade، Pint، JavaScript و Auditها PASS هستند. چون Browser کنترل‌شده Service Worker API را expose نکرد، lifecycle، forced-offline، install prompt و Production HTTPS installability به‌درستی `NOT VERIFIED` ماندند. Phase 15 هنوز PASS نیست و Phase 16 قفل می‌ماند.
+
+## DEC-036 - Onboarding یک‌باره برای حساب بزرگسال
+
+Date: 2026-09-12
+Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
+
+Prompt 016 الزام FEAT-013 را به یک Orientation کوتاه پس از تأیید ایمیل محدود می‌کند. این صفحه بازی رایگان، تداوم Saved/History و مرز داده حداقلی کودک را توضیح می‌دهد، اما هیچ Child Profile، خرید، Consent بازاریابی یا Match context را نمی‌پرسد.
+
+کاربر می‌تواند فوراً Match را شروع کند یا Onboarding را رد کند. Completion در Server یک‌باره و idempotent است و مقصد از Allowlist انتخاب می‌شود. Guest Match همچنان عمومی است.
+
+گیت متمرکز 4 test / 21 assertion و Regression کامل MySQL 8.4.11 برابر 88 test / 732 assertion بدون Skip PASS شد. Build و Pint PASS هستند و Browser QA در Desktop/Mobile، Light/Dark، RTL، Touch target، Overflow و Console نیز PASS است. این تصمیم Ranking، Content، Commerce یا Phase 16 را باز نمی‌کند.

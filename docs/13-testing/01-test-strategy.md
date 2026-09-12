@@ -2,7 +2,7 @@
 
 Status: IN PROGRESS
 Date: 2026-09-10
-Scope: رفتار پیاده‌سازی‌شده تا Prompt 014 و Hero ویدئویی مصوب
+Scope: رفتار پیاده‌سازی‌شده تا Prompt 016 و Hero ویدئویی مصوب
 
 ## هدف
 

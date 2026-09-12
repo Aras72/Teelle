@@ -14,7 +14,7 @@ final class EmailVerificationController extends Controller
 {
     public function notice(Request $request): RedirectResponse|View
     {
-        return $request->user()->hasVerifiedEmail() ? redirect()->route('account.show') : view('auth.verify-email');
+        return $request->user()->hasVerifiedEmail() ? redirect()->route($this->destination($request)) : view('auth.verify-email');
     }
 
     public function verify(EmailVerificationRequest $request): RedirectResponse
@@ -23,7 +23,7 @@ final class EmailVerificationController extends Controller
             $request->fulfill();
         }
 
-        return redirect()->route('account.show')->with('status', 'ایمیل شما تأیید شد');
+        return redirect()->route($this->destination($request))->with('status', 'ایمیل شما تأیید شد');
     }
 
     public function resend(Request $request): RedirectResponse
@@ -33,5 +33,10 @@ final class EmailVerificationController extends Controller
         }
 
         return back()->with('status', 'اگر ایمیل قابل ارسال باشد، پیوند تازه فرستاده شد');
+    }
+
+    private function destination(Request $request): string
+    {
+        return $request->user()->onboarding_completed_at === null ? 'onboarding.show' : 'account.show';
     }
 }

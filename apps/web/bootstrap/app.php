@@ -3,6 +3,7 @@
 use App\Http\Middleware\ApplySecurityHeaders;
 use App\Http\Middleware\EnsureContentStaff;
 use App\Http\Middleware\EnsureJigariActive;
+use App\Http\Middleware\EnsureOnboardingCompleted;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'content.staff' => EnsureContentStaff::class,
             'jigari' => EnsureJigariActive::class,
+            'onboarded' => EnsureOnboardingCompleted::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

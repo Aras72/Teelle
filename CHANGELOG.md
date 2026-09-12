@@ -2,6 +2,9 @@
 
 ## 2026-09-12
 
+- Implemented Prompt 016 one-time، skippable adult-account onboarding after email verification without requesting child data or gating free Guest play.
+- Added allowlisted Start Match/Account destinations، server-side idempotent completion and onboarding enforcement for verified Account/Jigari routes.
+- Prompt 016 focused gate passes at 4 tests / 21 assertions; full MySQL 8.4.11 regression passes at 88 tests / 732 assertions with no skips، and Build، Pint and Desktop/Mobile Light/Dark browser QA pass.
 - Implemented Prompt 015 local PWA readiness with Persian RTL manifest، photorealistic marble icons، privacy-safe static caching، offline recovery and accessible update flow.
 - Prompt 015 focused gate passes at 4 tests / 30 assertions; full MySQL 8.4.11 regression passes at 84 tests / 710 assertions with no skips، and Service Worker syntax، Manifest JSON، Build، JavaScript، Blade، Pint and audits pass.
 - Browser metadata/offline-page checks pass; real Service Worker lifecycle، forced-offline simulation، install prompt and Production HTTPS installability remain NOT VERIFIED.

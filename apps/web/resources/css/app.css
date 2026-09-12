@@ -214,6 +214,128 @@ body {
     cursor: pointer;
 }
 
+.onboarding-page {
+    position: relative;
+    display: grid;
+    min-height: calc(100dvh - var(--header-height));
+    place-items: center;
+    padding-block: var(--space-8);
+    overflow: hidden;
+}
+
+.onboarding-marble {
+    position: absolute;
+    inset-inline-start: max(-5rem, 4vw);
+    top: 8%;
+    width: clamp(8rem, 19vw, 15rem);
+    opacity: 0.72;
+    animation: teelle-float 7s var(--ease-enter) infinite alternate;
+}
+
+.onboarding-marble img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.onboarding-card {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 47rem);
+    padding: clamp(var(--space-6), 5vw, var(--space-12));
+    border: 1px solid var(--border-subtle);
+    border-radius: 1.5rem;
+    background: color-mix(in srgb, var(--surface-elevated) 94%, transparent);
+    box-shadow: var(--shadow-medium);
+}
+
+.onboarding-card h1 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: var(--line-height-tight);
+}
+
+.onboarding-lead {
+    max-width: 38rem;
+    color: var(--text-secondary);
+}
+
+.onboarding-points {
+    display: grid;
+    gap: var(--space-3);
+    margin: var(--space-8) 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: onboarding;
+}
+
+.onboarding-points li {
+    display: grid;
+    grid-template-columns: var(--touch-target) 1fr;
+    gap: var(--space-3);
+    align-items: center;
+    counter-increment: onboarding;
+}
+
+.onboarding-points li::before {
+    display: grid;
+    width: var(--touch-target);
+    height: var(--touch-target);
+    place-items: center;
+    border-radius: 50%;
+    background: var(--surface-warm);
+    content: counter(onboarding);
+    font-weight: var(--font-weight-black);
+}
+
+.onboarding-points strong,
+.onboarding-points span {
+    grid-column: 2;
+}
+
+.onboarding-points span {
+    color: var(--text-secondary);
+}
+
+.onboarding-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+}
+
+.onboarding-skip {
+    min-height: var(--touch-target);
+    padding-inline: var(--space-4);
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    cursor: pointer;
+}
+
+@media (max-width: 40rem) {
+    .onboarding-marble {
+        inset-inline-start: -3rem;
+        top: 1rem;
+        opacity: 0.3;
+    }
+
+    .onboarding-actions,
+    .onboarding-actions form,
+    .onboarding-actions .teelle-button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .onboarding-marble {
+        animation: none;
+    }
+}
+
 @media (max-width: 32rem) {
     .pwa-update-notice {
         align-items: stretch;

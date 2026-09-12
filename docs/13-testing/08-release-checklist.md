@@ -37,6 +37,9 @@ Phase 15 Gate: NOT PASS
 - [x] Prompt 015 PWA local foundation — Manifest، Service Worker privacy boundary، Offline recovery و Update flow با 4 test / 30 assertion
 - [x] Regression کامل جاری روی MySQL 8.4.11 — 84 test / 710 assertion بدون Skip
 - [x] Manifest JSON، Service Worker syntax، Offline RTL/44px/overflow و Browser metadata — PASS
+- [x] Prompt 016 Onboarding — Auth/Verification/Skip/Idempotency/Redirect allowlist با 4 test / 21 assertion
+- [x] Regression کامل جاری روی MySQL 8.4.11 — 88 test / 732 assertion بدون Skip
+- [x] Onboarding در Desktop و 390×844، Light/Dark، RTL، Touch target، Overflow و Console — PASS
 
 ## مسدودکننده انتشار
 

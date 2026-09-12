@@ -19,7 +19,7 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 | FEAT-010 Feedback/Rating | PASS | Idempotent rating |
 | FEAT-011 Public Heartbeat | PASS | Started-only projection with approved 110 display baseline |
 | FEAT-012 Authentication | PARTIAL | Local lifecycle passes؛ Production SMTP delivery is unverified |
-| FEAT-013 Onboarding | PARTIAL | Registration/account shell exists؛ distinct onboarding acceptance remains to be frozen |
+| FEAT-013 Onboarding | PASS | Prompt 016 verified-account، skippable، idempotent onboarding |
 | FEAT-014 Account Home | PASS | Prompt 010/013 |
 | FEAT-015 Child Profile | PASS | Prompt 011 |
 | FEAT-016 Saved | PARTIAL | Limited account Saved exists؛ full paid boundary requires final Jigari flow |
