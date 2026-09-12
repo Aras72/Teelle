@@ -43,6 +43,8 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 
 ## Phase 15 release blockers
 
+Repository-owned CI is implemented in Prompt 019. Its first Remote run must be observed before CI can be marked `PASS`; this does not replace any environment-specific evidence below.
+
 1. Exact Pars Pack MySQL 8 runtime and Staging migration rehearsal.
 2. Approved Ranking weights and zero Critical Coverage gap for claimed Contexts.
 3. Human-reviewed Published games with licensed reviewed Covers and Safety/source approval.

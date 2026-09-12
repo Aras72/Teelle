@@ -513,3 +513,14 @@ About در Scope صریح Website MVP و Navigation مصوب بود، اما Lab
 صفحه فقط Mission افزایش بازی واقعی، Promise «بازی مناسب، برای همین لحظه»، اصل سه انتخاب، Matching قطعی مبتنی بر Metadata، مرز بدون AI و Safety رایگان را توضیح می‌دهد. یک تیله فوتورئال غیر Hero با حرکت transform-only استفاده شد و reduced-motion آن را متوقف می‌کند. فقط یک CTA اصلی به Quick Match رایگان وجود دارد.
 
 گیت متمرکز برابر 2 test / 11 assertion و Regression کامل MySQL 8.4.11 برابر 94 test / 776 assertion PASS شد. JavaScript 8/8، Build، Blade و Pint PASS هستند؛ Browser QA در 390، 768 و 1440، Light/Dark، RTL، Touch، Overflow و Console نیز PASS است. Legal Privacy Policy و Terms همچنان Blocker مستقل Phase 15 هستند.
+
+## DEC-039 - CI مخزن جایگزین Evidence محیط انتشار نیست
+
+Date: 2026-09-12
+Status: APPROVED BY OWNER DIRECTION / IMPLEMENTED / REMOTE PENDING
+
+دستور مالک برای تکمیل فازهای باقی‌مانده مجوز بستن خلأ قابل‌کنترل CI را می‌دهد. Prompt 019 یک Workflow واحد GitHub Actions برای Push به `main`، Pull Request و اجرای دستی اضافه می‌کند و قرارداد جاری را با PHP 8.5، MySQL 8.4، Node 22 و pnpm 11.22.0 اجرا می‌کند.
+
+CI باید PHPUnit کامل با Schema validation، Pint، Blade compilation، JavaScript، Build و Auditهای Composer/pnpm را اجرا کند و فقط دسترسی خواندن Contents داشته باشد. پورت MySQL `3500` سیستم مالک وارد CI نمی‌شود.
+
+وجود Workflow یا Pass محلی معادل Pass Remote نیست. وضعیت Remote فقط پس از مشاهده اجرای همان Commit ثبت می‌شود و حتی Pass آن، Staging پارس‌پک، SMTP، Content/Ranking، Legal، Performance یا Production Launch را اثبات نمی‌کند. Phase 15 تا بسته‌شدن Checklist `NOT PASS` و Phase 16 همچنان قفل است.
