@@ -489,3 +489,16 @@ Prompt 016 الزام FEAT-013 را به یک Orientation کوتاه پس از �
 کاربر می‌تواند فوراً Match را شروع کند یا Onboarding را رد کند. Completion در Server یک‌باره و idempotent است و مقصد از Allowlist انتخاب می‌شود. Guest Match همچنان عمومی است.
 
 گیت متمرکز 4 test / 21 assertion و Regression کامل MySQL 8.4.11 برابر 88 test / 732 assertion بدون Skip PASS شد. Build و Pint PASS هستند و Browser QA در Desktop/Mobile، Light/Dark، RTL، Touch target، Overflow و Console نیز PASS است. این تصمیم Ranking، Content، Commerce یا Phase 16 را باز نمی‌کند.
+
+## DEC-037 - Collections سردبیری با مرز Published/Reviewed
+
+Date: 2026-09-12
+Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
+
+دستور ادامه مالک پس از Prompt 016 مجوز اجرای نزدیک‌ترین Slice مستقل باقی‌مانده فاز ۱۴، یعنی FEAT-021 Collections، بود. Collections فقط یک ابزار Discovery سناریومحور است و حق انتشار خودکار Draft، رتبه‌بندی، شخصی‌سازی یا عبور از مرز Safety/Review را ندارد.
+
+ویرایشگر می‌تواند پیش‌نویس مرتب بسازد، اما انتشار و توقف انتشار به `content.publish` محدود است. انتشار فقط وقتی مجاز است که تمام بازی‌ها نسخه جاری Published، Publication فعال، آخرین Review تأییدشده، Facts و Taxonomy لازم، Safety فعال و Cover بازبینی‌شده با Crop و Alt داشته باشند. همین قرارداد هنگام هر خواندن عمومی دوباره بررسی می‌شود تا stale شدن بازی فوراً دسترسی Collection و Cover را ببندد.
+
+گیت متمرکز Collections و Schema برابر 12 test / 67 assertion، Regression ترتیبی Content Admin + Collections برابر 14 test / 80 assertion و Regression کامل MySQL 8.4.11 برابر 92 test / 764 assertion بدون Failure پاس شد. JavaScript 8/8، Build، Blade، Pint و Auditها PASS هستند؛ Browser QA عمومی/Admin در 1440، 652 و 390، Light/Dark، RTL، Touch و Console نیز PASS است.
+
+هیچ بازی Pilot به‌صورت خودکار منتشر نشد؛ Production Collections تا ورود محتوای Human-reviewed خالی و صادقانه می‌ماند. این تصمیم Weekly Plan، Multi-child، Ranking، Commerce یا Phase 16 را باز نمی‌کند.

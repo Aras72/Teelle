@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: PROMPT 016 IMPLEMENTED / PASS / PHASE 15 QA GATE STILL OPEN
-Current Task: بستن Scope باقی‌مانده فاز ۱۴ و QA خارجی فاز ۱۵ بدون ادعای Launch-ready
+Current Stage: PROMPT 017 IMPLEMENTED / PASS / PHASE 15 QA GATE STILL OPEN
+Current Task: بستن Scope مستقل باقی‌مانده فاز ۱۴ و QA خارجی فاز ۱۵ بدون ادعای Launch-ready
 Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
 Last Completed:
@@ -81,13 +81,16 @@ Currently Working On:
 - گیت متمرکز PWA برابر 4/4 با 30 assertion و Regression کامل MySQL 8.4.11 برابر 84/84 با 710 assertion بدون Skip PASS است؛ lifecycle/install/offline واقعی روی HTTPS هنوز NOT VERIFIED است.
 - Prompt 016 اجرا شد: Onboarding کوتاه، یک‌باره و قابل‌رد برای حساب بزرگسال پس از تأیید ایمیل آماده شد؛ هیچ داده کودک در این مرحله گرفته نمی‌شود.
 - گیت Onboarding برابر 4/4 با 21 assertion و Regression کامل MySQL 8.4.11 برابر 88/88 با 732 assertion بدون Skip PASS شد؛ Browser QA Desktop/Mobile و Light/Dark نیز PASS است.
+- Prompt 017 اجرا شد: Collections سردبیری مرتب با Draft/Publish/Unpublish، Permission مستقل، Audit و صفحات عمومی fail-closed آماده شد.
+- گیت Collections و Schema برابر 12/12 با 67 assertion، Regression ترتیبی Content Admin + Collections برابر 14/14 با 80 assertion و Regression کامل MySQL 8.4.11 برابر 92/92 با 764 assertion PASS شد.
+- Browser QA صفحات عمومی و Admin Collections در 1440، 652 و 390، Light/Dark، RTL، Touch target، Overflow و Console PASS است.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
 - `PHASE 11 — SECURITY & PRIVACY`: مستندات پایه کامل؛ کنترل‌های Production مانند SMTP، TLS و Privacy release هنوز در Gate انتشار بررسی می‌شوند.
 - `PHASE 12 — DEVELOPMENT PLANNING`: کامل و Architecture Gate برابر PASS.
-- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 016 تولید، Freeze و اجرا شده‌اند.
-- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 016 اجرا شده‌اند؛ PWA local foundation و Onboarding بسته شدند، اما Hero interaction، Weekly Plan، Multi-child، Collections، محتوای Published/Reviewed، Ranking calibration، Commerce و Post-grace deletion هنوز COMPLETE نیست.
+- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 017 تولید، Freeze و اجرا شده‌اند.
+- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 017 اجرا شده‌اند؛ PWA local foundation، Onboarding و Collections بسته شدند، اما Hero interaction، Weekly Plan، Multi-child، محتوای Published/Reviewed، Ranking calibration، Commerce و Post-grace deletion هنوز COMPLETE نیست.
 - `PHASE 15 — TESTING & QA`: برای Scope موجود فعال است؛ گیت MySQL 8 پاس شده ولی Gate کامل QA هنوز NOT PASS است.
 
 Next:
@@ -99,7 +102,7 @@ Next:
 - تعیین و Freeze کردن کوچک‌ترین Slice بعدی فقط پس از بسته‌شدن QA جاری و تأیید مالک
 - تکمیل E2E، Accessibility، Security header و Performance Gate پیش از PHASE 16
 - طراحی Slice مستقل Executor حذف/Anonymization فقط پس از Freeze شدن Legal retention و Backup behavior
-- Freeze اجرایی Slice مستقل بعدی برای Collections editorial؛ بدون جعل Ranking، انتشار Content یا Commerce
+- Freeze اجرایی Slice مستقل بعدی برای صفحه About و تکمیل IA عمومی؛ بدون جعل Ranking، انتشار Content یا Commerce
 
 Blocked By:
 
@@ -147,9 +150,9 @@ Critical Risks:
 - Motion سنگین ممکن است Performance یا Accessibility را آسیب بزند و باید در Design Gate کنترل شود.
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
-Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-016 FROZEN AND EXECUTED; PROMPT 016 PASS
-Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPTS 011-014 IMPLEMENTED / PASS; PROMPT 015 PWA LOCAL FOUNDATION IMPLEMENTED / PRODUCTION EVIDENCE PENDING; PROMPT 016 ONBOARDING PASS
-Testing Status: PHASE 15 IN PROGRESS; current MySQL 8.4.11 full Laravel 88/88 PASS with 732 assertions and no skipped database contract tests; Onboarding focused 4/4 PASS with 21 assertions; PWA focused 4/4 PASS with 30 assertions; Admin report 4/4 PASS with 35 assertions; Privacy 5/5 PASS with 36 assertions; MySQL schema contract includes privacy_requests and search_observations; local MySQL backup/restore parity PASS; JS 8/8 PASS; Build، Pint، Blade compilation and current dependency audits PASS; browser smoke Home/Match/Login/Jigari/Admin report Light/Dark PASS; Onboarding Desktop/Mobile Light/Dark RTL/Touch/Overflow/Console PASS; PWA metadata and Offline document browser checks PASS but Service Worker lifecycle/installability NOT VERIFIED; Home responsive reflow at 320/390/768/1024/1440، Home/Login keyboard + 44px touch targets and authenticated Account/Child Profile/Admin/Privacy/Report keyboard traversal PASS; authenticated Child Profile Create/Edit/Archive، real-role Admin QA and Privacy/Report Desktop/Mobile Light/Dark QA PASS; SMTP، full software Screen reader، Zoom، Forced Colors، system Reduced Motion، Staging TLS، encrypted/off-site/media restore، post-grace anonymization and Core Web Vitals NOT VERIFIED
+Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-017 FROZEN AND EXECUTED; PROMPT 017 PASS
+Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPTS 011-014 IMPLEMENTED / PASS; PROMPT 015 PWA LOCAL FOUNDATION IMPLEMENTED / PRODUCTION EVIDENCE PENDING; PROMPT 016 ONBOARDING PASS; PROMPT 017 COLLECTIONS PASS
+Testing Status: PHASE 15 IN PROGRESS; current MySQL 8.4.11 full Laravel 92/92 PASS with 764 assertions and no skipped database contract tests; Collections + schema focused 12/12 PASS with 67 assertions; order-dependent Content Admin + Collections 14/14 PASS with 80 assertions; Onboarding focused 4/4 PASS with 21 assertions; PWA focused 4/4 PASS with 30 assertions; Admin report 4/4 PASS with 35 assertions; Privacy 5/5 PASS with 36 assertions; MySQL schema contract includes editorial_collections، editorial_collection_game، privacy_requests and search_observations; local MySQL backup/restore parity PASS; JS 8/8 PASS; Build، Pint، Blade compilation and current dependency audits PASS; browser smoke Home/Match/Login/Jigari/Admin report Light/Dark PASS; Collections public/Admin 1440/652/390 Light/Dark RTL/Touch/Overflow/Console PASS; Onboarding Desktop/Mobile Light/Dark RTL/Touch/Overflow/Console PASS; PWA metadata and Offline document browser checks PASS but Service Worker lifecycle/installability NOT VERIFIED; Home responsive reflow at 320/390/768/1024/1440، Home/Login keyboard + 44px touch targets and authenticated Account/Child Profile/Admin/Privacy/Report keyboard traversal PASS; authenticated Child Profile Create/Edit/Archive، real-role Admin QA and Privacy/Report Desktop/Mobile Light/Dark QA PASS; SMTP، full software Screen reader، Zoom، Forced Colors، system Reduced Motion، Staging TLS، encrypted/off-site/media restore، post-grace anonymization and Core Web Vitals NOT VERIFIED
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

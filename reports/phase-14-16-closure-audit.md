@@ -27,7 +27,7 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 | FEAT-018 Search/Filter | PASS | Prompt 012 plus aggregate Search health in Prompt 014 |
 | FEAT-019 Weekly Plan | NOT IMPLEMENTED | Requires child/profile/history and eligible content |
 | FEAT-020 Multi-child Match | NOT IMPLEMENTED | Contract exists؛ requires calibrated matching and eligible content |
-| FEAT-021 Collections | NOT IMPLEMENTED | Editorial/public collection model and UI remain |
+| FEAT-021 Collections | PASS | Prompt 017 Admin lifecycle، public discovery and stale-content fail-closed gate |
 | FEAT-022 Jigari Checkout | BLOCKED | Price and Payment Provider are unapproved |
 | FEAT-023 Subscription lifecycle | PARTIAL | Server entitlement/refund boundary exists؛ verified gateway lifecycle remains |
 | FEAT-024 Settings/Privacy | PARTIAL | Settings/export/request/cancel pass؛ post-grace execution and Legal retention remain |

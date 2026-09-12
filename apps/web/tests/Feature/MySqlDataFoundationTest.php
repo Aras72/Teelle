@@ -54,6 +54,7 @@ class MySqlDataFoundationTest extends TestCase
             $this->assertTrue(Schema::hasTable($table), "Missing table: {$table}");
         }
         $this->assertTrue(Schema::hasColumn('match_sessions', 'submission_key'));
+        $this->assertTrue(Schema::hasColumn('users', 'onboarding_completed_at'));
     }
 
     public function test_system_seeders_are_idempotent_and_publish_no_demo_game(): void
@@ -143,6 +144,7 @@ class MySqlDataFoundationTest extends TestCase
             'entitlements', 'audit_logs', 'outbox_messages',
             'privacy_requests',
             'search_observations',
+            'editorial_collections', 'editorial_collection_game',
         ];
     }
 

@@ -316,6 +316,152 @@ body {
     cursor: pointer;
 }
 
+.collections-page,
+.collection-detail {
+    padding-block: clamp(var(--space-8), 7vw, var(--space-16));
+}
+
+.collections-heading,
+.collection-detail__heading {
+    position: relative;
+    max-width: 48rem;
+    margin-bottom: var(--space-10);
+}
+
+.collections-heading h1,
+.collection-detail__heading h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 8vw, 5rem);
+    line-height: var(--line-height-tight);
+}
+
+.collections-heading > p:last-child,
+.collection-detail__heading > p {
+    max-width: 40rem;
+    color: var(--text-secondary);
+}
+
+.collections-heading__marble {
+    position: absolute;
+    inset-inline-end: -14rem;
+    top: -3rem;
+    width: clamp(9rem, 20vw, 15rem);
+    opacity: 0.7;
+    animation: teelle-float 8s var(--ease-enter) infinite alternate;
+}
+
+.collections-heading__marble img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.collection-list,
+.collection-games {
+    display: grid;
+    gap: var(--space-5);
+}
+
+.collection-list {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+}
+
+.collection-card,
+.collection-game-card {
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    border-radius: 1.25rem;
+    background: var(--surface-elevated);
+    box-shadow: var(--shadow-low);
+}
+
+.collection-card {
+    position: relative;
+    display: grid;
+    gap: var(--space-5);
+    min-height: 18rem;
+    padding: var(--space-6);
+}
+
+.collection-card__dot {
+    width: 3rem;
+    height: 3rem;
+}
+
+.collection-card__dot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.collection-card h2,
+.collection-game-card h2 {
+    margin: 0 0 var(--space-2);
+    line-height: var(--line-height-tight);
+}
+
+.collection-card p,
+.collection-game-card p {
+    color: var(--text-secondary);
+}
+
+.collection-card__link,
+.collection-detail__heading a {
+    width: fit-content;
+    min-height: var(--touch-target);
+    font-weight: var(--font-weight-bold);
+    text-underline-offset: 0.3em;
+}
+
+.collection-games {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.collection-game-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.collection-game-card > div {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-5);
+}
+
+.collection-game-picker {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-container);
+}
+
+.collection-game-picker label {
+    display: grid;
+    grid-template-columns: var(--touch-target) 1fr auto;
+    gap: var(--space-2);
+    align-items: center;
+    min-height: var(--touch-target);
+}
+
+.collection-game-picker input {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.collection-game-picker small {
+    color: var(--text-secondary);
+}
+
+.collection-publish-actions {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+}
+
 @media (max-width: 40rem) {
     .onboarding-marble {
         inset-inline-start: -3rem;
@@ -328,10 +474,20 @@ body {
     .onboarding-actions .teelle-button {
         width: 100%;
     }
+
+}
+
+@media (max-width: 64rem) {
+    .collections-heading__marble {
+        inset-inline-end: 0;
+        top: -1rem;
+        opacity: 0.24;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .onboarding-marble {
+    .onboarding-marble,
+    .collections-heading__marble {
         animation: none;
     }
 }
@@ -1188,6 +1344,12 @@ body:has(.home-hero) #main-content {
 .admin-heading h1, .admin-panel h2, .admin-kicker { margin: 0; }
 .admin-kicker { color: var(--action-primary); font-weight: var(--font-weight-bold); }
 .admin-actions, .admin-row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.admin-heading > a,
+.admin-actions > a:not(.teelle-button) {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+}
 .admin-panel { padding: clamp(1rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
 .admin-notice, .admin-error { margin: 0; padding: var(--space-4); border-radius: var(--radius-input); }
 .admin-notice { background: var(--surface-warm); color: var(--text-primary); }

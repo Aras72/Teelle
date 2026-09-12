@@ -2,6 +2,10 @@
 
 ## 2026-09-12
 
+- Implemented Prompt 017 Editorial Collections with ordered drafts، separated edit/publish permissions، audited lifecycle and public scenario-based discovery.
+- Collections fail closed against the complete Published/Reviewed candidate contract at publish and read time; no Draft، stale، unsafe or unreviewed game is exposed.
+- Fixed an order-dependent joined-column collision by selecting `games.*` explicitly; full MySQL 8.4.11 regression now passes at 92 tests / 764 assertions، with JavaScript 8/8، Build، Blade، Pint and audits passing.
+- Browser QA for public/Admin Collections passes at 1440، 652 and 390 in Light/Dark with no horizontal overflow، undersized actionable target or Console warning/error.
 - Implemented Prompt 016 one-time، skippable adult-account onboarding after email verification without requesting child data or gating free Guest play.
 - Added allowlisted Start Match/Account destinations، server-side idempotent completion and onboarding enforcement for verified Account/Jigari routes.
 - Prompt 016 focused gate passes at 4 tests / 21 assertions; full MySQL 8.4.11 regression passes at 88 tests / 732 assertions with no skips، and Build، Pint and Desktop/Mobile Light/Dark browser QA pass.

@@ -40,6 +40,10 @@ Phase 15 Gate: NOT PASS
 - [x] Prompt 016 Onboarding — Auth/Verification/Skip/Idempotency/Redirect allowlist با 4 test / 21 assertion
 - [x] Regression کامل جاری روی MySQL 8.4.11 — 88 test / 732 assertion بدون Skip
 - [x] Onboarding در Desktop و 390×844، Light/Dark، RTL، Touch target، Overflow و Console — PASS
+- [x] Prompt 017 Collections — Admin draft/publish/unpublish، public index/detail/cover و stale-content fail-closed با 12 test / 67 assertion
+- [x] Regression ترتیبی Content Admin + Collections — 14 test / 80 assertion
+- [x] Regression کامل جاری روی MySQL 8.4.11 — 92 test / 764 assertion بدون Failure و بدون Skip قرارداد دیتابیس
+- [x] Collections عمومی/Admin در 1440، 652 و 390، Light/Dark، RTL، Touch target، Overflow و Console — PASS
 
 ## مسدودکننده انتشار
 

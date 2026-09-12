@@ -11,10 +11,13 @@ Status: MYSQL 8 REGRESSION PASS
 
 - `MySqlDataFoundationTest`: `8 passed`، `37 assertions`
 - Full Laravel regression after Prompt 011: `64 passed`، `483 assertions`
+- Full Laravel regression after Prompt 017: `92 passed`، `764 assertions`
+- Editorial Collections + MySQL schema: `12 passed`، `67 assertions`
+- Order-dependent Content Admin + Collections regression: `14 passed`، `80 assertions`
 - Jigari entitlement and Child Profile authorization: `7 passed`، `50 assertions`
 - Server version assertion: `8.4.11`
 - migration، Seeder idempotency و تمام integrity constraintها: PASS
-- Auth و Guest merge، Content/Admin، Quick Match، Result/Play، Heartbeat و Jigari Child Profiles: PASS
+- Auth و Guest merge، Content/Admin، Quick Match، Result/Play، Heartbeat، Jigari Child Profiles و Editorial Collections: PASS
 
 در اجرای اولیه full suite، اجرای `migrate:fresh` داخل کلاس schema وضعیت مشترک `RefreshDatabase` را برای تست‌های بعدی آلوده کرد. تست schema به `RefreshDatabase` و seed تراکنشی هر تست منتقل شد؛ سپس full suite بدون Skip یا Failure دوباره اجرا و پاس شد.
 

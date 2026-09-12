@@ -7,6 +7,7 @@
                 @can('content.edit')<x-ui.button href="{{ route('admin.content.imports.index') }}" variant="secondary">Import بازی‌ها</x-ui.button>@endcan
                 @can('coverage.view')<x-ui.button href="{{ route('admin.content.coverage') }}" variant="secondary">ماتریس پوشش</x-ui.button>@endcan
                 @can('analytics.view')<x-ui.button href="{{ route('admin.content.reports.weekly') }}" variant="secondary">گزارش هفتگی</x-ui.button>@endcan
+                @can('content.edit')<x-ui.button href="{{ route('admin.content.collections.index') }}" variant="secondary">مجموعه‌ها</x-ui.button>@endcan
             </nav>
         </header>
 
