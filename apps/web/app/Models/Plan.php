@@ -10,6 +10,10 @@ class Plan extends Model
 
     protected function casts(): array
     {
-        return ['is_active' => 'boolean'];
+        return [
+            'duration_months' => 'integer',
+            'price_minor' => 'integer',
+            'is_active' => 'boolean',
+        ];
     }
 }

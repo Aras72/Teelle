@@ -526,3 +526,16 @@ CI باید PHPUnit کامل با Schema validation، Pint، Blade compilation،
 وجود Workflow یا Pass محلی معادل Pass Remote نیست. وضعیت Remote فقط پس از مشاهده اجرای همان Commit ثبت می‌شود و حتی Pass آن، Staging پارس‌پک، SMTP، Content/Ranking، Legal، Performance یا Production Launch را اثبات نمی‌کند. Phase 15 تا بسته‌شدن Checklist `NOT PASS` و Phase 16 همچنان قفل است.
 
 پس از اصلاح مجوز Trigger در دیتابیس موقت و اجرای Build پیش از PHPUnit، GitHub Actions Run #3 روی Commit `7bcb749` در 1m 34s با موفقیت کامل شد. این Evidence فقط CI Repository را PASS می‌کند.
+
+## DEC-040 - قیمت آزمایشی قابل‌ویرایش و تعویق درگاه تا بعد از MVP
+
+Date: 2026-09-13
+Status: APPROVED BY OWNER / IMPLEMENTED
+
+مالک اعلام کرد درگاه بانکی و قیمت‌گذاری نهایی بعد از MVP اضافه می‌شوند و برای MVP قیمت‌های آزمایشی تومان با امکان ویرایش Plan لازم است. این تصمیم بخش «قیمت نامشخص» DEC-029 را supersede می‌کند، اما ممنوعیت Checkout، Purchase و Entitlement ساختگی را حفظ می‌کند.
+
+سه دوره ثابت ۳، ۶ و ۱۲ماهه با Feature set یکسان باقی می‌مانند. قیمت‌های اولیه نمایشی به‌ترتیب ۳۹۰٬۰۰۰، ۶۹۰٬۰۰۰ و ۱٬۱۹۰٬۰۰۰ تومان‌اند. مقدار Canonical با Currency برابر `IRR` ذخیره و با نسبت صریح ۱ تومان = ۱۰ ریال نمایش داده می‌شود. Admin دارای Permission `subscription.manage` می‌تواند عنوان، قیمت و نمایش عمومی را بدون Terminal تغییر دهد؛ Code و Duration، Trial و دوره یک‌ماهه قابل ایجاد یا تغییر نیستند. هر تغییر Audit می‌شود.
+
+Payment Provider، Checkout، Callback، Purchase و فعال‌سازی پولی `JIGARI_ACTIVE` طبق دستور مالک به بعد از MVP منتقل شدند و دیگر Blocker Website MVP نیستند. تا آن زمان صفحه عمومی صریحاً آزمایشی‌بودن قیمت و نبود خرید را اعلام می‌کند.
+
+گیت متمرکز Jigari/Plan روی MySQL 8.4.11 برابر 11 test / 92 assertion و Regression کامل برابر 99 test / 842 assertion PASS شد. SQLite محلی به‌علت نبود Driver پیش از هر Assertion قابل اجرا نبود و PASS محسوب نشد.

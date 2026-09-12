@@ -27,6 +27,7 @@ Quick Match، مشاهده بازی، Start و Safety به سرویس خارجی
 - Callback signature، amount، currency، product، purchase identity و replay protection server-side بررسی می‌شوند.
 - Purchase و provider event ذخیره می‌شوند؛ Entitlement از نتیجه verified ساخته می‌شود.
 - Adapter ایرانی و Google Play آینده قرارداد مشترک دارند، اما TWA/Play integration تا Website Complete Gate قفل است.
+- قیمت آزمایشی Plan مستقل از Gateway است و Purchase ایجاد نمی‌کند؛ Provider و Checkout طبق DEC-040 به بعد از MVP منتقل شده‌اند.
 
 ## Content and media
 

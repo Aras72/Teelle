@@ -55,6 +55,8 @@ Phase: 10 - DATA
 - `audit_logs`: Actor، action، target، before/after محدود و request_id
 - `outbox_messages`: تحویل قابل اعتماد Notification/Integration بدون dual-write
 
+قیمت Plan در `price_minor` به‌صورت عدد صحیح `IRR` نگهداری می‌شود؛ Admin و UI عمومی آن را با نسبت ثابت ۱۰ ریال به ۱ تومان دریافت/نمایش می‌دهند. Code و Duration پلن‌های ۳/۶/۱۲ماهه ثابت‌اند و تغییر قیمت یا visibility Audit می‌شود.
+
 ## Key relationships
 
 - Game یک یا چند GameVersion دارد؛ فقط نسخه Approved می‌تواند Publication فعال بگیرد.

@@ -28,7 +28,7 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 | FEAT-019 Weekly Plan | NOT IMPLEMENTED | Requires child/profile/history and eligible content |
 | FEAT-020 Multi-child Match | NOT IMPLEMENTED | Contract exists؛ requires calibrated matching and eligible content |
 | FEAT-021 Collections | PASS | Prompt 017 Admin lifecycle، public discovery and stale-content fail-closed gate |
-| FEAT-022 Jigari Checkout | BLOCKED | Price and Payment Provider are unapproved |
+| FEAT-022 Jigari Checkout | DEFERRED POST-MVP | Editable provisional pricing is implemented؛ Payment Provider and Checkout are explicitly deferred by DEC-040 |
 | FEAT-023 Subscription lifecycle | PARTIAL | Server entitlement/refund boundary exists؛ verified gateway lifecycle remains |
 | FEAT-024 Settings/Privacy | PARTIAL | Settings/export/request/cancel pass؛ post-grace execution and Legal retention remain |
 | FEAT-025 Admin Content CRUD | PASS | Prompt 006 |
@@ -39,7 +39,7 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 | FEAT-030 Admin Export | PASS | Prompt 014 PDF and CSV/Excel |
 | FEAT-031 Pending Recovery | NOT IMPLEMENTED / SHOULD | Does not block MUST-only closure unless promoted |
 | FEAT-032 Relationship Copy | NOT IMPLEMENTED / SHOULD | Does not block MUST-only closure unless promoted |
-| FEAT-033 PWA Readiness | PARTIAL | Prompt 015 local implementation/tests pass؛ real browser lifecycle and Production HTTPS installability remain |
+| FEAT-033 PWA Readiness | PARTIAL | Local lifecycle and real server-outage recovery pass؛ Production HTTPS installability، app installation and two-version update remain |
 
 ## Phase 15 release blockers
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CoverageController;
 use App\Http\Controllers\Admin\EditorialCollectionController;
 use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
@@ -103,6 +104,8 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::get('/reports/weekly', [ReportController::class, 'index'])->name('reports.weekly');
     Route::get('/reports/weekly.csv', [ReportController::class, 'csv'])->name('reports.weekly.csv');
     Route::get('/reports/weekly.pdf', [ReportController::class, 'pdf'])->name('reports.weekly.pdf');
+    Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
+    Route::put('/plans/{plan:code}', [PlanController::class, 'update'])->name('plans.update');
     Route::get('/collections', [EditorialCollectionController::class, 'index'])->name('collections.index');
     Route::get('/collections/new', [EditorialCollectionController::class, 'create'])->name('collections.create');
     Route::post('/collections', [EditorialCollectionController::class, 'store'])->name('collections.store');

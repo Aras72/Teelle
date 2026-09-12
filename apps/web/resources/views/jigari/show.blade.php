@@ -1,4 +1,4 @@
-@php($digits = ['0'=>'۰','1'=>'۱','2'=>'۲','3'=>'۳','4'=>'۴','5'=>'۵','6'=>'۶','7'=>'۷','8'=>'۸','9'=>'۹'])
+@php($digits = ['0'=>'۰','1'=>'۱','2'=>'۲','3'=>'۳','4'=>'۴','5'=>'۵','6'=>'۶','7'=>'۷','8'=>'۸','9'=>'۹',','=>'٬'])
 <x-layouts.app title="تیله جیگری" description="عضویت تیله جیگری برای همراهی شخصی‌تر خانواده‌ها">
     <section class="jigari-page teelle-container" aria-labelledby="jigari-title">
         <header class="jigari-hero teelle-enter">
@@ -40,14 +40,15 @@
                         <img class="jigari-plan__marble" src="{{ asset('images/marbles/jigari-ruby-v1.webp') }}" alt="" width="768" height="768" aria-hidden="true">
                         <h3>{{ strtr((string) $plan->duration_months, $digits) }} ماهه</h3>
                         <p>همه امکانات تیله جیگری</p>
-                        <strong>قیمت و خرید هنوز فعال نشده</strong>
+                        <strong class="jigari-plan__price">{{ strtr(number_format(intdiv((int) $plan->price_minor, 10)), $digits) }} تومان</strong>
+                        <small>قیمت آزمایشی و قابل تغییر</small>
                     </article>
                 @empty
-                    <x-ui.state-message>پلن‌ها در حال آماده‌سازی‌اند و هنوز خریدی انجام نمی‌شود</x-ui.state-message>
+                    <x-ui.state-message>در حال حاضر هیچ قیمت آزمایشی فعالی نمایش داده نمی‌شود</x-ui.state-message>
                 @endforelse
             </div>
         </section>
 
-        <x-ui.state-message>تا تعیین قیمت و درگاه پرداخت، هیچ عضویت یا پرداختی از این صفحه ساخته نمی‌شود</x-ui.state-message>
+        <x-ui.state-message>درگاه پرداخت بعد از MVP اضافه می‌شود؛ فعلاً این صفحه فقط قیمت‌های آزمایشی را نمایش می‌دهد و هیچ عضویت یا پرداختی نمی‌سازد</x-ui.state-message>
     </section>
 </x-layouts.app>

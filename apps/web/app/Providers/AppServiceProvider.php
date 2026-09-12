@@ -65,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perHour(5)->by(hash('sha256', (string) $identity));
         });
 
-        foreach (['content.edit', 'content.review', 'content.publish', 'coverage.view'] as $ability) {
+        foreach (['content.edit', 'content.review', 'content.publish', 'coverage.view', 'subscription.manage'] as $ability) {
             Gate::define($ability, fn (User $user): bool => $user->hasPermission($ability));
         }
 

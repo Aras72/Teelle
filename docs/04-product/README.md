@@ -21,10 +21,10 @@ Closed: 2026-09-03
 - Non-goals: DOCUMENTED
 - Exact supported child age range: APPROVED — 6 to less than 156 months
 - Public-launch content acceptance threshold: DEFINED BY CRITICAL GOLDEN COVERAGE MATRIX
-- Payment provider/pricing amounts: OPEN; architecture/commercial dependency
+- Final pricing and Payment provider: POST-MVP؛ provisional editable toman prices are allowed by DEC-040 without Checkout
 
 ## Gate state
 
 `PASS`
 
-PRD، Scope، MVP، Feature Catalog و Non-goals مستند شده‌اند. بازه سنی و Coverage boundary مشخص‌اند. Payment provider و قیمت مبلغی وابستگی‌های فازهای بعد هستند و Product identity را مسدود نمی‌کنند. عبور Gate اجازه ورود به Product Rules را می‌دهد، نه Implementation.
+PRD، Scope، MVP، Feature Catalog و Non-goals مستند شده‌اند. بازه سنی و Coverage boundary مشخص‌اند. قیمت آزمایشی قابل‌ویرایش برای MVP مجاز است؛ قیمت نهایی و Payment provider طبق دستور مالک به بعد از MVP منتقل شده‌اند. عبور Gate اجازه ورود به Product Rules را می‌دهد، نه Implementation.

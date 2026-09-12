@@ -11,6 +11,8 @@ Phase: 05 — PRODUCT RULES
 - `BR-MEM-004`: اشتراک یک‌ماهه و Trial رایگان MUST NOT در MVP عرضه شوند.
 - `BR-MEM-005`: Entitlement مرکزی `JIGARI_ACTIVE` MUST مرجع دسترسی Featureهای پولی باشد.
 - `BR-MEM-006`: انقضا، Refund یا Revocation MUST دسترسی Jigari را متوقف کند بدون حذف داده مالکیتی کاربر.
+- `BR-MEM-007`: قیمت‌های MVP MAY آزمایشی و قابل‌ویرایش باشند، اما MUST با برچسب روشن نمایش داده شوند و بدون Provider تأییدشده هیچ Checkout یا Entitlement نسازند.
+- `BR-MEM-008`: ورودی قیمت Admin به تومان است؛ مقدار Canonical MUST با Currency برابر `IRR` و نسبت ۱ تومان به ۱۰ ریال ذخیره شود.
 
 ## Free core
 

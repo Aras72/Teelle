@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-09-13
+
+- Added Prompt 020 editable provisional pricing for the fixed 3/6/12-month Jigari plans at 390,000، 690,000 and 1,190,000 toman.
+- Added a `subscription.manage`-protected Admin surface for title، toman price and public visibility with localized digit normalization and append-only Audit.
+- Stored canonical amounts as IRR at 10 IRR per toman while clearly labeling public amounts as provisional.
+- Kept Checkout، Purchase، Payment Event and automatic Entitlement activation absent; Payment Provider and final pricing are deferred until after MVP by owner direction.
+- Focused Jigari and pricing regression passes on isolated MySQL 8.4.11 at 11 tests / 92 assertions and full Laravel regression passes at 99 tests / 842 assertions; the unavailable local SQLite driver is recorded separately and not counted as a pass.
+
 ## 2026-09-12
 
 - Added Prompt 019 GitHub Actions Quality gate for PHP 8.5، MySQL 8.4، Node 22 and pnpm 11.22.0 with full Laravel/JavaScript regression، formatting، build، Blade and dependency audits.

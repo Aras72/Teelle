@@ -19,7 +19,7 @@ final class JigariChildProfileTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_public_jigari_page_lists_only_approved_periods_without_fake_checkout(): void
+    public function test_public_jigari_page_lists_provisional_toman_prices_without_fake_checkout(): void
     {
         $this->seed(PlanSeeder::class);
 
@@ -27,7 +27,9 @@ final class JigariChildProfileTest extends TestCase
             ->assertSee('تیله جیگری')
             ->assertSee('۳ ماهه')->assertSee('۶ ماهه')->assertSee('۱۲ ماهه')
             ->assertSee('images/marbles/jigari-ruby-v1.webp', false)
-            ->assertSee('قیمت و خرید هنوز فعال نشده')
+            ->assertSee('۳۹۰٬۰۰۰ تومان')->assertSee('۶۹۰٬۰۰۰ تومان')->assertSee('۱٬۱۹۰٬۰۰۰ تومان')
+            ->assertSee('قیمت آزمایشی و قابل تغییر')
+            ->assertSee('درگاه پرداخت بعد از MVP اضافه می‌شود')
             ->assertDontSee('/checkout', false)
             ->assertDontSee('یک ماهه');
     }
@@ -35,7 +37,7 @@ final class JigariChildProfileTest extends TestCase
     public function test_public_jigari_page_has_an_honest_empty_plan_state(): void
     {
         $this->get(route('jigari.show'))->assertOk()
-            ->assertSee('پلن‌ها در حال آماده‌سازی‌اند')
+            ->assertSee('هیچ قیمت آزمایشی فعالی نمایش داده نمی‌شود')
             ->assertDontSee('/checkout', false);
     }
 
