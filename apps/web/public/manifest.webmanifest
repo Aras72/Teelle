@@ -1,0 +1,36 @@
+{
+    "id": "/",
+    "name": "تیله — هم‌بازی کودک",
+    "short_name": "تیله",
+    "description": "پیدا کردن بازی مناسب برای همین لحظه",
+    "lang": "fa",
+    "dir": "rtl",
+    "start_url": "/?source=pwa",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#fffaf0",
+    "theme_color": "#123f46",
+    "categories": ["family", "lifestyle", "education"],
+    "icons": [
+        {
+            "src": "/images/marbles/heartbeat-cobalt-v1.webp",
+            "sizes": "768x768",
+            "type": "image/webp",
+            "purpose": "any"
+        },
+        {
+            "src": "/images/marbles/jigari-ruby-v1.webp",
+            "sizes": "768x768",
+            "type": "image/webp",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "چی بازی کنیم؟",
+            "short_name": "پیدا کردن بازی",
+            "url": "/match?source=pwa-shortcut"
+        }
+    ]
+}

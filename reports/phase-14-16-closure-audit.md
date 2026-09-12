@@ -39,7 +39,7 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 | FEAT-030 Admin Export | PASS | Prompt 014 PDF and CSV/Excel |
 | FEAT-031 Pending Recovery | NOT IMPLEMENTED / SHOULD | Does not block MUST-only closure unless promoted |
 | FEAT-032 Relationship Copy | NOT IMPLEMENTED / SHOULD | Does not block MUST-only closure unless promoted |
-| FEAT-033 PWA Readiness | NOT IMPLEMENTED | Manifest، service worker، offline/update QA and installability remain |
+| FEAT-033 PWA Readiness | PARTIAL | Prompt 015 local implementation/tests pass؛ real browser lifecycle and Production HTTPS installability remain |
 
 ## Phase 15 release blockers
 

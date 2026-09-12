@@ -34,6 +34,9 @@ Phase 15 Gate: NOT PASS
 - [x] Regression کامل جاری روی MySQL 8.4.11 — 80 test / 680 assertion بدون Skip
 - [x] PDF واقعی دوصفحه‌ای با Dompdf 3.1.6 تولید، با Poppler رندر و بدون Clip/Overlap بازبینی شد
 - [x] گزارش Admin در Desktop و Mobile 390، Light/Dark، Keyboard، Touch target و Console بدون خطا PASS شد
+- [x] Prompt 015 PWA local foundation — Manifest، Service Worker privacy boundary، Offline recovery و Update flow با 4 test / 30 assertion
+- [x] Regression کامل جاری روی MySQL 8.4.11 — 84 test / 710 assertion بدون Skip
+- [x] Manifest JSON، Service Worker syntax، Offline RTL/44px/overflow و Browser metadata — PASS
 
 ## مسدودکننده انتشار
 
@@ -45,6 +48,7 @@ Phase 15 Gate: NOT PASS
 - [ ] Security header و HTTPS/TLS validation در Staging
 - [ ] Screen reader، Zoom، Forced Colors و reduced-motion واقعی
 - [ ] Lighthouse/Core Web Vitals و weak-device budget
+- [ ] Service Worker lifecycle، update، forced-offline navigation و installability واقعی روی HTTPS Production candidate
 - [ ] Staging encrypted/off-site backup restore، media restore، monitoring و rollback rehearsal با سنجش RPO/RTO
 - [ ] Privacy Policy، Terms و consentهای Release
 - [ ] اجرای حذف/Anonymization پس از مهلت، Backup propagation و Legal retention

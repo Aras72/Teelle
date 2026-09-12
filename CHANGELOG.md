@@ -2,6 +2,9 @@
 
 ## 2026-09-12
 
+- Implemented Prompt 015 local PWA readiness with Persian RTL manifest، photorealistic marble icons، privacy-safe static caching، offline recovery and accessible update flow.
+- Prompt 015 focused gate passes at 4 tests / 30 assertions; full MySQL 8.4.11 regression passes at 84 tests / 710 assertions with no skips، and Service Worker syntax، Manifest JSON، Build، JavaScript، Blade، Pint and audits pass.
+- Browser metadata/offline-page checks pass; real Service Worker lifecycle، forced-offline simulation، install prompt and Production HTTPS installability remain NOT VERIFIED.
 - Implemented Prompt 014 Admin weekly product report across Funnel، Matching، Content، Search، Business and Technical health with deterministic non-AI summary.
 - Added privacy-preserving aggregate Search observations، selectable date range، Excel-compatible UTF-8 CSV and hardened Dompdf PDF export.
 - Prompt 014 focused MySQL gate passes at 4 tests / 35 assertions; full regression passes at 80 tests / 680 assertions with no skips، and PDF render، Desktop/Mobile Light/Dark browser QA، Build، JavaScript، Pint، Blade and audits pass.

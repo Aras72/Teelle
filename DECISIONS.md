@@ -467,3 +467,14 @@ Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
 گزارش Funnel، Matching، Content، Search، Business و Technical health را از یک منبع server-side پوشش می‌دهد. Summary فقط از Ruleهای ثابت ساخته می‌شود و AI در تولید یا تفسیر آن نقشی ندارد. Search observation فقط شمارنده روزانه نگه می‌دارد و Query، User ID یا داده کودک ذخیره نمی‌کند. خروجی PDF با Remote loading و PHP execution غیرفعال و CSV با UTF-8 BOM سازگار با Excel است.
 
 گیت متمرکز برابر 4 test / 35 assertion و Regression کامل روی MySQL 8.4.11 برابر 80 test / 680 assertion بدون Skip پاس شد. JavaScript 8/8، Build، Blade، Pint و Auditها PASS هستند؛ PDF واقعی با Poppler بازبینی شد و Browser QA Desktop/Mobile، Light/Dark، Keyboard و Console نیز PASS است. این تصمیم Admin report/export را می‌بندد، نه کل Phase 14 یا Release Gate را؛ Prompt 015 به PWA readiness محدود می‌شود.
+
+## DEC-035 - PWA در همان پوسته Laravel و Cache بدون HTML شخصی
+
+Date: 2026-09-12
+Status: APPROVED BY OWNER / IMPLEMENTED / CONDITIONAL PASS
+
+Prompt 015 فقط PWA readiness همان وب‌سایت Responsive Laravel را اجرا می‌کند و هیچ Frontend موازی یا TWA نمی‌سازد. Manifest فارسی RTL، آیکن‌های تیله فوتورئال موجود، Offline recovery و Update notice در همان Design System اضافه شدند.
+
+Service Worker فقط Assetهای ثابت same-origin را Cache می‌کند. Navigation HTML، API، Request غیر GET و داده Account/Admin/Match/Result/Play وارد Cache نمی‌شوند. Offline Play queue و TWA خارج Scope هستند.
+
+گیت متمرکز 4 test / 30 assertion و Regression کامل MySQL 8.4.11 برابر 84 test / 710 assertion بدون Skip پاس شد. Syntax، Manifest JSON، Build، Blade، Pint، JavaScript و Auditها PASS هستند. چون Browser کنترل‌شده Service Worker API را expose نکرد، lifecycle، forced-offline، install prompt و Production HTTPS installability به‌درستی `NOT VERIFIED` ماندند. Phase 15 هنوز PASS نیست و Phase 16 قفل می‌ماند.

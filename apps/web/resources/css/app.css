@@ -184,6 +184,43 @@ body {
         color var(--duration-ui) var(--ease-enter);
 }
 
+.pwa-update-notice {
+    position: fixed;
+    inset-inline: max(var(--page-gutter), calc((100vw - var(--content-max)) / 2));
+    bottom: var(--space-4);
+    z-index: var(--layer-toast);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    max-width: 30rem;
+    min-height: var(--touch-target);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-container);
+    background: var(--surface-elevated);
+    box-shadow: var(--shadow-medium);
+}
+
+.pwa-update-notice button {
+    min-height: var(--touch-target);
+    padding-inline: var(--space-4);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: var(--action-primary);
+    color: var(--text-on-action);
+    font: inherit;
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+}
+
+@media (max-width: 32rem) {
+    .pwa-update-notice {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+
 button,
 input,
 select,

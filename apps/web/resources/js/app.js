@@ -98,3 +98,52 @@ const syncHeroVideo = () => {
 syncHeroVideo();
 reducedMotion.addEventListener('change', syncHeroVideo);
 document.addEventListener('visibilitychange', syncHeroVideo);
+
+const announcePwaUpdate = (registration) => {
+    if (document.querySelector('[data-pwa-update]')) {
+        return;
+    }
+
+    const notice = document.createElement('div');
+    notice.className = 'pwa-update-notice';
+    notice.dataset.pwaUpdate = '';
+    notice.setAttribute('role', 'status');
+    notice.innerHTML = '<span>نسخه تازه تیله آماده است</span><button type="button">به‌روزش کن</button>';
+
+    notice.querySelector('button').addEventListener('click', () => {
+        registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
+    });
+
+    document.body.append(notice);
+};
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', async () => {
+        try {
+            const registration = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+
+            if (registration.waiting) {
+                announcePwaUpdate(registration);
+            }
+
+            registration.addEventListener('updatefound', () => {
+                const worker = registration.installing;
+                worker?.addEventListener('statechange', () => {
+                    if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+                        announcePwaUpdate(registration);
+                    }
+                });
+            });
+        } catch {
+            // The website remains fully usable when PWA registration is unavailable.
+        }
+    });
+
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
+        }
+    });
+}

@@ -5,9 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="{{ $description ?? 'تیله، همراه خانواده برای پیدا کردن بازی‌های متناسب با کودک' }}">
         <meta name="theme-color" content="#fffaf0">
+        <meta name="application-name" content="تیله">
+        <meta name="mobile-web-app-capable" content="yes">
 
         <title>{{ isset($title) ? $title.' | تیله' : 'تیله' }}</title>
 
+        <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
+        <link rel="icon" href="{{ asset('images/marbles/heartbeat-cobalt-v1.webp') }}" type="image/webp">
         @include('partials.theme-bootstrap')
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
