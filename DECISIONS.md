@@ -538,4 +538,4 @@ Status: APPROVED BY OWNER / IMPLEMENTED
 
 Payment Provider، Checkout، Callback، Purchase و فعال‌سازی پولی `JIGARI_ACTIVE` طبق دستور مالک به بعد از MVP منتقل شدند و دیگر Blocker Website MVP نیستند. تا آن زمان صفحه عمومی صریحاً آزمایشی‌بودن قیمت و نبود خرید را اعلام می‌کند.
 
-گیت متمرکز Jigari/Plan روی MySQL 8.4.11 برابر 11 test / 92 assertion و Regression کامل برابر 99 test / 842 assertion PASS شد. SQLite محلی به‌علت نبود Driver پیش از هر Assertion قابل اجرا نبود و PASS محسوب نشد.
+گیت متمرکز Jigari/Plan روی MySQL 8.4.11 برابر 11 test / 92 assertion و Regression کامل برابر 99 test / 841 assertion PASS شد. SQLite محلی به‌علت نبود Driver پیش از هر Assertion قابل اجرا نبود و PASS محسوب نشد.

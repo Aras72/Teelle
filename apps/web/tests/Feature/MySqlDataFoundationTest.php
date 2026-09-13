@@ -66,7 +66,7 @@ class MySqlDataFoundationTest extends TestCase
 
         $this->assertSame($before, $this->seedCounts());
         $this->assertSame(0, Game::query()->where('status', GameStatus::Published)->count());
-        $this->assertSame(3, DB::table('plans')->where('is_active', false)->count());
+        $this->assertSame(3, DB::table('plans')->where('is_active', true)->count());
     }
 
     public function test_published_pointer_cannot_reference_another_game_version(): void

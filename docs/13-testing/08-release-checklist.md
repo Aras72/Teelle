@@ -50,7 +50,8 @@ Phase 15 Gate: NOT PASS
 - [x] PWA runtime در Chrome 152 روی loopback secure context — ثبت/فعال‌سازی/کنترل Service Worker، دوام کنترل پس از Reload و Cache `teelle-static-v1`
 - [x] PWA real-outage recovery — پس از توقف دقیق سرور موقت، صفحه «فعلاً آفلاینی» و اقدام «دوباره تلاش کن» توسط Service Worker نمایش داده شد
 - [x] قیمت آزمایشی پلن‌های ۳/۶/۱۲ماهه و مدیریت Admin — تومان محلی، ذخیره IRR، Permission، Audit و بدون Checkout/Entitlement ساختگی
-- [x] Regression کامل Prompt 020 روی MySQL 8.4.11 — 99 test / 842 assertion بدون Failure
+- [x] Regression کامل Prompt 020 روی MySQL 8.4.11 — 99 test / 841 assertion بدون Failure
+- [ ] Remote CI اصلاح Prompt 020 — Run اولیه `34723528510` روی assertion منسوخ Plan شکست خورد؛ recheck جایگزین در انتظار است
 
 ## مسدودکننده انتشار
 

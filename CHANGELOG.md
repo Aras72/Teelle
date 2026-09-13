@@ -6,7 +6,8 @@
 - Added a `subscription.manage`-protected Admin surface for title، toman price and public visibility with localized digit normalization and append-only Audit.
 - Stored canonical amounts as IRR at 10 IRR per toman while clearly labeling public amounts as provisional.
 - Kept Checkout، Purchase، Payment Event and automatic Entitlement activation absent; Payment Provider and final pricing are deferred until after MVP by owner direction.
-- Focused Jigari and pricing regression passes on isolated MySQL 8.4.11 at 11 tests / 92 assertions and full Laravel regression passes at 99 tests / 842 assertions; the unavailable local SQLite driver is recorded separately and not counted as a pass.
+- Focused Jigari and pricing regression passes on isolated MySQL 8.4.11 at 11 tests / 92 assertions and full Laravel regression passes at 99 tests / 841 assertions; the unavailable local SQLite driver is recorded separately and not counted as a pass.
+- Corrected the legacy MySQL foundation expectation so the three owner-approved provisional plans are required to seed as publicly active.
 
 ## 2026-09-12
 

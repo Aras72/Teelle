@@ -3,7 +3,7 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: PROMPT 020 IMPLEMENTED / LOCAL GATE PASS / PHASE 15 QA GATE STILL OPEN
+Current Stage: PROMPT 020 CI EXPECTATION FIXED / LOCAL GATE PASS / REMOTE RECHECK PENDING
 Current Task: بستن Scope مستقل باقی‌مانده فاز ۱۴ و QA خارجی/Production فاز ۱۵ بدون ادعای Launch-ready
 Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
@@ -89,6 +89,7 @@ Currently Working On:
 - گیت About برابر 2/2 با 11 assertion و Regression کامل MySQL 8.4.11 برابر 94/94 با 776 assertion PASS شد؛ Browser QA در 390، 768 و 1440، Light/Dark نیز PASS است.
 - Prompt 019 PASS شد: GitHub Actions Quality gate با MySQL 8.4، PHP 8.5، PHPUnit، Pint، Blade، JavaScript، Build و Auditها اضافه شد؛ Run #3 روی Commit `7bcb749` در 1m 34s با موفقیت کامل شد.
 - Prompt 020 اجرا شد: قیمت‌های آزمایشی تومان برای پلن‌های ثابت ۳/۶/۱۲ماهه، مدیریت Admin بدون Terminal، تبدیل Canonical به IRR و Audit تغییرات اضافه شد؛ هیچ Checkout، Purchase یا Entitlement ساختگی وجود ندارد و درگاه طبق تصمیم مالک بعد از MVP است.
+- GitHub Actions Run `34723528510` به‌دلیل assertion منسوخ «سه Plan غیرفعال» شکست خورد؛ این انتظار با تصمیم قیمت‌گذاری فعال DEC-040 همگام شد و Regression محلی جایگزین روی MySQL 8.4.11 با 99 test / 841 assertion PASS شد؛ Remote recheck هنوز در انتظار است.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
@@ -159,7 +160,7 @@ Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL
 Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPTS 011-014 IMPLEMENTED / PASS; PROMPT 015 PWA LOCAL FOUNDATION IMPLEMENTED / PRODUCTION EVIDENCE PENDING; PROMPT 016 ONBOARDING PASS; PROMPT 017 COLLECTIONS PASS; PROMPT 018 ABOUT PASS; PROMPT 020 PROVISIONAL PRICING PASS / PAYMENT POST-MVP
 Testing Status: PHASE 15 IN PROGRESS; current MySQL 8.4.11 full Laravel 94/94 PASS with 776 assertions and no skipped database contract tests; About focused 2/2 PASS with 11 assertions; Collections + schema focused 12/12 PASS with 67 assertions; order-dependent Content Admin + Collections 14/14 PASS with 80 assertions; Onboarding focused 4/4 PASS with 21 assertions; PWA focused 4/4 PASS with 30 assertions; Admin report 4/4 PASS with 35 assertions; Privacy 5/5 PASS with 36 assertions; MySQL schema contract includes editorial_collections، editorial_collection_game، privacy_requests and search_observations; local MySQL backup/restore parity PASS; JS 8/8 PASS; Build، Pint، Blade compilation and current dependency audits PASS; browser smoke Home/Match/Login/Jigari/Admin report Light/Dark PASS; About public 390/768/1440 Light/Dark RTL/Touch/Overflow/Console PASS; Collections public/Admin 1440/652/390 Light/Dark RTL/Touch/Overflow/Console PASS; Onboarding Desktop/Mobile Light/Dark RTL/Touch/Overflow/Console PASS; PWA metadata، Service Worker local lifecycle، controller continuity and real server-outage recovery PASS; HTTPS installability، app installation and two-version update rollout NOT VERIFIED; Home responsive reflow at 320/390/768/1024/1440، Home/Login keyboard + 44px touch targets and authenticated Account/Child Profile/Admin/Privacy/Report keyboard traversal PASS; authenticated Child Profile Create/Edit/Archive، real-role Admin QA and Privacy/Report Desktop/Mobile Light/Dark QA PASS; SMTP، full software Screen reader، Zoom، Forced Colors، system Reduced Motion، Staging TLS، encrypted/off-site/media restore، post-grace anonymization and Core Web Vitals NOT VERIFIED
 Testing Status Update: PROMPT 019 local contract 1/1 PASS with 24 assertions; current MySQL 8.4.11 full Laravel 95/95 PASS with 800 assertions; GitHub Actions Run #3 on `7bcb749` REMOTE PASS in 1m 34s.
-Testing Status Update: PROMPT 020 Plan pricing 4/4 PASS with 36 assertions; combined Jigari/Plan 11/11 PASS with 92 assertions; current MySQL 8.4.11 full Laravel 99/99 PASS with 842 assertions; JavaScript 8/8، Build، Blade، Pint and pnpm production audit PASS.
+Testing Status Update: PROMPT 020 Plan pricing 4/4 PASS with 36 assertions; combined Jigari/Plan 11/11 PASS with 92 assertions; current MySQL 8.4.11 full Laravel 99/99 PASS with 841 assertions; focused MySQL foundation + Plan gate 12/12 PASS with 78 assertions; JavaScript 8/8، Build، Blade، Pint and pnpm production audit PASS. Remote Run `34723528510` failed on the superseded inactive-plan assertion; correction recheck is pending.
 Launch Status: NOT STARTED
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED
