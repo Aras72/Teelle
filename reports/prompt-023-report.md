@@ -32,4 +32,4 @@ Status: IMPLEMENTED / AUTOMATED GATE PASS / BROWSER QA PASS
 - Composer and pnpm audits: PASS، no known vulnerability.
 - Browser QA: PASS on default Desktop and 390×844 Mobile، Light/Dark، RTL، visible keyboard focus and no horizontal overflow.
 - Browser console error/warning log across changed pages: empty.
-- Remote CI for the final Commit: PENDING until Push.
+- Commit `22186b8` روی `main` Push و تطابق local HEAD با `origin/main` تأیید شد؛ نتیجه Remote CI به‌دلیل نبود GitHub CLI و دسترسی احرازشده به Actions خصوصی در این محیط `NOT VERIFIED` است.
