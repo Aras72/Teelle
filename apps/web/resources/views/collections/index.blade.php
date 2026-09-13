@@ -3,8 +3,8 @@
         <header class="collections-heading teelle-enter">
             <div class="collections-heading__marble" aria-hidden="true"><img src="{{ asset('images/marbles/match-violet-v1.webp') }}" width="768" height="768" alt=""></div>
             <p class="match-kicker">برای یک موقعیت واقعی</p>
-            <h1 id="collections-title">مجموعه‌های بازی</h1>
-            <p>انتخاب‌های سردبیری‌شده برای وقتی که می‌خواهید زودتر به بازی برسید</p>
+            <h1 id="collections-title">یک بازی خوب برای همین حالا</h1>
+            <p>چند مجموعه آماده برای وقت‌هایی که می‌خواهید بی‌معطلی بازی را شروع کنید.</p>
         </header>
 
         <div class="collection-list">
@@ -15,7 +15,7 @@
                     <a class="collection-card__link" href="{{ route('collections.show', $collection) }}">دیدن بازی‌ها</a>
                 </article>
             @empty
-                <x-ui.state-message title="مجموعه تازه‌ای منتشر نشده">فقط مجموعه‌ای نشان داده می‌شود که بازی‌هایش منتشر، بازبینی‌شده و ایمن باشند</x-ui.state-message>
+                <x-ui.state-message title="مجموعه تازه‌ای منتشر نشده">هر مجموعه وقتی اینجا می‌آید که بازی‌هایش منتشر، بازبینی و از نظر ایمنی بررسی شده باشند.</x-ui.state-message>
             @endforelse
         </div>
     </section>

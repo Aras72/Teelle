@@ -43,6 +43,7 @@ Phase: 10 - DATA
 - `match_results`: سه رتبه، game/version snapshot و explanation facts
 - `play_sessions`: انتخاب Result و lifecycle بازی
 - `play_events`: started/completed/rated append-only و idempotent
+- `daily_free_play_claims`: Claim روزانه Start رایگان با HMAC روز/IP و بدون ذخیره IP خام
 - `saved_games`: مالکیت user و game؛ guest storage server-side محدود یا device-side
 - `coverage_observations`: no-result و gapهای ناشناس برای Content operations
 
@@ -68,3 +69,5 @@ Phase: 10 - DATA
 ## Privacy boundary
 
 Guest context فقط به MatchSession با TTL متصل است. داده کودک هرگز شامل نام خانوادگی، تصویر، مدرسه، آدرس دقیق یا جنسیت اجباری نیست. Analytics از شناسه pseudonymous و dimensionهای coarse استفاده می‌کند.
+
+شناسه کنترل Start رایگان از HMAC شامل روز تهران و IP مشاهده‌شده ساخته می‌شود؛ بنابراین نه IP خام ذخیره می‌شود و نه یک Fingerprint ثابت برای اتصال رفتار میان روزها وجود دارد. Claimهای روز قبل با Scheduler پاک می‌شوند.

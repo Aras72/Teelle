@@ -550,3 +550,16 @@ Status: APPROVED BY OWNER DIRECTION / IMPLEMENTED
 هر نسخه اکنون پرونده محافظت‌شده و read-only دارد. نتیجه پنج حوزه به‌صورت ساختاریافته و جداگانه ذخیره می‌شود؛ نتیجه کلی از آن‌ها مشتق می‌شود و اگر هر حوزه نیاز به اصلاح داشته باشد notes اجباری است. Self-review محتوا و رسانه همچنان در Server مسدود است. تصمیم سریع داخل فهرست حذف شد تا مشاهده پرونده قبل از تصمیم مسیر اصلی باشد.
 
 این تصمیم تأیید هیچ‌یک از ۲۵ Draft، مجوز تصویر، Publication، رفع Ranking hold یا انتخاب Weight نیست. تصمیم‌های واقعی باید توسط مالک یا بازبین انسانی مستقل ثبت شوند و انتشار همچنان Gate جداگانه و fail-closed دارد.
+
+## DEC-042 - Copy انسانی و یک Start رایگان روزانه برای هر IP
+
+Date: 2026-09-13
+Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
+
+مالک Copy دقیق Account، Registration، Collections، Jigari و About را اصلاح کرد و خواست متن‌های توضیحی نقطه پایانی داشته باشند اما عنوان‌ها بدون نقطه بمانند. نام حساب اکنون با نمونه‌های نسبی «داییِ ارغوان» و «مامانِ کوهیار» راهنمایی می‌شود و همان مقدار Server-side در سلام Account نمایش داده می‌شود. قالب اصلی حفظ شد؛ تناسب Kickerهای قرمز و تیترهای About نزدیک‌تر و کادر پایانی به یک پیام انسانی تمام‌عرض تبدیل شد.
+
+مالک همچنین مقرر کرد هر IP فقط یک بار در روز از بازی رایگان استفاده کند. مرز اجرایی روی گذار معتبر PlaySession از `matched` به `started` قرار گرفت تا مشاهده Match، Result و Detail سهم را مصرف نکند. Retry همان Start idempotent است، روز بر مبنای `Asia/Tehran` عوض می‌شود و Entitlement فعال جیگری از مسیر رایگان استفاده نمی‌کند.
+
+IP خام ذخیره نمی‌شود. Claim فقط HMAC روزانه IP مشاهده‌شده را نگه می‌دارد و به‌دلیل ورود روز به Digest، رفتار یک IP میان روزها قابل اتصال نیست. Header جعلی `X-Forwarded-For` بدون Trusted Proxy صریح نادیده می‌ماند و Claimهای قبلی با Scheduler روزانه پاک می‌شوند. Production باید `FREE_PLAY_IP_HASH_KEY` مستقل، Trusted Proxy دقیق و Cron واقعی را در Staging اثبات کند.
+
+گیت متمرکز MySQL 8.4.11 برابر 40 test / 317 assertion و Regression کامل برابر 103 test / 898 assertion بدون Skip پاس شد. JavaScript 8/8، Build با 58 module، Blade، Pint و Auditهای Composer/pnpm نیز PASS هستند. Browser QA در Desktop و Mobile 390، Light/Dark، RTL، Keyboard focus، بدون Horizontal overflow و بدون Console error برای صفحات تغییرکرده PASS شد. اجرای روزانه Cron و تشخیص IP واقعی پشت Proxy پارس‌پک هنوز Production evidence ندارند.

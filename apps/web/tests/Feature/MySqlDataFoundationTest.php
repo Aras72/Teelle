@@ -140,6 +140,7 @@ class MySqlDataFoundationTest extends TestCase
             'game_facts', 'coverage_matrix_cells',
             'materials', 'safety_rules', 'media_assets', 'match_sessions',
             'match_results', 'play_sessions', 'play_events', 'heartbeat_projections',
+            'daily_free_play_claims',
             'coverage_observations', 'plans', 'purchases', 'payment_events',
             'entitlements', 'audit_logs', 'outbox_messages',
             'privacy_requests',

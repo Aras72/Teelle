@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Enums\EntitlementStatus;
 use App\Enums\GameStatus;
 use App\Enums\GameVersionStatus;
 use App\Enums\MatchOutcome;
 use App\Enums\PlayState;
 use App\Models\ContentReview;
+use App\Models\Entitlement;
 use App\Models\Game;
 use App\Models\GamePublication;
 use App\Models\GameVersion;
@@ -22,6 +24,7 @@ use App\Models\User;
 use Database\Seeders\PlanSeeder;
 use Database\Seeders\SystemTaxonomySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -125,6 +128,101 @@ final class ResultPlayFlowTest extends TestCase
         $this->assertSame(1, DB::table('play_events')->where('event_type', 'rated')->count());
         $this->assertSame(['rating' => 5], $play->events()->where('event_type', 'rated')->firstOrFail()->payload_json);
         $this->get('/')->assertOk()->assertSee('۱۱۱');
+    }
+
+    public function test_free_play_is_limited_to_one_started_game_per_ip_and_tehran_day(): void
+    {
+        [$firstMatch, $firstToken] = $this->guestMatch(MatchOutcome::Matched);
+        [$secondMatch, $secondToken] = $this->guestMatch(MatchOutcome::Matched);
+        foreach ([$firstMatch, $secondMatch] as $match) {
+            foreach (range(1, 3) as $rank) {
+                $this->publishedResult($match, $rank);
+            }
+        }
+
+        $network = ['REMOTE_ADDR' => '203.0.113.25'];
+        $this->withServerVariables($network)->withSession(['teelle.guest_token' => $firstToken])
+            ->post(route('matches.games.start', [$firstMatch, 1]))->assertRedirect();
+        $firstPlay = PlaySession::query()->firstOrFail();
+
+        $this->withServerVariables($network)->withSession(['teelle.guest_token' => $firstToken])
+            ->post(route('matches.games.start', [$firstMatch, 1]))
+            ->assertRedirect(route('plays.show', $firstPlay));
+        $this->withServerVariables($network)->withSession(['teelle.guest_token' => $secondToken])
+            ->post(route('matches.games.start', [$secondMatch, 1]))
+            ->assertSessionHasErrors(['play' => 'فرصت بازی رایگان امروز این اینترنت استفاده شده است؛ فردا دوباره برگردید یا با عضویت فعال جیگری ادامه دهید']);
+
+        $this->assertDatabaseCount('daily_free_play_claims', 1);
+        $this->assertDatabaseCount('play_sessions', 1);
+        $this->assertSame(1, HeartbeatProjection::query()->whereKey('public_play_starts')->value('started_count'));
+        $claim = DB::table('daily_free_play_claims')->first();
+        $this->assertNotNull($claim);
+        $this->assertSame(64, strlen($claim->ip_day_hash));
+        $this->assertStringNotContainsString('203.0.113.25', $claim->ip_day_hash);
+
+        $this->travel(1)->days();
+        $this->withServerVariables($network)->withSession(['teelle.guest_token' => $secondToken])
+            ->post(route('matches.games.start', [$secondMatch, 1]))->assertRedirect();
+        $this->assertDatabaseCount('daily_free_play_claims', 2);
+        $this->assertDatabaseCount('play_sessions', 2);
+        $this->assertSame(2, HeartbeatProjection::query()->whereKey('public_play_starts')->value('started_count'));
+
+        Artisan::call('teelle:prune-daily-free-play');
+        $this->assertDatabaseCount('daily_free_play_claims', 1);
+        $this->assertDatabaseHas('daily_free_play_claims', ['usage_date' => now()->toDateString()]);
+    }
+
+    public function test_untrusted_forwarded_ip_cannot_evade_the_daily_free_play_limit(): void
+    {
+        [$firstMatch, $firstToken] = $this->guestMatch(MatchOutcome::Matched);
+        [$secondMatch, $secondToken] = $this->guestMatch(MatchOutcome::Matched);
+        foreach ([$firstMatch, $secondMatch] as $match) {
+            foreach (range(1, 3) as $rank) {
+                $this->publishedResult($match, $rank);
+            }
+        }
+
+        $this->withServerVariables(['REMOTE_ADDR' => '198.51.100.14', 'HTTP_X_FORWARDED_FOR' => '203.0.113.1'])
+            ->withSession(['teelle.guest_token' => $firstToken])
+            ->post(route('matches.games.start', [$firstMatch, 1]))->assertRedirect();
+        $this->withServerVariables(['REMOTE_ADDR' => '198.51.100.14', 'HTTP_X_FORWARDED_FOR' => '203.0.113.2'])
+            ->withSession(['teelle.guest_token' => $secondToken])
+            ->post(route('matches.games.start', [$secondMatch, 1]))->assertSessionHasErrors('play');
+
+        $this->assertDatabaseCount('daily_free_play_claims', 1);
+    }
+
+    public function test_active_jigari_member_does_not_consume_the_free_play_ip_allowance(): void
+    {
+        $member = User::factory()->create();
+        Entitlement::query()->create([
+            'user_id' => $member->id,
+            'product_code' => 'jigari',
+            'status' => EntitlementStatus::Active,
+            'starts_at' => now()->subHour(),
+            'ends_at' => now()->addMonth(),
+        ]);
+        $matches = collect(range(1, 2))->map(function () use ($member): MatchSession {
+            $match = MatchSession::factory()->create([
+                'user_id' => $member->id,
+                'guest_identity_id' => null,
+                'outcome' => MatchOutcome::Matched,
+                'evaluated_at' => now(),
+            ]);
+            foreach (range(1, 3) as $rank) {
+                $this->publishedResult($match, $rank);
+            }
+
+            return $match;
+        });
+
+        foreach ($matches as $match) {
+            $this->actingAs($member)->withServerVariables(['REMOTE_ADDR' => '192.0.2.44'])
+                ->post(route('matches.games.start', [$match, 1]))->assertRedirect();
+        }
+
+        $this->assertDatabaseCount('play_sessions', 2);
+        $this->assertDatabaseCount('daily_free_play_claims', 0);
     }
 
     public function test_verified_owner_can_save_a_published_play_but_another_user_cannot(): void

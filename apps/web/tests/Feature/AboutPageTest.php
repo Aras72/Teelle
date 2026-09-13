@@ -12,10 +12,13 @@ final class AboutPageTest extends TestCase
     {
         $this->get(route('about'))
             ->assertOk()
-            ->assertSee('از صفحه به بازی واقعی')
+            ->assertSee('راه کوتاه‌تر تا بازی کنار کودک')
+            ->assertSee('تیله با سه انتخاب روشن، کمک می‌کند تا زودتر در کنار کودکتان تجربه‌های شیرین بسازید.')
             ->assertSee('کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد')
             ->assertSee('سه انتخاب روشن، نه یک فهرست بی‌انتها')
-            ->assertSee('پیشنهادها با Metadata و قواعد قطعی ساخته می‌شوند، نه با AI')
+            ->assertSee('پیشنهادها با بررسی و قواعد سختگیرانه ارائه می‌شوند، نه با AI.')
+            ->assertSee('ایمنی اطلاعات شما همیشه حفظ می‌شود.')
+            ->assertSee('وقت کمتر برای انتخاب، فرصت بیشتر برای باهم‌بودن')
             ->assertSee('ایمنی قبل از درآمد')
             ->assertSee(route('match.show'), false)
             ->assertSee('images/marbles/play-amber-v1.webp', false);

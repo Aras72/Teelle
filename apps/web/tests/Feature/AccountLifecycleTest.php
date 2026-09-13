@@ -34,7 +34,9 @@ final class AccountLifecycleTest extends TestCase
     public function test_registration_creates_adult_household_sends_verification_and_rotates_session(): void
     {
         Notification::fake();
-        $this->get(route('register'));
+        $this->get(route('register'))
+            ->assertOk()
+            ->assertSee('نامی بنویسید که کودک شما را با آن می‌شناسد؛ مثلاً: داییِ ارغوان، مامانِ کوهیار.');
         $oldSessionId = session()->getId();
 
         $this->post(route('register.store'), [
@@ -172,7 +174,7 @@ final class AccountLifecycleTest extends TestCase
 
     public function test_account_history_and_saved_mutations_are_scoped_to_current_user(): void
     {
-        $owner = User::factory()->create();
+        $owner = User::factory()->create(['name' => 'داییِ ارغوان']);
         $other = User::factory()->create();
         [$match, $play, $game] = $this->userPlay($owner, 'بازی خصوصی آراس');
         SavedGame::query()->create(['user_id' => $owner->id, 'game_id' => $game->id]);
@@ -182,6 +184,8 @@ final class AccountLifecycleTest extends TestCase
         $this->assertDatabaseHas('saved_games', ['user_id' => $owner->id, 'game_id' => $game->id]);
 
         $this->actingAs($owner)->get(route('account.show'))->assertOk()->assertSee('بازی خصوصی آراس')
+            ->assertSee('سلام داییِ ارغوان')->assertSee('مثلاً: داییِ ارغوان، مامانِ کوهیار.')
+            ->assertSee('پروفایل کودک')->assertSee('پروفایل کودک فقط با عضویت فعال جیگری در دسترس است.')
             ->assertSee('شروع یک بازی')->assertSee('خروج از حساب');
         $this->put(route('account.update'), ['name' => 'نام تازه', 'timezone' => 'Asia/Tehran'])
             ->assertRedirect()->assertSessionHas('status', 'تنظیمات حساب ذخیره شد');

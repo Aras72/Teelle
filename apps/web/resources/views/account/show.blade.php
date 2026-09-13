@@ -4,7 +4,7 @@
         <header class="account-heading teelle-enter">
             <div class="account-marble" aria-hidden="true"><img src="{{ asset('images/marbles/account-indigo-v1.webp') }}" alt="" width="768" height="768"></div>
             <div>
-                <p class="match-kicker">خانه شما در تیله</p><h1 id="account-title">سلام {{ auth()->user()->name }}</h1><p>بازی‌های انجام‌شده و انتخاب‌های دوست‌داشتنی شما اینجا می‌مانند</p>
+                <p class="match-kicker">خانه شما در تیله</p><h1 id="account-title">سلام {{ auth()->user()->name }}</h1><p>بازی‌های انجام‌شده و انتخاب‌های دوست‌داشتنی شما اینجا می‌مانند.</p>
                 <div class="account-heading__actions">
                     <x-ui.button href="{{ route('match.show') }}">شروع یک بازی</x-ui.button>
                     <form method="post" action="{{ route('logout') }}">@csrf<x-ui.button type="submit" variant="secondary">خروج از حساب</x-ui.button></form>
@@ -17,17 +17,17 @@
             <section class="account-panel account-panel--wide" aria-labelledby="saved-title">
                 <div class="account-panel__heading"><div><p class="match-kicker">برای بعد</p><h2 id="saved-title">بازی‌های ذخیره‌شده</h2></div><span>{{ strtr((string) $saved->count(), $digits) }} بازی</span></div>
                 @if($saved->isEmpty())
-                    <p class="account-empty">هنوز بازی‌ای ذخیره نکرده‌اید؛ بعد از انجام یک بازی می‌توانید آن را برای بعد نگه دارید</p>
+                    <p class="account-empty">هنوز بازی‌ای ذخیره نکرده‌اید؛ بعد از انجام یک بازی می‌توانید آن را برای بعد نگه دارید.</p>
                 @else
                     <div class="saved-grid">
                         @foreach($saved as $row)
                             <article class="saved-card">
                                 @if($row['available'])
                                     <img src="{{ route('account.saved.cover', $row['item']->game) }}" alt="{{ $row['item']->game->currentPublishedVersion->title }}" loading="lazy">
-                                    <div><h3>{{ $row['item']->game->currentPublishedVersion->title }}</h3><p>آماده برای یک وقت با هم بودن</p></div>
+                                    <div><h3>{{ $row['item']->game->currentPublishedVersion->title }}</h3><p>آماده برای یک وقت با هم بودن.</p></div>
                                 @else
                                     <div class="saved-card__unavailable" aria-hidden="true"><span></span></div>
-                                    <div><h3>این بازی فعلاً در دسترس نیست</h3><p>تا بازبینی دوباره، جزئیات آن نمایش داده نمی‌شود</p></div>
+                                    <div><h3>این بازی فعلاً در دسترس نیست</h3><p>تا بازبینی دوباره، جزئیات آن نمایش داده نمی‌شود.</p></div>
                                 @endif
                                 <form method="post" action="{{ route('account.saved.destroy', $row['item']->game) }}">@csrf @method('DELETE')<button type="submit">برداشتن از ذخیره‌ها</button></form>
                             </article>
@@ -39,7 +39,7 @@
             <section class="account-panel" aria-labelledby="history-title">
                 <div class="account-panel__heading"><div><p class="match-kicker">خاطره‌های بازی</p><h2 id="history-title">سابقه</h2></div></div>
                 @if($history->isEmpty())
-                    <p class="account-empty">اولین بازی شما هنوز منتظر شروع است</p>
+                    <p class="account-empty">اولین بازی شما هنوز منتظر شروع است.</p>
                 @else
                     <ol class="history-list">
                         @foreach($history as $play)
@@ -53,7 +53,7 @@
                 <div class="account-panel__heading"><div><p class="match-kicker">تنظیمات پایه</p><h2 id="settings-title">مشخصات حساب</h2></div></div>
                 <form method="post" action="{{ route('account.update') }}" class="auth-form">
                     @csrf @method('PUT')
-                    <x-ui.field label="نام شما" name="name" value="{{ old('name', auth()->user()->name) }}" autocomplete="name" required :error="$errors->first('name')" />
+                    <x-ui.field label="نام شما" name="name" value="{{ old('name', auth()->user()->name) }}" autocomplete="name" hint="مثلاً: داییِ ارغوان، مامانِ کوهیار." required :error="$errors->first('name')" />
                     <x-ui.field label="ایمیل تأییدشده" name="account_email" type="email" value="{{ auth()->user()->email }}" disabled />
                     <input type="hidden" name="timezone" value="Asia/Tehran">
                     <x-ui.button type="submit">ذخیره تنظیمات</x-ui.button>
@@ -61,25 +61,25 @@
             </section>
 
             <section class="account-panel" aria-labelledby="jigari-account-title">
-                <div class="account-panel__heading"><div><p class="match-kicker">تیله جیگری</p><h2 id="jigari-account-title">پروفایل کودکان</h2></div></div>
+                <div class="account-panel__heading"><div><p class="match-kicker">تیله جیگری</p><h2 id="jigari-account-title">پروفایل کودک</h2></div></div>
                 @if($jigariActive)
-                    <p class="account-empty">عضویت فعال است و {{ strtr((string) $childCount, $digits) }} پروفایل فعال دارید</p>
+                    <p class="account-empty">عضویت فعال است و {{ strtr((string) $childCount, $digits) }} پروفایل فعال دارید.</p>
                     <x-ui.button href="{{ route('account.children.index') }}">مدیریت پروفایل‌ها</x-ui.button>
                 @else
-                    <p class="account-empty">پروفایل کودک فقط با عضویت فعال جیگری در دسترس است؛ اطلاعات قبلی پس از پایان عضویت حذف نمی‌شوند</p>
+                    <p class="account-empty">پروفایل کودک فقط با عضویت فعال جیگری در دسترس است.</p>
                     <x-ui.button href="{{ route('jigari.show') }}" variant="secondary">آشنایی با تیله جیگری</x-ui.button>
                 @endif
             </section>
 
             <section class="account-panel account-panel--wide privacy-panel" aria-labelledby="privacy-title">
                 <div class="account-panel__heading"><div><p class="match-kicker">کنترل داده‌ها</p><h2 id="privacy-title">حریم خصوصی حساب</h2></div></div>
-                <p class="account-empty">این حساب برای بزرگسال همراه کودک است. فایل خروجی فقط داده‌های مربوط به همین حساب را دارد و رمز عبور، نشست‌ها و شناسه‌های داخلی در آن قرار نمی‌گیرند</p>
+                <p class="account-empty">این حساب برای بزرگسال همراه کودک است. فایل خروجی فقط داده‌های مربوط به همین حساب را دارد و رمز عبور، نشست‌ها و شناسه‌های داخلی در آن قرار نمی‌گیرند.</p>
 
                 <div class="privacy-actions">
                     <form method="post" action="{{ route('account.privacy.export') }}" class="privacy-form">
                         @csrf
                         <h3>دریافت نسخه داده‌ها</h3>
-                        <p>یک فایل JSON خوانا شامل مشخصات حساب، پروفایل‌های کودک، سابقه Match و بازی، ذخیره‌ها و وضعیت عضویت دریافت می‌کنید</p>
+                        <p>یک فایل JSON خوانا شامل مشخصات حساب، پروفایل‌های کودک، سابقه Match و بازی، ذخیره‌ها و وضعیت عضویت دریافت می‌کنید.</p>
                         <x-ui.field label="رمز فعلی برای تأیید" name="export_password" type="password" autocomplete="current-password" required :error="$errors->first('export_password')" />
                         <x-ui.button type="submit" variant="secondary">دریافت فایل داده‌های من</x-ui.button>
                     </form>
@@ -87,13 +87,13 @@
                     <div class="privacy-form privacy-form--danger">
                         <h3>حذف حساب</h3>
                         @if($pendingDeletion)
-                            <p class="privacy-warning">درخواست حذف فعال است و برای {{ strtr($pendingDeletion->scheduled_for->format('Y/m/d'), $digits) }} برنامه‌ریزی شده است. تا آن روز می‌توانید آن را لغو کنید</p>
+                            <p class="privacy-warning">درخواست حذف فعال است و برای {{ strtr($pendingDeletion->scheduled_for->format('Y/m/d'), $digits) }} برنامه‌ریزی شده است. تا آن روز می‌توانید آن را لغو کنید.</p>
                             <form method="post" action="{{ route('account.privacy.deletion.destroy') }}">
                                 @csrf @method('DELETE')
                                 <x-ui.button type="submit" variant="secondary">فعلاً حسابم بماند</x-ui.button>
                             </form>
                         @else
-                            <p>پس از ثبت درخواست، ۳۰ روز برای لغو فرصت دارید. اجرای نهایی ممکن است بعضی داده‌ها را ناشناس کند؛ نسخه‌های پشتیبان در چرخه معمول حذف می‌شوند و سوابقی که نگهداری قانونی دارند تا پایان همان مدت باقی می‌مانند</p>
+                            <p>پس از ثبت درخواست، ۳۰ روز برای لغو فرصت دارید. اجرای نهایی ممکن است بعضی داده‌ها را ناشناس کند؛ نسخه‌های پشتیبان در چرخه معمول حذف می‌شوند و سوابقی که نگهداری قانونی دارند تا پایان همان مدت باقی می‌مانند.</p>
                             <form method="post" action="{{ route('account.privacy.deletion.store') }}" class="privacy-form__request">
                                 @csrf
                                 <x-ui.field label="رمز فعلی برای تأیید حذف" name="deletion_password" type="password" autocomplete="current-password" required :error="$errors->first('deletion_password')" />

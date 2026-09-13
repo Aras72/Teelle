@@ -339,12 +339,17 @@ body {
 }
 
 .about-hero h1 {
-    max-width: 11ch;
+    max-width: 13ch;
     margin: 0;
-    font-size: clamp(3.25rem, 8vw, 7.5rem);
+    font-size: clamp(2.85rem, 6.6vw, 6rem);
     font-weight: var(--font-weight-black);
     letter-spacing: -0.055em;
     line-height: 0.95;
+}
+
+.about-page .match-kicker {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    letter-spacing: 0.01em;
 }
 
 .about-hero__lead {
@@ -414,9 +419,9 @@ body {
 
 .about-principles h2,
 .about-closing h2 {
-    max-width: 14ch;
+    max-width: 16ch;
     margin: 0;
-    font-size: clamp(2rem, 4.5vw, 4.5rem);
+    font-size: clamp(2rem, 3.8vw, 3.75rem);
     line-height: 1.08;
 }
 
@@ -449,16 +454,22 @@ body {
 }
 
 .about-closing {
-    display: flex;
-    gap: var(--space-8);
-    align-items: end;
-    justify-content: space-between;
+    display: grid;
+    min-height: clamp(11rem, 24vw, 18rem);
+    place-items: center;
     margin-bottom: clamp(var(--space-12), 8vw, var(--space-20));
     padding: clamp(var(--space-6), 5vw, var(--space-12));
     border: 1px solid var(--border-subtle);
     border-radius: 1.5rem;
     background: var(--surface-elevated);
     box-shadow: var(--shadow-low);
+}
+
+.about-closing h2 {
+    width: 100%;
+    max-width: none;
+    text-align: center;
+    text-wrap: balance;
 }
 
 @keyframes about-marble-drift {
@@ -1726,10 +1737,11 @@ body:has(.home-hero) #main-content {
 .jigari-orbit__planet--two { width: clamp(2.25rem, 4.5vw, 3.5rem); }
 .jigari-orbit__planet--three { width: clamp(1.5rem, 3vw, 2.5rem); }
 .jigari-benefits { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(1.5rem, 5vw, 5rem); align-items: start; }
-.jigari-benefits h2, .jigari-section-heading h2 { margin: .3rem 0 0; font-size: clamp(1.8rem, 4vw, 3.5rem); line-height: 1.35; }
+.jigari-benefits h2 { margin: .3rem 0 0; font-size: clamp(1.8rem, 4vw, 3.5rem); line-height: 1.35; }
 .jigari-benefits ul { display: grid; gap: .85rem; margin: 0; padding: 0; list-style: none; }
 .jigari-benefits li { padding: 1rem 1.25rem; border-inline-start: .3rem solid var(--teelle-peach); border-radius: var(--radius-input); background: var(--surface-warm); }
 .jigari-section-heading { margin-block-end: 1.5rem; }
+.jigari-section-heading h2 { margin: 0; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.15; text-wrap: balance; }
 .jigari-plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .jigari-plan { display: grid; justify-items: start; gap: .75rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
 .jigari-plan__marble, .child-card__marble { width: 3.25rem; aspect-ratio: 1; filter: drop-shadow(0 .65rem .8rem rgb(5 37 44 / .18)); }

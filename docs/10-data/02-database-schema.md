@@ -27,6 +27,7 @@ Phase: 10 - DATA
 | `match_results` | match_session_id، rank، game_id، game_version_id، score، explanation_json | unique session/rank and session/game؛ ranks 1..3 |
 | `play_sessions` | public_id، match_result_id، user/guest actor، state، started_at، completed_at | selected published snapshot retained |
 | `play_events` | public_id، play_session_id، event_type، idempotency_key، payload_json، occurred_at، recorded_at | unique idempotency key؛ unique one-time event types per session |
+| `daily_free_play_claims` | usage_date، ip_day_hash، play_session_id | unique date/hash و unique play؛ HMAC روزانه، بدون IP خام |
 | `coverage_observations` | context_bucket، reason_code، observed_on، count | aggregated; no raw child PII |
 
 Successful match rows MUST be committed atomically with exactly three unique Results. `no_result` stores no fabricated Results.
@@ -46,6 +47,7 @@ Successful match rows MUST be committed atomically with exactly three unique Res
 - Matching hot path uses normalized join columns and bounded values؛ JSON is not the primary hard-filter path.
 - Generated columns or `FULLTEXT` indexes are added only for stable approved search needs and after query evidence.
 - Heartbeat uses a pre-aggregated counter table/projection؛ public request never counts the full event table.
+- Free-play enforcement uses a date-scoped HMAC of the server-observed IP؛ the raw address is never persisted and the digest changes across Tehran calendar days.
 
 ## Integrity enforcement
 

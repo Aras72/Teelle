@@ -63,6 +63,8 @@ Guest MUST بتواند Quick Match، Result، Game Detail و Start را بدو�
 - `PRD-PLAY-003`: Feedback کوتاه MUST رویداد `rated` ثبت کند.
 - `PRD-PLAY-004`: فقط `started` MUST در Heartbeat عمومی شمرده شود.
 - `PRD-PLAY-005`: Pending session MAY در بازگشت بعدی بازیابی و با Reminder رضایت‌محور یادآوری شود.
+- `PRD-PLAY-006`: هر IP مشاهده‌شده MUST در هر روز تقویم `Asia/Tehran` حداکثر یک Play Start رایگان تازه ایجاد کند؛ تکرار همان Start سهم تازه مصرف نمی‌کند و عضو دارای Entitlement فعال جیگری از این سهم رایگان استفاده نمی‌کند.
+- `PRD-PLAY-007`: کنترل سهم روزانه MUST بدون ذخیره IP خام و با HMAC روزانه غیرقابل‌پیوند میان روزها انجام شود؛ Headerهای Forwarded فقط پس از پیکربندی صریح Proxy قابل‌اعتماد معتبرند.
 
 ### Account and membership
 

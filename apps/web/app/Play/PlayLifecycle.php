@@ -16,11 +16,14 @@ use Illuminate\Support\Facades\DB;
 
 final class PlayLifecycle
 {
-    public function __construct(private readonly PublishedResult $publishedResult) {}
+    public function __construct(
+        private readonly PublishedResult $publishedResult,
+        private readonly DailyFreePlayLimit $dailyFreePlayLimit,
+    ) {}
 
-    public function start(MatchResult $result): PlaySession
+    public function start(MatchResult $result, ?string $freePlayIpAddress = null): PlaySession
     {
-        $play = DB::transaction(function () use ($result): PlaySession {
+        $play = DB::transaction(function () use ($result, $freePlayIpAddress): PlaySession {
             $lockedResult = MatchResult::query()->whereKey($result->id)->lockForUpdate()->firstOrFail();
             $match = $lockedResult->matchSession()->firstOrFail();
             if (! $this->publishedResult->hasCompleteSet($match) || ! $this->publishedResult->isAvailable($lockedResult)) {
@@ -32,6 +35,9 @@ final class PlayLifecycle
             );
 
             if ($play->state === PlayState::Matched) {
+                if ($freePlayIpAddress !== null) {
+                    $this->dailyFreePlayLimit->claim($play, $freePlayIpAddress);
+                }
                 $event = PlayEvent::query()->firstOrCreate(
                     ['play_session_id' => $play->id, 'event_type' => PlayEventType::Started],
                     ['idempotency_key' => $this->eventKey($play, PlayEventType::Started), 'occurred_at' => now()],

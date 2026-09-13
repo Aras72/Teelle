@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: PROMPT 022 HUMAN REVIEW WORKSPACE IMPLEMENTED / OWNER REVIEW READY
-Current Task: بستن Scope مستقل باقی‌مانده فاز ۱۴ و QA خارجی/Production فاز ۱۵ بدون ادعای Launch-ready
+Current Stage: PROMPT 023 COPY + DAILY FREE PLAY IMPLEMENTED / LOCAL GATES PASS
+Current Task: تحویل Remote تغییرات Prompt 023 و سپس بستن Scope مستقل باقی‌مانده فاز ۱۴ و QA خارجی/Production فاز ۱۵ بدون ادعای Launch-ready
 Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
 Last Completed:
@@ -94,6 +94,9 @@ Currently Working On:
 - Prompt 022 فضای محافظت‌شده بازبینی انسانی را اضافه کرد: پرونده کامل Copy/Source/Age/Safety/Cover، چک‌لیست اجباری تأیید، notes اجباری اصلاح و حذف تصمیم سریع از جدول؛ هیچ Pilot تأیید یا منتشر نشد.
 - گیت Prompt 022 روی MySQL 8.4.11 متمرکز برابر 11 test / 69 assertion و Regression کامل برابر 100 test / 856 assertion بدون Skip پاس شد؛ JavaScript 8/8، Build، Pint، Blade و Auditهای Composer/pnpm نیز PASS هستند.
 - GitHub Actions Quality Run `34756584862` روی Commit پیاده‌سازی Prompt 022 برابر REMOTE PASS در 1m 26s است.
+- Prompt 023 Copy حساب، ثبت‌نام، بازی‌ها، جیگری و About را طبق دستور مالک اصلاح کرد و Start رایگان تازه را به یک بار در روز تهران برای هر IP مشاهده‌شده محدود کرد؛ IP خام ذخیره نمی‌شود، Retry همان Start مجاز است و عضو فعال جیگری از سهم رایگان استفاده نمی‌کند.
+- گیت متمرکز Prompt 023 روی MySQL 8.4.11 برابر 40/40 با 317 assertion و Regression کامل برابر 103/103 با 898 assertion بدون Skip PASS شد؛ JavaScript 8/8، Build، Blade، Pint، Scheduler discovery و Auditها نیز PASS هستند.
+- QA مرورگری Prompt 023 در Desktop و Mobile 390، Light/Dark، RTL، Keyboard focus، بدون Horizontal overflow و بدون Console error PASS شد.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 

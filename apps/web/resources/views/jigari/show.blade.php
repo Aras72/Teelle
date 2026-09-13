@@ -9,7 +9,7 @@
             </div>
             <p class="match-kicker">همراهی که با خانواده بزرگ می‌شود</p>
             <h1 id="jigari-title">تیله جیگری</h1>
-            <p>پروفایل‌های حداقلی کودک، برنامه‌ریزی بازی و کشف دقیق‌تر؛ بدون اینکه کیفیت پیشنهاد یا اطلاعات ایمنی پشت پرداخت پنهان شود</p>
+            <p>پروفایل کودک، برنامه‌ریزی بازی، کشف دقیق‌تر و کیفیت بالاتر.</p>
             @if($active)
                 <div class="jigari-hero__actions">
                     <x-ui.button href="{{ route('jigari.games.index') }}">جست‌وجوی بازی‌ها</x-ui.button>
@@ -25,30 +25,30 @@
         <section class="jigari-benefits" aria-labelledby="benefits-title">
             <div><p class="match-kicker">یک عضویت، یک تجربه</p><h2 id="benefits-title">در همه دوره‌ها امکانات یکسان است</h2></div>
             <ul>
-                <li>پروفایل کودک با کمترین داده لازم</li>
-                <li>Search و برنامه هفتگی در Sliceهای بعدی</li>
-                <li>History کامل و تجربه چندکودکی پس از تکمیل Gateها</li>
-                <li>پیشنهادهای اصلی و Safety همیشه برای همه رایگان می‌مانند</li>
+                <li>پروفایل کودک با کمترین داده لازم.</li>
+                <li>Search و برنامه هفتگی در Sliceهای بعدی.</li>
+                <li>History کامل و تجربه چندکودکی پس از تکمیل Gateها.</li>
+                <li>پیشنهاد بازی متناسب با شخصیت کودک شما.</li>
             </ul>
         </section>
 
         <section aria-labelledby="plans-title">
-            <div class="jigari-section-heading"><p class="match-kicker">دوره‌های مصوب</p><h2 id="plans-title">سه انتخاب، بدون تفاوت در امکانات</h2></div>
+            <div class="jigari-section-heading"><h2 id="plans-title">دوره‌های خاطره بازی</h2></div>
             <div class="jigari-plans">
                 @forelse($plans as $plan)
                     <article class="jigari-plan">
                         <img class="jigari-plan__marble" src="{{ asset('images/marbles/jigari-ruby-v1.webp') }}" alt="" width="768" height="768" aria-hidden="true">
                         <h3>{{ strtr((string) $plan->duration_months, $digits) }} ماهه</h3>
-                        <p>همه امکانات تیله جیگری</p>
+                        <p>همه امکانات تیله جیگری.</p>
                         <strong class="jigari-plan__price">{{ strtr(number_format(intdiv((int) $plan->price_minor, 10)), $digits) }} تومان</strong>
-                        <small>قیمت آزمایشی و قابل تغییر</small>
+                        <small>قیمت آزمایشی و قابل تغییر.</small>
                     </article>
                 @empty
-                    <x-ui.state-message>در حال حاضر هیچ قیمت آزمایشی فعالی نمایش داده نمی‌شود</x-ui.state-message>
+                    <x-ui.state-message>در حال حاضر هیچ قیمت آزمایشی فعالی نمایش داده نمی‌شود.</x-ui.state-message>
                 @endforelse
             </div>
         </section>
 
-        <x-ui.state-message>درگاه پرداخت بعد از MVP اضافه می‌شود؛ فعلاً این صفحه فقط قیمت‌های آزمایشی را نمایش می‌دهد و هیچ عضویت یا پرداختی نمی‌سازد</x-ui.state-message>
+        <x-ui.state-message>درگاه پرداخت بعد از MVP اضافه می‌شود؛ فعلاً این صفحه فقط قیمت‌های آزمایشی را نمایش می‌دهد و هیچ عضویت یا پرداختی نمی‌سازد.</x-ui.state-message>
     </section>
 </x-layouts.app>

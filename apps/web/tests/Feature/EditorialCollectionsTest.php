@@ -93,7 +93,11 @@ final class EditorialCollectionsTest extends TestCase
 
     public function test_public_index_has_honest_empty_state_and_admin_is_protected(): void
     {
-        $this->get(route('collections.index'))->assertOk()->assertSee('مجموعه تازه‌ای منتشر نشده');
+        $this->get(route('collections.index'))->assertOk()
+            ->assertSee('یک بازی خوب برای همین حالا')
+            ->assertSee('چند مجموعه آماده برای وقت‌هایی که می‌خواهید بی‌معطلی بازی را شروع کنید.')
+            ->assertSee('هر مجموعه وقتی اینجا می‌آید که بازی‌هایش منتشر، بازبینی و از نظر ایمنی بررسی شده باشند.')
+            ->assertSee('مجموعه تازه‌ای منتشر نشده');
         $this->get(route('admin.content.collections.index'))->assertUnauthorized();
         $this->actingAs(User::factory()->create())->get(route('admin.content.collections.index'))->assertForbidden();
     }

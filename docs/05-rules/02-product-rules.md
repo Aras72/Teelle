@@ -52,6 +52,10 @@ Phase: 05 — PRODUCT RULES
 - `PR-PLAY-002`: `completed` MUST فقط پس از `started` معتبر باشد.
 - `PR-PLAY-003`: `rated` MUST به Session معتبر مرتبط باشد و MAY پس از completed ثبت شود.
 - `PR-PLAY-004`: Reminder MUST opt-in/consent-aware باشد.
+- `PR-PLAY-005`: IP مشاهده‌شده MUST فقط یک PlaySession رایگان تازه را در هر روز تهران از `matched` به `started` ببرد.
+- `PR-PLAY-006`: Retry همان PlaySession شروع‌شده MUST idempotent و مجاز بماند؛ سهم روزانه فقط پس از Start معتبر مصرف می‌شود.
+- `PR-PLAY-007`: Entitlement فعال جیگری MUST محدودیت Start رایگان را مصرف نکند.
+- `PR-PLAY-008`: IP خام MUST برای این کنترل ذخیره نشود؛ شناسه HMAC MUST روزانه تغییر کند تا رفتار یک IP بین روزها قابل اتصال نباشد.
 
 ## Coverage
 

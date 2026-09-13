@@ -30,6 +30,8 @@ Host/provider نام مشخصی در Domain یا code ندارد. انتخاب P
 - `.env` و credentialها commit نمی‌شوند.
 - Local example فقط نام متغیر و مقدار غیرحساس نمونه دارد.
 - Production keyها در secret manager/control panel و با دسترسی محدود نگهداری می‌شوند.
+- `FREE_PLAY_IP_HASH_KEY` در Production یک Secret مستقل است؛ نبود آن فقط در Local/Test به `APP_KEY` fallback می‌کند.
+- Reverse proxyهای Production باید با IP/CIDR دقیق Trusted شوند؛ اعتماد عمومی به `X-Forwarded-For` ممنوع است.
 - Debug در Staging و Production خاموش است؛ logها PII کودک یا token کامل ندارند.
 
 ## Data isolation

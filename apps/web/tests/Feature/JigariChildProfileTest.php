@@ -30,6 +30,10 @@ final class JigariChildProfileTest extends TestCase
             ->assertSee('۳۹۰٬۰۰۰ تومان')->assertSee('۶۹۰٬۰۰۰ تومان')->assertSee('۱٬۱۹۰٬۰۰۰ تومان')
             ->assertSee('قیمت آزمایشی و قابل تغییر')
             ->assertSee('درگاه پرداخت بعد از MVP اضافه می‌شود')
+            ->assertSee('پروفایل کودک، برنامه‌ریزی بازی، کشف دقیق‌تر و کیفیت بالاتر.')
+            ->assertSee('پیشنهاد بازی متناسب با شخصیت کودک شما.')
+            ->assertSee('دوره‌های خاطره بازی')
+            ->assertDontSee('سه انتخاب، بدون تفاوت در امکانات')
             ->assertDontSee('/checkout', false)
             ->assertDontSee('یک ماهه');
     }

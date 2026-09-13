@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Play;
 
 use App\Enums\PlayEventType;
 use App\Http\Controllers\Controller;
+use App\Jigari\JigariAccess;
 use App\Models\MatchSession;
 use App\Models\PlaySession;
 use App\Play\PlayLifecycle;
@@ -18,12 +19,13 @@ use Illuminate\View\View;
 
 final class PlayController extends Controller
 {
-    public function start(Request $request, MatchSession $match, int $rank, PublicMatchAccess $access, PlayLifecycle $lifecycle): RedirectResponse
+    public function start(Request $request, MatchSession $match, int $rank, PublicMatchAccess $access, PlayLifecycle $lifecycle, JigariAccess $jigari): RedirectResponse
     {
         $access->assertMatch($request, $match);
         $result = $match->results()->where('rank', $rank)->firstOrFail();
         try {
-            $play = $lifecycle->start($result);
+            $usesFreePlay = ! $request->user() || ! $jigari->activeFor($request->user());
+            $play = $lifecycle->start($result, $usesFreePlay ? (string) $request->ip() : null);
         } catch (DomainException $exception) {
             throw ValidationException::withMessages(['play' => $exception->getMessage()]);
         }

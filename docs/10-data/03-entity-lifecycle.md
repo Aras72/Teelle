@@ -27,6 +27,8 @@ Phase: 10 - DATA
 - Events remain immutable even when projection state changes.
 - Offline retry uses the original idempotency key.
 - Rating is an Event attached to a valid PlaySession and does not rewrite completion.
+- گذار رایگان تازه به `STARTED` فقط پس از Claim یکتای IP/روز تهران انجام می‌شود؛ Retry همان PlaySession Claim تازه نمی‌سازد و عضو جیگری از سهم رایگان عبور نمی‌کند.
+- Claimهای روزهای قبل در Scheduler ساعت ۰۰:۱۵ تهران حذف می‌شوند؛ اجرای واقعی Scheduler جزو Gate محیط انتشار است.
 
 ## Identity and deletion
 
