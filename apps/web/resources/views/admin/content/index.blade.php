@@ -26,12 +26,9 @@
                         <tr>
                             <td>{{ $version?->title ?? 'بدون نسخه' }}</td><td dir="ltr">{{ $game->slug }}</td><td>{{ $game->status->value }}</td><td>{{ $version?->version_no ?? '-' }}</td>
                             <td class="admin-row-actions">
+                                @if ($version)<a href="{{ route('admin.content.review.show', $version) }}">{{ $version->status->value === 'in_review' && auth()->user()->can('content.review') ? 'بازبینی و تصمیم' : 'مشاهده پرونده' }}</a>@endif
                                 @if ($version && $version->status->value === 'draft' && auth()->user()->can('content.edit'))<a href="{{ route('admin.content.edit', $version) }}">ویرایش</a>@endif
                                 @if ($version && $version->status->value === 'draft' && auth()->user()->can('content.edit'))<form method="post" action="{{ route('admin.content.submit', $version) }}">@csrf<button>ارسال برای بازبینی</button></form>@endif
-                                @if ($version && $version->status->value === 'in_review' && auth()->user()->can('content.review'))
-                                    <form method="post" action="{{ route('admin.content.review', $version) }}">@csrf<input type="hidden" name="decision" value="approved"><button>تأیید مستقل</button></form>
-                                    <form method="post" action="{{ route('admin.content.review', $version) }}">@csrf<input type="hidden" name="decision" value="changes_requested"><button>درخواست اصلاح</button></form>
-                                @endif
                                 @if ($version && $version->status->value === 'approved' && auth()->user()->can('content.publish'))<form method="post" action="{{ route('admin.content.publish', $version) }}">@csrf<button>انتشار</button></form>@endif
                                 @if ($version && $version->status->value !== 'draft' && auth()->user()->can('content.edit'))<a href="{{ route('admin.content.revision', $game) }}">نسخه تازه</a>@endif
                                 @if ($game->status->value === 'published' && auth()->user()->can('content.publish'))

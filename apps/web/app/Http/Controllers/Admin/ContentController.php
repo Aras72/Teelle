@@ -57,6 +57,25 @@ class ContentController extends Controller
         ]);
     }
 
+    public function showReview(Request $request, GameVersion $version, GameMetadataPayload $metadata): View
+    {
+        abort_unless($request->user()->can('content.edit') || $request->user()->can('content.review'), 403);
+
+        $version->load(['game', 'creator', 'facts']);
+        $media = MediaAsset::query()->select('media_assets.*')
+            ->join('game_media', 'game_media.media_asset_id', '=', 'media_assets.id')
+            ->where('game_media.game_version_id', $version->id)
+            ->orderBy('game_media.sort_order')
+            ->get();
+
+        return view('admin.content.review', [
+            'version' => $version,
+            'metadata' => $metadata->forVersion($version),
+            'media' => $media,
+            'isOwnVersion' => (int) $version->created_by === (int) $request->user()->id,
+        ]);
+    }
+
     public function structuredMetadata(StructuredMetadataRequest $request, GameVersion $version, GameContentWorkflow $workflow): RedirectResponse
     {
         return $this->attempt(fn () => $workflow->updateStructuredMetadata($request->user(), $version, $request->validated('metadata')),
@@ -96,7 +115,13 @@ class ContentController extends Controller
 
     public function review(ReviewContentRequest $request, GameVersion $version, GameContentWorkflow $workflow): RedirectResponse
     {
-        return $this->attempt(fn () => $workflow->review($request->user(), $version, $request->string('decision')->toString(), $request->string('notes')->toString() ?: null),
+        return $this->attempt(fn () => $workflow->review(
+            $request->user(),
+            $version,
+            $request->string('decision')->toString(),
+            $request->string('notes')->toString() ?: null,
+            $request->validated('checks'),
+        ),
             back()->with('status', 'نتیجه بازبینی ثبت شد'));
     }
 

@@ -116,6 +116,7 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::get('/new', [ContentController::class, 'create'])->name('create');
     Route::post('/', [ContentController::class, 'store'])->name('store');
     Route::get('/versions/{version}/edit', [ContentController::class, 'edit'])->name('edit');
+    Route::get('/versions/{version}/review', [ContentController::class, 'showReview'])->name('review.show');
     Route::put('/versions/{version}', [ContentController::class, 'update'])->name('update');
     Route::post('/versions/{version}/structured-metadata', [ContentController::class, 'structuredMetadata'])->name('structured-metadata');
     Route::post('/versions/{version}/submit', [ContentController::class, 'submit'])->name('submit');

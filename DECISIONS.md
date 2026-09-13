@@ -539,3 +539,14 @@ Status: APPROVED BY OWNER / IMPLEMENTED
 Payment Provider، Checkout، Callback، Purchase و فعال‌سازی پولی `JIGARI_ACTIVE` طبق دستور مالک به بعد از MVP منتقل شدند و دیگر Blocker Website MVP نیستند. تا آن زمان صفحه عمومی صریحاً آزمایشی‌بودن قیمت و نبود خرید را اعلام می‌کند.
 
 گیت متمرکز Jigari/Plan روی MySQL 8.4.11 برابر 11 test / 92 assertion و Regression کامل برابر 99 test / 841 assertion PASS شد. SQLite محلی به‌علت نبود Driver پیش از هر Assertion قابل اجرا نبود و PASS محسوب نشد.
+
+## DEC-041 - تصمیم محتوایی فقط پس از مشاهده پرونده پنج‌حوزه‌ای
+
+Date: 2026-09-13
+Status: APPROVED BY OWNER DIRECTION / IMPLEMENTED
+
+مالک اجازه ادامه داد و اعلام کرد در نقاط لازم نتیجه را بررسی و تأیید یا رد می‌کند. چرخه فنی Review از Prompt 006 موجود بود، اما جدول Admin امکان تصمیم سریع بدون صفحه‌ای برای مشاهده یکپارچه Copy، Source، Age، Safety و Cover داشت. Prompt 022 این خلأ عملی را بدون تغییر Separation of duties بست.
+
+هر نسخه اکنون پرونده محافظت‌شده و read-only دارد. نتیجه پنج حوزه به‌صورت ساختاریافته و جداگانه ذخیره می‌شود؛ نتیجه کلی از آن‌ها مشتق می‌شود و اگر هر حوزه نیاز به اصلاح داشته باشد notes اجباری است. Self-review محتوا و رسانه همچنان در Server مسدود است. تصمیم سریع داخل فهرست حذف شد تا مشاهده پرونده قبل از تصمیم مسیر اصلی باشد.
+
+این تصمیم تأیید هیچ‌یک از ۲۵ Draft، مجوز تصویر، Publication، رفع Ranking hold یا انتخاب Weight نیست. تصمیم‌های واقعی باید توسط مالک یا بازبین انسانی مستقل ثبت شوند و انتشار همچنان Gate جداگانه و fail-closed دارد.

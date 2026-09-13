@@ -107,7 +107,7 @@ final class GameContentWorkflow
         });
     }
 
-    public function review(User $actor, GameVersion $version, string $decision, ?string $notes = null): void
+    public function review(User $actor, GameVersion $version, string $decision, ?string $notes = null, array $scopeDecisions = []): void
     {
         if ($version->status !== GameVersionStatus::InReview) {
             throw new DomainException('Only submitted versions can be reviewed.');
@@ -121,10 +121,26 @@ final class GameContentWorkflow
         if (! in_array($decision, ['approved', 'changes_requested'], true)) {
             throw new DomainException('Invalid review decision.');
         }
+        $requiredScopes = ['copy', 'source', 'age', 'safety', 'cover'];
+        if ($scopeDecisions !== []) {
+            $providedScopes = array_keys($scopeDecisions);
+            sort($providedScopes);
+            $sortedRequiredScopes = $requiredScopes;
+            sort($sortedRequiredScopes);
+            if ($providedScopes !== $sortedRequiredScopes
+                || array_diff(array_values($scopeDecisions), ['approved', 'changes_requested']) !== []) {
+                throw new DomainException('Review scope decisions are incomplete or invalid.');
+            }
+            $derivedDecision = in_array('changes_requested', $scopeDecisions, true) ? 'changes_requested' : 'approved';
+            if ($decision !== $derivedDecision) {
+                throw new DomainException('Review decision does not match its scope decisions.');
+            }
+        }
         $scopeHash = $this->hash->reviewScope($version);
-        DB::transaction(function () use ($actor, $version, $decision, $notes, $scopeHash): void {
+        DB::transaction(function () use ($actor, $version, $decision, $notes, $scopeHash, $scopeDecisions): void {
             ContentReview::query()->create(['game_version_id' => $version->id, 'reviewer_id' => $actor->id,
-                'decision' => $decision, 'scope_hash' => $scopeHash, 'notes' => $notes, 'reviewed_at' => now()]);
+                'decision' => $decision, 'scope_hash' => $scopeHash, 'scope_decisions' => $scopeDecisions ?: null,
+                'notes' => $notes, 'reviewed_at' => now()]);
             $approved = $decision === 'approved';
             $version->update(['status' => $approved ? GameVersionStatus::Approved : GameVersionStatus::Draft, 'approved_at' => $approved ? now() : null]);
             $version->game()->update(['status' => $approved ? GameStatus::Approved : GameStatus::Draft]);

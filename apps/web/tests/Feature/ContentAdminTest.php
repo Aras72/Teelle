@@ -75,6 +75,52 @@ class ContentAdminTest extends TestCase
         }
     }
 
+    public function test_review_workspace_requires_explicit_human_checks_and_change_notes(): void
+    {
+        [$editor, $reviewer] = [$this->staff('content_editor'), $this->staff('reviewer')];
+        $workflow = app(GameContentWorkflow::class);
+        $version = $workflow->createDraft($editor, $this->draft('human-review-workspace'))->versions()->firstOrFail();
+        $this->completeMetadata($version, $editor, $reviewer);
+        $workflow->submit($editor, $version);
+
+        $this->actingAs($reviewer)->get(route('admin.content.review.show', $version))
+            ->assertOk()
+            ->assertSee('پرونده بازبینی مستقل')
+            ->assertSee('متن، دستورها و لحن')
+            ->assertSee('Test source')
+            ->assertSee('تأییدشده');
+
+        $this->actingAs($reviewer)->post(route('admin.content.review', $version), [
+            'decision' => 'approved',
+            'checks' => [
+                'copy' => 'approved', 'source' => 'approved', 'age' => 'approved', 'safety' => 'approved',
+            ],
+        ])->assertSessionHasErrors('checks.cover');
+        $this->assertSame('in_review', $version->fresh()->status->value);
+
+        $this->actingAs($reviewer)->post(route('admin.content.review', $version), [
+            'checks' => [
+                'copy' => 'approved', 'source' => 'approved', 'age' => 'approved',
+                'safety' => 'approved', 'cover' => 'changes_requested',
+            ],
+        ])->assertSessionHasErrors('notes');
+        $this->assertSame('in_review', $version->fresh()->status->value);
+
+        $this->actingAs($reviewer)->post(route('admin.content.review', $version), [
+            'checks' => [
+                'copy' => 'approved', 'source' => 'approved', 'age' => 'approved',
+                'safety' => 'approved', 'cover' => 'approved',
+            ],
+            'notes' => 'پنج حوزه بازبینی شد',
+        ])->assertRedirect();
+        $this->assertSame('approved', $version->fresh()->status->value);
+        $review = DB::table('content_reviews')->where('game_version_id', $version->id)->latest('id')->first();
+        $this->assertEquals([
+            'copy' => 'approved', 'source' => 'approved', 'age' => 'approved',
+            'safety' => 'approved', 'cover' => 'approved',
+        ], json_decode($review->scope_decisions, true, flags: JSON_THROW_ON_ERROR));
+    }
+
     public function test_publication_requires_complete_reviewed_metadata_and_unpublish_is_audited(): void
     {
         [$editor, $reviewer] = [$this->staff('content_editor'), $this->staff('reviewer')];

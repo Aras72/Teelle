@@ -10,6 +10,9 @@
 - Corrected the legacy MySQL foundation expectation so the three owner-approved provisional plans are required to seed as publicly active.
 - GitHub Actions replacement Run `34743030855` passed on correction Commit `1886d5e`.
 - Added Prompt 021 human-review preparation for all 25 Pilot games with explicit source، age-band، Safety flag، Cover licensing and zero-approval boundaries; no game was published.
+- Added Prompt 022 protected human-review workspace with a five-area approval checklist، required change notes and complete Copy/Source/Age/Safety/Cover context before decision.
+- Removed fast approval actions from the content table; reviewers now enter the version dossier while self-review، automatic publication and Pilot approval remain blocked.
+- Prompt 022 focused MySQL gate passes at 11 tests / 69 assertions and full regression passes at 100 tests / 856 assertions with no skips؛ JavaScript 8/8، Build، Pint، Blade and dependency audits pass.
 
 ## 2026-09-12
 
