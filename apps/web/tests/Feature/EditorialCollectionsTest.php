@@ -96,7 +96,7 @@ final class EditorialCollectionsTest extends TestCase
         $this->get(route('collections.index'))->assertOk()
             ->assertSee('یک بازی خوب برای همین حالا')
             ->assertSee('چند مجموعه آماده برای وقت‌هایی که می‌خواهید بی‌معطلی بازی را شروع کنید.')
-            ->assertSee('هر مجموعه وقتی اینجا می‌آید که بازی‌هایش منتشر، بازبینی و از نظر ایمنی بررسی شده باشند.')
+            ->assertSee('هر مجموعه‌ای که در این بخش منتشر شده، کاملاً بازبینی و از نظر ایمنی بررسی شده است.')
             ->assertSee('مجموعه تازه‌ای منتشر نشده');
         $this->get(route('admin.content.collections.index'))->assertUnauthorized();
         $this->actingAs(User::factory()->create())->get(route('admin.content.collections.index'))->assertForbidden();

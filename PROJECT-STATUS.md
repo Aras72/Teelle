@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: PROMPT 023 COPY + DAILY FREE PLAY IMPLEMENTED / LOCAL GATES PASS
-Current Task: Prompt 023 روی `main` تحویل شد؛ ادامه بستن Scope مستقل باقی‌مانده فاز ۱۴ و QA خارجی/Production فاز ۱۵ بدون ادعای Launch-ready
+Current Stage: PROMPT 024 TYPOGRAPHY + ORBIT-FREE MOTION IMPLEMENTED / LOCAL GATES PASS
+Current Task: تحویل Remote اصلاحات Prompt 024 و سپس ادامه بستن Scope مستقل باقی‌مانده فاز ۱۴ بدون ادعای Launch-ready
 Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
 Last Completed:
@@ -98,6 +98,10 @@ Currently Working On:
 - گیت متمرکز Prompt 023 روی MySQL 8.4.11 برابر 40/40 با 317 assertion و Regression کامل برابر 103/103 با 898 assertion بدون Skip PASS شد؛ JavaScript 8/8، Build، Blade، Pint، Scheduler discovery و Auditها نیز PASS هستند.
 - QA مرورگری Prompt 023 در Desktop و Mobile 390، Light/Dark، RTL، Keyboard focus، بدون Horizontal overflow و بدون Console error PASS شد.
 - Commit پیاده‌سازی Prompt 023 برابر `22186b8` روی `main` Push و با `origin/main` همگام شد؛ وضعیت Remote CI به‌دلیل نبود دسترسی احرازشده به Actions خصوصی در محیط فعلی `NOT VERIFIED` است.
+- Prompt 024 Copy دقیق Account، Collections، Jigari و About را اصلاح کرد؛ مقیاس تیترهای اصلی و Kicker قرمز متعادل، CTA صفحه About برجسته‌تر و تیله Collections در Light شفاف شد.
+- تمام خط‌های مدار قابل‌مشاهده از Match و Results حذف شدند؛ مسیرهای نامرئی حرکت Auth/Jigari حفظ و فرم Match با پنج تیله فوتورئال و حرکت‌های مستقل نامنظم بدون Overflow آماده شد.
+- Regression کامل Prompt 024 روی MySQL 8.4.11 برابر 103/103 با 905 assertion و بدون Skip PASS شد؛ JavaScript 8/8، Build 58 module، Blade، Pint و Auditهای Composer/pnpm نیز PASS هستند.
+- Browser QA Prompt 024 در Desktop و Mobile 390، Light/Dark، RTL و بدون Horizontal overflow PASS شد؛ دو جمله Promise صفحه About در هر دو اندازه دقیقاً دوخطی هستند.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 

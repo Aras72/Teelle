@@ -339,16 +339,16 @@ body {
 }
 
 .about-hero h1 {
-    max-width: 13ch;
+    max-width: 15ch;
     margin: 0;
-    font-size: clamp(2.85rem, 6.6vw, 6rem);
+    font-size: clamp(2.15rem, 4vw, 3.5rem);
     font-weight: var(--font-weight-black);
     letter-spacing: -0.055em;
     line-height: 0.95;
 }
 
 .about-page .match-kicker {
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
     letter-spacing: 0.01em;
 }
 
@@ -357,6 +357,17 @@ body {
     margin: 0;
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2vw, 1.35rem);
+}
+
+.about-hero__cta {
+    min-height: 3.5rem;
+    padding-inline: clamp(1.6rem, 4vw, 2.35rem);
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    box-shadow: 0 1rem 2.2rem color-mix(in srgb, var(--action-primary) 26%, transparent);
+}
+
+.about-hero__cta:hover {
+    transform: translateY(-0.2rem) scale(1.025);
 }
 
 .about-marble {
@@ -387,27 +398,28 @@ body {
 
 .about-promise {
     display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(14rem, 0.5fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(var(--space-6), 6vw, var(--space-16));
-    align-items: end;
+    align-items: start;
     padding-block: clamp(var(--space-12), 9vw, var(--space-20));
     border-block: 1px solid var(--border-subtle);
 }
 
 .about-promise p {
+    max-width: 28ch;
     margin: 0;
+    font-size: clamp(1.45rem, 2.5vw, 2.25rem);
+    line-height: 1.35;
+    text-wrap: balance;
 }
 
 .about-promise__line {
-    max-width: 18ch;
-    font-size: clamp(2.1rem, 5.5vw, 5rem);
     font-weight: var(--font-weight-black);
-    line-height: 1.08;
 }
 
 .about-promise > p:last-child {
     color: var(--text-secondary);
-    font-size: 1.08rem;
+    font-weight: var(--font-weight-regular);
 }
 
 .about-principles {
@@ -421,7 +433,7 @@ body {
 .about-closing h2 {
     max-width: 16ch;
     margin: 0;
-    font-size: clamp(2rem, 3.8vw, 3.75rem);
+    font-size: clamp(1.9rem, 3.35vw, 3.2rem);
     line-height: 1.08;
 }
 
@@ -492,7 +504,7 @@ body {
 .collections-heading h1,
 .collection-detail__heading h1 {
     margin: 0;
-    font-size: clamp(2.4rem, 8vw, 5rem);
+    font-size: clamp(1.85rem, 3.8vw, 2.75rem);
     line-height: var(--line-height-tight);
 }
 
@@ -507,8 +519,13 @@ body {
     inset-inline-end: -14rem;
     top: -3rem;
     width: clamp(9rem, 20vw, 15rem);
-    opacity: 0.7;
+    opacity: 0.92;
     animation: teelle-float 8s var(--ease-enter) infinite alternate;
+}
+
+:root[data-theme='light'] .collections-heading__marble {
+    opacity: 1;
+    filter: saturate(1.06) contrast(1.04) drop-shadow(0 1.25rem 1.5rem rgb(18 63 70 / 0.18));
 }
 
 .collections-heading__marble img {
@@ -677,7 +694,11 @@ body {
     .collections-heading__marble {
         inset-inline-end: 0;
         top: -1rem;
-        opacity: 0.24;
+        opacity: 0.84;
+    }
+
+    :root[data-theme='light'] .collections-heading__marble {
+        opacity: 0.94;
     }
 }
 
@@ -1414,11 +1435,14 @@ body:has(.home-hero) #main-content {
 /* Guest Quick Match: one dominant question, Teelle orbit motion, persistent themes. */
 .match-page { position: relative; display: grid; min-height: calc(100dvh - 7.5rem); place-items: center; overflow: hidden; padding-block: clamp(1.5rem, 6vw, 4rem); }
 .match-card { position: relative; z-index: 1; width: min(100%, 45rem); padding: clamp(1.25rem, 5vw, 3rem); border: 1px solid var(--border-subtle); border-radius: clamp(1.25rem, 4vw, 2.5rem); background: var(--surface-elevated); background: color-mix(in srgb, var(--surface-elevated) 96%, transparent); box-shadow: var(--shadow-medium); }
-.match-orbit { position: absolute; inset: 8% 3%; border: 1px solid color-mix(in srgb, var(--border-strong) 42%, transparent); border-radius: 50%; transform: rotate(-9deg); pointer-events: none; }
+.match-orbit { position: absolute; inset: 8% 3%; border: 0; border-radius: 50%; transform: rotate(-9deg); pointer-events: none; }
 .match-orbit__marble { position: absolute; aspect-ratio: 1; filter: drop-shadow(0 .8rem 1rem rgb(5 37 44 / .22)); }
 .match-orbit__marble img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .match-orbit__marble--primary { inset-block-start: 6%; inset-inline-start: 10%; width: clamp(3rem, 8vw, 5.5rem); }
 .match-orbit__marble--secondary { inset-block-end: 10%; inset-inline-end: 8%; width: clamp(1.5rem, 4vw, 2.75rem); }
+.match-orbit__marble--tertiary { inset-block-start: 15%; inset-inline-end: 5%; width: clamp(2rem, 5vw, 3.5rem); }
+.match-orbit__marble--quaternary { inset-block-end: 4%; inset-inline-start: 18%; width: clamp(1.75rem, 4vw, 3rem); }
+.match-orbit__marble--quinary { inset-block-start: 48%; inset-inline-start: 1%; width: clamp(1.25rem, 3vw, 2.25rem); }
 .match-progress-header { display: grid; grid-template-columns: auto 1fr; gap: .75rem 1rem; align-items: center; margin-block-end: clamp(1.5rem, 4vw, 2.5rem); }
 .match-close { display: grid; width: 2.75rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--border-subtle); border-radius: 50%; font-size: 1.75rem; line-height: 1; text-decoration: none; }
 .match-progress-copy { display: flex; justify-content: space-between; color: var(--text-secondary); font-size: .875rem; }
@@ -1443,18 +1467,25 @@ body:has(.home-hero) #main-content {
 .match-back { position: absolute; inset-block-end: 1rem; inset-inline-end: 1.5rem; }
 .match-back button { border: 0; background: transparent; color: var(--text-secondary); cursor: pointer; text-decoration: underline; }
 .match-card--complete { display: grid; justify-items: start; gap: 1.25rem; }
-.match-kicker { color: var(--action-primary) !important; font-weight: var(--font-weight-black); }
+.match-kicker { color: var(--action-primary) !important; font-size: clamp(1.1rem, 1.55vw, 1.4rem); font-weight: var(--font-weight-black); line-height: 1.45; }
 .match-ready-mark { width: 5rem; aspect-ratio: 1; filter: drop-shadow(0 .8rem 1rem rgb(5 37 44 / .2)); }
 .match-ready-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .match-hold-note { padding: 1rem; border-inline-start: .25rem solid var(--status-warning); border-radius: .5rem; background: var(--surface-primary); color: var(--text-primary) !important; }
 @media (prefers-reduced-motion: no-preference) {
-    .match-orbit__marble--primary { animation: match-marble-orbit 9s ease-in-out infinite alternate; }
-    .match-orbit__marble--secondary { animation: match-marble-orbit-small 11s ease-in-out infinite alternate-reverse; }
-    @keyframes match-marble-orbit { to { transform: translate(1.5rem, .75rem) rotate(18deg); } }
-    @keyframes match-marble-orbit-small { to { transform: translate(-1rem, -.5rem) rotate(-14deg); } }
+    .match-orbit__marble { will-change: transform; }
+    .match-orbit__marble--primary { animation: match-marble-wander-one 9s ease-in-out infinite alternate; }
+    .match-orbit__marble--secondary { animation: match-marble-wander-two 11s ease-in-out infinite alternate-reverse; }
+    .match-orbit__marble--tertiary { animation: match-marble-wander-three 13s ease-in-out infinite alternate; }
+    .match-orbit__marble--quaternary { animation: match-marble-wander-four 10s ease-in-out infinite alternate-reverse; }
+    .match-orbit__marble--quinary { animation: match-marble-wander-five 8s ease-in-out infinite alternate; }
+    @keyframes match-marble-wander-one { 35% { transform: translate(1.4rem, -.6rem) rotate(38deg); } 70% { transform: translate(.45rem, 1.15rem) rotate(94deg); } 100% { transform: translate(2rem, .35rem) rotate(145deg); } }
+    @keyframes match-marble-wander-two { 40% { transform: translate(-1.25rem, .55rem) rotate(-42deg); } 75% { transform: translate(.4rem, -1rem) rotate(-105deg); } 100% { transform: translate(-1.7rem, -.2rem) rotate(-160deg); } }
+    @keyframes match-marble-wander-three { 30% { transform: translate(-.8rem, 1.15rem) rotate(52deg); } 68% { transform: translate(1.25rem, .25rem) rotate(124deg); } 100% { transform: translate(.35rem, -1rem) rotate(190deg); } }
+    @keyframes match-marble-wander-four { 38% { transform: translate(.75rem, -.8rem) rotate(-55deg); } 72% { transform: translate(-1.1rem, -.15rem) rotate(-116deg); } 100% { transform: translate(.25rem, 1rem) rotate(-178deg); } }
+    @keyframes match-marble-wander-five { 32% { transform: translate(.9rem, .6rem) rotate(65deg); } 66% { transform: translate(-.35rem, -1rem) rotate(137deg); } 100% { transform: translate(1.15rem, -.2rem) rotate(205deg); } }
 }
 @media (max-width: 35rem) {
-    .match-page { place-items: start center; overflow: visible; }
+    .match-page { place-items: start center; overflow-x: clip; overflow-y: visible; }
     .match-card { border-radius: 1.25rem; }
     .match-options { grid-template-columns: 1fr; }
     .match-options--compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1464,7 +1495,7 @@ body:has(.home-hero) #main-content {
 
 /* Results, game detail and the quiet screen-to-play loop. */
 .results-page, .game-page, .play-page { position: relative; min-height: calc(100dvh - 7.5rem); padding-block: clamp(2rem, 6vw, 5rem); }
-.results-orbit { position: absolute; inset: 2rem 0 auto; height: 22rem; border: 1px solid var(--border-subtle); border-radius: 50%; transform: rotate(-5deg); pointer-events: none; }
+.results-orbit { position: absolute; inset: 2rem 0 auto; height: 22rem; border: 0; border-radius: 50%; transform: rotate(-5deg); pointer-events: none; }
 .results-orbit span { position: absolute; inset-block-start: 1.5rem; inset-inline-start: 18%; width: 3.25rem; aspect-ratio: 1; filter: drop-shadow(0 .65rem .8rem rgb(5 37 44 / .22)); }
 .results-orbit img, .play-marble img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .results-heading { position: relative; z-index: 1; display: grid; gap: .75rem; max-width: 48rem; margin-block-end: 2rem; }
@@ -1539,7 +1570,7 @@ body:has(.home-hero) #main-content {
 .admin-shell { display: grid; gap: var(--space-6); padding-block: var(--space-8); }
 .admin-heading { display: flex; align-items: end; justify-content: space-between; gap: var(--space-5); }
 .admin-heading h1, .admin-panel h2, .admin-kicker { margin: 0; }
-.admin-kicker { color: var(--action-primary); font-weight: var(--font-weight-bold); }
+.admin-kicker { color: var(--action-primary); font-size: clamp(1.1rem, 1.55vw, 1.4rem); font-weight: var(--font-weight-bold); line-height: 1.45; }
 .admin-actions, .admin-row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
 .admin-heading > a,
 .admin-actions > a:not(.teelle-button) {
@@ -1737,11 +1768,11 @@ body:has(.home-hero) #main-content {
 .jigari-orbit__planet--two { width: clamp(2.25rem, 4.5vw, 3.5rem); }
 .jigari-orbit__planet--three { width: clamp(1.5rem, 3vw, 2.5rem); }
 .jigari-benefits { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(1.5rem, 5vw, 5rem); align-items: start; }
-.jigari-benefits h2 { margin: .3rem 0 0; font-size: clamp(1.8rem, 4vw, 3.5rem); line-height: 1.35; }
+.jigari-benefits h2 { margin: .3rem 0 0; font-size: clamp(1.55rem, 2.5vw, 2.2rem); line-height: 1.35; }
 .jigari-benefits ul { display: grid; gap: .85rem; margin: 0; padding: 0; list-style: none; }
 .jigari-benefits li { padding: 1rem 1.25rem; border-inline-start: .3rem solid var(--teelle-peach); border-radius: var(--radius-input); background: var(--surface-warm); }
 .jigari-section-heading { margin-block-end: 1.5rem; }
-.jigari-section-heading h2 { margin: 0; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.15; text-wrap: balance; }
+.jigari-section-heading h2 { margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); line-height: 1.2; text-wrap: balance; }
 .jigari-plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .jigari-plan { display: grid; justify-items: start; gap: .75rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
 .jigari-plan__marble, .child-card__marble { width: 3.25rem; aspect-ratio: 1; filter: drop-shadow(0 .65rem .8rem rgb(5 37 44 / .18)); }

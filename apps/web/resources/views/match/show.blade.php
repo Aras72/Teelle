@@ -19,6 +19,9 @@
         <div class="match-orbit" aria-hidden="true">
             <span class="match-orbit__marble match-orbit__marble--primary"><img src="{{ asset('images/marbles/match-violet-v1.webp') }}" alt="" width="768" height="768"></span>
             <span class="match-orbit__marble match-orbit__marble--secondary"><img src="{{ asset('images/marbles/auth-emerald-v1.webp') }}" alt="" width="768" height="768"></span>
+            <span class="match-orbit__marble match-orbit__marble--tertiary"><img src="{{ asset('images/marbles/play-amber-v1.webp') }}" alt="" width="768" height="768"></span>
+            <span class="match-orbit__marble match-orbit__marble--quaternary"><img src="{{ asset('images/marbles/heartbeat-cobalt-v1.webp') }}" alt="" width="768" height="768"></span>
+            <span class="match-orbit__marble match-orbit__marble--quinary"><img src="{{ asset('images/marbles/account-indigo-v1.webp') }}" alt="" width="768" height="768"></span>
         </div>
 
         @if($match)

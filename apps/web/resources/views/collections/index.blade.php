@@ -15,7 +15,7 @@
                     <a class="collection-card__link" href="{{ route('collections.show', $collection) }}">دیدن بازی‌ها</a>
                 </article>
             @empty
-                <x-ui.state-message title="مجموعه تازه‌ای منتشر نشده">هر مجموعه وقتی اینجا می‌آید که بازی‌هایش منتشر، بازبینی و از نظر ایمنی بررسی شده باشند.</x-ui.state-message>
+                <x-ui.state-message title="مجموعه تازه‌ای منتشر نشده">هر مجموعه‌ای که در این بخش منتشر شده، کاملاً بازبینی و از نظر ایمنی بررسی شده است.</x-ui.state-message>
             @endforelse
         </div>
     </section>

@@ -4,8 +4,8 @@
             <div class="about-hero__copy teelle-enter">
                 <p class="match-kicker">چرا تیله</p>
                 <h1 id="about-title">راه کوتاه‌تر تا بازی کنار کودک</h1>
-                <p class="about-hero__lead">تیله با سه انتخاب روشن، کمک می‌کند تا زودتر در کنار کودکتان تجربه‌های شیرین بسازید.</p>
-                <x-ui.button href="{{ route('match.show') }}">چی بازی کنیم؟</x-ui.button>
+                <p class="about-hero__lead">تیله با سه انتخاب روشن، کمک می‌کند تا زودتر در کنار کودک‌تان تجربه‌های شیرین بسازید.</p>
+                <x-ui.button class="about-hero__cta" href="{{ route('match.show') }}">چی بازی کنیم؟</x-ui.button>
             </div>
             <figure class="about-marble" aria-label="تیله شیشه‌ای زنده، نماد همراهی تیله">
                 <img src="{{ asset('images/marbles/play-amber-v1.webp') }}" width="768" height="768" alt="تیله شیشه‌ای کهربایی با رگه‌های طبیعی">
@@ -33,7 +33,7 @@
         </section>
 
         <section class="about-closing teelle-container" aria-labelledby="about-closing-title">
-            <h2 id="about-closing-title">وقت کمتر برای انتخاب، فرصت بیشتر برای باهم‌بودن</h2>
+            <h2 id="about-closing-title">اتلاف وقت کمتر برای انتخاب، فرصت بیشتر برای با هم بودن</h2>
         </section>
     </article>
 </x-layouts.app>

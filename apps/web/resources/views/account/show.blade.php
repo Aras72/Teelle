@@ -53,7 +53,7 @@
                 <div class="account-panel__heading"><div><p class="match-kicker">تنظیمات پایه</p><h2 id="settings-title">مشخصات حساب</h2></div></div>
                 <form method="post" action="{{ route('account.update') }}" class="auth-form">
                     @csrf @method('PUT')
-                    <x-ui.field label="نام شما" name="name" value="{{ old('name', auth()->user()->name) }}" autocomplete="name" hint="مثلاً: داییِ ارغوان، مامانِ کوهیار." required :error="$errors->first('name')" />
+                    <x-ui.field label="نام شما" name="name" value="{{ old('name', auth()->user()->name) }}" autocomplete="name" hint="مثلاً: داییِ ارغوان، مامانِ کوهیار" required :error="$errors->first('name')" />
                     <x-ui.field label="ایمیل تأییدشده" name="account_email" type="email" value="{{ auth()->user()->email }}" disabled />
                     <input type="hidden" name="timezone" value="Asia/Tehran">
                     <x-ui.button type="submit">ذخیره تنظیمات</x-ui.button>
@@ -93,7 +93,7 @@
                                 <x-ui.button type="submit" variant="secondary">فعلاً حسابم بماند</x-ui.button>
                             </form>
                         @else
-                            <p>پس از ثبت درخواست، ۳۰ روز برای لغو فرصت دارید. اجرای نهایی ممکن است بعضی داده‌ها را ناشناس کند؛ نسخه‌های پشتیبان در چرخه معمول حذف می‌شوند و سوابقی که نگهداری قانونی دارند تا پایان همان مدت باقی می‌مانند.</p>
+                            <p>پس از ثبت درخواست حذف حساب، ۳۰ روز برای لغو فرصت دارید.</p>
                             <form method="post" action="{{ route('account.privacy.deletion.store') }}" class="privacy-form__request">
                                 @csrf
                                 <x-ui.field label="رمز فعلی برای تأیید حذف" name="deletion_password" type="password" autocomplete="current-password" required :error="$errors->first('deletion_password')" />

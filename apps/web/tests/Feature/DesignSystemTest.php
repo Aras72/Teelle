@@ -129,6 +129,12 @@ class DesignSystemTest extends TestCase
         $this->assertStringContainsString('.auth-orbit span { animation: auth-marble-orbit', $css);
         $this->assertStringContainsString('.auth-orbit { position: absolute; width: min(88vw, 62rem); aspect-ratio: 2 / 1; border: 0;', $css);
         $this->assertStringContainsString('.jigari-orbit { position: absolute; width: min(88%, 50rem); aspect-ratio: 2 / 1; border: 0;', $css);
+        $this->assertStringContainsString('.match-orbit { position: absolute; inset: 8% 3%; border: 0;', $css);
+        $this->assertStringContainsString('.results-orbit { position: absolute; inset: 2rem 0 auto; height: 22rem; border: 0;', $css);
+
+        $match = file_get_contents(resource_path('views/match/show.blade.php'));
+        $this->assertIsString($match);
+        $this->assertSame(5, substr_count($match, 'match-orbit__marble match-orbit__marble--'));
 
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(resource_path('views'))) as $file) {
             if (! $file->isFile() || $file->getExtension() !== 'php' || $file->getFilename() === 'welcome.blade.php') {

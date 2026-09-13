@@ -184,7 +184,8 @@ final class AccountLifecycleTest extends TestCase
         $this->assertDatabaseHas('saved_games', ['user_id' => $owner->id, 'game_id' => $game->id]);
 
         $this->actingAs($owner)->get(route('account.show'))->assertOk()->assertSee('بازی خصوصی آراس')
-            ->assertSee('سلام داییِ ارغوان')->assertSee('مثلاً: داییِ ارغوان، مامانِ کوهیار.')
+            ->assertSee('سلام داییِ ارغوان')->assertSee('مثلاً: داییِ ارغوان، مامانِ کوهیار')
+            ->assertSee('پس از ثبت درخواست حذف حساب، ۳۰ روز برای لغو فرصت دارید.')
             ->assertSee('پروفایل کودک')->assertSee('پروفایل کودک فقط با عضویت فعال جیگری در دسترس است.')
             ->assertSee('شروع یک بازی')->assertSee('خروج از حساب');
         $this->put(route('account.update'), ['name' => 'نام تازه', 'timezone' => 'Asia/Tehran'])

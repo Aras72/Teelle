@@ -563,3 +563,16 @@ Status: APPROVED BY OWNER / IMPLEMENTED / PROMPT GATE PASS
 IP خام ذخیره نمی‌شود. Claim فقط HMAC روزانه IP مشاهده‌شده را نگه می‌دارد و به‌دلیل ورود روز به Digest، رفتار یک IP میان روزها قابل اتصال نیست. Header جعلی `X-Forwarded-For` بدون Trusted Proxy صریح نادیده می‌ماند و Claimهای قبلی با Scheduler روزانه پاک می‌شوند. Production باید `FREE_PLAY_IP_HASH_KEY` مستقل، Trusted Proxy دقیق و Cron واقعی را در Staging اثبات کند.
 
 گیت متمرکز MySQL 8.4.11 برابر 40 test / 317 assertion و Regression کامل برابر 103 test / 898 assertion بدون Skip پاس شد. JavaScript 8/8، Build با 58 module، Blade، Pint و Auditهای Composer/pnpm نیز PASS هستند. Browser QA در Desktop و Mobile 390، Light/Dark، RTL، Keyboard focus، بدون Horizontal overflow و بدون Console error برای صفحات تغییرکرده PASS شد. اجرای روزانه Cron و تشخیص IP واقعی پشت Proxy پارس‌پک هنوز Production evidence ندارند.
+
+## DEC-043 - مقیاس متعادل تیترها و حرکت تیله بدون خط مدار
+
+Date: 2026-09-13
+Status: APPROVED BY OWNER / IMPLEMENTED / LOCAL GATE PASS
+
+دستور تازه مالک Copyهای انتخابی Account، Collections، Jigari و About را بر قانون عمومی نقطه‌گذاری DEC-042 مقدم می‌کند. متن راهنمای نام Account، زیرعنوان Jigari، فهرست امکانات و Copy پلن‌ها بدون نقطه پایانی‌اند؛ متن حذف حساب، Empty state مجموعه‌ها، نوشتار «کودک‌تان» و پیام پایانی About دقیقاً مطابق Copy تازه مالک هستند.
+
+مقیاس تیترهای Collections، About و Jigari کاهش و Kickerهای قرمز در سطوح عمومی و Admin بزرگ‌تر و متناسب شدند. دو جمله Promise در About هم‌اندازه، روبه‌روی هم و دوخطی‌اند و CTA اصلی About حضور بصری بیشتری دارد. Asset تیله Collections در Light بدون Opacity کدر نمایش داده می‌شود.
+
+هیچ خط مدار قابل‌مشاهده‌ای در UI مجاز نیست. Containerهای نامرئی فقط برای مسیر حرکت حفظ می‌شوند؛ Match و Results نیز Border مدار ندارند. Match پنج تیله فوتورئال متفاوت با حرکت‌های transform-only مستقل دارد، `prefers-reduced-motion` را رعایت می‌کند و در Mobile افقی Clip می‌شود تا Overflow نسازد.
+
+Regression کامل MySQL 8.4.11 برابر 103 test / 905 assertion بدون Skip پاس شد. JavaScript 8/8، Build با 58 module، Blade، Pint و Auditهای Composer/pnpm PASS هستند. Browser QA در Desktop و Mobile 390، Light/Dark، RTL، بدون خط مدار و بدون Horizontal overflow PASS شد. این تصمیم هیچ بازی Pilot را تأیید یا منتشر نمی‌کند و Ranking hold را تغییر نمی‌دهد.
