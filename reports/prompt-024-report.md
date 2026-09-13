@@ -23,4 +23,4 @@ Status: IMPLEMENTED / LOCAL AUTOMATED GATE PASS / BROWSER QA PASS
 - Browser QA: Desktop و Mobile 390، Light/Dark، RTL، Match/Collections/Jigari/About: PASS.
 - About Promise در Mobile: هر دو متن 62.625px ارتفاع با line-height برابر 31.32px؛ دقیقاً دو خط.
 - Mobile viewport: inner width برابر 390px و document/body width برابر 375px؛ Horizontal overflow وجود ندارد.
-- Remote CI: PENDING until Push.
+- Commit `041a062` روی `main` Push و تطابق local HEAD با `origin/main` تأیید شد؛ Remote CI به‌دلیل نبود دسترسی احرازشده به Actions خصوصی در این محیط `NOT VERIFIED` است.
