@@ -23,6 +23,10 @@ class DesignSystemTest extends TestCase
 
         $this->assertStringContainsString("font-family: 'Lalezar';", $css);
         $this->assertStringContainsString("--font-display: 'Lalezar', 'Vazirmatn'", $css);
+        $this->assertStringContainsString('.teelle-wordmark {', $css);
+        $this->assertStringContainsString('.teelle-play-cta {', $css);
+        $this->assertStringContainsString('.teelle-brand-promise {', $css);
+        $this->assertStringContainsString('--teelle-brick: #b84632', $css);
         $this->assertStringContainsString('.match-question legend {', $css);
         $this->assertStringContainsString('font-family: var(--font-display);', $css);
     }

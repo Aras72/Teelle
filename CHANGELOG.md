@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-09-15
+
+- Added a protected user and membership directory with search, latest purchased plan, entitlement state and audited correction of name, email and mobile.
+- Split the existing full «مدیر» role from the new lower «ادمین» role; only managers can grant it and support admins cannot manage roles, pricing, publishing or manager accounts.
+- Changed the public Heartbeat baseline from 110 to 121 without inserting play events and centered the metric independently of digit count.
+- Applied Lalezar to the Teelle wordmark, brand promise and all current «چی بازی کنیم؟» CTAs; added a theme-safe brick accent and a more visible shared CTA shape.
+- Kept the About hero title on one line at desktop widths.
+- Rebuilt both single-sheet game workbooks with dropdowns for 6 to 12 months, 1 to 12 years, time, child count, adult count and all other fixed-choice fields while preserving the accepted layout.
+
 ## 2026-09-13
 
 - Added Prompt 025 responsive clearance between the Collections marble and its first content state; mobile now reserves a dedicated marble row instead of overlapping heading copy.

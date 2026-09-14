@@ -16,10 +16,10 @@ class HomepageTest extends TestCase
             ->assertSee('بازی مناسب، برای همین لحظه')
             ->assertSee('چند سؤال کوتاه، سه بازی مناسب برای همین حالا')
             ->assertSee('کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد')
-            ->assertSee('۱۲٬۴۵۵')
+            ->assertSee('۱۲٬۴۶۶')
             ->assertSee('بار بازی با تیله انجام شده')
             ->assertSee('چی بازی کنیم؟')
-            ->assertSee('data-heartbeat-count="12455"', false);
+            ->assertSee('data-heartbeat-count="12466"', false);
     }
 
     public function test_homepage_adds_owner_approved_baseline_without_inserting_events(): void
@@ -28,8 +28,8 @@ class HomepageTest extends TestCase
 
         $this->get('/')
             ->assertOk()
-            ->assertSee('۱۱۰')
-            ->assertSee('data-heartbeat-count="110"', false)
+            ->assertSee('۱۲۱')
+            ->assertSee('data-heartbeat-count="121"', false)
             ->assertDontSee('۱۲٬۳۴۵');
     }
 
@@ -40,7 +40,7 @@ class HomepageTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('به‌روزرسانی آمار موقتاً در دسترس نیست')
-            ->assertSee('data-heartbeat-count="110"', false)
+            ->assertSee('data-heartbeat-count="121"', false)
             ->assertDontSee('۱۲٬۳۴۵');
     }
 

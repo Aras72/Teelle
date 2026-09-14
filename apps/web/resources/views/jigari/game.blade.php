@@ -13,6 +13,6 @@
             <section class="game-panel" aria-labelledby="steps-title"><h2 id="steps-title">چطور بازی کنیم؟</h2><ol>@foreach($version->instructions as $instruction)<li>{{ $instruction }}</li>@endforeach</ol></section>
             <section class="game-panel game-panel--safety" aria-labelledby="safety-title"><h2 id="safety-title">قبل از شروع</h2><p>{{ $version->safety_copy }}</p><ul>@foreach($safetyRules as $rule)<li>{{ $rule }}</li>@endforeach</ul></section>
         </div>
-        <div class="catalog-detail-action"><p>جست‌وجو ابزار کشف است؛ برای سه پیشنهاد متناسب با همین لحظه از مسیر اصلی تیله استفاده کنید</p><x-ui.button href="{{ route('match.show') }}">چی بازی کنیم؟</x-ui.button></div>
+        <div class="catalog-detail-action"><p>جست‌وجو ابزار کشف است؛ برای سه پیشنهاد متناسب با همین لحظه از مسیر اصلی تیله استفاده کنید</p><x-ui.button class="teelle-play-cta" href="{{ route('match.show') }}">چی بازی کنیم؟</x-ui.button></div>
     </section>
 </x-layouts.app>

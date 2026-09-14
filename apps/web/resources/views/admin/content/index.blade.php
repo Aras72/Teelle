@@ -10,6 +10,7 @@
                 @can('content.edit')<x-ui.button href="{{ route('admin.content.collections.index') }}" variant="secondary">مجموعه‌ها</x-ui.button>@endcan
                 @can('subscription.manage')<x-ui.button href="{{ route('admin.content.plans.index') }}" variant="secondary">پلن‌ها و قیمت‌ها</x-ui.button>@endcan
                 @can('users.manage')<x-ui.button href="{{ route('admin.content.accounts.index') }}" variant="secondary">درخواست‌های حساب</x-ui.button>@endcan
+                @can('users.view')<x-ui.button href="{{ route('admin.content.users.index') }}" variant="secondary">کاربران و عضویت‌ها</x-ui.button>@endcan
             </nav>
         </header>
 

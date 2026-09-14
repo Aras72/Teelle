@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\PrivacyAccountController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\OnboardingController;
@@ -110,6 +111,10 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::put('/plans/{plan:code}', [PlanController::class, 'update'])->name('plans.update');
     Route::get('/accounts', [PrivacyAccountController::class, 'index'])->name('accounts.index');
     Route::post('/accounts/deletions/{privacyRequest:public_id}/reactivate', [PrivacyAccountController::class, 'reactivate'])->name('accounts.reactivate');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::put('/users/{user}/role', [UserController::class, 'updateRole'])->name('users.role.update');
     Route::get('/collections', [EditorialCollectionController::class, 'index'])->name('collections.index');
     Route::get('/collections/new', [EditorialCollectionController::class, 'create'])->name('collections.create');
     Route::post('/collections', [EditorialCollectionController::class, 'store'])->name('collections.store');

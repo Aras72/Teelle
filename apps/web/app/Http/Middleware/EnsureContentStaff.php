@@ -14,7 +14,7 @@ class EnsureContentStaff
         if (! $user) {
             abort(401);
         }
-        if (! $user->hasAnyPermission(['content.edit', 'content.review', 'content.publish', 'subscription.manage', 'users.manage'])) {
+        if (! $user->hasAnyPermission(['content.edit', 'content.review', 'content.publish', 'subscription.manage', 'users.manage', 'users.view'])) {
             abort(403);
         }
 

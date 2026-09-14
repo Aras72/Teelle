@@ -127,7 +127,7 @@ final class ResultPlayFlowTest extends TestCase
         $this->post(route('plays.rate', $play), ['rating' => 2])->assertSessionHas('status', 'بازخورد این بازی قبلاً ثبت شده بود');
         $this->assertSame(1, DB::table('play_events')->where('event_type', 'rated')->count());
         $this->assertSame(['rating' => 5], $play->events()->where('event_type', 'rated')->firstOrFail()->payload_json);
-        $this->get('/')->assertOk()->assertSee('۱۱۱');
+        $this->get('/')->assertOk()->assertSee('۱۲۲');
     }
 
     public function test_free_play_is_limited_to_one_started_game_per_ip_and_tehran_day(): void

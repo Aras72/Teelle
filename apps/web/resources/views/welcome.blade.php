@@ -11,13 +11,13 @@
 
             <h1 class="home-hero__title" id="home-title">بازی مناسب، برای همین لحظه</h1>
             <p class="home-hero__copy">چند سؤال کوتاه، سه بازی مناسب برای همین حالا</p>
-            <x-ui.button class="home-hero__cta" href="/match">چی بازی کنیم؟</x-ui.button>
+            <x-ui.button class="home-hero__cta teelle-play-cta" href="/match">چی بازی کنیم؟</x-ui.button>
         </div>
     </section>
 
     <section class="home-heartbeat" id="heartbeat" aria-label="هم‌بازی‌های تیله">
         <div class="teelle-container home-heartbeat__content">
-            <p class="home-heartbeat__tagline">کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد</p>
+            <p class="home-heartbeat__tagline teelle-brand-promise">کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد</p>
 
             <div class="home-heartbeat__metric" @if ($heartbeatCount !== null) data-heartbeat-count="{{ $heartbeatCount }}" @endif>
                 <span class="home-heartbeat__marble" aria-hidden="true"><img src="{{ asset('images/marbles/heartbeat-cobalt-v1.webp') }}" width="768" height="768" alt="" decoding="async"></span>

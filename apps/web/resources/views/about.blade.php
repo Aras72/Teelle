@@ -5,7 +5,7 @@
                 <p class="match-kicker">چرا تیله</p>
                 <h1 id="about-title">راه کوتاه‌تر تا بازی کنار کودک</h1>
                 <p class="about-hero__lead">تیله با سه انتخاب روشن، کمک می‌کند تا زودتر در کنار کودک‌تان تجربه‌های شیرین بسازید.</p>
-                <x-ui.button class="about-hero__cta" href="{{ route('match.show') }}">چی بازی کنیم؟</x-ui.button>
+                <x-ui.button class="about-hero__cta teelle-play-cta" href="{{ route('match.show') }}">چی بازی کنیم؟</x-ui.button>
             </div>
             <figure class="about-marble" aria-label="تیله شیشه‌ای زنده، نماد همراهی تیله">
                 <img src="{{ asset('images/marbles/play-amber-v1.webp') }}" width="768" height="768" alt="تیله شیشه‌ای کهربایی با رگه‌های طبیعی">
@@ -13,7 +13,7 @@
         </section>
 
         <section class="about-promise teelle-container" aria-labelledby="about-promise-title">
-            <p class="about-promise__line" id="about-promise-title">کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد</p>
+            <p class="about-promise__line teelle-brand-promise" id="about-promise-title">کودک، بیشتر از اسباب‌بازی به هم‌بازی نیاز دارد</p>
             <p>مسئله همیشه کمبود ایده نیست، گاهی انتخاب در لحظه سخت است.</p>
         </section>
 

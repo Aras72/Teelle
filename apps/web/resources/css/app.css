@@ -29,6 +29,7 @@
     --teelle-cream: #fff8e6;
     --teelle-peach: #fae297;
     --teelle-ruby: #e83346;
+    --teelle-brick: #b84632;
 
     /* Semantic color tokens: light */
     --surface-canvas: #fffaf0;
@@ -113,6 +114,7 @@
     --border-subtle: #31585e;
     --border-strong: #809397;
     --action-primary: #d51d37;
+    --teelle-brick: #f08a6d;
     --action-primary-hover: #ec4053;
     --action-secondary: #fff0cf;
     --focus-ring: #ff5d6e;
@@ -140,6 +142,7 @@
         --border-subtle: #31585e;
         --border-strong: #809397;
         --action-primary: #d51d37;
+        --teelle-brick: #f08a6d;
         --action-primary-hover: #ec4053;
         --action-secondary: #fff0cf;
         --focus-ring: #ff5d6e;
@@ -830,6 +833,7 @@ a {
     justify-content: center;
     padding-inline: var(--space-3);
     color: var(--text-primary);
+    font-family: var(--font-display);
     font-size: 1.75rem;
     font-weight: var(--font-weight-black);
     line-height: 1;
@@ -947,6 +951,25 @@ a {
 
 .teelle-button--primary:hover {
     background: var(--action-primary-hover);
+}
+
+.teelle-play-cta {
+    min-height: 3.5rem;
+    padding-inline: clamp(1.75rem, 4vw, 2.75rem);
+    border: 0.125rem solid color-mix(in srgb, var(--text-on-action) 40%, transparent);
+    border-radius: 1.25rem 0.5rem 1.25rem 0.5rem;
+    background: var(--action-primary);
+    box-shadow: 0 0.85rem 1.8rem color-mix(in srgb, var(--action-primary) 30%, transparent);
+    color: var(--text-on-action);
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0.01em;
+}
+
+.teelle-play-cta:hover {
+    box-shadow: 0 1rem 2.2rem color-mix(in srgb, var(--action-primary) 38%, transparent);
+    transform: translateY(-0.15rem) rotate(-0.5deg);
 }
 
 .teelle-button--secondary {
@@ -1348,6 +1371,12 @@ a {
     text-align: center;
 }
 
+.teelle-brand-promise {
+    color: var(--teelle-brick);
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-regular);
+}
+
 .home-heartbeat__metric {
     display: flex;
     align-items: center;
@@ -1362,6 +1391,8 @@ a {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: var(--font-weight-black);
     line-height: 1;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
 }
 
 .home-heartbeat__marble {
@@ -1379,6 +1410,13 @@ a {
     .home-heartbeat__metric {
         padding-inline-start: var(--space-8);
         border-inline-start: 1px solid var(--border-strong);
+    }
+}
+
+@media (min-width: 48.01rem) {
+    .about-hero h1 {
+        max-width: none;
+        white-space: nowrap;
     }
 }
 
@@ -1435,10 +1473,11 @@ body:has(.home-hero) #main-content {
     grid-template-rows: 1fr auto;
 }
 .home-heartbeat__content { padding-block: clamp(0.75rem, 2.5dvh, 1.5rem); gap: 1rem; }
-.home-heartbeat__metric { min-width: 0; font-size: clamp(0.75rem, 1.2vw, 1rem); }
+.home-heartbeat__metric { position: relative; min-width: 0; justify-content: center; padding-inline: 4.5rem; font-size: clamp(0.75rem, 1.2vw, 1rem); text-align: center; }
+.home-heartbeat__metric > p { width: 100%; text-align: center; }
 .home-heartbeat__metric strong { font-size: clamp(1.6rem, 3.5vw, 2.75rem); }
 .heartbeat-status { display: block; font-size: 0.7rem; color: var(--text-secondary); }
-.home-heartbeat__marble { position: relative; background: none; }
+.home-heartbeat__marble { position: absolute; inset-inline-start: .25rem; background: none; }
 .home-heartbeat__marble img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .marble-control { position: absolute; inset: 0; border: 0; border-radius: 50%; background: transparent; cursor: grab; touch-action: none; }
 .marble-control.is-dragging { cursor: grabbing; }
@@ -1459,7 +1498,7 @@ body:has(.home-hero) #main-content {
     .teelle-header-actions { justify-self: end; }
     .home-heartbeat__content { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); }
     .home-heartbeat__tagline { white-space: nowrap; font-size: clamp(1.125rem, 2.35vw, 2rem); }
-    .home-heartbeat__metric { padding-inline-start: 1.25rem; }
+    .home-heartbeat__metric { padding-inline: 4.5rem; }
 }
 @media (max-width: 47.99rem) {
     .home-heartbeat__content { justify-items: center; }
@@ -1621,6 +1660,16 @@ body:has(.home-hero) #main-content {
 .admin-form label { display: grid; gap: var(--space-2); font-weight: var(--font-weight-bold); }
 .admin-form textarea { resize: vertical; line-height: 1.8; }
 .admin-form select { appearance: auto; }
+.admin-user-search { display: grid; gap: var(--space-2); padding: var(--space-5); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); }
+.admin-user-search > label { font-weight: var(--font-weight-bold); }
+.admin-user-search > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-3); }
+.admin-users-table small { color: var(--text-secondary); }
+.admin-user-edit { max-width: 68rem; }
+.admin-user-form { max-width: 42rem; }
+.admin-user-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin: var(--space-4) 0 0; }
+.admin-user-facts div { padding: var(--space-4); border: 1px solid var(--border-subtle); border-radius: var(--radius-input); background: var(--surface-primary); }
+.admin-user-facts dt { color: var(--text-secondary); font-size: .9rem; }
+.admin-user-facts dd { margin: .35rem 0 0; font-weight: var(--font-weight-bold); }
 .admin-code { direction: ltr; font-family: ui-monospace, Consolas, monospace; text-align: left; }
 .admin-table-wrap { overflow-x: auto; margin-block: var(--space-4); }
 .admin-table { width: 100%; border-collapse: collapse; min-width: 48rem; }
@@ -1670,6 +1719,8 @@ body:has(.home-hero) #main-content {
     .admin-review-media li { grid-template-columns: 6.5rem minmax(0, 1fr); }
     .admin-review-media img { width: 6.5rem; }
     .admin-review-media form { grid-column: 1 / -1; }
+    .admin-user-search > div, .admin-user-facts { grid-template-columns: 1fr; }
+    .admin-user-search .teelle-button { width: 100%; }
 }
 
 /* Weekly product health stays aggregate, legible and export-oriented. */

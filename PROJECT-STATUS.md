@@ -3,7 +3,7 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 COMPLETE / PHASE 15 PAUSED BY OWNER
-Current Stage: PROMPT 026 OWNER GAME REVIEW IMPORTED / SINGLE-SHEET TEMPLATES DELIVERED
+Current Stage: PROMPT 028 USER ADMIN / VISUAL POLISH / DROPDOWN TEMPLATES IMPLEMENTED
 Current Task: انتظار برای تصاویر بازی‌ها و دستور صریح مالک برای آغاز PHASE 15
 Overall Status: PHASE 14 PASS / RELEASE QA NOT STARTED
 
@@ -111,6 +111,9 @@ Currently Working On:
 - Regression نهایی Phase 14 روی MySQL Community Server 8.4.11 برابر 106/106 با 937 assertion و بدون Skip PASS شد؛ JavaScript 8/8، Build 58 module، Pint، Blade و Auditهای Composer/pnpm نیز PASS هستند.
 - Browser QA تازه پنل در Desktop و Mobile 390، فهرست ۲۵ Draft، Copy اصلاح‌شده، Metadata و Upload تصویر را پوشش داد و مسیر اصلی PASS است.
 - مالک تکمیل همین بسته را شرط Closure اعلام کرد؛ PHASE 14 طبق DEC-049 بسته و PHASE 15 تا آماده‌شدن تصاویر و دستور مالک متوقف شد.
+- Prompt 028 پنل «کاربران و عضویت‌ها» را با جست‌وجو، مشاهده آخرین پلن و وضعیت عضویت، اصلاح ممیزی‌شده مشخصات عمومی و نقش محدود «ادمین» اضافه کرد؛ نقش کامل قبلی با عنوان «مدیر» باقی ماند.
+- Wordmark تیله، CTAهای «چی بازی کنیم؟» و شعار برند با Lalezar و تأکید آجری همگام شدند؛ عنوان Hero صفحه About در Desktop یک‌خطی و Heartbeat با baseline تازه ۱۲۱ در مرکز پایدار شد.
+- دو تمپلیت یک‌شیتی با حفظ ظاهر قبلی بازتولید شدند؛ سن ۶ تا ۱۲ ماه و سپس ۱ تا ۱۲ سال، زمان و تعداد کودک/بزرگسال همگی Dropdown دارند.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
@@ -180,6 +183,7 @@ Testing Status: PHASE 14 LOCAL GATES PASS / PHASE 15 PAUSED; prior QA evidence r
 Testing Status Update: PROMPT 019 local contract 1/1 PASS with 24 assertions; current MySQL 8.4.11 full Laravel 95/95 PASS with 800 assertions; GitHub Actions Run #3 on `7bcb749` REMOTE PASS in 1m 34s.
 Testing Status Update: PROMPT 020 Plan pricing 4/4 PASS with 36 assertions; combined Jigari/Plan 11/11 PASS with 92 assertions; current MySQL 8.4.11 full Laravel 99/99 PASS with 841 assertions; focused MySQL foundation + Plan gate 12/12 PASS with 78 assertions; JavaScript 8/8، Build، Blade، Pint and pnpm production audit PASS. Remote Run `34723528510` exposed the superseded inactive-plan assertion; replacement Run `34743030855` on correction Commit `1886d5e` PASS.
 Testing Status Update: PROMPT 026 current MySQL 8.4.11 full Laravel 106/106 PASS with 937 assertions and zero skip; Content Admin focused 11/11 PASS with 69 assertions; owner Copy 1/1 PASS with 7 assertions; JavaScript 8/8، Build 58 modules، Blade، Pint and Composer/pnpm audits PASS. Browser QA Desktop and Mobile 390 for Admin list/edit/metadata/media PASS.
+Testing Status Update: PROMPT 028 current MySQL 8.4.11 full Laravel 110/110 PASS with 970 assertions and zero skip; focused Admin users 4/4، Homepage 5/5، About 2/2، Design System 7/7 and Content Admin 11/11 PASS. JavaScript 8/8، Build 58 modules، Blade، Pint and Composer/pnpm audits PASS. Browser QA Desktop and Mobile 390 for Home، About and Admin user list/edit PASS with no horizontal overflow or console warning/error.
 Launch Status: PHASE 15 PAUSED / NOT STARTED BY OWNER
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -19,6 +20,11 @@ class User extends Authenticatable implements MustVerifyEmailContract
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, HasPublicUlid, Notifiable;
+
+    public function getRouteKeyName(): string
+    {
+        return 'public_id';
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -55,6 +61,26 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function privacyRequests(): HasMany
     {
         return $this->hasMany(PrivacyRequest::class);
+    }
+
+    public function purchases(): HasMany
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
+    public function latestPurchase(): HasOne
+    {
+        return $this->hasOne(Purchase::class)->latestOfMany();
+    }
+
+    public function entitlements(): HasMany
+    {
+        return $this->hasMany(Entitlement::class);
+    }
+
+    public function latestEntitlement(): HasOne
+    {
+        return $this->hasOne(Entitlement::class)->latestOfMany();
     }
 
     public function hasPermission(string $permission): bool
