@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'phone_e164', 'locale', 'timezone', 'password', 'onboarding_completed_at'])]
+#[Fillable(['name', 'email', 'phone_e164', 'locale', 'timezone', 'password', 'onboarding_completed_at', 'privacy_accepted_at', 'privacy_policy_version'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmailContract
 {
@@ -32,6 +32,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
             'phone_verified_at' => 'datetime',
             'last_login_at' => 'datetime',
             'onboarding_completed_at' => 'datetime',
+            'privacy_accepted_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
@@ -59,5 +60,11 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function hasPermission(string $permission): bool
     {
         return $this->roles()->whereHas('permissions', fn ($query) => $query->where('code', $permission))->exists();
+    }
+
+    /** @param array<int, string> $permissions */
+    public function hasAnyPermission(array $permissions): bool
+    {
+        return $this->roles()->whereHas('permissions', fn ($query) => $query->whereIn('code', $permissions))->exists();
     }
 }

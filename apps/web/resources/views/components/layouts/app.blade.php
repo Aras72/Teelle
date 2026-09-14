@@ -23,5 +23,10 @@
         <main id="main-content" tabindex="-1">
             {{ $slot }}
         </main>
+
+        <footer class="teelle-footer teelle-container">
+            <span>تیله؛ برای وقت واقعی کنار کودک</span>
+            <a href="{{ route('privacy') }}">حریم خصوصی</a>
+        </footer>
     </body>
 </html>

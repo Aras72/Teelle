@@ -32,9 +32,13 @@ final class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'string', 'email:rfc', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', Password::min(12)->letters()->mixedCase()->numbers()->symbols(), new NotCommonPassword],
+            'privacy_accepted' => ['accepted'],
         ]);
 
+        unset($data['privacy_accepted']);
         $data['email'] = Str::lower(trim($data['email']));
+        $data['privacy_accepted_at'] = now();
+        $data['privacy_policy_version'] = '2026-09-14';
         $user = DB::transaction(function () use ($data): User {
             $user = User::query()->create($data);
             $householdId = DB::table('households')->insertGetId([

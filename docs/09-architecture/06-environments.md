@@ -14,7 +14,7 @@ Phase: 09 - TECHNICAL ARCHITECTURE
 
 ## Required capabilities
 
-Production target پارس‌پک با MySQL 8 است. پلن نهایی MUST همچنین PHP 8.5، Laravel 13 requirements، scheduled tasks، queue processing قابل اتکا، HTTPS، releasable deployments، secret management، object-storage access، backup export و health monitoring را فراهم کند. وجود MySQL 8 تأیید شده؛ باقی capabilityها پیش از Implementation باید از پنل/قرارداد سرویس مستند شوند.
+Production target پارس‌پک با MySQL 8 و PHP 8.4 است. پلن نهایی MUST همچنین Laravel 13 requirements، scheduled tasks، queue processing قابل اتکا، HTTPS، releasable deployments، secret management، object-storage access، backup export و health monitoring را فراهم کند. SSH/Terminal در دسترس نیست و انتقال توسط مالک از پنل انجام می‌شود؛ باقی capabilityها هنگام انتقال باید مستند شوند.
 
 Host/provider نام مشخصی در Domain یا code ندارد. انتخاب Provider در Release planning با اثبات همین capabilityها انجام می‌شود.
 

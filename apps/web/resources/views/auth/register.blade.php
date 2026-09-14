@@ -11,6 +11,11 @@
                 <x-ui.field label="ایمیل" name="email" type="email" value="{{ old('email') }}" autocomplete="email" inputmode="email" required :error="$errors->first('email')" />
                 <x-ui.field label="رمز عبور" name="password" type="password" autocomplete="new-password" hint="حداقل ۱۲ نویسه با حرف بزرگ و کوچک، عدد و نشانه." required :error="$errors->first('password')" />
                 <x-ui.field label="تکرار رمز عبور" name="password_confirmation" type="password" autocomplete="new-password" required />
+                <label class="auth-consent">
+                    <input type="checkbox" name="privacy_accepted" value="1" @checked(old('privacy_accepted')) required>
+                    <span>سیاست <a href="{{ route('privacy') }}" target="_blank" rel="noopener">حریم خصوصی تیله</a> را می‌پذیرم.</span>
+                </label>
+                @error('privacy_accepted')<p class="field-error" role="alert">برای ساخت حساب، پذیرش سیاست حریم خصوصی لازم است.</p>@enderror
                 <x-ui.button type="submit">ساخت حساب و نگهداری سابقه</x-ui.button>
             </form>
             <div class="auth-links"><a href="{{ route('login') }}">قبلاً حساب ساخته‌ام</a><a href="{{ route('match.show') }}">ادامه به‌عنوان مهمان</a></div>

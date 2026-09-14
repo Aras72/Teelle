@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\EditorialCollectionController;
 use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\PrivacyAccountController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
@@ -33,6 +34,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', ShowHomepageController::class)->name('home');
 Route::get('/about', AboutController::class)->name('about');
+Route::view('/privacy', 'privacy')->name('privacy');
 Route::get('/collections', [CollectionController::class, 'index'])->name('collections.index');
 Route::get('/collections/{collection:slug}', [CollectionController::class, 'show'])->name('collections.show');
 Route::get('/collections/{collection:slug}/games/{game:public_id}/cover', CollectionCoverController::class)->name('collections.games.cover');
@@ -106,6 +108,8 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::get('/reports/weekly.pdf', [ReportController::class, 'pdf'])->name('reports.weekly.pdf');
     Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
     Route::put('/plans/{plan:code}', [PlanController::class, 'update'])->name('plans.update');
+    Route::get('/accounts', [PrivacyAccountController::class, 'index'])->name('accounts.index');
+    Route::post('/accounts/deletions/{privacyRequest:public_id}/reactivate', [PrivacyAccountController::class, 'reactivate'])->name('accounts.reactivate');
     Route::get('/collections', [EditorialCollectionController::class, 'index'])->name('collections.index');
     Route::get('/collections/new', [EditorialCollectionController::class, 'create'])->name('collections.create');
     Route::post('/collections', [EditorialCollectionController::class, 'store'])->name('collections.store');

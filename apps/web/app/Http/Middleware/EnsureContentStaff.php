@@ -14,7 +14,7 @@ class EnsureContentStaff
         if (! $user) {
             abort(401);
         }
-        if (! collect(['content.edit', 'content.review', 'content.publish', 'subscription.manage'])->contains(fn (string $permission) => $user->hasPermission($permission))) {
+        if (! $user->hasAnyPermission(['content.edit', 'content.review', 'content.publish', 'subscription.manage', 'users.manage'])) {
             abort(403);
         }
 

@@ -12,6 +12,9 @@
 
         <div class="teelle-header-actions">
             @auth
+                @if(auth()->user()->hasAnyPermission(['content.edit', 'content.review', 'content.publish', 'subscription.manage', 'users.manage']))
+                    <a class="teelle-account-link" href="{{ route('admin.content.index') }}">پنل مدیریت</a>
+                @endif
                 <a class="teelle-account-link" href="{{ auth()->user()->hasVerifiedEmail() ? route('account.show') : route('verification.notice') }}">حساب من</a>
             @else
                 <a class="teelle-account-link" href="{{ route('login') }}">ورود</a>

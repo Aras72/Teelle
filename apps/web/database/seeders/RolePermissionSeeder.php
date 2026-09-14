@@ -25,6 +25,7 @@ class RolePermissionSeeder extends Seeder
             'analytics.view' => 'مشاهده آمار تجمیعی',
             'subscription.manage' => 'مدیریت وضعیت اشتراک',
             'roles.manage' => 'مدیریت نقش‌ها',
+            'users.manage' => 'مدیریت بازگردانی حساب‌ها',
         ];
 
         foreach ($roles as $code => $title) {

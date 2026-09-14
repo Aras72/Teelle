@@ -10,7 +10,7 @@ Date: 2026-09-03
 - Security: threat، Auth/Authz، data، privacy، abuse and verification checklist reviewed
 - Roadmap: Website-first stages and explicit TWA prohibition documented
 - Tasks: bounded task IDs and dependency graph documented
-- Stack: PHP 8.5 and Laravel 13 fixed؛ MySQL 8 Pars Pack owner-confirmed
+- Stack: PHP 8.4 and Laravel 13 fixed؛ MySQL 8 Pars Pack owner-confirmed
 - Owner operations: Admin/Control Panel/managed automation paths documented؛ Terminal dependency prohibited
 
 ## Gate decision

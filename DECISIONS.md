@@ -576,3 +576,28 @@ Status: APPROVED BY OWNER / IMPLEMENTED / LOCAL GATE PASS
 هیچ خط مدار قابل‌مشاهده‌ای در UI مجاز نیست. Containerهای نامرئی فقط برای مسیر حرکت حفظ می‌شوند؛ Match و Results نیز Border مدار ندارند. Match پنج تیله فوتورئال متفاوت با حرکت‌های transform-only مستقل دارد، `prefers-reduced-motion` را رعایت می‌کند و در Mobile افقی Clip می‌شود تا Overflow نسازد.
 
 Regression کامل MySQL 8.4.11 برابر 103 test / 905 assertion بدون Skip پاس شد. JavaScript 8/8، Build با 58 module، Blade، Pint و Auditهای Composer/pnpm PASS هستند. Browser QA در Desktop و Mobile 390، Light/Dark، RTL، بدون خط مدار و بدون Horizontal overflow PASS شد. این تصمیم هیچ بازی Pilot را تأیید یا منتشر نمی‌کند و Ranking hold را تغییر نمی‌دهد.
+
+## DEC-044 - ویدئوی فعلی Hero نسخه نهایی MVP است
+
+Date: 2026-09-14
+Status: APPROVED BY OWNER / IMPLEMENTED
+
+مالک صریحاً ویدئوی فعلی تیله Hero را نهایی اعلام کرد. برای Website MVP همین ویدئوی فوتورئال Loop شده مرجع نهایی است و الزام تعامل سه‌بعدی قبلی را در MVP supersede می‌کند. Poster و احترام به reduced-motion باقی می‌مانند و هیچ بازتولید یا تغییر ظاهری روی تیله نهایی مجاز نیست مگر با دستور تازه مالک.
+
+## DEC-045 - استقرار دستی پارس‌پک با PHP 8.4 و MySQL 8
+
+Date: 2026-09-14
+Status: APPROVED BY OWNER / IMPLEMENTED IN CI AND RUNBOOK
+
+مالک اعلام کرد هاست پارس‌پک PHP 8.4 و MySQL 8 دارد، SSH/Terminal ارائه نمی‌کند، دامنه نهایی `teelle.ir` است و SSL هنگام اتصال دامنه فعال می‌شود. CI از PHP 8.5 به PHP 8.4 تغییر کرد و پس از PASS یک Artifact شامل Vendor و Build و بدون `.env` می‌سازد تا انتقال از پنل ممکن باشد. SMTP بعد از انتقال ارائه و روی دامنه واقعی تست می‌شود.
+
+این تصمیم Staging را حذف نمی‌کند؛ چون مالک محیط آزمایشی جدا نمی‌دهد، کنترل‌های Migration، HTTPS، SMTP، PWA، Backup و Rollback باید پیش از عمومی‌کردن دامنه روی Production candidate انجام شوند. نبود Evidence واقعی با تست محلی جایگزین نمی‌شود.
+
+## DEC-046 - سه روز بازگردانی و منع نگهداری مخفیانه پس از حذف
+
+Date: 2026-09-14
+Status: PARTIAL / OWNER RETENTION CHOICE REQUIRED
+
+مالک مهلت سه‌روزه و دکمه Admin برای بازگردانی حساب را خواست؛ این بخش به‌صورت `deletion_pending`، خروج از نشست، Permission مستقل `users.manage` و Audit پیاده‌سازی شد. مالک همچنین خواست اطلاعات شخصی پس از «حذف حساب» برای همیشه و بدون اطلاع کاربر برای مارکتینگ بماند. این بخش به دلیل تضاد با شفافیت، Purpose limitation و Consent اجرا نمی‌شود.
+
+Production Gate فقط با یکی از دو انتخاب صریح بسته می‌شود: حذف/ناشناس‌سازی شناسه‌های مستقیم پس از سه روز و نگهداری آمار غیرقابل انتساب؛ یا تغییر عنوان عمل به «غیرفعال‌سازی»، اعلام نگهداری دائمی و هدف مارکتینگ، و رضایت جداگانه قابل پس‌گرفتن. تا آن زمان پردازش پس از مهلت عمداً فعال نیست و Privacy Policy منتشرشده Draft عملیاتی است.

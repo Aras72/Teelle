@@ -18,7 +18,7 @@ class ContinuousIntegrationWorkflowTest extends TestCase
         $this->assertStringContainsString('permissions:', $workflow);
         $this->assertStringContainsString('contents: read', $workflow);
         $this->assertStringContainsString('image: mysql:8.4', $workflow);
-        $this->assertStringContainsString('php-version: "8.5"', $workflow);
+        $this->assertStringContainsString('php-version: "8.4"', $workflow);
         $this->assertStringContainsString('version: 11.22.0', $workflow);
         $this->assertStringContainsString('node-version: 22', $workflow);
         $this->assertStringContainsString('DB_SCHEMA_VALIDATION: "true"', $workflow);

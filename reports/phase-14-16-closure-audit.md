@@ -1,6 +1,6 @@
 # Phase 14–16 Closure Audit
 
-Date: 2026-09-13
+Date: 2026-09-14
 Status: LOCAL REPOSITORY WORK VERIFIED / OWNER AND PRODUCTION GATES OPEN
 
 This matrix prevents a phase label from hiding an unfinished requirement. `PASS` means implementation and current local evidence exist؛ `PARTIAL` means a real boundary remains؛ `BLOCKED` means approved external input or production evidence is absent.
@@ -8,7 +8,7 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 | Feature | Current status | Closure evidence or remaining boundary |
 |---|---|---|
 | FEAT-001 Landing/Homepage | PASS | Prompt 004/005 and browser QA |
-| FEAT-002 Interactive Hero Marble | PARTIAL | Natural approved video is active؛ identical safe interactive asset remains unavailable under DEC-026 |
+| FEAT-002 Hero Marble | PASS FOR MVP | Owner finalized the current natural looping video under DEC-044؛ interactive 3D is superseded for MVP |
 | FEAT-003 Guest Quick Match | PASS | Prompt 008 |
 | FEAT-004 Deterministic Matching | BLOCKED | Ranking weights and sufficient Published/Reviewed Coverage are not approved |
 | FEAT-005 Match Results | PARTIAL | Exactly-three downstream contract exists؛ real matching E2E waits on FEAT-004 |
@@ -30,7 +30,7 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 | FEAT-021 Collections | PASS | Prompt 017 Admin lifecycle، public discovery and stale-content fail-closed gate |
 | FEAT-022 Jigari Checkout | DEFERRED POST-MVP | Editable provisional pricing is implemented؛ Payment Provider and Checkout are explicitly deferred by DEC-040 |
 | FEAT-023 Subscription lifecycle | PARTIAL | Server entitlement/refund boundary exists؛ verified gateway lifecycle remains |
-| FEAT-024 Settings/Privacy | PARTIAL | Settings/export/request/cancel pass؛ post-grace execution and Legal retention remain |
+| FEAT-024 Settings/Privacy | PARTIAL | Export، 3-day deactivation and audited Admin reactivation implemented؛ post-grace retention model requires owner choice |
 | FEAT-025 Admin Content CRUD | PASS | Prompt 006 |
 | FEAT-026 Import | PASS | Atomic preview/confirm/rollback |
 | FEAT-027 Review/Publish | PASS | Independent review and fail-closed publish |
@@ -47,7 +47,7 @@ Prompt 025 همچنین نقص فاصله تیله و کادر Collections را 
 
 Repository-owned CI is `PASS` through Prompt 019 and GitHub Actions Run #3 on commit `7bcb749`. This does not replace any environment-specific evidence below.
 
-1. Exact Pars Pack MySQL 8 runtime and Staging migration rehearsal.
+1. Pars Pack MySQL 8 migration/import rehearsal through the hosting panel.
 2. Approved Ranking weights and zero Critical Coverage gap for claimed Contexts.
 3. Human-reviewed Published games with licensed reviewed Covers and Safety/source approval.
 4. Real Result/Play E2E through the production candidate set.
@@ -56,7 +56,7 @@ Repository-owned CI is `PASS` through Prompt 019 and GitHub Actions Run #3 on co
 7. Real screen reader، 200% zoom، Forced Colors and OS reduced-motion checks.
 8. Lighthouse/Core Web Vitals and weak-device budgets on the production build.
 9. Encrypted off-site backup/media restore، monitoring and rollback rehearsal with measured RPO/RTO.
-10. Release Privacy Policy، Terms and consent language.
+10. Privacy draft and registration acceptance are implemented؛ final retention choice، legal review and Terms remain.
 11. Post-grace deletion/anonymization، backup propagation and approved Legal retention.
 
 ## Additional Website MVP surfaces
@@ -74,8 +74,8 @@ Phase 16 is Production Launch. It can be executed only after every Critical/High
 
 1. تصمیم انسانی ثبت‌شده برای Copy/Source/Age/Safety/Cover بازی‌های Pilot و مجوز Publication.
 2. Golden set و وزن‌های عددی مصوب Ranking برای بستن FEAT-004، سپس Weekly Plan و Multi-child.
-3. دسترسی Staging پارس‌پک شامل نسخه دقیق MySQL، Domain/HTTPS و مسیر Deployment/rollback.
-4. مشخصات SMTP و DNS evidence مربوط به SPF/DKIM/DMARC.
-5. متن حقوقی مصوب Privacy/Terms/Consent و تصمیم Legal retention/backup deletion.
+3. انتقال دستی Artifact به پارس‌پک، Import دیتابیس، اتصال `teelle.ir` و فعال‌سازی SSL توسط مالک.
+4. مشخصات SMTP پس از انتقال و DNS evidence مربوط به SPF/DKIM/DMARC.
+5. انتخاب یکی از دو مدل شفاف حذف یا غیرفعال‌سازی و بازبینی نهایی Privacy/Terms.
 
 تا زمان ورود این پنج دسته ورودی، اعلام Phase 14، 15 یا 16 به‌عنوان COMPLETE از نظر Evidence نادرست است.

@@ -42,6 +42,7 @@ final class AccountLifecycleTest extends TestCase
         $this->post(route('register.store'), [
             'name' => 'آراس', 'email' => 'ARAS@example.com',
             'password' => 'SecurePass!2026', 'password_confirmation' => 'SecurePass!2026',
+            'privacy_accepted' => '1',
         ])->assertRedirect(route('verification.notice'));
 
         $user = User::query()->where('email', 'aras@example.com')->firstOrFail();
@@ -49,6 +50,8 @@ final class AccountLifecycleTest extends TestCase
         $this->assertNotSame($oldSessionId, session()->getId());
         $this->assertDatabaseHas('households', ['owner_user_id' => $user->id]);
         $this->assertDatabaseHas('household_members', ['user_id' => $user->id, 'role' => 'owner']);
+        $this->assertNotNull($user->privacy_accepted_at);
+        $this->assertSame('2026-09-14', $user->privacy_policy_version);
         Notification::assertSentTo($user, VerifyEmail::class);
     }
 
@@ -57,9 +60,22 @@ final class AccountLifecycleTest extends TestCase
         $this->from(route('register'))->post(route('register.store'), [
             'name' => 'مراقب', 'email' => 'caregiver@example.com',
             'password' => 'Password123!', 'password_confirmation' => 'Password123!',
+            'privacy_accepted' => '1',
         ])->assertRedirect(route('register'))->assertSessionHasErrors('password');
 
         $this->assertDatabaseMissing('users', ['email' => 'caregiver@example.com']);
+    }
+
+    public function test_registration_requires_privacy_acceptance_without_forcing_policy_open(): void
+    {
+        $this->get(route('register'))->assertOk()->assertSee(route('privacy'));
+
+        $this->from(route('register'))->post(route('register.store'), [
+            'name' => 'داییِ ارغوان', 'email' => 'privacy@example.com',
+            'password' => 'SecurePass!2026', 'password_confirmation' => 'SecurePass!2026',
+        ])->assertRedirect(route('register'))->assertSessionHasErrors('privacy_accepted');
+
+        $this->assertDatabaseMissing('users', ['email' => 'privacy@example.com']);
     }
 
     public function test_login_uses_generic_failure_for_wrong_and_inactive_accounts_and_is_throttled(): void
@@ -185,7 +201,7 @@ final class AccountLifecycleTest extends TestCase
 
         $this->actingAs($owner)->get(route('account.show'))->assertOk()->assertSee('بازی خصوصی آراس')
             ->assertSee('سلام داییِ ارغوان')->assertSee('مثلاً: داییِ ارغوان، مامانِ کوهیار')
-            ->assertSee('پس از ثبت درخواست حذف حساب، ۳۰ روز برای لغو فرصت دارید.')
+            ->assertSee('پس از ثبت درخواست حذف حساب، ۳ روز برای درخواست بازگردانی از پشتیبانی فرصت دارید.')
             ->assertSee('پروفایل کودک')->assertSee('پروفایل کودک فقط با عضویت فعال جیگری در دسترس است.')
             ->assertSee('شروع یک بازی')->assertSee('خروج از حساب');
         $this->put(route('account.update'), ['name' => 'نام تازه', 'timezone' => 'Asia/Tehran'])

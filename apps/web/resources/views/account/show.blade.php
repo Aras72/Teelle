@@ -93,7 +93,7 @@
                                 <x-ui.button type="submit" variant="secondary">فعلاً حسابم بماند</x-ui.button>
                             </form>
                         @else
-                            <p>پس از ثبت درخواست حذف حساب، ۳۰ روز برای لغو فرصت دارید.</p>
+                            <p>پس از ثبت درخواست حذف حساب، ۳ روز برای درخواست بازگردانی از پشتیبانی فرصت دارید.</p>
                             <form method="post" action="{{ route('account.privacy.deletion.store') }}" class="privacy-form__request">
                                 @csrf
                                 <x-ui.field label="رمز فعلی برای تأیید حذف" name="deletion_password" type="password" autocomplete="current-password" required :error="$errors->first('deletion_password')" />

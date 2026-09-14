@@ -26,7 +26,7 @@ Homepage UI can proceed after Foundation in parallel with Data. Account follows 
 
 ## External readiness
 
-- Pars Pack: PHP 8.5، Composer/deploy path، Cron/Queue، MySQL 8 minor، backup and storage capabilities
+- Pars Pack: PHP 8.4، no-terminal manual deploy path، Cron/Queue، MySQL 8 minor، backup and storage capabilities
 - Email: SMTP credentials، SPF/DKIM/DMARC and deliverability test
 - SMS: optional provider contract only when OTP activation is approved
 - Payment: provider and server-side callback requirements before Stage 6

@@ -9,6 +9,7 @@ use App\Privacy\AccountDataExporter;
 use App\Privacy\PrivacyRequestManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class PrivacyController extends Controller
@@ -31,8 +32,11 @@ final class PrivacyController extends Controller
     {
         $request->validate(['deletion_password' => ['required', 'current_password:web']]);
         $privacyRequest = $requests->requestDeletion($request->user());
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return back()->with('status', 'درخواست حذف ثبت شد؛ تا '.$privacyRequest->scheduled_for?->format('Y/m/d').' فرصت لغو دارید');
+        return redirect()->route('home')->with('status', 'درخواست حذف ثبت شد؛ تا '.$privacyRequest->scheduled_for?->format('Y/m/d').' می‌توانید از پشتیبانی درخواست بازگردانی کنید');
     }
 
     public function cancelDeletion(Request $request, PrivacyRequestManager $requests): RedirectResponse

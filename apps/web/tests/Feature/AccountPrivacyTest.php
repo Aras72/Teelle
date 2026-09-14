@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Models\PrivacyRequest;
+use App\Models\Role;
 use App\Models\User;
+use Database\Seeders\RolePermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -46,34 +48,39 @@ final class AccountPrivacyTest extends TestCase
         $this->assertDatabaseHas('audit_logs', ['actor_user_id' => $user->id, 'actor_type' => 'user', 'action' => 'privacy.export_completed']);
     }
 
-    public function test_deletion_request_has_thirty_day_grace_and_is_idempotent(): void
+    public function test_deletion_request_has_three_day_grace_and_deactivates_session(): void
     {
         $this->travelTo(now()->startOfSecond());
         $user = User::factory()->create(['password' => Hash::make('Correct!2026')]);
 
-        $this->actingAs($user)->post(route('account.privacy.deletion.store'), ['deletion_password' => 'Correct!2026'])->assertRedirect();
-        $this->post(route('account.privacy.deletion.store'), ['deletion_password' => 'Correct!2026'])->assertRedirect();
+        $this->actingAs($user)->post(route('account.privacy.deletion.store'), ['deletion_password' => 'Correct!2026'])->assertRedirect(route('home'));
 
         $request = PrivacyRequest::query()->where('user_id', $user->id)->where('request_type', 'deletion')->sole();
         $this->assertSame('pending', $request->status);
         $this->assertSame('active', $request->active_key);
-        $this->assertTrue($request->scheduled_for->equalTo(now()->addDays(30)));
+        $this->assertTrue($request->scheduled_for->equalTo(now()->addDays(3)));
+        $this->assertDatabaseHas('users', ['id' => $user->id, 'status' => 'deletion_pending']);
+        $this->assertGuest();
         $this->assertSame(1, DB::table('audit_logs')->where('action', 'privacy.deletion_requested')->count());
     }
 
-    public function test_pending_deletion_can_be_cancelled_without_deleting_account_data(): void
+    public function test_admin_can_reactivate_pending_deletion_within_three_days(): void
     {
+        $this->seed(RolePermissionSeeder::class);
         $user = User::factory()->create(['password' => Hash::make('Correct!2026')]);
         $this->actingAs($user)->post(route('account.privacy.deletion.store'), ['deletion_password' => 'Correct!2026']);
-
-        $this->delete(route('account.privacy.deletion.destroy'))->assertRedirect()->assertSessionHas('status', 'درخواست حذف حساب لغو شد');
-
         $privacyRequest = PrivacyRequest::query()->where('user_id', $user->id)->sole();
-        $this->assertSame('cancelled', $privacyRequest->status);
-        $this->assertNull($privacyRequest->active_key);
-        $this->assertNotNull($privacyRequest->cancelled_at);
+        $admin = User::factory()->create();
+        $admin->roles()->attach(Role::query()->where('code', 'admin')->sole());
+
+        $this->actingAs($admin)->post(route('admin.content.accounts.reactivate', $privacyRequest))
+            ->assertRedirect()->assertSessionHas('status', 'حساب بازگردانی شد و کاربر دوباره می‌تواند وارد شود');
+
+        $this->assertSame('cancelled', $privacyRequest->fresh()->status);
+        $this->assertNull($privacyRequest->fresh()->active_key);
+        $this->assertNotNull($privacyRequest->fresh()->cancelled_at);
         $this->assertDatabaseHas('users', ['id' => $user->id, 'status' => 'active']);
-        $this->assertDatabaseHas('audit_logs', ['actor_user_id' => $user->id, 'action' => 'privacy.deletion_cancelled']);
+        $this->assertDatabaseHas('audit_logs', ['actor_user_id' => $admin->id, 'actor_type' => 'admin', 'action' => 'privacy.account_reactivated_by_admin']);
     }
 
     public function test_account_page_exposes_honest_privacy_controls_and_status(): void
@@ -85,11 +92,13 @@ final class AccountPrivacyTest extends TestCase
             'status' => 'pending',
             'active_key' => 'active',
             'requested_at' => now(),
-            'scheduled_for' => now()->addDays(30),
+            'scheduled_for' => now()->addDays(3),
         ]);
 
         $this->actingAs($user)->get(route('account.show'))->assertOk()
             ->assertSee('حریم خصوصی حساب')->assertSee('دریافت فایل داده‌های من')
             ->assertSee('فعلاً حسابم بماند')->assertSee('تا آن روز می‌توانید آن را لغو کنید');
+
+        $this->get(route('privacy'))->assertOk()->assertSee('سیاست حریم خصوصی تیله');
     }
 }

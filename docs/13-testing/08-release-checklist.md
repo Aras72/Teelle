@@ -58,7 +58,7 @@ Phase 15 Gate: NOT PASS
 
 ## مسدودکننده انتشار
 
-- [ ] نسخه دقیق MySQL 8 هاست و migration rehearsal
+- [ ] Import/Migration rehearsal روی MySQL 8 پارس‌پک از طریق پنل
 - [ ] Ranking weights تأییدشده و Coverage بدون Gap بحرانی
 - [ ] بازی‌های Published/Reviewed با Cover و Safety review
 - [ ] Result/Play واقعی E2E
@@ -68,7 +68,10 @@ Phase 15 Gate: NOT PASS
 - [ ] Lighthouse/Core Web Vitals و weak-device budget
 - [ ] PWA update rollout دو نسخه‌ای، install prompt/app installation و installability واقعی روی HTTPS Production candidate
 - [ ] Staging encrypted/off-site backup restore، media restore، monitoring و rollback rehearsal با سنجش RPO/RTO
-- [ ] Privacy Policy، Terms و consentهای Release
+- [x] Privacy Policy ساده، صفحه عمومی و پذیرش اجباری ثبت‌نام در کد
+- [x] مهلت سه‌روزه و بازگردانی Audit‌شده توسط Admin — 16 test / 136 assertion متمرکز
+- [x] CI روی PHP 8.4 و Artifact بدون Terminal با Vendor و Build و بدون Secret
+- [ ] انتخاب شفاف retention، Legal review نهایی و Terms
 - [ ] اجرای حذف/Anonymization پس از مهلت، Backup propagation و Legal retention
 
 شروع PHASE 16 یا اعلام Launch-ready تا بسته‌شدن موارد بالا ممنوع است.

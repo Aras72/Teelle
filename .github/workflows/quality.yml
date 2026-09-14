@@ -57,7 +57,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.5"
+          php-version: "8.4"
           extensions: bcmath, fileinfo, intl, mbstring, pdo_mysql
           coverage: none
 
@@ -105,3 +105,22 @@ jobs:
 
       - name: Audit production JavaScript dependencies
         run: pnpm audit --prod --audit-level=low
+
+      - name: Prepare no-terminal deployment bundle
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress
+
+      - name: Upload PHP 8.4 deployment bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: teelle-web-php84-${{ github.sha }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            apps/web
+            !apps/web/.env
+            !apps/web/node_modules
+            !apps/web/tests
+            !apps/web/storage/logs/*
+            !apps/web/storage/framework/cache/data/*
+            !apps/web/storage/framework/sessions/*
+            !apps/web/storage/framework/views/*

@@ -7,7 +7,7 @@ Reviewed: 2026-09-03
 ## Current-version evidence
 
 - Laravel 13 نسخه جاری Framework در مستندات رسمی Laravel در سپتامبر 2026 است.
-- PHP 8.5 نسخه Stable جاری و تا پایان 2027 در Active support و تا پایان 2029 در Security support است.
+- PHP 8.4 سقف نسخه تأییدشده هاست پارس‌پک است و با قرارداد Composer پروژه (`^8.3`) سازگار است.
 - PHP 8.6 در این تاریخ Beta است و برای Production انتخاب نمی‌شود.
 
 Sources:
@@ -22,7 +22,7 @@ Sources:
 
 | Layer | Choice | State |
 | --- | --- | --- |
-| Language | PHP 8.5 | ACCEPTED؛ Hosting MUST support it |
+| Language | PHP 8.4 | APPROVED BY OWNER؛ CI MUST verify it |
 | Framework | Laravel 13.x | ACCEPTED |
 | Rendering | Blade SSR | ACCEPTED |
 | Stateful UI | Livewire 4، حداقل patched `4.3.4` | ACCEPTED؛ patch در Lockfile |
@@ -37,7 +37,7 @@ Sources:
 
 ## Selection rule
 
-Hosting انتخاب‌شده پارس‌پک است و طبق اعلام مالک MySQL 8 ارائه می‌کند. PHP 8.5، Extensionهای Laravel، Cron/Queue، Backup و deployment capabilityهای پلن مشخص باید پیش از Implementation جداگانه بررسی شوند. نسخه‌های patch پکیج‌ها فقط از طریق Lockfile و پس از Quality Gate ارتقا می‌یابند. Three.js پس از Spike عملکرد و Testing toolchain در PHASE 12 Freeze می‌شوند.
+Hosting انتخاب‌شده پارس‌پک است و طبق اعلام مالک MySQL 8 و PHP تا نسخه 8.4 ارائه می‌کند. Extensionهای Laravel، Cron/Queue، Backup و deployment capabilityهای پلن مشخص باید هنگام انتقال از پنل بررسی شوند. نسخه‌های patch پکیج‌ها فقط از طریق Lockfile و پس از Quality Gate ارتقا می‌یابند.
 
 Laravel 13 از MySQL 8.0 به بالا پشتیبانی می‌کند. Minor/Patch واقعی Server در شروع Implementation از connection ثبت می‌شود تا Migrationها در همان نسخه آزموده شوند.
 
