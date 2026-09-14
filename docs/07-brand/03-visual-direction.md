@@ -25,11 +25,13 @@ Modern Nostalgia × Playful Intelligence برای محصولی adult-facing در
 ## Typography
 
 - خانواده پایه فارسی: Vazirmatn Variable، self-hosted، با fallback `Tahoma, Arial, sans-serif`
-- Display: همان خانواده با وزن ۷۰۰ تا ۹۰۰؛ Serif تزئینی استفاده نمی‌شود.
+- Display و تیترها: Lalezar Regular، self-hosted، با fallback به Vazirmatn؛ متن‌های عادی، کنترل‌ها و توضیحات همچنان Vazirmatn هستند.
 - Body: وزن ۴۰۰ تا ۵۰۰، line-height خوانا و طول خط محدود.
 - اعداد و UI از Stylistic set مصوب و یکسان استفاده می‌کنند.
 
 Source: [Vazirmatn official repository](https://github.com/rastikerdar/vazirmatn)؛ مجوز OFL 1.1 و فایل Variable باید هنگام Implementation داخل Repository vendored و License آن حفظ شود.
+
+فایل `Lalezar-Regular.ttf` در تاریخ ۲۰۲۶-۰۹-۱۴ توسط مالک پروژه تحویل و با SHA-256 برابر `87AC2CEFAD76A91ADBE9286A6D3D683741C781A7DDF841914479674D7939A8CD` داخل Repository ثبت شد.
 
 ## Shape and material
 

@@ -13,6 +13,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Lalezar';
+    src: url('../fonts/Lalezar-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
 :root {
     color-scheme: light;
 
@@ -46,6 +54,7 @@
 
     /* Typography */
     --font-sans: 'Vazirmatn', Tahoma, Arial, sans-serif;
+    --font-display: 'Lalezar', 'Vazirmatn', Tahoma, Arial, sans-serif;
     --font-weight-regular: 400;
     --font-weight-medium: 500;
     --font-weight-bold: 700;
@@ -182,6 +191,17 @@ body {
     transition:
         background-color var(--duration-ui) var(--ease-enter),
         color var(--duration-ui) var(--ease-enter);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.match-question legend {
+    font-family: var(--font-display);
+    font-synthesis: none;
 }
 
 .pwa-update-notice {

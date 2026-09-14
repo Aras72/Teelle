@@ -9,12 +9,22 @@ class DesignSystemTest extends TestCase
     public function test_self_hosted_font_and_license_are_present(): void
     {
         $font = resource_path('fonts/Vazirmatn-Variable.woff2');
+        $displayFont = resource_path('fonts/Lalezar-Regular.ttf');
         $license = resource_path('fonts/OFL.txt');
 
         $this->assertFileExists($font);
         $this->assertGreaterThan(100_000, filesize($font));
+        $this->assertFileExists($displayFont);
+        $this->assertGreaterThan(200_000, filesize($displayFont));
         $this->assertFileExists($license);
         $this->assertStringContainsString('SIL OPEN FONT LICENSE Version 1.1', file_get_contents($license));
+
+        $css = file_get_contents(resource_path('css/app.css'));
+
+        $this->assertStringContainsString("font-family: 'Lalezar';", $css);
+        $this->assertStringContainsString("--font-display: 'Lalezar', 'Vazirmatn'", $css);
+        $this->assertStringContainsString('.match-question legend {', $css);
+        $this->assertStringContainsString('font-family: var(--font-display);', $css);
     }
 
     public function test_semantic_tokens_cover_both_themes_and_motion_preferences(): void
