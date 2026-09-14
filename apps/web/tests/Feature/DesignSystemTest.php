@@ -75,6 +75,19 @@ class DesignSystemTest extends TestCase
         $this->assertStringNotContainsString(".home-heartbeat__tagline {\n    max-width: none;\n    white-space: nowrap;", $css);
     }
 
+    public function test_collections_list_keeps_clear_space_below_the_floating_marble(): void
+    {
+        $css = file_get_contents(resource_path('css/app.css'));
+
+        $this->assertIsString($css);
+        $this->assertStringContainsString(
+            ".collection-list {\n    padding-block-start: clamp(var(--space-10), 6vw, var(--space-16));",
+            $css,
+        );
+        $this->assertStringContainsString(".collections-heading {\n        padding-block-end: 7.5rem;", $css);
+        $this->assertStringContainsString(".collections-heading__marble {\n        top: auto;\n        bottom: 0;\n        width: 7rem;", $css);
+    }
+
     public function test_page_marbles_use_distinct_optimized_photorealistic_assets(): void
     {
         $assets = [

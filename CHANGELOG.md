@@ -2,6 +2,9 @@
 
 ## 2026-09-13
 
+- Added Prompt 025 responsive clearance between the Collections marble and its first content state; mobile now reserves a dedicated marble row instead of overlapping heading copy.
+- Added a source contract for Desktop/Mobile clearance and verified 7 Design System tests / 131 assertions plus the full MySQL 8.4.11 suite at 104 tests / 909 assertions.
+- Reconfirmed JavaScript 8/8، production Build، Blade، Pint and fresh Composer/pnpm production audits; Phase 14–16 external gates remain explicitly open.
 - Added Prompt 020 editable provisional pricing for the fixed 3/6/12-month Jigari plans at 390,000، 690,000 and 1,190,000 toman.
 - Added a `subscription.manage`-protected Admin surface for title، toman price and public visibility with localized digit normalization and append-only Audit.
 - Stored canonical amounts as IRR at 10 IRR per toman while clearly labeling public amounts as provisional.

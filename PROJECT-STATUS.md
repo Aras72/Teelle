@@ -3,8 +3,8 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: PROMPT 024 TYPOGRAPHY + ORBIT-FREE MOTION IMPLEMENTED / LOCAL GATES PASS
-Current Task: Prompt 024 روی `main` تحویل شد؛ ادامه بستن Scope مستقل باقی‌مانده فاز ۱۴ بدون ادعای Launch-ready
+Current Stage: PROMPT 025 COLLECTIONS CLEARANCE IMPLEMENTED / LOCAL GATES PASS
+Current Task: Scope محلی مستقل تا Prompt 025 تحویل شد؛ دریافت ورودی‌های انسانی و محیط Production برای بستن فازهای ۱۴ تا ۱۶
 Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
 
 Last Completed:
@@ -103,13 +103,15 @@ Currently Working On:
 - Regression کامل Prompt 024 روی MySQL 8.4.11 برابر 103/103 با 905 assertion و بدون Skip PASS شد؛ JavaScript 8/8، Build 58 module، Blade، Pint و Auditهای Composer/pnpm نیز PASS هستند.
 - Browser QA Prompt 024 در Desktop و Mobile 390، Light/Dark، RTL و بدون Horizontal overflow PASS شد؛ دو جمله Promise صفحه About در هر دو اندازه دقیقاً دوخطی هستند.
 - Commit پیاده‌سازی Prompt 024 برابر `041a062` روی `main` Push و با `origin/main` همگام شد؛ Remote CI به‌دلیل نبود دسترسی احرازشده به Actions خصوصی در محیط فعلی `NOT VERIFIED` است.
+- Prompt 025 فاصله تیله شناور Collections از کادر پایین را در Desktop اصلاح کرد و در Mobile 390 فضای مستقل زیر Header ساخت تا تیله روی متن نیفتد.
+- گیت متمرکز Design System برابر 7/7 با 131 assertion و Regression کامل MySQL 8.4.11 برابر 104/104 با 909 assertion PASS شد؛ JavaScript 8/8، Build، Blade، Pint و Auditهای تازه نیز PASS هستند.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
 - `PHASE 11 — SECURITY & PRIVACY`: مستندات پایه کامل؛ کنترل‌های Production مانند SMTP، TLS و Privacy release هنوز در Gate انتشار بررسی می‌شوند.
 - `PHASE 12 — DEVELOPMENT PLANNING`: کامل و Architecture Gate برابر PASS.
-- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 018 تولید، Freeze و اجرا شده‌اند.
-- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 022 اجرا شده‌اند؛ PWA local foundation، Onboarding، Collections، About، مدیریت قیمت آزمایشی و بستر بازبینی انسانی بسته شدند، اما Hero interaction، Weekly Plan، Multi-child، محتوای Published/Reviewed، Ranking calibration و Post-grace deletion هنوز COMPLETE نیست.
+- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 025 تولید، Freeze و اجرا شده‌اند.
+- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 025 اجرا شده‌اند؛ PWA local foundation، Onboarding، Collections، About، مدیریت قیمت آزمایشی و بستر بازبینی انسانی بسته شدند، اما Hero interaction، Weekly Plan، Multi-child، محتوای Published/Reviewed، Ranking calibration و Post-grace deletion هنوز COMPLETE نیست.
 - `PHASE 15 — TESTING & QA`: برای Scope موجود فعال است؛ گیت MySQL 8 و CI Repository PASS هستند، ولی Gate کامل QA به‌علت Evidenceهای Staging/Production هنوز NOT PASS است.
 
 Next:

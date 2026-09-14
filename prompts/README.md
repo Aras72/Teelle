@@ -1,6 +1,6 @@
 # PHASE 13 - EXECUTION PROMPTS
 
-Status: PROMPTS 001-004 EXECUTED/PASS; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED/CONDITIONAL PASS; PROMPTS 011-012 IMPLEMENTED/PASS
+Status: PROMPTS 001-025 FROZEN/EXECUTED WITH PER-PROMPT REPORTS; CROSS-PHASE EXTERNAL GATES REMAIN OPEN
 Architecture Gate: PASS
 
 ## Planned order
@@ -17,5 +17,7 @@ Architecture Gate: PASS
 10. `010-email-account-and-continuity.md`
 11. `011-jigari-entitlement-and-child-profiles.md`
 12. `012-jigari-search-and-filter.md`
+
+Prompts `013` تا `025` ادامه اجرای ترتیبی Privacy، Reports، PWA، Onboarding، Collections، About، CI، Pricing آزمایشی، Human-review workspace، Daily free-play، Copy/Motion و Collections clearance هستند؛ Evidence هرکدام در `reports/prompt-0xx-report.md` ثبت شده است.
 
 Each prompt is frozen before execution، runs alone and must pass its own tests/quality gate before the next prompt starts. OTP activation is not scheduled until an SMS provider is approved.

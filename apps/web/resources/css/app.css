@@ -541,6 +541,7 @@ body {
 }
 
 .collection-list {
+    padding-block-start: clamp(var(--space-10), 6vw, var(--space-16));
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
 }
 
@@ -711,6 +712,20 @@ body {
 }
 
 @media (max-width: 32rem) {
+    .collections-heading {
+        padding-block-end: 7.5rem;
+    }
+
+    .collections-heading__marble {
+        top: auto;
+        bottom: 0;
+        width: 7rem;
+    }
+
+    .collection-list {
+        padding-block-start: var(--space-6);
+    }
+
     .pwa-update-notice {
         align-items: stretch;
         flex-direction: column;

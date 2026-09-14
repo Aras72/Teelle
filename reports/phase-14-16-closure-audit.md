@@ -1,7 +1,7 @@
 # Phase 14–16 Closure Audit
 
-Date: 2026-09-12
-Status: ACTIVE SOURCE-TO-EVIDENCE MATRIX
+Date: 2026-09-13
+Status: LOCAL REPOSITORY WORK VERIFIED / OWNER AND PRODUCTION GATES OPEN
 
 This matrix prevents a phase label from hiding an unfinished requirement. `PASS` means implementation and current local evidence exist؛ `PARTIAL` means a real boundary remains؛ `BLOCKED` means approved external input or production evidence is absent.
 
@@ -41,6 +41,8 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 | FEAT-032 Relationship Copy | NOT IMPLEMENTED / SHOULD | Does not block MUST-only closure unless promoted |
 | FEAT-033 PWA Readiness | PARTIAL | Local lifecycle and real server-outage recovery pass؛ Production HTTPS installability، app installation and two-version update remain |
 
+Prompt 025 همچنین نقص فاصله تیله و کادر Collections را در Desktop/Mobile بست و با MySQL regression و Browser QA تأیید کرد؛ این اصلاح وضعیت Featureهای وابسته به Ranking، Content یا Production را تغییر نمی‌دهد.
+
 ## Phase 15 release blockers
 
 Repository-owned CI is `PASS` through Prompt 019 and GitHub Actions Run #3 on commit `7bcb749`. This does not replace any environment-specific evidence below.
@@ -67,3 +69,13 @@ Repository-owned CI is `PASS` through Prompt 019 and GitHub Actions Run #3 on co
 ## Phase 16 boundary
 
 Phase 16 is Production Launch. It can be executed only after every Critical/High item above is closed with environment-specific evidence. A local test pass cannot be relabeled as Production launch evidence.
+
+## Required next inputs
+
+1. تصمیم انسانی ثبت‌شده برای Copy/Source/Age/Safety/Cover بازی‌های Pilot و مجوز Publication.
+2. Golden set و وزن‌های عددی مصوب Ranking برای بستن FEAT-004، سپس Weekly Plan و Multi-child.
+3. دسترسی Staging پارس‌پک شامل نسخه دقیق MySQL، Domain/HTTPS و مسیر Deployment/rollback.
+4. مشخصات SMTP و DNS evidence مربوط به SPF/DKIM/DMARC.
+5. متن حقوقی مصوب Privacy/Terms/Consent و تصمیم Legal retention/backup deletion.
+
+تا زمان ورود این پنج دسته ورودی، اعلام Phase 14، 15 یا 16 به‌عنوان COMPLETE از نظر Evidence نادرست است.
