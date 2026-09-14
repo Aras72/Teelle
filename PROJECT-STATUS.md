@@ -2,10 +2,10 @@
 
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
-Current Phase: PHASE 14 CLOSURE + PHASE 15 TESTING & QA
-Current Stage: PROMPT 025 COLLECTIONS CLEARANCE IMPLEMENTED / LOCAL GATES PASS
-Current Task: Scope محلی مستقل تا Prompt 025 تحویل شد؛ دریافت ورودی‌های انسانی و محیط Production برای بستن فازهای ۱۴ تا ۱۶
-Overall Status: IMPLEMENTATION INCOMPLETE / TESTING IN PROGRESS
+Current Phase: PHASE 14 COMPLETE / PHASE 15 PAUSED BY OWNER
+Current Stage: PROMPT 026 OWNER GAME REVIEW IMPORTED / SINGLE-SHEET TEMPLATES DELIVERED
+Current Task: انتظار برای تصاویر بازی‌ها و دستور صریح مالک برای آغاز PHASE 15
+Overall Status: PHASE 14 PASS / RELEASE QA NOT STARTED
 
 Last Completed:
 
@@ -105,31 +105,33 @@ Currently Working On:
 - Commit پیاده‌سازی Prompt 024 برابر `041a062` روی `main` Push و با `origin/main` همگام شد؛ Remote CI به‌دلیل نبود دسترسی احرازشده به Actions خصوصی در محیط فعلی `NOT VERIFIED` است.
 - Prompt 025 فاصله تیله شناور Collections از کادر پایین را در Desktop اصلاح کرد و در Mobile 390 فضای مستقل زیر Header ساخت تا تیله روی متن نیفتد.
 - گیت متمرکز Design System برابر 7/7 با 131 assertion و Regression کامل MySQL 8.4.11 برابر 104/104 با 909 assertion PASS شد؛ JavaScript 8/8، Build، Blade، Pint و Auditهای تازه نیز PASS هستند.
+- Prompt 026 فایل بازبینی مالک را خواند و شش اصلاح Copy را به منبع Canonical بیست‌وپنج بازی منتقل کرد؛ تست مالک 1/1 با 7 assertion PASS شد.
+- تمپلیت پرشده v2 و تمپلیت خالی بازی‌های آینده با یک شیت، Vazirmatn، سلول‌های وسط‌چین و Dropdownهای بدون ماکرو تحویل شدند؛ سناریوهای S و ستون نکته برش حذف شدند.
+- پنل مدیریت برای افزودن دستی بازی، Metadata کامل و Upload/Review تصویر راستی‌آزمایی شد؛ گیت Content Admin روی دیتابیس موقت ایزوله 11/11 با 69 assertion PASS شد.
+- Regression نهایی Phase 14 روی MySQL Community Server 8.4.11 برابر 106/106 با 937 assertion و بدون Skip PASS شد؛ JavaScript 8/8، Build 58 module، Pint، Blade و Auditهای Composer/pnpm نیز PASS هستند.
+- Browser QA تازه پنل در Desktop و Mobile 390، فهرست ۲۵ Draft، Copy اصلاح‌شده، Metadata و Upload تصویر را پوشش داد و مسیر اصلی PASS است.
+- مالک تکمیل همین بسته را شرط Closure اعلام کرد؛ PHASE 14 طبق DEC-049 بسته و PHASE 15 تا آماده‌شدن تصاویر و دستور مالک متوقف شد.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
 - `PHASE 11 — SECURITY & PRIVACY`: مستندات پایه کامل؛ کنترل‌های Production مانند SMTP، TLS و Privacy release هنوز در Gate انتشار بررسی می‌شوند.
 - `PHASE 12 — DEVELOPMENT PLANNING`: کامل و Architecture Gate برابر PASS.
-- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 025 تولید، Freeze و اجرا شده‌اند.
-- `PHASE 14 — IMPLEMENTATION`: Promptهای 001 تا 025 اجرا شده‌اند؛ PWA local foundation، Onboarding، Collections، About، مدیریت قیمت آزمایشی و بستر بازبینی انسانی بسته شدند، اما Hero interaction، Weekly Plan، Multi-child، محتوای Published/Reviewed، Ranking calibration و Post-grace deletion هنوز COMPLETE نیست.
-- `PHASE 15 — TESTING & QA`: برای Scope موجود فعال است؛ گیت MySQL 8 و CI Repository PASS هستند، ولی Gate کامل QA به‌علت Evidenceهای Staging/Production هنوز NOT PASS است.
+- `PHASE 13 — EXECUTION PROMPTS`: Promptهای 001 تا 026 تولید، Freeze و اجرا شده‌اند.
+- `PHASE 14 — IMPLEMENTATION`: COMPLETE در مرز تعیین‌شده مالک؛ Promptهای 001 تا 026، منبع ۲۵ بازی با اصلاحات مالک، Admin Content و تمپلیت آینده تحویل شدند. Hero نهایی همان ویدئو است؛ Weekly Plan، Multi-child و Payment خارج از Closure این فاز باقی مانده‌اند.
+- `PHASE 15 — TESTING & QA`: PAUSED؛ فقط پس از آماده‌شدن عکس‌های هر بازی و دستور صریح مالک آغاز می‌شود. Publication، Ranking calibration و Evidenceهای Hosting/SMTP در همین فاز Gate می‌شوند.
 
 Next:
 
-- ثبت تصمیم انسانی Copy/Source/Age/Safety و Cover برای هر بازی با استفاده از `reports/pilot-human-review-pack-v1.md` و چرخه Admin
-- بازبینی انسانی محتوا، Safety، تناسب سنی و منبع هر Draft و تولید/تأیید Coverهای هم‌سبک تیله
-- بازبینی مالک روی جریان Guest Quick Match
-- Freeze کردن Weightهای Ranking با Golden-set calibration و تأمین حداقل سه بازی Published/Reviewed برای Contextهای پشتیبانی‌شده
-- تنظیم SMTP تولید، SPF/DKIM/DMARC و آزمون واقعی تحویل Verification/Reset
-- تعیین و Freeze کردن کوچک‌ترین Slice بعدی فقط پس از بسته‌شدن QA جاری و تأیید مالک
-- تکمیل E2E، Accessibility، Security header و Performance Gate پیش از PHASE 16
-- طراحی Slice مستقل Executor حذف/Anonymization فقط پس از Freeze شدن Legal retention و Backup behavior
-- دریافت Evidence و تصمیم‌های مالک برای Ranking/Content، Legal retention و Hosting/Staging پیش از Sliceهای وابسته باقی‌مانده؛ Payment Provider/Checkout طبق DEC-040 بعد از MVP است
+- دریافت عکس‌های هر بازی از مالک و آغاز PHASE 15 فقط با دستور صریح او
+- ورود و بازبینی Coverها، ساخت Candidate set و کالیبراسیون Ranking در PHASE 15
+- بازبینی مالک روی جریان واقعی Guest Quick Match پس از آماده‌شدن Candidate set
+- تنظیم SMTP تولید، SPF/DKIM/DMARC و آزمون واقعی Verification/Reset پس از انتقال به هاست
+- تکمیل E2E، Accessibility، Security header، Performance، Backup/Restore و Rollback پیش از PHASE 16
 
-Blocked By:
+Phase 15 Waiting For:
 
 - نسخه دقیق MySQL سرویس هاست پارس‌پک و migration rehearsal روی Staging هنوز تأیید نشده است؛ پورت محلی 3500 نسخه 26.7 دارد و مبنای گیت MySQL 8 قرار نگرفت.
-- ۲۵ بازی Pilot عمداً Draft هستند؛ تا تصویر Reviewed و Human editorial/safety review وارد Candidate set نمی‌شوند.
+- ۲۵ بازی Pilot عمداً Draft هستند؛ تا تصویر Reviewed وارد Candidate set نمی‌شوند.
 - Weightهای Ranking هنوز در Calibration Hold هستند؛ بنابراین تولید واقعی پیشنهادها قفل است و Quick Match در وضعیت صادقانه `Collecting` می‌ماند.
 
 Open Questions:
@@ -173,10 +175,11 @@ Critical Risks:
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-022 FROZEN AND EXECUTED; PROMPTS 019-020 PASS; PROMPT 021 REVIEW PREPARATION PASS; PROMPT 022 AUTOMATED PASS / OWNER VISUAL REVIEW READY
-Implementation Status: PHASE 14 INCOMPLETE; PROMPTS 001-004 COMPLETE; PROMPT 005 NATURAL LOOP VIDEO ACTIVE / 3D INTERACTION DEFERRED; PROMPTS 006-010 IMPLEMENTED / CONDITIONAL PASS; PROMPTS 011-014 IMPLEMENTED / PASS; PROMPT 015 PWA LOCAL FOUNDATION IMPLEMENTED / PRODUCTION EVIDENCE PENDING; PROMPT 016 ONBOARDING PASS; PROMPT 017 COLLECTIONS PASS; PROMPT 018 ABOUT PASS; PROMPT 020 PROVISIONAL PRICING PASS / PAYMENT POST-MVP
-Testing Status: PHASE 15 IN PROGRESS; current MySQL 8.4.11 full Laravel 94/94 PASS with 776 assertions and no skipped database contract tests; About focused 2/2 PASS with 11 assertions; Collections + schema focused 12/12 PASS with 67 assertions; order-dependent Content Admin + Collections 14/14 PASS with 80 assertions; Onboarding focused 4/4 PASS with 21 assertions; PWA focused 4/4 PASS with 30 assertions; Admin report 4/4 PASS with 35 assertions; Privacy 5/5 PASS with 36 assertions; MySQL schema contract includes editorial_collections، editorial_collection_game، privacy_requests and search_observations; local MySQL backup/restore parity PASS; JS 8/8 PASS; Build، Pint، Blade compilation and current dependency audits PASS; browser smoke Home/Match/Login/Jigari/Admin report Light/Dark PASS; About public 390/768/1440 Light/Dark RTL/Touch/Overflow/Console PASS; Collections public/Admin 1440/652/390 Light/Dark RTL/Touch/Overflow/Console PASS; Onboarding Desktop/Mobile Light/Dark RTL/Touch/Overflow/Console PASS; PWA metadata، Service Worker local lifecycle، controller continuity and real server-outage recovery PASS; HTTPS installability، app installation and two-version update rollout NOT VERIFIED; Home responsive reflow at 320/390/768/1024/1440، Home/Login keyboard + 44px touch targets and authenticated Account/Child Profile/Admin/Privacy/Report keyboard traversal PASS; authenticated Child Profile Create/Edit/Archive، real-role Admin QA and Privacy/Report Desktop/Mobile Light/Dark QA PASS; SMTP، full software Screen reader، Zoom، Forced Colors، system Reduced Motion، Staging TLS، encrypted/off-site/media restore، post-grace anonymization and Core Web Vitals NOT VERIFIED
+Implementation Status: PHASE 14 COMPLETE BY OWNER-DEFINED BOUNDARY; PROMPTS 001-026 IMPLEMENTED; OWNER COPY IMPORTED; ADMIN CONTENT AND SINGLE-SHEET FUTURE TEMPLATE PASS; GAME COVERS AND RELEASE CANDIDATE DEFERRED TO PHASE 15
+Testing Status: PHASE 14 LOCAL GATES PASS / PHASE 15 PAUSED; prior QA evidence remains valid for its tested scope, but Production SMTP، HTTPS installability، app installation، two-version PWA rollout، full software Screen reader، Zoom، Forced Colors، system Reduced Motion، Staging TLS، encrypted off-site/media restore، post-grace privacy processing and Core Web Vitals remain NOT VERIFIED until Phase 15 starts.
 Testing Status Update: PROMPT 019 local contract 1/1 PASS with 24 assertions; current MySQL 8.4.11 full Laravel 95/95 PASS with 800 assertions; GitHub Actions Run #3 on `7bcb749` REMOTE PASS in 1m 34s.
 Testing Status Update: PROMPT 020 Plan pricing 4/4 PASS with 36 assertions; combined Jigari/Plan 11/11 PASS with 92 assertions; current MySQL 8.4.11 full Laravel 99/99 PASS with 841 assertions; focused MySQL foundation + Plan gate 12/12 PASS with 78 assertions; JavaScript 8/8، Build، Blade، Pint and pnpm production audit PASS. Remote Run `34723528510` exposed the superseded inactive-plan assertion; replacement Run `34743030855` on correction Commit `1886d5e` PASS.
-Launch Status: NOT STARTED
+Testing Status Update: PROMPT 026 current MySQL 8.4.11 full Laravel 106/106 PASS with 937 assertions and zero skip; Content Admin focused 11/11 PASS with 69 assertions; owner Copy 1/1 PASS with 7 assertions; JavaScript 8/8، Build 58 modules، Blade، Pint and Composer/pnpm audits PASS. Browser QA Desktop and Mobile 390 for Admin list/edit/metadata/media PASS.
+Launch Status: PHASE 15 PAUSED / NOT STARTED BY OWNER
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

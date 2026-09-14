@@ -22,6 +22,7 @@ Phase 15 Gate: NOT PASS
 - [x] Prompt 012 Search/Filter و Design System روی MySQL 8.4.11 — 12 test / 145 assertion
 - [x] Prompt 025 Collections clearance در Desktop و Mobile 390 — تیله از کادر جدا و هم‌پوشانی Mobile حذف شد
 - [x] Regression کامل جاری روی MySQL 8.4.11 — 104 test / 909 assertion بدون Failure و Skip
+- [x] Regression نهایی PHASE 14 روی MySQL 8.4.11 — 106 test / 937 assertion بدون Failure و Skip
 - [x] JavaScript 8/8، Production Build، Blade، Pint و Audit تازه Composer/pnpm
 - [x] Regression کامل جاری با قرارداد MySQL فعال و بدون Skip — 71 test / 605 assertion
 - [x] Login و Jigari بدون خط بیضی قابل مشاهده و با حرکت حفظ‌شده تیله‌ها در مرورگر زنده

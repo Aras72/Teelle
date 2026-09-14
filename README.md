@@ -6,16 +6,16 @@
 
 ## وضعیت فعلی
 
-- مرحله: بستن Implementation و Testing & QA روی Scope پیاده‌سازی‌شده
-- فاز: `PHASE 14 CLOSURE + PHASE 15 — TESTING & QA`
-- وضعیت Gate: `IN PROGRESS / NOT PASS`
+- مرحله: انتظار برای تصاویر بازی‌ها و دستور مالک برای آغاز QA انتشار
+- فاز: `PHASE 14 — COMPLETE / PHASE 15 — PAUSED`
+- وضعیت Gate: `PHASE 14 PASS / RELEASE NOT STARTED`
 - پشته قطعی وب: PHP + Laravel
 - تحویل اصلی: وب‌سایت کامل و Responsive
 - موبایل: فقط TWA و فقط پس از عبور از `WEBSITE COMPLETE GATE`
 
 وضعیت دقیق و جاری در [PROJECT-STATUS.md](PROJECT-STATUS.md) ثبت می‌شود.
 
-فازهای ۱۱ و ۱۲ کامل‌اند. فاز ۱۳ Promptهای 001 تا 011 را Freeze کرده و Prompt 012 هنوز LOCKED است؛ فاز ۱۴ با وجود اجرای Promptهای 001 تا 011 تا تکمیل Scope، Content/Ranking، Commerce و Hardening کامل اعلام نمی‌شود. فاز ۱۵ برای QA همین Scope فعال است و Regression محلی MySQL 8.4.11 پاس شده، اما Release Gate تا تکمیل کنترل‌های باقی‌مانده باز می‌ماند.
+فازهای ۱۱ تا ۱۳ کامل‌اند. فاز ۱۴ در مرز صریح تعیین‌شده مالک با اجرای Promptهای 001 تا 026، ورود اصلاحات متنی ۲۵ بازی، پنل مدیریت محتوا و تمپلیت یک‌شیتی بازی‌های آینده بسته شد. فاز ۱۵ تا آماده‌شدن عکس‌های بازی‌ها و دستور تازه مالک شروع نمی‌شود؛ هیچ Draft بدون تصویر تأیید یا منتشر نشده است.
 
 ## منابع حقیقت
 

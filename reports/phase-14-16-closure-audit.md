@@ -1,9 +1,9 @@
 # Phase 14–16 Closure Audit
 
 Date: 2026-09-14
-Status: LOCAL REPOSITORY WORK VERIFIED / OWNER AND PRODUCTION GATES OPEN
+Status: PHASE 14 CLOSED / PHASE 15 PAUSED / PHASE 16 LOCKED
 
-This matrix prevents a phase label from hiding an unfinished requirement. `PASS` means implementation and current local evidence exist؛ `PARTIAL` means a real boundary remains؛ `BLOCKED` means approved external input or production evidence is absent.
+This matrix prevents a phase label from hiding an unfinished requirement. `PASS` means implementation and current local evidence exist؛ `PARTIAL` means a real boundary remains؛ `BLOCKED` means approved external input or production evidence is absent. Phase 14 is closed under the explicit owner-defined implementation boundary in DEC-049؛ open release items below are carried into Phase 15 and are not silently relabeled as complete.
 
 | Feature | Current status | Closure evidence or remaining boundary |
 |---|---|---|
@@ -43,7 +43,16 @@ This matrix prevents a phase label from hiding an unfinished requirement. `PASS`
 
 Prompt 025 همچنین نقص فاصله تیله و کادر Collections را در Desktop/Mobile بست و با MySQL regression و Browser QA تأیید کرد؛ این اصلاح وضعیت Featureهای وابسته به Ranking، Content یا Production را تغییر نمی‌دهد.
 
-## Phase 15 release blockers
+## Phase 14 closure evidence
+
+1. Prompts 001 through 026 are implemented in the repository.
+2. The owner workbook was reviewed and six Copy changes were integrated into the canonical 25-game source.
+3. The populated and blank future-game templates are single-sheet, dropdown-based and visually verified.
+4. Manual Admin CRUD, complete structured Metadata, private image upload, independent media/content review and fail-closed publication exist.
+5. Owner content test passed 1/1 with 7 assertions، Content Admin passed 11/11 with 69 assertions and full Regression passed 106/106 with 937 assertions and zero skips on isolated MySQL 8.4.11.
+6. Per-game covers, Candidate-set publication and ranking calibration were explicitly moved to Phase 15 by the owner.
+
+## Phase 15 release gates
 
 Repository-owned CI is `PASS` through Prompt 019 and GitHub Actions Run #3 on commit `7bcb749`. This does not replace any environment-specific evidence below.
 
@@ -66,16 +75,18 @@ Repository-owned CI is `PASS` through Prompt 019 and GitHub Actions Run #3 on co
 | Public About | PASS | Prompt 018 approved-copy route، responsive Light/Dark browser QA and active primary navigation |
 | Release Privacy Policy and Terms | BLOCKED | Approved legal copy and owner/market review are absent |
 
+Phase 15 is currently `PAUSED` and must not start until the owner supplies game images and explicitly says to start it.
+
 ## Phase 16 boundary
 
 Phase 16 is Production Launch. It can be executed only after every Critical/High item above is closed with environment-specific evidence. A local test pass cannot be relabeled as Production launch evidence.
 
-## Required next inputs
+## Required inputs for Phase 15
 
-1. تصمیم انسانی ثبت‌شده برای Copy/Source/Age/Safety/Cover بازی‌های Pilot و مجوز Publication.
-2. Golden set و وزن‌های عددی مصوب Ranking برای بستن FEAT-004، سپس Weekly Plan و Multi-child.
+1. تصاویر اختصاصی بازی‌های Pilot و تصمیم Cover/Publication.
+2. Golden set و وزن‌های عددی مصوب Ranking برای بستن FEAT-004.
 3. انتقال دستی Artifact به پارس‌پک، Import دیتابیس، اتصال `teelle.ir` و فعال‌سازی SSL توسط مالک.
 4. مشخصات SMTP پس از انتقال و DNS evidence مربوط به SPF/DKIM/DMARC.
 5. انتخاب یکی از دو مدل شفاف حذف یا غیرفعال‌سازی و بازبینی نهایی Privacy/Terms.
 
-تا زمان ورود این پنج دسته ورودی، اعلام Phase 14، 15 یا 16 به‌عنوان COMPLETE از نظر Evidence نادرست است.
+Phase 14 برابر COMPLETE است. تا ورود این پنج دسته ورودی، Phase 15 آغاز یا کامل اعلام نمی‌شود و Phase 16 قفل می‌ماند.
