@@ -51,7 +51,7 @@ final class AccountLifecycleTest extends TestCase
         $this->assertDatabaseHas('households', ['owner_user_id' => $user->id]);
         $this->assertDatabaseHas('household_members', ['user_id' => $user->id, 'role' => 'owner']);
         $this->assertNotNull($user->privacy_accepted_at);
-        $this->assertSame('2026-09-14', $user->privacy_policy_version);
+        $this->assertSame('2026-09-15', $user->privacy_policy_version);
         Notification::assertSentTo($user, VerifyEmail::class);
     }
 
@@ -69,7 +69,7 @@ final class AccountLifecycleTest extends TestCase
     public function test_registration_requires_privacy_acceptance_without_forcing_policy_open(): void
     {
         $this->get(route('register'))->assertOk()->assertSee(route('privacy'));
-        $this->get(route('privacy'))->assertOk()->assertDontSee('این متن، پیش‌نویس عملیاتی MVP است');
+        $this->get(route('privacy'))->assertOk()->assertSee('نسخه نهایی MVP')->assertDontSee('این متن، پیش‌نویس عملیاتی MVP است');
 
         $this->from(route('register'))->post(route('register.store'), [
             'name' => 'داییِ ارغوان', 'email' => 'privacy@example.com',

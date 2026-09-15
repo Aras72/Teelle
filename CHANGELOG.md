@@ -2,6 +2,9 @@
 
 ## 2026-09-15
 
+- Finalized the owner-approved MVP Privacy Policy copy and selected the disclosed three-day deletion/anonymization model; the post-grace processing job remains a Phase 15 implementation gate.
+- Clarified Coverage Matrix copy as 25 total age/situation combinations with at least three reviewed published games required per combination.
+- Removed the redundant «همان» from the Excel import instruction.
 - Replaced the admin JSON import box with direct `.xlsx` upload and a complete Persian single-game form; both paths create a review preview before any draft is written.
 - Added a fail-closed native reader for the official one-sheet workbook with exact-header validation, ZIP limits, macro rejection and regression coverage for the 25-row reference file and fake workbooks.
 - Added audited, recoverable user disable actions for managers and support admins while protecting self, manager and peer-admin accounts and revoking active database sessions.

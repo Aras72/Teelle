@@ -242,7 +242,7 @@ class ContentAdminTest extends TestCase
         $this->assertSame(25, app(CoverageMatrix::class)->criticalGaps());
         $this->assertTrue($report->every(fn (object $cell): bool => (int) $cell->survivors === 0));
         $this->actingAs($reviewer)->get(route('admin.content.coverage'))
-            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('در ۲۵ ترکیب سن و موقعیت، هنوز بازی کافی نداریم');
+            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('از مجموع ۲۵ ترکیب سن و موقعیت، در ۲۵ ترکیب هنوز بازی کافی نداریم')->assertSee('هر ترکیب باید حداقل سه بازی منتشرشده و تأییدشده داشته باشد');
     }
 
     public function test_image_upload_uses_private_quarantine_and_rejects_duplicate_or_self_review(): void

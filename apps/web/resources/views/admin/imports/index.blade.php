@@ -19,7 +19,7 @@
 
         <section class="admin-panel" aria-labelledby="excel-import-title">
             <h2 id="excel-import-title">افزودن از فایل Excel</h2>
-            <p>همان تمپلیت رسمی تیله را پر کنید. فایل ابتدا بررسی و پیش‌نمایش داده می‌شود و بدون تأیید شما هیچ بازی‌ای ساخته نمی‌شود.</p>
+            <p>تمپلیت رسمی تیله را پر کنید. فایل ابتدا بررسی و پیش‌نمایش داده می‌شود و بدون تأیید شما هیچ بازی‌ای ساخته نمی‌شود.</p>
             <form class="admin-form admin-import-upload" method="post" enctype="multipart/form-data" action="{{ route('admin.content.imports.excel.preview') }}">@csrf
                 <label>فایل Excel<input class="teelle-input" type="file" name="workbook" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required></label>
                 <x-ui.button type="submit">بررسی فایل و نمایش پیش‌نمایش</x-ui.button>

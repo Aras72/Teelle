@@ -72,7 +72,8 @@ Phase 15 Gate: NOT PASS
 - [x] Privacy Policy ساده، صفحه عمومی و پذیرش اجباری ثبت‌نام در کد
 - [x] مهلت سه‌روزه و بازگردانی Audit‌شده توسط Admin — 16 test / 136 assertion متمرکز
 - [x] CI روی PHP 8.4 و Artifact بدون Terminal با Vendor و Build و بدون Secret
-- [ ] انتخاب شفاف retention، Legal review نهایی و Terms
+- [x] انتخاب شفاف مدل حذف و تأیید متن Privacy Policy نهایی MVP توسط مالک
+- [ ] Terms و تطبیق نهایی شرایط انتشار با محیط میزبانی
 - [ ] اجرای حذف/Anonymization پس از مهلت، Backup propagation و Legal retention
 
 شروع PHASE 16 یا اعلام Launch-ready تا بسته‌شدن موارد بالا ممنوع است.

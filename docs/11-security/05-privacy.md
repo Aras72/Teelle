@@ -1,6 +1,6 @@
 # Privacy
 
-Status: ACCEPTED PRODUCT BASELINE; LEGAL REVIEW REQUIRED BEFORE LAUNCH
+Status: OWNER-APPROVED MVP POLICY; PUBLISHED COPY FINAL
 Phase: 11 - SECURITY & PRIVACY
 
 ## Principles
@@ -36,14 +36,11 @@ Phase: 11 - SECURITY & PRIVACY
 | Payment/accounting record | statutory minimum only | LEGAL DURATION OPEN |
 | Aggregated non-identifying metrics | retained for product trends | privacy threshold required |
 
-## Open retention decision
+## Approved retention model
 
-The owner requested indefinite hidden retention of personal data after an action labelled account deletion. This is not an implementable privacy contract: the interface and policy must describe the real behavior. Before Production, one model must be approved and implemented end to end:
+مالک در ۱۴۰۵/۰۶/۲۴ متن عمومی فعلی را به‌عنوان سیاست نهایی MVP تأیید کرد و در نتیجه مدل حذف انتخاب شد: حساب بلافاصله غیرفعال می‌شود، تا سه روز امکان بازگردانی دارد و بعد از آن شناسه‌های مستقیم باید حذف یا ناشناس شوند؛ فقط آمار غیرقابل انتساب و سوابق لازم برای امنیت، حسابداری یا الزام قانونی باقی می‌مانند. استفاده بازاریابی شخصی همچنان به رضایت جداگانه و قابل‌پس‌گرفتن نیاز دارد.
 
-1. **Deletion model:** deactivate immediately، allow reactivation for 3 days، then delete/anonymize direct identifiers while retaining only non-identifying aggregates and legally required records.
-2. **Deactivation model:** rename the action to account deactivation، disclose indefinite retention and marketing purposes، and collect separate marketing consent with withdrawal controls.
-
-Current code implements only the reversible three-day `deletion_pending` state and Admin reactivation. Post-grace processing remains disabled until this decision is approved; the public policy page is therefore a release draft، not final legal approval.
+متن سیاست برای انتشار نهایی است. کد فعلی مرحله غیرفعال‌سازی و بازگردانی سه‌روزه را اجرا می‌کند؛ Job حذف/ناشناس‌سازی پس از مهلت و propagation آن به Backup باید پیش از Launch-ready شدن محصول پیاده‌سازی و در Phase 15 اثبات شود.
 
 ## Child protection
 

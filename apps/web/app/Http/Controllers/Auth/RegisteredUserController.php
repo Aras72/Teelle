@@ -38,7 +38,7 @@ final class RegisteredUserController extends Controller
         unset($data['privacy_accepted']);
         $data['email'] = Str::lower(trim($data['email']));
         $data['privacy_accepted_at'] = now();
-        $data['privacy_policy_version'] = '2026-09-14';
+        $data['privacy_policy_version'] = '2026-09-15';
         $user = DB::transaction(function () use ($data): User {
             $user = User::query()->create($data);
             $householdId = DB::table('households')->insertGetId([
