@@ -7,7 +7,7 @@
             @if(!$collection || $collection->status === 'draft')
             <form class="auth-form" method="post" action="{{ $collection ? route('admin.content.collections.update', $collection) : route('admin.content.collections.store') }}">@csrf @if($collection)@method('PUT')@endif
                 <x-ui.field label="عنوان" name="title" value="{{ old('title', $collection?->title) }}" required :error="$errors->first('title')" />
-                <x-ui.field label="Slug لاتین" name="slug" value="{{ old('slug', $collection?->slug) }}" dir="ltr" required :error="$errors->first('slug')" />
+                <x-ui.field label="نام کوتاه انگلیسی برای نشانی صفحه" name="slug" value="{{ old('slug', $collection?->slug) }}" dir="ltr" required :error="$errors->first('slug')" />
                 <label for="summary">خلاصه</label><textarea class="teelle-input" id="summary" name="summary" rows="4" required>{{ old('summary', $collection?->summary) }}</textarea>
                 <fieldset class="collection-game-picker"><legend>بازی‌ها به ترتیب شناسه</legend>
                     @forelse($games as $game)<label><input type="checkbox" name="game_ids[]" value="{{ $game->id }}" @checked(in_array($game->id, old('game_ids', $selected), true))><span>{{ $game->currentPublishedVersion?->title ?? $game->slug }}</span><small>{{ $game->status->value }}</small></label>@empty<p>هنوز بازی‌ای در سیستم نیست</p>@endforelse

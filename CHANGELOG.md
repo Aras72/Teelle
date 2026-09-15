@@ -2,6 +2,11 @@
 
 ## 2026-09-15
 
+- Replaced the admin JSON import box with direct `.xlsx` upload and a complete Persian single-game form; both paths create a review preview before any draft is written.
+- Added a fail-closed native reader for the official one-sheet workbook with exact-header validation, ZIP limits, macro rejection and regression coverage for the 25-row reference file and fake workbooks.
+- Added audited, recoverable user disable actions for managers and support admins while protecting self, manager and peer-admin accounts and revoking active database sessions.
+- Humanized admin navigation, import history and audit labels; aligned admin action rows and role checkboxes, and simplified all admin back links to «بازگشت».
+- Updated email-verification copy from «پیوند» to «پیام», removed the public privacy draft disclaimer and removed the provisional-price footnote from plan cards.
 - Added a protected user and membership directory with search, latest purchased plan, entitlement state and audited correction of name, email and mobile.
 - Split the existing full «مدیر» role from the new lower «ادمین» role; only managers can grant it and support admins cannot manage roles, pricing, publishing or manager accounts.
 - Changed the public Heartbeat baseline from 110 to 121 without inserting play events and centered the metric independently of digit count.

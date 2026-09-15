@@ -10,7 +10,7 @@
             <nav class="admin-actions" aria-label="عملیات گزارش">
                 <x-ui.button href="{{ route('admin.content.reports.weekly.csv', request()->only('from', 'to')) }}" variant="secondary">خروجی CSV برای Excel</x-ui.button>
                 <x-ui.button href="{{ route('admin.content.reports.weekly.pdf', request()->only('from', 'to')) }}" variant="secondary">خروجی PDF</x-ui.button>
-                <a href="{{ route('admin.content.index') }}">بازگشت به محتوا</a>
+                <a href="{{ route('admin.content.index') }}">بازگشت</a>
             </nav>
         </header>
 

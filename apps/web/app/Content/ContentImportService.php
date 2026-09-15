@@ -24,6 +24,12 @@ final class ContentImportService
         } catch (\JsonException) {
             throw ValidationException::withMessages(['payload' => 'JSON معتبر نیست']);
         }
+
+        return $this->previewPayload($actor, $payload);
+    }
+
+    public function previewPayload(User $actor, mixed $payload): ContentImportBatch
+    {
         if (! is_array($payload) || ! array_is_list($payload) || $payload === [] || count($payload) > 100) {
             throw ValidationException::withMessages(['payload' => 'ورودی باید آرایه‌ای شامل ۱ تا ۱۰۰ بازی باشد']);
         }
@@ -79,7 +85,7 @@ final class ContentImportService
             $payload[$index] = $validator->validated();
         }
         if (count(array_unique(array_column($payload, 'slug'))) !== count($payload)) {
-            throw ValidationException::withMessages(['payload' => 'slug تکراری در فایل وجود دارد']);
+            throw ValidationException::withMessages(['payload' => 'شناسه کوتاه انگلیسی در فایل تکراری است']);
         }
         $batch = ContentImportBatch::query()->create(['actor_user_id' => $actor->id, 'status' => 'previewed', 'payload_json' => $payload]);
         $this->audit->write($actor, 'content.import.previewed', $batch, null, ['items' => count($payload)]);

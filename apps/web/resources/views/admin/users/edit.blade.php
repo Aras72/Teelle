@@ -1,7 +1,7 @@
 @php($digits = ['0'=>'۰','1'=>'۱','2'=>'۲','3'=>'۳','4'=>'۴','5'=>'۵','6'=>'۶','7'=>'۷','8'=>'۸','9'=>'۹',','=>'٬'])
 <x-layouts.app title="ویرایش کاربر" description="اصلاح مشخصات عمومی و دسترسی ادمین">
     <div class="admin-shell teelle-container admin-user-edit">
-        <header class="admin-heading"><div><p class="admin-kicker">پشتیبانی کاربران</p><h1>{{ $user->name }}</h1><p>رمز عبور و سابقه خرید از این صفحه قابل تغییر نیست.</p></div><a href="{{ route('admin.content.users.index') }}">بازگشت به کاربران</a></header>
+        <header class="admin-heading"><div><p class="admin-kicker">پشتیبانی کاربران</p><h1>{{ $user->name }}</h1><p>رمز عبور و سابقه خرید از این صفحه قابل تغییر نیست.</p></div><a href="{{ route('admin.content.users.index') }}">بازگشت</a></header>
         @if(session('status'))<p class="admin-notice" role="status">{{ session('status') }}</p>@endif
         @if($errors->any())<div class="admin-error" role="alert"><strong>تغییر ذخیره نشد</strong><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
 
@@ -32,7 +32,7 @@
             <section class="admin-panel" aria-labelledby="role-title">
                 <h2 id="role-title">دسترسی ادمین</h2>
                 <p>ادمین می‌تواند کاربران و عضویت‌ها را ببیند و مشخصات عمومی را اصلاح کند. به انتشار محتوا، قیمت‌گذاری و تعیین نقش دسترسی ندارد.</p>
-                <form class="admin-form" method="post" action="{{ route('admin.content.users.role.update', $user) }}">
+                <form class="admin-form admin-role-form" method="post" action="{{ route('admin.content.users.role.update', $user) }}">
                     @csrf @method('PUT')
                     <label class="teelle-check"><input type="checkbox" name="support_admin" value="1" @checked(old('support_admin', $user->roles->contains('code', 'support_admin')))><span>دسترسی ادمین فعال باشد</span></label>
                     <x-ui.field label="دلیل تغییر یا شماره تیکت" name="reason" value="{{ old('reason') }}" required :error="$errors->first('reason')" />

@@ -32,7 +32,7 @@ final class EmailVerificationController extends Controller
             $request->user()->sendEmailVerificationNotification();
         }
 
-        return back()->with('status', 'اگر ایمیل قابل ارسال باشد، پیوند تازه فرستاده شد');
+        return back()->with('status', 'اگر ایمیل قابل ارسال باشد، پیام تازه فرستاده شد');
     }
 
     private function destination(Request $request): string

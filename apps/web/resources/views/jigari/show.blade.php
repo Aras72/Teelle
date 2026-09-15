@@ -41,7 +41,6 @@
                         <h3>{{ strtr((string) $plan->duration_months, $digits) }} ماهه</h3>
                         <p>همه امکانات تیله جیگری</p>
                         <strong class="jigari-plan__price">{{ strtr(number_format(intdiv((int) $plan->price_minor, 10)), $digits) }} تومان</strong>
-                        <small>قیمت آزمایشی و قابل تغییر.</small>
                     </article>
                 @empty
                     <x-ui.state-message>در حال حاضر هیچ قیمت آزمایشی فعالی نمایش داده نمی‌شود.</x-ui.state-message>

@@ -69,6 +69,7 @@ final class AccountLifecycleTest extends TestCase
     public function test_registration_requires_privacy_acceptance_without_forcing_policy_open(): void
     {
         $this->get(route('register'))->assertOk()->assertSee(route('privacy'));
+        $this->get(route('privacy'))->assertOk()->assertDontSee('این متن، پیش‌نویس عملیاتی MVP است');
 
         $this->from(route('register'))->post(route('register.store'), [
             'name' => 'داییِ ارغوان', 'email' => 'privacy@example.com',
@@ -97,6 +98,8 @@ final class AccountLifecycleTest extends TestCase
     {
         Notification::fake();
         $user = User::factory()->unverified()->create();
+        $this->actingAs($user)->get(route('verification.notice'))
+            ->assertOk()->assertSee('پیام تأیید برای')->assertSee('ارسال دوباره پیام')->assertDontSee('ارسال دوباره پیوند');
         $verificationUrl = URL::temporarySignedRoute('verification.verify', now()->addMinutes(10), ['id' => $user->id, 'hash' => sha1($user->email)]);
         $this->actingAs($user)->get($verificationUrl)->assertRedirect(route('account.show'));
         $this->assertNotNull($user->fresh()->email_verified_at);

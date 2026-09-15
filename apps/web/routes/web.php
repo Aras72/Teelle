@@ -115,6 +115,7 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::put('/users/{user}/role', [UserController::class, 'updateRole'])->name('users.role.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/collections', [EditorialCollectionController::class, 'index'])->name('collections.index');
     Route::get('/collections/new', [EditorialCollectionController::class, 'create'])->name('collections.create');
     Route::post('/collections', [EditorialCollectionController::class, 'store'])->name('collections.store');
@@ -138,7 +139,8 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::get('/games/{game:public_id}/revision', [ContentController::class, 'revision'])->name('revision');
     Route::post('/games/{game:public_id}/revision', [ContentController::class, 'storeRevision'])->name('revision.store');
     Route::get('/imports', [ImportController::class, 'index'])->name('imports.index');
-    Route::post('/imports/preview', [ImportController::class, 'preview'])->name('imports.preview');
+    Route::post('/imports/excel/preview', [ImportController::class, 'previewExcel'])->name('imports.excel.preview');
+    Route::post('/imports/form/preview', [ImportController::class, 'previewForm'])->name('imports.form.preview');
     Route::post('/imports/pilot/preview', [ImportController::class, 'previewPilot'])->name('imports.pilot.preview');
     Route::get('/imports/{batch:public_id}', [ImportController::class, 'show'])->name('imports.show');
     Route::post('/imports/{batch:public_id}/confirm', [ImportController::class, 'confirm'])->name('imports.confirm');

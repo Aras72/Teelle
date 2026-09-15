@@ -1,13 +1,13 @@
 @php($base = $version ?? $source)
 <x-layouts.app title="{{ $version ? 'ویرایش پیش‌نویس' : ($source ? 'نسخه تازه' : 'پیش‌نویس تازه') }}" description="ویرایش ساختاریافته محتوای بازی">
     <div class="admin-shell teelle-container">
-        <header class="admin-heading"><div><p class="admin-kicker">محتوای بازی</p><h1>{{ $version ? 'ویرایش نسخه '.$version->version_no : 'ساخت پیش‌نویس' }}</h1></div><a href="{{ route('admin.content.index') }}">بازگشت به فهرست</a></header>
+        <header class="admin-heading"><div><p class="admin-kicker">محتوای بازی</p><h1>{{ $version ? 'ویرایش نسخه '.$version->version_no : 'ساخت پیش‌نویس' }}</h1></div><a href="{{ route('admin.content.index') }}">بازگشت</a></header>
         @if (session('status'))<p class="admin-notice" role="status">{{ session('status') }}</p>@endif
         @if ($errors->any())<div class="admin-error" role="alert"><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
 
         <form class="admin-form admin-panel" method="post" action="{{ $version ? route('admin.content.update', $version) : ($source ? route('admin.content.revision.store', $game) : route('admin.content.store')) }}">
             @csrf @if($version) @method('PUT') @endif
-            @unless($version)<label>شناسه انگلیسی<input class="teelle-input" dir="ltr" name="slug" value="{{ old('slug') }}" required maxlength="120"></label>@endunless
+            @unless($version)<label>نام کوتاه انگلیسی برای نشانی صفحه<input class="teelle-input" dir="ltr" name="slug" value="{{ old('slug') }}" required maxlength="120"></label>@endunless
             <label>عنوان<input class="teelle-input" name="title" value="{{ old('title', $base?->title) }}" required maxlength="180"></label>
             <label>خلاصه<textarea class="teelle-input" name="summary" rows="3" required>{{ old('summary', $base?->summary) }}</textarea></label>
             <label>مراحل بازی، هر مرحله در یک خط<textarea class="teelle-input" name="instructions_text" rows="7" required>{{ old('instructions_text', $base ? implode("\n", $base->instructions) : '') }}</textarea></label>

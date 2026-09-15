@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Content\ContentImportService;
+use App\Content\TeelleXlsxGameReader;
 use App\Http\Controllers\Controller;
 use App\Models\ContentImportBatch;
 use DomainException;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -17,16 +21,48 @@ class ImportController extends Controller
     {
         abort_unless($request->user()->can('content.edit'), 403);
 
-        return view('admin.imports.index', ['batches' => ContentImportBatch::query()->latest()->paginate(20)]);
+        return view('admin.imports.index', [
+            'batches' => ContentImportBatch::query()->latest()->paginate(20),
+            'options' => $this->formOptions(),
+        ]);
     }
 
-    public function preview(Request $request, ContentImportService $service): RedirectResponse
+    public function previewExcel(Request $request, TeelleXlsxGameReader $reader, ContentImportService $service): RedirectResponse
     {
         abort_unless($request->user()->can('content.edit'), 403);
-        $data = $request->validate(['payload' => ['required', 'string', 'max:1000000']]);
-        $batch = $service->preview($request->user(), $data['payload']);
+        $data = $request->validate(['workbook' => ['required', 'file', 'max:10240']]);
+        $batch = $service->previewPayload($request->user(), $reader->read($data['workbook']));
 
-        return redirect()->route('admin.content.imports.show', $batch)->with('status', 'پیش‌نمایش ساخته شد؛ هنوز هیچ بازی ایجاد نشده است');
+        return redirect()->route('admin.content.imports.show', $batch)->with('status', 'فایل Excel بررسی شد؛ هنوز هیچ بازی ایجاد نشده است');
+    }
+
+    public function previewForm(Request $request, ContentImportService $service): RedirectResponse
+    {
+        abort_unless($request->user()->can('content.edit'), 403);
+        $game = is_array($request->input('game')) ? $request->input('game') : [];
+        $metadata = is_array($game['metadata'] ?? null) ? $game['metadata'] : [];
+        $game['instructions'] = $this->parts((string) ($game['instructions_text'] ?? ''));
+        $game['contraindications'] = $this->parts((string) ($game['contraindications_text'] ?? ''));
+        unset($game['instructions_text'], $game['contraindications_text']);
+        $metadata['required_adult'] = $request->boolean('game.metadata.required_adult');
+        $metadata['materials'] = array_values(array_filter(array_map(function ($material): ?array {
+            if (! is_array($material) || trim((string) ($material['slug'] ?? '')) === '') {
+                return null;
+            }
+
+            return [
+                'slug' => trim((string) $material['slug']),
+                'requirement' => trim((string) ($material['requirement'] ?? '')),
+                'quantity_note' => trim((string) ($material['quantity_note'] ?? '')) ?: null,
+            ];
+        }, is_array($metadata['materials'] ?? null) ? $metadata['materials'] : [])));
+        foreach (['situations', 'locations', 'moods', 'tags', 'safety_flags'] as $field) {
+            $metadata[$field] = array_values(array_filter(array_unique(array_map('strval', is_array($metadata[$field] ?? null) ? $metadata[$field] : []))));
+        }
+        $game['metadata'] = $metadata;
+        $batch = $service->previewPayload($request->user(), [$game]);
+
+        return redirect()->route('admin.content.imports.show', $batch)->with('status', 'بازی بررسی شد؛ هنوز چیزی به فهرست اضافه نشده است');
     }
 
     public function previewPilot(Request $request, ContentImportService $service): RedirectResponse
@@ -51,14 +87,14 @@ class ImportController extends Controller
     {
         abort_unless($request->user()->can('content.edit'), 403);
 
-        return $this->attempt(fn () => $service->confirm($request->user(), $batch), back()->with('status', 'Import به‌صورت اتمیک تأیید شد'));
+        return $this->attempt(fn () => $service->confirm($request->user(), $batch), back()->with('status', 'همه بازی‌های این فایل به‌صورت پیش‌نویس اضافه شدند'));
     }
 
     public function rollback(Request $request, ContentImportBatch $batch, ContentImportService $service): RedirectResponse
     {
         abort_unless($request->user()->can('content.edit'), 403);
 
-        return $this->attempt(fn () => $service->rollback($request->user(), $batch), back()->with('status', 'پیش‌نویس‌های این Batch بازگردانی شدند'));
+        return $this->attempt(fn () => $service->rollback($request->user(), $batch), back()->with('status', 'پیش‌نویس‌های این ورود گروهی بازگردانی شدند'));
     }
 
     private function attempt(callable $operation, RedirectResponse $success): RedirectResponse
@@ -70,5 +106,26 @@ class ImportController extends Controller
         } catch (DomainException $exception) {
             throw ValidationException::withMessages(['import' => $exception->getMessage()]);
         }
+    }
+
+    /** @return array<int, string> */
+    private function parts(string $value): array
+    {
+        return array_values(array_filter(array_map('trim', preg_split('/[|\r\n]+/u', $value) ?: [])));
+    }
+
+    /** @return array<string, mixed> */
+    private function formOptions(): array
+    {
+        $lookup = fn (string $table, string $key = 'slug', string $label = 'title'): array => DB::table($table)
+            ->when(Schema::hasColumn($table, 'is_active'), fn (Builder $query) => $query->where('is_active', true))
+            ->orderBy($label)->pluck($label, $key)->all();
+
+        return [
+            'age_bands' => $lookup('age_bands', 'code'), 'situations' => $lookup('situations'), 'locations' => $lookup('locations'),
+            'moods' => $lookup('moods'), 'tags' => $lookup('tags'), 'energy_levels' => $lookup('energy_levels'),
+            'players' => $lookup('player_requirements'), 'materials' => $lookup('materials'),
+            'safety' => $lookup('safety_rules', 'code', 'copy'),
+        ];
     }
 }

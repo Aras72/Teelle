@@ -1641,11 +1641,14 @@ body:has(.home-hero) #main-content {
 }
 
 /* Content operations use the existing Teelle tokens in both themes. */
-.admin-shell { display: grid; gap: var(--space-6); padding-block: var(--space-8); }
-.admin-heading { display: flex; align-items: end; justify-content: space-between; gap: var(--space-5); }
+.admin-shell { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); padding-block: var(--space-8); }
+.admin-heading { display: flex; min-width: 0; align-items: end; justify-content: space-between; gap: var(--space-5); }
+.admin-heading:has(.admin-actions) { flex-direction: column; align-items: stretch; }
 .admin-heading h1, .admin-panel h2, .admin-kicker { margin: 0; }
 .admin-kicker { color: var(--action-primary); font-size: clamp(1.1rem, 1.55vw, 1.4rem); font-weight: var(--font-weight-bold); line-height: 1.45; }
-.admin-actions, .admin-row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.admin-actions { display: flex; width: 100%; min-width: 0; flex-wrap: nowrap; align-items: center; gap: var(--space-3); max-width: 100%; overflow-x: auto; padding-block-end: .25rem; scrollbar-width: thin; }
+.admin-actions > * { flex: 0 0 auto; }
+.admin-row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
 .admin-heading > a,
 .admin-actions > a:not(.teelle-button) {
     display: inline-flex;
@@ -1658,6 +1661,9 @@ body:has(.home-hero) #main-content {
 .admin-error { border: 1px solid var(--action-primary); background: var(--surface-primary); color: var(--action-primary); }
 .admin-form { display: grid; gap: var(--space-5); }
 .admin-form label { display: grid; gap: var(--space-2); font-weight: var(--font-weight-bold); }
+.admin-form .teelle-check { display: flex; width: fit-content; min-height: var(--touch-target); align-items: center; justify-content: flex-start; gap: var(--space-2); }
+.admin-form .teelle-check input { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin: 0; accent-color: var(--action-primary); }
+.admin-role-form { max-width: 42rem; }
 .admin-form textarea { resize: vertical; line-height: 1.8; }
 .admin-form select { appearance: auto; }
 .admin-user-search { display: grid; gap: var(--space-2); padding: var(--space-5); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); }
@@ -1677,6 +1683,20 @@ body:has(.home-hero) #main-content {
 .admin-table th { color: var(--text-secondary); font-size: 0.85rem; }
 .admin-row-actions form { margin: 0; }
 .admin-row-actions button, .admin-media button { padding: 0; border: 0; background: none; color: var(--action-primary); text-decoration: underline; cursor: pointer; }
+.admin-delete-user { position: relative; }
+.admin-delete-user summary { color: var(--status-error); cursor: pointer; font-weight: var(--font-weight-bold); }
+.admin-delete-user form { display: grid; width: min(19rem, 70vw); gap: var(--space-2); margin-block-start: var(--space-2); padding: var(--space-3); border: 1px solid var(--status-error); border-radius: var(--radius-input); background: var(--surface-primary); }
+.admin-delete-user form button { min-height: var(--touch-target); padding: .55rem 1rem; border-radius: var(--radius-pill); background: var(--status-error); color: #fff; text-decoration: none; }
+.admin-panel-heading { display: flex; align-items: start; justify-content: space-between; gap: var(--space-5); }
+.admin-panel-heading h2, .admin-panel-heading p { margin-block-start: 0; }
+.admin-game-entry fieldset { min-width: 0; margin: 0; padding: var(--space-5); border: 1px solid var(--border-subtle); border-radius: var(--radius-input); }
+.admin-game-entry legend { padding-inline: var(--space-2); color: var(--action-primary); font-family: var(--font-display); font-size: 1.2rem; }
+.admin-form-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+.admin-field-wide { grid-column: 1 / -1; }
+.admin-choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2) var(--space-4); }
+.admin-material-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+.admin-material-grid > div { display: grid; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--border-subtle); border-radius: var(--radius-input); background: var(--surface-primary); }
+.admin-import-upload { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
 .admin-row-actions .admin-unpublish { display: inline-flex; align-items: center; gap: var(--space-2); }
 .admin-row-actions .admin-unpublish .teelle-input { width: min(13rem, 42vw); padding: .45rem .65rem; }
 .admin-audit, .admin-preview, .admin-media { display: grid; gap: var(--space-3); margin-block: var(--space-4) 0; padding: 0; list-style-position: inside; }
@@ -1713,7 +1733,7 @@ body:has(.home-hero) #main-content {
 .admin-theme-preview p { color: inherit; }
 @media (max-width: 47.99rem) {
     .admin-heading { align-items: start; flex-direction: column; }
-    .admin-actions .teelle-button { width: 100%; }
+    .admin-actions { width: 100%; }
     .admin-theme-preview { grid-template-columns: 1fr; }
     .admin-review-intro, .admin-review-grid, .admin-review-checks { grid-template-columns: 1fr; }
     .admin-review-media li { grid-template-columns: 6.5rem minmax(0, 1fr); }
@@ -1721,6 +1741,8 @@ body:has(.home-hero) #main-content {
     .admin-review-media form { grid-column: 1 / -1; }
     .admin-user-search > div, .admin-user-facts { grid-template-columns: 1fr; }
     .admin-user-search .teelle-button { width: 100%; }
+    .admin-panel-heading { flex-direction: column; }
+    .admin-form-grid, .admin-choice-grid, .admin-material-grid, .admin-import-upload { grid-template-columns: 1fr; }
 }
 
 /* Weekly product health stays aggregate, legible and export-oriented. */

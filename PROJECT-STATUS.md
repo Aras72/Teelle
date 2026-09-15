@@ -3,7 +3,7 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 COMPLETE / PHASE 15 PAUSED BY OWNER
-Current Stage: PROMPT 028 USER ADMIN / VISUAL POLISH / DROPDOWN TEMPLATES IMPLEMENTED
+Current Stage: PROMPT 029 ADMIN OPERATIONS / EXCEL IMPORT / SAFE USER DISABLE IMPLEMENTED
 Current Task: انتظار برای تصاویر بازی‌ها و دستور صریح مالک برای آغاز PHASE 15
 Overall Status: PHASE 14 PASS / RELEASE QA NOT STARTED
 
@@ -112,6 +112,9 @@ Currently Working On:
 - Browser QA تازه پنل در Desktop و Mobile 390، فهرست ۲۵ Draft، Copy اصلاح‌شده، Metadata و Upload تصویر را پوشش داد و مسیر اصلی PASS است.
 - مالک تکمیل همین بسته را شرط Closure اعلام کرد؛ PHASE 14 طبق DEC-049 بسته و PHASE 15 تا آماده‌شدن تصاویر و دستور مالک متوقف شد.
 - Prompt 028 پنل «کاربران و عضویت‌ها» را با جست‌وجو، مشاهده آخرین پلن و وضعیت عضویت، اصلاح ممیزی‌شده مشخصات عمومی و نقش محدود «ادمین» اضافه کرد؛ نقش کامل قبلی با عنوان «مدیر» باقی ماند.
+- Prompt 029 مسیر افزودن گروهی بازی را از JSON به بارگذاری مستقیم Excel رسمی و پیش‌نمایش امن تبدیل کرد و فرم کامل افزودن یک بازی را در همان صفحه پنل قرار داد؛ فایل مرجع ۲۵ردیفی و فایل جعلی هر دو با تست MySQL پوشش داده شدند.
+- مدیر و ادمین اکنون می‌توانند عضو عادی را با ثبت دلیل به‌صورت قابل‌بازگشت غیرفعال کنند؛ نشست‌های فعال بسته می‌شوند، Audit ثبت می‌شود و حذف فیزیکی یا حذف سوابق انجام نمی‌شود. حساب خودِ عامل، مدیر و ادمین هم‌سطح محافظت می‌شوند.
+- متن تأیید ایمیل، حریم خصوصی، پلن‌ها، رویدادهای پنل و مسیرهای بازگشت انسانی‌سازی شدند؛ چینش Checkbox نقش و ردیف عملیات پنل نیز اصلاح شد.
 - Wordmark تیله، CTAهای «چی بازی کنیم؟» و شعار برند با Lalezar و تأکید آجری همگام شدند؛ عنوان Hero صفحه About در Desktop یک‌خطی و Heartbeat با baseline تازه ۱۲۱ در مرکز پایدار شد.
 - دو تمپلیت یک‌شیتی با حفظ ظاهر قبلی بازتولید شدند؛ سن ۶ تا ۱۲ ماه و سپس ۱ تا ۱۲ سال، زمان و تعداد کودک/بزرگسال همگی Dropdown دارند.
 
@@ -178,12 +181,12 @@ Critical Risks:
 - داده فعلی بازار عمدتاً Demographic یا غیرایرانی است و تقاضا/پرداخت ایران را اثبات نمی‌کند.
 
 Documentation Status: PHASE 00 COMPLETE; PHASE 01 COMPLETE; PHASE 02 CONDITIONAL PASS; PHASE 03 GO; PHASE 04 PASS; PHASE 05 CONDITIONAL PASS; PHASE 06 PASS WITH EVIDENCE CAVEAT; PHASE 07 PASS; PHASE 08 PASS; PHASE 09 COMPLETE; PHASE 10 COMPLETE BASELINE; PHASE 11 COMPLETE BASELINE; PHASE 12 PASS; PROMPTS 001-022 FROZEN AND EXECUTED; PROMPTS 019-020 PASS; PROMPT 021 REVIEW PREPARATION PASS; PROMPT 022 AUTOMATED PASS / OWNER VISUAL REVIEW READY
-Implementation Status: PHASE 14 COMPLETE BY OWNER-DEFINED BOUNDARY; PROMPTS 001-026 IMPLEMENTED; OWNER COPY IMPORTED; ADMIN CONTENT AND SINGLE-SHEET FUTURE TEMPLATE PASS; GAME COVERS AND RELEASE CANDIDATE DEFERRED TO PHASE 15
+Implementation Status: PHASE 14 COMPLETE BY OWNER-DEFINED BOUNDARY; PROMPTS 001-029 IMPLEMENTED; OWNER COPY IMPORTED; ADMIN CONTENT, DIRECT EXCEL IMPORT AND SINGLE-SHEET FUTURE TEMPLATE PASS; GAME COVERS AND RELEASE CANDIDATE DEFERRED TO PHASE 15
 Testing Status: PHASE 14 LOCAL GATES PASS / PHASE 15 PAUSED; prior QA evidence remains valid for its tested scope, but Production SMTP، HTTPS installability، app installation، two-version PWA rollout، full software Screen reader، Zoom، Forced Colors، system Reduced Motion، Staging TLS، encrypted off-site/media restore، post-grace privacy processing and Core Web Vitals remain NOT VERIFIED until Phase 15 starts.
 Testing Status Update: PROMPT 019 local contract 1/1 PASS with 24 assertions; current MySQL 8.4.11 full Laravel 95/95 PASS with 800 assertions; GitHub Actions Run #3 on `7bcb749` REMOTE PASS in 1m 34s.
 Testing Status Update: PROMPT 020 Plan pricing 4/4 PASS with 36 assertions; combined Jigari/Plan 11/11 PASS with 92 assertions; current MySQL 8.4.11 full Laravel 99/99 PASS with 841 assertions; focused MySQL foundation + Plan gate 12/12 PASS with 78 assertions; JavaScript 8/8، Build، Blade، Pint and pnpm production audit PASS. Remote Run `34723528510` exposed the superseded inactive-plan assertion; replacement Run `34743030855` on correction Commit `1886d5e` PASS.
 Testing Status Update: PROMPT 026 current MySQL 8.4.11 full Laravel 106/106 PASS with 937 assertions and zero skip; Content Admin focused 11/11 PASS with 69 assertions; owner Copy 1/1 PASS with 7 assertions; JavaScript 8/8، Build 58 modules، Blade، Pint and Composer/pnpm audits PASS. Browser QA Desktop and Mobile 390 for Admin list/edit/metadata/media PASS.
-Testing Status Update: PROMPT 028 current MySQL 8.4.11 full Laravel 110/110 PASS with 970 assertions and zero skip; focused Admin users 4/4، Homepage 5/5، About 2/2، Design System 7/7 and Content Admin 11/11 PASS. JavaScript 8/8، Build 58 modules، Blade، Pint and Composer/pnpm audits PASS. Browser QA Desktop and Mobile 390 for Home، About and Admin user list/edit PASS with no horizontal overflow or console warning/error.
+Testing Status Update: PROMPT 029 current MySQL 8.4.11 full Laravel 113/113 PASS with 1000 assertions and zero skip; focused Account، Admin users، Content Admin and Jigari 36/36 with 284 assertions PASS. JavaScript 8/8، Build 58 modules، Blade، Pint and Composer/pnpm audits PASS. Browser QA Desktop and 390px for Admin dashboard، Excel/form import and user list/edit PASS with zero page-level horizontal overflow and no Console warning/error.
 Launch Status: PHASE 15 PAUSED / NOT STARTED BY OWNER
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED

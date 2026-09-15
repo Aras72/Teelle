@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Content\AuditWriter;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\DeleteUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Http\Requests\Admin\UpdateUserRoleRequest;
 use App\Models\Role;
@@ -89,5 +90,22 @@ final class UserController extends Controller
         });
 
         return back()->with('status', $validated['support_admin'] ? 'دسترسی ادمین فعال شد' : 'دسترسی ادمین برداشته شد');
+    }
+
+    public function destroy(DeleteUserRequest $request, User $user, AuditWriter $audit): RedirectResponse
+    {
+        abort_if((int) $request->user()->id === (int) $user->id, 403);
+        abort_if($user->roles()->where('code', 'admin')->exists(), 403);
+        abort_if(! $request->user()->hasPermission('roles.manage') && $user->roles()->where('code', 'support_admin')->exists(), 403);
+
+        DB::transaction(function () use ($request, $user, $audit): void {
+            $lockedUser = User::query()->whereKey($user->id)->lockForUpdate()->firstOrFail();
+            $before = ['status' => $lockedUser->status];
+            $lockedUser->forceFill(['status' => 'disabled', 'remember_token' => null])->save();
+            DB::table('sessions')->where('user_id', $lockedUser->id)->delete();
+            $audit->write($request->user(), 'identity.user.disabled', $lockedUser, $before, ['status' => 'disabled'], $request->validated('reason'));
+        });
+
+        return redirect()->route('admin.content.users.index')->with('status', 'حساب کاربر غیرفعال شد و دسترسی او قطع شد');
     }
 }

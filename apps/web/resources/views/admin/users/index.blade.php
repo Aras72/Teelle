@@ -3,7 +3,7 @@
     <div class="admin-shell teelle-container">
         <header class="admin-heading">
             <div><p class="admin-kicker">پشتیبانی کاربران</p><h1>کاربران و عضویت‌ها</h1><p>مشخصات عمومی، نقش و آخرین پلن ثبت‌شده هر حساب را اینجا می‌بینید.</p></div>
-            @if(auth()->user()->hasAnyPermission(['content.edit', 'content.review', 'content.publish', 'subscription.manage', 'users.manage']))<a href="{{ route('admin.content.index') }}">بازگشت به مدیریت</a>@endif
+            @if(auth()->user()->hasAnyPermission(['content.edit', 'content.review', 'content.publish', 'subscription.manage', 'users.manage']))<a href="{{ route('admin.content.index') }}">بازگشت</a>@endif
         </header>
 
         @if(session('status'))<p class="admin-notice" role="status">{{ session('status') }}</p>@endif
@@ -27,7 +27,14 @@
                         <td>@if($purchase)<strong>{{ $purchase->plan?->title ?? 'پلن حذف‌شده' }}</strong><br><small>{{ strtr(number_format(intdiv((int) $purchase->amount_minor, 10)), $digits) }} تومان، {{ match($purchase->status) { 'paid' => 'پرداخت‌شده', 'pending' => 'در انتظار', 'payment_failed' => 'ناموفق', 'cancelled' => 'لغوشده', 'refunded' => 'بازپرداخت‌شده', default => $purchase->status } }}</small>@else خریدی ثبت نشده @endif</td>
                         <td>{{ $entitlement ? match($entitlement->status->value) { 'active' => 'فعال', 'pending' => 'در انتظار', 'expired' => 'پایان‌یافته', 'cancelled' => 'لغوشده', 'refunded' => 'بازپرداخت‌شده', 'revoked' => 'برداشته‌شده' } : 'عضویت جیگری ندارد' }}</td>
                         <td>{{ match($user->status) { 'active' => 'فعال', 'disabled' => 'غیرفعال', 'deletion_pending' => 'درخواست حذف', default => $user->status } }}</td>
-                        <td>@can('users.edit')<a href="{{ route('admin.content.users.edit', $user) }}">مشاهده و ویرایش</a>@endcan</td>
+                        <td class="admin-row-actions">
+                            @can('users.edit')<a href="{{ route('admin.content.users.edit', $user) }}">مشاهده و ویرایش</a>@endcan
+                            @can('users.delete')
+                                @if((int) auth()->id() !== (int) $user->id && !$user->roles->contains('code', 'admin') && (auth()->user()->can('roles.manage') || !$user->roles->contains('code', 'support_admin')))
+                                    <details class="admin-delete-user"><summary>حذف کاربر</summary><form method="post" action="{{ route('admin.content.users.destroy', $user) }}">@csrf @method('DELETE')<label class="sr-only" for="delete-reason-{{ $user->id }}">دلیل حذف</label><input id="delete-reason-{{ $user->id }}" class="teelle-input" name="reason" required minlength="5" maxlength="500" placeholder="دلیل حذف یا شماره تیکت"><button>تأیید حذف</button></form></details>
+                                @endif
+                            @endcan
+                        </td>
                     </tr>
                 @empty<tr><td colspan="7">کاربری پیدا نشد.</td></tr>@endforelse
                 </tbody>

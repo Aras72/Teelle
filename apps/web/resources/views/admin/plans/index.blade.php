@@ -3,7 +3,7 @@
     <div class="admin-shell teelle-container">
         <header class="admin-heading">
             <div><p class="admin-kicker">Jigari pricing</p><h1>پلن‌ها و قیمت آزمایشی</h1><p>این قیمت‌ها به تومان نمایش داده می‌شوند و تا اتصال درگاه، خریدی ایجاد نمی‌کنند</p></div>
-            <a href="{{ route('admin.content.index') }}">بازگشت به مدیریت</a>
+            <a href="{{ route('admin.content.index') }}">بازگشت</a>
         </header>
 
         @if(session('status'))<p class="admin-notice" role="status">{{ session('status') }}</p>@endif

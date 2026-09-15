@@ -99,6 +99,25 @@ final class AdminUserManagementTest extends TestCase
         $this->assertDatabaseCount('audit_logs', 2);
     }
 
+    public function test_support_admin_can_disable_a_member_but_cannot_delete_managers_or_other_admins(): void
+    {
+        $support = $this->staff('support_admin');
+        $member = User::factory()->create();
+        $manager = $this->staff('admin');
+        $otherSupport = $this->staff('support_admin');
+
+        $this->actingAs($support)->delete(route('admin.content.users.destroy', $member), ['reason' => 'درخواست حذف از تیکت ۴۲'])
+            ->assertRedirect(route('admin.content.users.index'))->assertSessionHas('status');
+        $this->assertSame('disabled', $member->fresh()->status);
+        $this->assertDatabaseHas('audit_logs', ['actor_user_id' => $support->id, 'action' => 'identity.user.disabled']);
+
+        $this->actingAs($support)->delete(route('admin.content.users.destroy', $manager), ['reason' => 'درخواست حذف مدیر'])->assertForbidden();
+        $this->actingAs($support)->delete(route('admin.content.users.destroy', $otherSupport), ['reason' => 'درخواست حذف ادمین'])->assertForbidden();
+        $this->actingAs($support)->delete(route('admin.content.users.destroy', $support), ['reason' => 'درخواست حذف خود'])->assertForbidden();
+        $this->assertSame('active', $manager->fresh()->status);
+        $this->assertSame('active', $otherSupport->fresh()->status);
+    }
+
     private function staff(string $role): User
     {
         $user = User::factory()->create();

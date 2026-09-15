@@ -169,7 +169,7 @@ class ContentAdminTest extends TestCase
         $before = Game::query()->count();
         $batch = $service->preview($editor, json_encode([$this->draft('batch-one'), $this->draft('batch-two')], JSON_THROW_ON_ERROR));
         $this->assertSame($before, Game::query()->count());
-        $this->actingAs($editor)->get(route('admin.content.imports.index'))->assertOk()->assertSee('پیش‌نمایش Import');
+        $this->actingAs($editor)->get(route('admin.content.imports.index'))->assertOk()->assertSee('فایل Excel یا فرم آنلاین');
         $this->actingAs($editor)->get(route('admin.content.imports.show', $batch))->assertOk()->assertSee('batch-one');
         $service->confirm($editor, $batch);
         $service->confirm($editor, $batch->fresh());
@@ -178,6 +178,40 @@ class ContentAdminTest extends TestCase
         $service->rollback($editor, $batch->fresh());
         $this->assertSame($before, Game::query()->count());
         $this->assertSame('rolled_back', ContentImportBatch::query()->find($batch->id)->status);
+    }
+
+    public function test_admin_can_preview_the_official_excel_template_and_use_the_panel_form_without_json(): void
+    {
+        $editor = $this->staff('content_editor');
+        $this->actingAs($editor)->get(route('admin.content.imports.index'))
+            ->assertOk()->assertSee('افزودن از فایل Excel')->assertSee('افزودن یک بازی با فرم')->assertDontSee('آرایه JSON بازی‌ها');
+
+        $path = base_path('../../docs/14-operations/templates/Teelle_Game_Review_Template_v2.xlsx');
+        $workbook = new UploadedFile($path, 'Teelle_Game_Review_Template_v2.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', null, true);
+        $this->actingAs($editor)->post(route('admin.content.imports.excel.preview'), ['workbook' => $workbook])->assertRedirect();
+        $this->assertSame(25, count(ContentImportBatch::query()->latest('id')->firstOrFail()->payload_json));
+        $this->assertDatabaseCount('games', 0);
+
+        $draft = $this->draft('panel-form-game');
+        $draft['instructions_text'] = implode("\n", $draft['instructions']);
+        $draft['contraindications_text'] = '';
+        unset($draft['instructions'], $draft['contraindications']);
+        $this->actingAs($editor)->post(route('admin.content.imports.form.preview'), ['game' => $draft])->assertRedirect();
+        $this->assertSame('panel-form-game', ContentImportBatch::query()->latest('id')->firstOrFail()->payload_json[0]['slug']);
+        $this->assertDatabaseCount('games', 0);
+    }
+
+    public function test_excel_import_rejects_a_fake_workbook_without_creating_a_preview(): void
+    {
+        $editor = $this->staff('content_editor');
+        $workbook = UploadedFile::fake()->createWithContent('games.xlsx', 'this is not an Excel workbook');
+
+        $this->actingAs($editor)
+            ->post(route('admin.content.imports.excel.preview'), ['workbook' => $workbook])
+            ->assertSessionHasErrors('workbook');
+
+        $this->assertDatabaseCount('content_import_batches', 0);
+        $this->assertDatabaseCount('games', 0);
     }
 
     public function test_bundled_pilot_previews_and_imports_complete_drafts(): void

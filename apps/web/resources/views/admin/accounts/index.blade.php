@@ -1,7 +1,7 @@
 @php($digits = ['0'=>'۰','1'=>'۱','2'=>'۲','3'=>'۳','4'=>'۴','5'=>'۵','6'=>'۶','7'=>'۷','8'=>'۸','9'=>'۹'])
 <x-layouts.app title="درخواست‌های حساب" description="مدیریت امن درخواست‌های حذف و بازگردانی حساب">
     <div class="admin-shell teelle-container">
-        <header class="admin-heading"><div><p class="admin-kicker">حریم خصوصی کاربران</p><h1>درخواست‌های حذف حساب</h1></div><a href="{{ route('admin.content.index') }}">بازگشت به مدیریت</a></header>
+        <header class="admin-heading"><div><p class="admin-kicker">حریم خصوصی کاربران</p><h1>درخواست‌های حذف حساب</h1></div><a href="{{ route('admin.content.index') }}">بازگشت</a></header>
         @if(session('status'))<p class="admin-notice" role="status">{{ session('status') }}</p>@endif
         <section class="admin-panel" aria-labelledby="deletions-title">
             <h2 id="deletions-title">بازگردانی در مهلت سه‌روزه</h2>

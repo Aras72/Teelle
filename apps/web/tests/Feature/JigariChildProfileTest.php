@@ -28,7 +28,7 @@ final class JigariChildProfileTest extends TestCase
             ->assertSee('۳ ماهه')->assertSee('۶ ماهه')->assertSee('۱۲ ماهه')
             ->assertSee('images/marbles/jigari-ruby-v1.webp', false)
             ->assertSee('۳۹۰٬۰۰۰ تومان')->assertSee('۶۹۰٬۰۰۰ تومان')->assertSee('۱٬۱۹۰٬۰۰۰ تومان')
-            ->assertSee('قیمت آزمایشی و قابل تغییر')
+            ->assertDontSee('قیمت آزمایشی و قابل تغییر')
             ->assertSee('درگاه پرداخت بعد از MVP اضافه می‌شود')
             ->assertSee('پروفایل کودک، برنامه‌ریزی بازی، کشف دقیق‌تر و کیفیت بالاتر')
             ->assertDontSee('پروفایل کودک با کمترین داده لازم.')

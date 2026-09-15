@@ -28,6 +28,7 @@ class RolePermissionSeeder extends Seeder
             'roles.manage' => 'مدیریت نقش‌ها',
             'users.view' => 'مشاهده کاربران و عضویت‌ها',
             'users.edit' => 'ویرایش مشخصات عمومی کاربران',
+            'users.delete' => 'غیرفعال‌سازی حساب کاربر',
             'users.manage' => 'مدیریت بازگردانی حساب‌ها',
         ];
 
@@ -42,7 +43,7 @@ class RolePermissionSeeder extends Seeder
         $grants = [
             'content_editor' => ['content.edit', 'coverage.view'],
             'reviewer' => ['content.edit', 'content.review', 'content.publish', 'coverage.view', 'analytics.view'],
-            'support_admin' => ['users.view', 'users.edit'],
+            'support_admin' => ['users.view', 'users.edit', 'users.delete'],
             'admin' => array_keys($permissions),
         ];
 

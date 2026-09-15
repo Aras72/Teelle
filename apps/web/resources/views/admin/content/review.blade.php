@@ -17,7 +17,7 @@
                 <h1>{{ $version->title }}</h1>
                 <p>نسخه {{ strtr((string) $version->version_no, $digits) }} با وضعیت {{ $statusLabels[$version->status->value] ?? $version->status->value }}</p>
             </div>
-            <a href="{{ route('admin.content.index') }}">بازگشت به فهرست</a>
+            <a href="{{ route('admin.content.index') }}">بازگشت</a>
         </header>
 
         @if (session('status'))<p class="admin-notice" role="status">{{ session('status') }}</p>@endif
