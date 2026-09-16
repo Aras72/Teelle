@@ -3,12 +3,13 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 COMPLETE / PHASE 15 PAUSED BY OWNER
-Current Stage: PROMPT 034 FINAL DAILY-MOMENT TAXONOMY IMPLEMENTED AND VERIFIED
+Current Stage: PROMPT 035 QUICK MATCH ENERGY AND RTL BACK CONTROL IMPLEMENTED AND VERIFIED
 Current Task: انتظار برای تصاویر بازی‌ها و دستور صریح مالک برای آغاز PHASE 15
 Overall Status: PHASE 14 PASS / RELEASE QA NOT STARTED
 
 Last Completed:
 
+- Prompt 035: سه گزینه انرژی همراه با Migration مستقل تضمین شدند، مسیر تا مرحله حال کودک تحت تست End-to-End قرار گرفت و جهت فلش بازگشت فرم برای RTL اصلاح شد.
 - Prompt 034: چهار موقعیت نهایی «بین وعده‌های غذایی»، «بعد از غذا»، «بین کارهای روزمره» و «قبل از خواب» برای تمام ورودی‌ها تصویب شد؛ Coverage فعال ۲۰ ترکیب است و گزینه‌های قدیمی بدون حذف روابط بازی‌ها غیرفعال می‌شوند.
 - Prompt 033: هم‌پوشانی Taxonomy رفع شد؛ رستوران، ماشین و مهمانی فقط مکان‌اند، موقعیت‌های فعال به بعد از کار، روز بارانی و قبل خواب محدود شدند و Coverage فعال به ۱۵ ترکیب رسید. روابط بازی‌های قدیمی برای اصلاح دستی حفظ شدند.
 - Prompt 032 آغاز شد: مالک Taxonomy هشت‌مرحله‌ای تصاویر، مجله تیله و مجوزهای انتخابی هر ادمین را تأیید کرد. مهاجرت داده‌های قدیمی خودکار نیست و پیش‌نویس‌ها توسط مالک بازبینی می‌شوند.

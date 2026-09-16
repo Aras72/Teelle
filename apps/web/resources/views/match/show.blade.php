@@ -30,9 +30,9 @@
             <article class="match-card teelle-enter">
                 <header class="match-progress-header">
                     @if(count($state['history']))
-                        <form method="post" action="{{ route('match.back') }}" class="match-back-control">@csrf<button type="submit" aria-label="سؤال قبل">‹</button></form>
+                        <form method="post" action="{{ route('match.back') }}" class="match-back-control">@csrf<button type="submit" aria-label="سؤال قبل">›</button></form>
                     @else
-                        <a href="{{ route('home') }}" class="match-back-control" aria-label="بازگشت به خانه">‹</a>
+                        <a href="{{ route('home') }}" class="match-back-control" aria-label="بازگشت به خانه">›</a>
                     @endif
                     <p class="match-step-label">سؤال {{ $progress }} از {{ $totalSteps }}</p>
                     <div class="match-progress" role="progressbar" aria-label="پیشرفت پرسش‌ها" aria-valuemin="1" aria-valuemax="{{ $totalSteps }}" aria-valuenow="{{ $progress }}" style="--match-progress: {{ $progressPosition }}%">

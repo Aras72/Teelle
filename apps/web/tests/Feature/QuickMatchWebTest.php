@@ -91,6 +91,29 @@ class QuickMatchWebTest extends TestCase
             ->assertSeeInOrder(['داخل خانه', 'بیرون', 'رستوران', 'ماشین', 'مهمانی']);
     }
 
+    public function test_caregiver_energy_options_and_rtl_back_control_are_always_available(): void
+    {
+        $this->get(route('match.show'))->assertOk()->assertSee('›');
+        $this->post(route('match.answer'), ['step' => 'age', 'age_years' => 3, 'age_months' => 0]);
+        $this->get(route('match.show'))->assertOk()->assertSee('aria-label="سؤال قبل">›</button>', false);
+
+        foreach ([
+            ['situation', 'between-meals'], ['duration', 15], ['location', 'home-inside'],
+            ['materials', ['none']], ['players', 'child-and-adult'],
+        ] as [$step, $answer]) {
+            $this->post(route('match.answer'), ['step' => $step, 'answer' => $answer])->assertRedirect(route('match.show'));
+        }
+
+        $this->get(route('match.show'))->assertOk()
+            ->assertSee('انرژی‌تون چقدره؟')
+            ->assertSeeInOrder(['کم', 'متوسط', 'زیاد']);
+        $this->post(route('match.answer'), ['step' => 'caregiver_energy', 'answer' => 'medium'])
+            ->assertRedirect(route('match.show'));
+        $this->get(route('match.show'))->assertOk()
+            ->assertSee('حال کودک چطوره؟')
+            ->assertSeeInOrder(['آرام', 'بی‌حوصله', 'پرانرژی', 'نیاز به توجه']);
+    }
+
     public function test_step_skipping_and_conflicting_material_answers_fail_closed(): void
     {
         $this->get(route('match.show'));
