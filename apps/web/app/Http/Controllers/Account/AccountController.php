@@ -10,6 +10,7 @@ use App\Jigari\JigariAccess;
 use App\Models\Household;
 use App\Models\PrivacyRequest;
 use App\Models\SavedGame;
+use App\Models\SupportTicket;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -30,8 +31,9 @@ final class AccountController extends Controller
         $privacyRequests = PrivacyRequest::query()->where('user_id', $request->user()->id)
             ->latest('requested_at')->limit(10)->get();
         $pendingDeletion = $privacyRequests->first(fn (PrivacyRequest $item): bool => $item->request_type === 'deletion' && $item->status === 'pending');
+        $tickets = SupportTicket::query()->where('user_id', $request->user()->id)->latest()->limit(10)->get();
 
-        return view('account.show', compact('saved', 'history', 'jigariActive', 'childCount', 'privacyRequests', 'pendingDeletion'));
+        return view('account.show', compact('saved', 'history', 'jigariActive', 'childCount', 'privacyRequests', 'pendingDeletion', 'tickets'));
     }
 
     public function update(Request $request): RedirectResponse

@@ -143,7 +143,7 @@ class MySqlDataFoundationTest extends TestCase
             'daily_free_play_claims',
             'coverage_observations', 'plans', 'purchases', 'payment_events',
             'entitlements', 'audit_logs', 'outbox_messages',
-            'privacy_requests',
+            'privacy_requests', 'support_tickets',
             'search_observations',
             'editorial_collections', 'editorial_collection_game',
         ];

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Teelle Weekly Product Report</title>
+    <title>Teelle Product Report</title>
     <style>
         @page { margin: 28px; }
         body { color: #123f46; font-family: "DejaVu Sans", sans-serif; font-size: 10px; }
@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-<h1>Teelle Weekly Product Report</h1>
+<h1>Teelle Product Report</h1>
 <div class="meta">{{ $report['period']['from']->format('Y-m-d') }} to {{ $report['period']['to']->format('Y-m-d') }} | Generated {{ $report['generated_at']->format('Y-m-d H:i T') }}</div>
 <div class="summary"><strong>Rule-based status: {{ strtoupper($report['summary']['status']) }}</strong><br>No AI-generated interpretation is used.</div>
 @foreach($report['sections'] as $section => $metrics)

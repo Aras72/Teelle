@@ -2,6 +2,7 @@
 
 ## 2026-09-16
 
+- Replaced the account-request admin surface with general user tickets and audited replies, and expanded the product report from a weekly/31-day window to any ordered date range with aligned CSV/PDF exports.
 - Guaranteed the three caregiver-energy choices through a forward database migration, covered the final mood step end to end and corrected the Quick Match back arrow for RTL navigation.
 - Finalized the active situation taxonomy as between meals, after a meal, between daily routines and before sleep across Quick Match, admin metadata, Excel import, search and the 20-cell coverage matrix; legacy game relationships remain intact for manual correction.
 - Removed restaurant, car and party from active situations because they duplicate locations; retained them only as locations and reduced the active age/situation coverage matrix to 15 cells without deleting existing game relationships.

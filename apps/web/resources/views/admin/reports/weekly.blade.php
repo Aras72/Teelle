@@ -3,18 +3,19 @@
     $titles = ['funnel'=>'قیف محصول','matching'=>'کیفیت تطبیق','content'=>'سلامت محتوا','search'=>'جست‌وجو','business'=>'کسب‌وکار','technical'=>'سلامت فنی'];
     $formatMetric = fn(array $metric) => strtr(number_format((float) $metric['value'], $metric['format'] === 'percent' ? 1 : 0).($metric['format'] === 'percent' ? '٪' : ''), $digits);
 @endphp
-<x-layouts.app title="گزارش هفتگی محصول" description="گزارش تجمیعی و قاعده‌محور سلامت محصول تیله">
+<x-layouts.app title="گزارش" description="گزارش تجمیعی و قاعده‌محور سلامت محصول تیله در بازه دلخواه">
     <div class="admin-shell teelle-container report-page">
         <header class="admin-heading">
-            <div><p class="admin-kicker">Product health</p><h1>گزارش هفتگی محصول</h1><p>از {{ strtr($report['period']['from']->format('Y/m/d'), $digits) }} تا {{ strtr($report['period']['to']->format('Y/m/d'), $digits) }}</p></div>
-            <nav class="admin-actions" aria-label="عملیات گزارش">
-                <x-ui.button href="{{ route('admin.content.reports.weekly.csv', request()->only('from', 'to')) }}" variant="secondary">خروجی CSV برای Excel</x-ui.button>
-                <x-ui.button href="{{ route('admin.content.reports.weekly.pdf', request()->only('from', 'to')) }}" variant="secondary">خروجی PDF</x-ui.button>
-                <a href="{{ route('admin.content.index') }}">بازگشت</a>
-            </nav>
+            <div><p class="admin-kicker">سلامت محصول</p><h1>گزارش</h1><p>از {{ strtr($report['period']['from']->format('Y/m/d'), $digits) }} تا {{ strtr($report['period']['to']->format('Y/m/d'), $digits) }}</p></div>
+            <a href="{{ route('admin.content.index') }}">بازگشت</a>
         </header>
 
-        <form class="report-range admin-panel" method="get" action="{{ route('admin.content.reports.weekly') }}">
+        <nav class="admin-actions" aria-label="خروجی‌های گزارش">
+            <x-ui.button href="{{ route('admin.content.reports.csv', request()->only('from', 'to')) }}" variant="secondary">خروجی CSV برای Excel</x-ui.button>
+            <x-ui.button href="{{ route('admin.content.reports.pdf', request()->only('from', 'to')) }}" variant="secondary">خروجی PDF</x-ui.button>
+        </nav>
+
+        <form class="report-range admin-panel" method="get" action="{{ route('admin.content.reports.index') }}">
             <x-ui.field label="از تاریخ" name="from" type="date" :value="request('from', $report['period']['from']->format('Y-m-d'))" :error="$errors->first('from')" />
             <x-ui.field label="تا تاریخ" name="to" type="date" :value="request('to', $report['period']['to']->format('Y-m-d'))" :error="$errors->first('to')" />
             <x-ui.button type="submit">به‌روزرسانی گزارش</x-ui.button>

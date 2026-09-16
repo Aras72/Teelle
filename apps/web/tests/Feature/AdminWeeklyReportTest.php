@@ -29,11 +29,11 @@ final class AdminWeeklyReportTest extends TestCase
         $editor = $this->staff('content_editor');
         $reviewer = $this->staff('reviewer');
 
-        $this->get(route('admin.content.reports.weekly'))->assertUnauthorized();
-        $this->actingAs($member)->get(route('admin.content.reports.weekly'))->assertForbidden();
-        $this->actingAs($editor)->get(route('admin.content.reports.weekly'))->assertForbidden();
-        $this->actingAs($reviewer)->get(route('admin.content.reports.weekly'))
-            ->assertOk()->assertSee('گزارش هفتگی محصول')->assertSee('قیف محصول')->assertSee('سلامت فنی');
+        $this->get(route('admin.content.reports.index'))->assertUnauthorized();
+        $this->actingAs($member)->get(route('admin.content.reports.index'))->assertForbidden();
+        $this->actingAs($editor)->get(route('admin.content.reports.index'))->assertForbidden();
+        $this->actingAs($reviewer)->get(route('admin.content.reports.index'))
+            ->assertOk()->assertSee('<h1>گزارش</h1>', false)->assertDontSee('گزارش هفتگی')->assertSee('قیف محصول')->assertSee('سلامت فنی');
     }
 
     public function test_search_analytics_is_aggregate_only_and_reported_without_query_text(): void
@@ -51,14 +51,14 @@ final class AdminWeeklyReportTest extends TestCase
         $this->assertNotContains('query', Schema::getColumnListing('search_observations'));
         $this->assertNotContains('user_id', Schema::getColumnListing('search_observations'));
 
-        $this->actingAs($this->staff('reviewer'))->get(route('admin.content.reports.weekly'))
+        $this->actingAs($this->staff('reviewer'))->get(route('admin.content.reports.index'))
             ->assertOk()->assertSee('۲')->assertDontSee('نام خصوصی کودک');
     }
 
     public function test_csv_and_pdf_exports_are_downloadable_and_contain_all_six_domains(): void
     {
         $reviewer = $this->staff('reviewer');
-        $csv = $this->actingAs($reviewer)->get(route('admin.content.reports.weekly.csv'));
+        $csv = $this->actingAs($reviewer)->get(route('admin.content.reports.csv'));
         $csv->assertOk()->assertDownload();
         $content = $csv->streamedContent();
         foreach (['funnel', 'matching', 'content', 'search', 'business', 'technical'] as $domain) {
@@ -66,21 +66,21 @@ final class AdminWeeklyReportTest extends TestCase
         }
         $this->assertStringStartsWith("\xEF\xBB\xBF", $content);
 
-        $pdf = $this->actingAs($reviewer)->get(route('admin.content.reports.weekly.pdf'));
+        $pdf = $this->actingAs($reviewer)->get(route('admin.content.reports.pdf'));
         $pdf->assertOk()->assertDownload();
         $pdf->assertHeader('Content-Type', 'application/pdf');
         $this->assertStringStartsWith('%PDF-', $pdf->getContent());
     }
 
-    public function test_report_rejects_reversed_or_excessive_ranges(): void
+    public function test_report_rejects_reversed_dates_and_accepts_any_ordered_range(): void
     {
         $reviewer = $this->staff('reviewer');
-        $this->actingAs($reviewer)->from(route('admin.content.reports.weekly'))
-            ->get(route('admin.content.reports.weekly', ['from' => '2026-09-12', 'to' => '2026-09-01']))
-            ->assertRedirect(route('admin.content.reports.weekly'))->assertSessionHasErrors('from');
-        $this->actingAs($reviewer)->from(route('admin.content.reports.weekly'))
-            ->get(route('admin.content.reports.weekly', ['from' => '2026-01-01', 'to' => '2026-09-12']))
-            ->assertRedirect(route('admin.content.reports.weekly'))->assertSessionHasErrors('from');
+        $this->actingAs($reviewer)->from(route('admin.content.reports.index'))
+            ->get(route('admin.content.reports.index', ['from' => '2026-09-12', 'to' => '2026-09-01']))
+            ->assertRedirect(route('admin.content.reports.index'))->assertSessionHasErrors('from');
+        $this->actingAs($reviewer)
+            ->get(route('admin.content.reports.index', ['from' => '2025-01-01', 'to' => '2026-09-12']))
+            ->assertOk()->assertSee('2025-01-01', false)->assertSee('2026-09-12', false);
     }
 
     private function staff(string $role): User

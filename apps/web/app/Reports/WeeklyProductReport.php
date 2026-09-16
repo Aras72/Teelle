@@ -120,7 +120,7 @@ final class WeeklyProductReport
             return ['status' => 'critical', 'text' => "{$critical} شاخص بحرانی است؛ انتشار باید تا رفع آن متوقف بماند"];
         }
         if ($attention > 0) {
-            return ['status' => 'attention', 'text' => "{$attention} شاخص نیازمند بررسی است؛ روند هفتگی را پیش از تصمیم محصول بررسی کنید"];
+            return ['status' => 'attention', 'text' => "{$attention} شاخص نیازمند بررسی است؛ روند این بازه را پیش از تصمیم محصول بررسی کنید"];
         }
 
         return ['status' => 'ok', 'text' => 'در داده‌های این بازه هشدار قاعده‌محور ثبت نشد'];

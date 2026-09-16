@@ -5,6 +5,7 @@ use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Account\ChildProfileController;
 use App\Http\Controllers\Account\PrivacyController;
 use App\Http\Controllers\Account\SavedGameController;
+use App\Http\Controllers\Account\SupportTicketController as AccountSupportTicketController;
 use App\Http\Controllers\Admin\ArticleCategoryController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\ContentController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\PrivacyAccountController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SiteContentController;
+use App\Http\Controllers\Admin\SupportTicketController as AdminSupportTicketController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
@@ -63,6 +65,7 @@ Route::middleware('auth')->group(function (): void {
     Route::middleware(['verified', 'onboarded'])->group(function (): void {
         Route::get('/account', [AccountController::class, 'show'])->name('account.show');
         Route::put('/account/settings', [AccountController::class, 'update'])->name('account.update');
+        Route::post('/account/tickets', [AccountSupportTicketController::class, 'store'])->middleware('throttle:6,1')->name('account.tickets.store');
         Route::prefix('/account/privacy')->name('account.privacy.')->middleware('throttle:privacy')->group(function (): void {
             Route::post('/export', [PrivacyController::class, 'export'])->name('export');
             Route::post('/deletion', [PrivacyController::class, 'requestDeletion'])->name('deletion.store');
@@ -113,13 +116,14 @@ if (app()->environment('local')) {
 Route::prefix('admin/content')->name('admin.content.')->middleware('content.staff')->group(function (): void {
     Route::get('/', [ContentController::class, 'index'])->name('index');
     Route::get('/coverage', CoverageController::class)->name('coverage');
-    Route::get('/reports/weekly', [ReportController::class, 'index'])->name('reports.weekly');
-    Route::get('/reports/weekly.csv', [ReportController::class, 'csv'])->name('reports.weekly.csv');
-    Route::get('/reports/weekly.pdf', [ReportController::class, 'pdf'])->name('reports.weekly.pdf');
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports.csv', [ReportController::class, 'csv'])->name('reports.csv');
+    Route::get('/reports.pdf', [ReportController::class, 'pdf'])->name('reports.pdf');
     Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
     Route::put('/plans/{plan:code}', [PlanController::class, 'update'])->name('plans.update');
-    Route::get('/accounts', [PrivacyAccountController::class, 'index'])->name('accounts.index');
-    Route::post('/accounts/deletions/{privacyRequest:public_id}/reactivate', [PrivacyAccountController::class, 'reactivate'])->name('accounts.reactivate');
+    Route::get('/tickets', [AdminSupportTicketController::class, 'index'])->name('tickets.index');
+    Route::put('/tickets/{supportTicket:public_id}', [AdminSupportTicketController::class, 'update'])->name('tickets.update');
+    Route::post('/tickets/deletions/{privacyRequest:public_id}/reactivate', [PrivacyAccountController::class, 'reactivate'])->name('tickets.reactivate');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');

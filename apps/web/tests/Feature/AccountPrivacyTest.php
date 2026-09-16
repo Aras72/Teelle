@@ -73,7 +73,7 @@ final class AccountPrivacyTest extends TestCase
         $admin = User::factory()->create();
         $admin->roles()->attach(Role::query()->where('code', 'admin')->sole());
 
-        $this->actingAs($admin)->post(route('admin.content.accounts.reactivate', $privacyRequest))
+        $this->actingAs($admin)->post(route('admin.content.tickets.reactivate', $privacyRequest))
             ->assertRedirect()->assertSessionHas('status', 'حساب بازگردانی شد و کاربر دوباره می‌تواند وارد شود');
 
         $this->assertSame('cancelled', $privacyRequest->fresh()->status);

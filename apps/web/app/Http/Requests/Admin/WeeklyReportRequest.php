@@ -6,7 +6,6 @@ namespace App\Http\Requests\Admin;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 
 final class WeeklyReportRequest extends FormRequest
 {
@@ -33,14 +32,23 @@ final class WeeklyReportRequest extends FormRequest
             : now()->toImmutable()->endOfDay();
         $from = isset($validated['from'])
             ? CarbonImmutable::createFromFormat('Y-m-d', $validated['from'])->startOfDay()
-            : $to->subDays(6)->startOfDay();
-
-        if ($from->isAfter($to) || $from->diffInDays($to) > 31) {
-            throw ValidationException::withMessages([
-                'from' => 'بازه گزارش باید مرتب و حداکثر ۳۱ روزه باشد',
-            ]);
-        }
+            : $to->startOfMonth();
 
         return [$from, $to];
+    }
+
+    protected function withValidator($validator): void
+    {
+        $validator->after(function ($validator): void {
+            if (! $this->filled('from') || ! $this->filled('to')) {
+                return;
+            }
+
+            $from = (string) $this->input('from');
+            $to = (string) $this->input('to');
+            if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $from) === 1 && preg_match('/^\d{4}-\d{2}-\d{2}$/', $to) === 1 && $from > $to) {
+                $validator->errors()->add('from', 'تاریخ شروع باید پیش از تاریخ پایان باشد');
+            }
+        });
     }
 }

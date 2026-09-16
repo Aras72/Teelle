@@ -84,6 +84,10 @@ final class AccountDataExporter
             ->get(['public_id', 'request_type', 'status', 'requested_at', 'scheduled_for', 'completed_at', 'cancelled_at'])
             ->map(fn (object $row): array => (array) $row)->all();
 
+        $tickets = DB::table('support_tickets')->where('user_id', $user->id)->orderBy('created_at')
+            ->get(['public_id', 'subject', 'body', 'status', 'admin_reply', 'replied_at', 'created_at', 'updated_at'])
+            ->map(fn (object $row): array => (array) $row)->all();
+
         return [
             'format' => 'teelle-account-export-v1',
             'generated_at' => now()->toIso8601String(),
@@ -106,6 +110,7 @@ final class AccountDataExporter
             'purchases' => $purchases,
             'entitlements' => $entitlements,
             'privacy_requests' => $requests,
+            'support_tickets' => $tickets,
         ];
     }
 

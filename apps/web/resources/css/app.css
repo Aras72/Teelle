@@ -1798,7 +1798,7 @@ body:has(.home-hero) #main-content {
     .admin-form-grid, .admin-choice-grid, .admin-material-grid, .admin-import-upload { grid-template-columns: 1fr; }
 }
 
-/* Weekly product health stays aggregate, legible and export-oriented. */
+/* Product health stays aggregate, legible and export-oriented for every selected period. */
 .report-page { position: relative; }
 .report-page .admin-heading > div > p:last-child { margin: .35rem 0 0; color: var(--text-secondary); }
 .report-range { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) auto; gap: 1rem; align-items: end; }
@@ -1883,6 +1883,23 @@ body:has(.home-hero) #main-content {
 .privacy-request-list { display: grid; gap: .75rem; margin: .75rem 0 0; padding: 0; list-style: none; }
 .privacy-request-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; padding-block: .75rem; border-block-end: 1px solid var(--border-subtle); }
 .privacy-request-list span { color: var(--text-secondary); }
+.support-ticket-form { display: grid; gap: 1rem; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-input); background: var(--surface-primary); }
+.support-ticket-form > label, .ticket-reply-form > label { font-weight: var(--font-weight-bold); }
+.support-ticket-form textarea, .ticket-reply-form textarea, .ticket-reply-form select { width: 100%; border: 1px solid var(--border-strong); border-radius: var(--radius-input); background: var(--surface-elevated); color: var(--text-primary); padding: .85rem 1rem; line-height: 1.8; resize: vertical; }
+.support-ticket-history, .ticket-admin-list { display: grid; gap: 1rem; }
+.support-ticket-history > h3 { margin: .5rem 0 0; }
+.support-ticket-item, .ticket-admin-card { display: grid; gap: .85rem; padding: clamp(1rem, 2.5vw, 1.4rem); border: 1px solid var(--border-subtle); border-radius: var(--radius-input); background: var(--surface-primary); }
+.support-ticket-item > header, .ticket-admin-card > header { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+.support-ticket-item h4, .support-ticket-item p, .ticket-admin-card h3, .ticket-admin-card p { margin: 0; }
+.support-ticket-item > time, .ticket-meta, .ticket-admin-card header p { color: var(--text-secondary); font-size: .86rem; }
+.support-ticket-reply { display: grid; gap: .4rem; padding: 1rem; border-inline-start: .25rem solid var(--teelle-peach); border-radius: var(--radius-input); background: var(--surface-warm); }
+.ticket-status { display: inline-flex; flex: 0 0 auto; align-items: center; min-height: 2rem; padding-inline: .75rem; border-radius: var(--radius-pill); background: var(--surface-warm); color: var(--text-secondary); font-size: .82rem; font-weight: var(--font-weight-bold); }
+.ticket-status--open { color: var(--action-primary); }
+.ticket-status--in_progress { color: var(--status-warning); }
+.ticket-status--resolved { color: var(--status-success); }
+.ticket-reply-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(10rem, .28fr) auto; gap: .75rem 1rem; align-items: end; padding-block-start: .75rem; border-block-start: 1px solid var(--border-subtle); }
+.ticket-reply-form label:first-of-type, .ticket-reply-form textarea { grid-column: 1 / -1; }
+.ticket-admin-page .admin-heading > div > p:last-child { margin: .35rem 0 0; color: var(--text-secondary); }
 .auth-consent { display: flex; align-items: flex-start; gap: .65rem; color: var(--text-secondary); font-size: .78rem; line-height: 1.8; }
 .auth-consent input { inline-size: 1rem; block-size: 1rem; margin-block-start: .35rem; accent-color: var(--action-primary); }
 .auth-consent a, .teelle-footer a { color: var(--action-primary); text-underline-offset: .2em; }
@@ -1907,6 +1924,9 @@ body:has(.home-hero) #main-content {
     .teelle-account-link { min-height: var(--touch-target); padding-inline: .6rem; font-size: .8rem; }
     .account-grid, .saved-grid { grid-template-columns: 1fr; }
     .privacy-actions { grid-template-columns: 1fr; }
+    .ticket-reply-form { grid-template-columns: 1fr; }
+    .ticket-reply-form label:first-of-type, .ticket-reply-form textarea { grid-column: auto; }
+    .support-ticket-item > header, .ticket-admin-card > header { align-items: stretch; flex-direction: column; }
     .account-panel--wide { grid-column: auto; }
     .account-heading { grid-template-columns: 1fr; }
     .account-heading .account-marble { width: 4.5rem; }

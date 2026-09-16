@@ -6,9 +6,9 @@
                 @can('content.edit')<x-ui.button href="{{ route('admin.content.imports.index') }}" variant="secondary">افزودن بازی‌ها</x-ui.button>@endcan
                 @if(auth()->user()->can('articles.edit') || auth()->user()->can('articles.publish'))<x-ui.button href="{{ route('admin.content.articles.index') }}" variant="secondary">مجله تیله</x-ui.button>@endif
                 @can('coverage.view')<x-ui.button href="{{ route('admin.content.coverage') }}" variant="secondary">ماتریس پوشش</x-ui.button>@endcan
-                @can('analytics.view')<x-ui.button href="{{ route('admin.content.reports.weekly') }}" variant="secondary">گزارش هفتگی</x-ui.button>@endcan
+                @can('analytics.view')<x-ui.button href="{{ route('admin.content.reports.index') }}" variant="secondary">گزارش</x-ui.button>@endcan
                 @can('subscription.manage')<x-ui.button href="{{ route('admin.content.plans.index') }}" variant="secondary">پلن‌ها و قیمت‌ها</x-ui.button>@endcan
-                @can('users.manage')<x-ui.button href="{{ route('admin.content.accounts.index') }}" variant="secondary">درخواست‌های حساب</x-ui.button>@endcan
+                @can('users.manage')<x-ui.button href="{{ route('admin.content.tickets.index') }}" variant="secondary">تیکت‌ها</x-ui.button>@endcan
                 @can('users.view')<x-ui.button href="{{ route('admin.content.users.index') }}" variant="secondary">کاربران و عضویت‌ها</x-ui.button>@endcan
                 @can('site.manage')<x-ui.button href="{{ route('admin.content.site.edit') }}" variant="secondary">متن‌ها و چیدمان</x-ui.button>@endcan
             </nav>

@@ -71,6 +71,34 @@
                 @endif
             </section>
 
+            <section class="account-panel account-panel--wide support-panel" aria-labelledby="support-title">
+                <div class="account-panel__heading"><div><p class="match-kicker">کنار شماییم</p><h2 id="support-title">پشتیبانی و تیکت‌ها</h2></div></div>
+                <p class="account-empty">هر سؤال، مشکل یا پیشنهادی دارید برای ما بنویسید. پاسخ تیکت را همین‌جا می‌بینید.</p>
+                <form method="post" action="{{ route('account.tickets.store') }}" class="support-ticket-form">
+                    @csrf
+                    <x-ui.field label="موضوع" name="subject" value="{{ old('subject') }}" maxlength="160" placeholder="مثلاً مشکل ورود، پیشنهاد بازی یا سؤال درباره عضویت" required :error="$errors->first('subject')" />
+                    <label for="ticket-body">پیام شما</label>
+                    <textarea id="ticket-body" name="body" rows="5" maxlength="5000" placeholder="هرچقدر لازم است توضیح بدهید" required>{{ old('body') }}</textarea>
+                    @error('body')<p class="field-error">{{ $message }}</p>@enderror
+                    <x-ui.button type="submit">ارسال تیکت</x-ui.button>
+                </form>
+
+                @if($tickets->isNotEmpty())
+                    @php($ticketStatuses = ['open'=>'باز','in_progress'=>'در حال پیگیری','resolved'=>'پاسخ داده شده','closed'=>'بسته'])
+                    <div class="support-ticket-history" aria-labelledby="support-history-title">
+                        <h3 id="support-history-title">تیکت‌های من</h3>
+                        @foreach($tickets as $ticket)
+                            <article class="support-ticket-item">
+                                <header><h4>{{ $ticket->subject }}</h4><span class="ticket-status ticket-status--{{ $ticket->status }}">{{ $ticketStatuses[$ticket->status] }}</span></header>
+                                <p>{{ $ticket->body }}</p>
+                                @if($ticket->admin_reply)<div class="support-ticket-reply"><strong>پاسخ تیله</strong><p>{{ $ticket->admin_reply }}</p></div>@endif
+                                <time datetime="{{ $ticket->created_at->toIso8601String() }}">{{ strtr($ticket->created_at->format('Y/m/d H:i'), $digits) }}</time>
+                            </article>
+                        @endforeach
+                    </div>
+                @endif
+            </section>
+
             <section class="account-panel account-panel--wide privacy-panel" aria-labelledby="privacy-title">
                 <div class="account-panel__heading"><div><p class="match-kicker">کنترل داده‌ها</p><h2 id="privacy-title">حریم خصوصی حساب</h2></div></div>
                 <p class="account-empty">این حساب برای بزرگسال همراه کودک است. فایل خروجی فقط داده‌های مربوط به همین حساب را دارد و رمز عبور، نشست‌ها و شناسه‌های داخلی در آن قرار نمی‌گیرند.</p>

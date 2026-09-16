@@ -82,9 +82,10 @@ Guest MUST بتواند Quick Match، Result، Game Detail و Start را بدو�
 
 - `PRD-ADM-001`: Admin MUST Content CRUD، Import، Publish review و Audit log داشته باشد.
 - `PRD-ADM-002`: Coverage Dashboard MUST Gapهای Taxonomy/Situation را نشان دهد.
-- `PRD-ADM-003`: Weekly Product Report MUST Funnel، Matching، Content، Search، Business و Technical health را پوشش دهد.
+- `PRD-ADM-003`: Product Report MUST برای هر بازه انتخابی Funnel، Matching، Content، Search، Business و Technical health را پوشش دهد.
 - `PRD-ADM-004`: Export MUST PDF و CSV/Excel را پشتیبانی کند.
 - `PRD-ADM-005`: Summary report MUST rule-based باشد؛ AI summary در MVP ممنوع است.
+- `PRD-ADM-006`: عضو واردشده MUST بتواند با موضوع و متن آزاد تیکت پشتیبانی ثبت کند و وضعیت و پاسخ را در حساب خود ببیند؛ مدیر یا ادمین مجاز MUST بتواند آن را پیگیری و پاسخ دهد.
 
 ### Brand and interaction
 
