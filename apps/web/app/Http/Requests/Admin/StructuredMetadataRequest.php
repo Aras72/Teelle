@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StructuredMetadataRequest extends FormRequest
 {
@@ -58,7 +59,7 @@ class StructuredMetadataRequest extends FormRequest
             'metadata.caregiver_involvement' => ['required', 'in:active,shared,light'], 'metadata.setup_complexity' => ['required', 'in:none,simple,moderate'],
             'metadata.source_title' => ['required', 'string', 'max:255'], 'metadata.source_url' => ['required', 'url:http,https', 'max:2048'],
             'metadata.cultural_origin' => ['required', 'string', 'max:120'],
-            'metadata.situations' => ['required', 'array', 'min:1'], 'metadata.situations.*' => ['required', 'distinct', 'exists:situations,slug'],
+            'metadata.situations' => ['required', 'array', 'min:1'], 'metadata.situations.*' => ['required', 'distinct', 'exists:situations,slug', Rule::notIn(['restaurant', 'car', 'party'])],
             'metadata.locations' => ['required', 'array', 'min:1'], 'metadata.locations.*' => ['required', 'distinct', 'exists:locations,slug'],
             'metadata.moods' => ['required', 'array', 'min:1'], 'metadata.moods.*' => ['required', 'distinct', 'exists:moods,slug'],
             'metadata.tags' => ['required', 'array', 'min:1'], 'metadata.tags.*' => ['required', 'distinct', 'exists:tags,slug'],

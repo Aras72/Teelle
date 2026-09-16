@@ -2,8 +2,9 @@
 
 ## 2026-09-16
 
+- Removed restaurant, car and party from active situations because they duplicate locations; retained them only as locations and reduced the active age/situation coverage matrix to 15 cells without deleting existing game relationships.
 - Replaced the provisional Quick Match taxonomy with the owner-approved eight-step flow: age, situation, duration, location, available materials, players, caregiver energy and child mood.
-- Added restaurant, car and party to the relevant active context lists; removed «وقت با هم بودن» from the active matching taxonomy without rewriting existing game records.
+- Added restaurant, car and party to active locations; removed «وقت با هم بودن» from the active matching taxonomy without rewriting existing game records.
 - Made all Quick Match choices database-backed, fixed the previously empty situation step and tied the real-marble progress marker to the current question from first to last step.
 - Replaced the game metadata JSON editor with explicit age, time, player, location, situation, mood, energy, material, safety and source controls for both new drafts and every existing draft.
 - Added per-admin direct permissions so managers can grant different operational areas to different admins while keeping game/article final publication manager-only.

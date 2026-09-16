@@ -6,6 +6,7 @@ use App\Content\ContentHash;
 use App\Content\ContentImportService;
 use App\Content\CoverageMatrix;
 use App\Content\GameContentWorkflow;
+use App\Content\GameFormOptions;
 use App\Enums\GameStatus;
 use App\Models\ContentImportBatch;
 use App\Models\Game;
@@ -20,6 +21,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class ContentAdminTest extends TestCase
@@ -245,11 +247,29 @@ class ContentAdminTest extends TestCase
 
         $report = app(CoverageMatrix::class)->report();
 
-        $this->assertCount(30, $report);
-        $this->assertSame(30, app(CoverageMatrix::class)->criticalGaps());
+        $this->assertCount(15, $report);
+        $this->assertSame(15, app(CoverageMatrix::class)->criticalGaps());
         $this->assertTrue($report->every(fn (object $cell): bool => (int) $cell->survivors === 0));
         $this->actingAs($reviewer)->get(route('admin.content.coverage'))
-            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('از مجموع ۳۰ ترکیب سن و موقعیت، در ۳۰ ترکیب هنوز بازی کافی نداریم')->assertSee('هر ترکیب باید حداقل سه بازی منتشرشده و تأییدشده داشته باشد');
+            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('از مجموع ۱۵ ترکیب سن و موقعیت، در ۱۵ ترکیب هنوز بازی کافی نداریم')->assertSee('ماتریس فعلی از ۵ بازه سنی و ۳ موقعیت ساخته شده است')->assertSee('هر ترکیب باید حداقل سه بازی منتشرشده و تأییدشده داشته باشد');
+    }
+
+    public function test_location_only_values_are_not_offered_or_accepted_as_situations(): void
+    {
+        $options = app(GameFormOptions::class)->all(includeInactive: true);
+
+        $this->assertArrayNotHasKey('restaurant', $options['situations']);
+        $this->assertArrayNotHasKey('car', $options['situations']);
+        $this->assertArrayNotHasKey('party', $options['situations']);
+        $this->assertArrayHasKey('restaurant', $options['locations']);
+        $this->assertArrayHasKey('car', $options['locations']);
+        $this->assertArrayHasKey('party', $options['locations']);
+
+        $draft = $this->draft('location-only-situation');
+        $draft['metadata']['situations'] = ['party'];
+
+        $this->expectException(ValidationException::class);
+        app(ContentImportService::class)->previewPayload($this->staff('content_editor'), [$draft]);
     }
 
     public function test_image_upload_uses_private_quarantine_and_rejects_duplicate_or_self_review(): void

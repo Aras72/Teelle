@@ -10,9 +10,6 @@ return new class extends Migration
         $this->replaceActiveTaxonomy('situations', [
             'after-work' => 'بعد از کار',
             'rainy-day' => 'روز بارانی',
-            'restaurant' => 'رستوران',
-            'car' => 'ماشین',
-            'party' => 'مهمانی',
             'before-bed' => 'قبل خواب',
         ]);
         $this->replaceActiveTaxonomy('locations', [

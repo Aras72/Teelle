@@ -11,6 +11,7 @@ use App\Models\User;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 final class ContentImportService
@@ -62,7 +63,7 @@ final class ContentImportService
             'metadata.source_url' => ['required', 'url:http,https', 'max:2048'],
             'metadata.cultural_origin' => ['required', 'string', 'max:120'],
             'metadata.situations' => ['required', 'array', 'min:1'],
-            'metadata.situations.*' => ['required', 'distinct', 'exists:situations,slug'],
+            'metadata.situations.*' => ['required', 'distinct', 'exists:situations,slug', Rule::notIn(['restaurant', 'car', 'party'])],
             'metadata.locations' => ['required', 'array', 'min:1'],
             'metadata.locations.*' => ['required', 'distinct', 'exists:locations,slug'],
             'metadata.moods' => ['required', 'array', 'min:1'],

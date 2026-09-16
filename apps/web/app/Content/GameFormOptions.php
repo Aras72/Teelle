@@ -16,6 +16,10 @@ final class GameFormOptions
         $lookup = function (string $table, string $key = 'slug', string $label = 'title') use ($includeInactive): array {
             return DB::table($table)
                 ->when(
+                    $table === 'situations',
+                    fn (Builder $query) => $query->whereNotIn('slug', ['restaurant', 'car', 'party']),
+                )
+                ->when(
                     ! $includeInactive && Schema::hasColumn($table, 'is_active'),
                     fn (Builder $query) => $query->where('is_active', true),
                 )

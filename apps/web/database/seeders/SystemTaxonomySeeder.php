@@ -14,9 +14,6 @@ class SystemTaxonomySeeder extends Seeder
         $this->seedSlugTable('situations', [
             'after-work' => 'بعد از کار',
             'rainy-day' => 'روز بارانی',
-            'restaurant' => 'رستوران',
-            'car' => 'ماشین',
-            'party' => 'مهمانی',
             'before-bed' => 'قبل خواب',
         ]);
         $this->seedSlugTable('locations', [
@@ -36,6 +33,7 @@ class SystemTaxonomySeeder extends Seeder
         $this->seedLegacySlugTable('situations', [
             'connection' => 'ارتباط', 'bored' => 'بی‌حوصلگی', 'indoor-time' => 'وقت داخل خانه',
             'restless' => 'بی‌قراری', 'calm-down' => 'آرام‌شدن',
+            'restaurant' => 'رستوران', 'car' => 'ماشین', 'party' => 'مهمانی',
         ]);
         $this->seedLegacySlugTable('locations', [
             'home-outside' => 'حیاط خانه', 'travel' => 'سفر', 'park' => 'پارک',

@@ -76,9 +76,14 @@ class QuickMatchWebTest extends TestCase
         $this->get(route('match.show'));
         $this->post(route('match.answer'), ['step' => 'age', 'age_years' => 3, 'age_months' => 0]);
         $this->get(route('match.show'))->assertOk()
-            ->assertSeeInOrder(['بعد از کار', 'روز بارانی', 'رستوران', 'ماشین', 'مهمانی', 'قبل خواب'])
+            ->assertSeeInOrder(['بعد از کار', 'روز بارانی', 'قبل خواب'])
+            ->assertDontSee('رستوران')
+            ->assertDontSee('ماشین')
+            ->assertDontSee('مهمانی')
             ->assertDontSee('وقت با هم بودن');
-        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'party']);
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'party'])
+            ->assertSessionHasErrors('answer');
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'before-bed']);
         $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 30]);
         $this->get(route('match.show'))->assertOk()
             ->assertSeeInOrder(['داخل خانه', 'بیرون', 'رستوران', 'ماشین', 'مهمانی']);
