@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Content\GameContentWorkflow;
+use App\Content\GameFormOptions;
 use App\Content\GameMetadataPayload;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ReviewContentRequest;
@@ -22,10 +23,14 @@ class ContentController extends Controller
 {
     public function index(Request $request): View
     {
-        abort_unless($request->user()->can('content.edit') || $request->user()->can('content.review'), 403);
+        $canManageGames = $request->user()->can('content.edit') || $request->user()->can('content.review') || $request->user()->can('content.publish');
+        abort_unless($canManageGames || $request->user()->can('articles.edit') || $request->user()->can('articles.publish'), 403);
 
         return view('admin.content.index', [
-            'games' => Game::query()->with(['versions' => fn ($query) => $query->latest('version_no')])->latest()->paginate(25),
+            'canManageGames' => $canManageGames,
+            'games' => $canManageGames
+                ? Game::query()->with(['versions' => fn ($query) => $query->latest('version_no')])->latest()->paginate(25)
+                : null,
             'audits' => AuditLog::query()->latest('occurred_at')->limit(15)->get(),
         ]);
     }
@@ -44,7 +49,7 @@ class ContentController extends Controller
         return redirect()->route('admin.content.edit', $game->versions()->first())->with('status', 'پیش‌نویس ساخته شد');
     }
 
-    public function edit(Request $request, GameVersion $version, GameMetadataPayload $metadata): View
+    public function edit(Request $request, GameVersion $version, GameMetadataPayload $metadata, GameFormOptions $formOptions): View
     {
         $this->authorizeAbility($request, 'content.edit');
 
@@ -53,7 +58,8 @@ class ContentController extends Controller
             'media' => MediaAsset::query()->select('media_assets.*')
                 ->join('game_media', 'game_media.media_asset_id', '=', 'media_assets.id')
                 ->where('game_media.game_version_id', $version->id)->get(),
-            'metadataJson' => json_encode($metadata->forVersion($version), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'metadata' => $metadata->forVersion($version),
+            'options' => $formOptions->all(includeInactive: true),
         ]);
     }
 

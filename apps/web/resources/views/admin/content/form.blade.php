@@ -18,10 +18,10 @@
         </form>
 
         @if($version)
-        <section class="admin-panel"><h2>Metadata کامل بازی</h2><p>تمام Factها، Taxonomyها، منبع و Safety این نسخه در JSON زیر ثبت می‌شود. مقدارها قبل از ذخیره با Vocabulary تیله اعتبارسنجی می‌شوند</p>
+        <section class="admin-panel"><h2>جزئیات کامل بازی</h2><p>سن، موقعیت، مکان، انرژی، حال کودک، همراهان، وسایل، منبع و ایمنی را مستقیم ویرایش کنید</p>
             <form class="admin-form" method="post" action="{{ route('admin.content.structured-metadata', $version) }}">@csrf
-                <label>Metadata JSON<textarea class="teelle-input admin-code" name="metadata_json" rows="22" dir="ltr" required>{{ old('metadata_json', $metadataJson) }}</textarea></label>
-                <x-ui.button type="submit" variant="secondary">اعتبارسنجی و ذخیره Metadata</x-ui.button>
+                @include('admin.content.metadata-fields', ['metadata' => $metadata, 'options' => $options])
+                <x-ui.button type="submit" variant="secondary">ذخیره جزئیات بازی</x-ui.button>
             </form>
         </section>
         <section class="admin-panel"><h2>رسانه قرنطینه‌ای</h2><p>تصویر تا تأیید یک بازبین دیگر خصوصی می‌ماند</p>

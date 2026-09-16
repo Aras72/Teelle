@@ -1,10 +1,23 @@
 # CHANGELOG
 
+## 2026-09-16
+
+- Replaced the provisional Quick Match taxonomy with the owner-approved eight-step flow: age, situation, duration, location, available materials, players, caregiver energy and child mood.
+- Added restaurant, car and party to the relevant active context lists; removed «وقت با هم بودن» from the active matching taxonomy without rewriting existing game records.
+- Made all Quick Match choices database-backed, fixed the previously empty situation step and tied the real-marble progress marker to the current question from first to last step.
+- Replaced the game metadata JSON editor with explicit age, time, player, location, situation, mood, energy, material, safety and source controls for both new drafts and every existing draft.
+- Added per-admin direct permissions so managers can grant different operational areas to different admins while keeping game/article final publication manager-only.
+- Added the expandable SEO-ready Teelle Magazine with hierarchical topic categories, drafts, review submission, SEO fields, safe Markdown rendering and manager-only publication.
+- Added the official v2 one-sheet game workbook with the approved taxonomy, Vazirmatn styling and dropdowns for every fixed-choice field.
+
 ## 2026-09-15
 
 - Finalized the owner-approved MVP Privacy Policy copy and selected the disclosed three-day deletion/anonymization model; the post-grace processing job remains a Phase 15 implementation gate.
 - Clarified Coverage Matrix copy as 25 total age/situation combinations with at least three reviewed published games required per combination.
 - Removed the redundant «همان» from the Excel import instruction.
+- Added branded light/dark error pages for 403, 404, 419, 429, 500 and 503 with local-only preview routes.
+- Reworked Quick Match presentation to follow the approved mobile question boards while preserving the current metadata taxonomy pending owner confirmation.
+- Removed public/admin collection entry points and the duplicate new-draft button; added a manager-only controlled copy and layout editor.
 - Replaced the admin JSON import box with direct `.xlsx` upload and a complete Persian single-game form; both paths create a review preview before any draft is written.
 - Added a fail-closed native reader for the official one-sheet workbook with exact-header validation, ZIP limits, macro rejection and regression coverage for the 25-row reference file and fake workbooks.
 - Added audited, recoverable user disable actions for managers and support admins while protecting self, manager and peer-admin accounts and revoking active database sessions.

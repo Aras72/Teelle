@@ -1,40 +1,52 @@
-# Photoreal Marble Visual QA
+# Quick Match and System Error Design QA
 
-Date: 2026-09-10
-Scope: Heartbeat، Auth، Match، Play/Result، Account/Child Profile و Jigari marble surfaces
+Date: 2026-09-16
+Scope: Quick Match question flow and 403/404/419/429/500/503 error states
 
-## Source targets
+## Source visual truth
 
-- `C:\Users\Aras\Desktop\colorful-glass-marbles-stockcake.jpg` — glass depth، caustics and varied internal ribbons
-- `C:\Users\Aras\Desktop\images.jpg` — striped glass variety for non-Hero surfaces
-- `C:\Users\Aras\Desktop\1000_F_165890033_Q7vyh0ohuWV9mykyHkK2sn7JIVXBNgje.jpg` — ruby material/color direction only; watermarked pixels were not used
-- Approved Hero video/poster — intentionally unchanged and not reused elsewhere
+- `docs/08-ux/prototypes/quick-match-essential-questions-v2.png` — 1802×872 composite board
+- `docs/08-ux/prototypes/quick-match-adaptive-questions-v2.png` — 1801×873 composite board
+- `docs/08-ux/prototypes/system-states-mobile-light-v1.png` — 1536×1024 composite board
+- `docs/08-ux/prototypes/system-states-mobile-dark-v1.png` — 1536×1024 composite board
 
-## Implementation targets
+## Implementation evidence
 
-- Live routes: `http://127.0.0.1:8016/`، `/login`، `/register`، `/match` and `/jigari`
-- Assets: `apps/web/public/images/marbles/*.webp`
-- Browser states: Dark theme، desktop default viewport، tablet 768×900، mobile 390×844
-- Density: browser device pixel ratio; assets are 768×768 transparent WebP
+- Live local routes: `http://127.0.0.1:8135/match` and `http://127.0.0.1:8135/_preview/errors/{403|404|419|429|500|503}`
+- Browser-rendered implementation screenshots were inspected in the Codex in-app browser at desktop default viewport and 390×844 CSS pixels, device scale 1, Light and Dark.
+- The browser integration did not expose a persisted local screenshot path. Captures are preserved as in-app browser evidence in this task rather than a Repository artifact.
+- States inspected: age question, 404, 500, manager site-content editor; desktop and 390px mobile; Light and Dark.
+- Primary interactions tested: theme switch, Home-to-Match navigation and manager-only page access.
+- Console errors/warnings on the inspected Light/Dark form, 404 error and manager pages: none.
 
-## Comparison and iterations
+## Full-view and focused comparison
 
-1. Full-page desktop comparison identified Jigari planets overlapping the kicker; planet sizes were reduced.
-2. Initial motion-path implementation did not move reliably; it was replaced with three independent rotating tracks.
-3. Auth marble was partially hidden behind the form; its orbit was enlarged on desktop and separated above the card on mobile.
-4. Focused desktop/tablet/mobile comparisons confirmed glass realism، distinct colors، uncropped alpha edges، readable form fields and visible motion.
-5. Computed transforms for all three Jigari tracks changed between samples; successive Login screenshots showed the Auth marble moving along the orbit.
+- Typography: Lalezar is used for question and error headings; Vazirmatn remains the body and control font. Weight and rhythm follow the approved boards.
+- Layout: the live mobile card preserves the dominant single-question composition, back control, progress marker, centered title, answer area and full-width CTA. Desktop intentionally keeps the same narrow task focus instead of stretching the form.
+- Colors: cream/petrol/red Light tokens and petrol/cream/red Dark tokens match the approved Teelle system.
+- Imagery: existing photoreal Teelle marble assets are used without placeholders or CSS-drawn marbles. The progress marble is an actual image asset.
+- Copy: error copy is humanized and state-specific. Form question titles now match the tone of the approved visual boards.
+- Focused controls: the age selectors remain structured year/month inputs because the product range begins at six months; radio/checkbox states retain native semantics and visible focus.
 
-## Evidence
+## Comparison history
 
-- Browser visual: PASS — user-visible Codex in-app browser, no saved screenshot artifact
-- 390×844: PASS
-- 768×900: PASS
-- Desktop: PASS
-- Reduced motion contract: PASS by CSS source test
-- Source asset separation: PASS by `DesignSystemTest`
-- MySQL 8.4.11 Laravel regression: PASS — 65 tests / 554 assertions
-- JavaScript: PASS — 8/8
-- Production build and Pint: PASS
+1. Previous implementation used a wide generic card, technical progress copy and five decorative orbiting marbles. It did not resemble the approved mobile question boards.
+2. The card was narrowed, the visible orbit removed, the progress indicator changed to a real marble marker, headings moved to Lalezar and the primary CTA was anchored as the dominant action.
+3. Desktop and 390px Light/Dark captures confirmed no horizontal overflow, readable controls and persistent theme behavior.
 
-final result: passed
+## Product decision resolved
+
+- The owner approved the options shown in the reference boards as the final public taxonomy. The flow now has eight required steps and every step is sourced from the active database taxonomy.
+- Existing games were intentionally not auto-reclassified. Old values remain inactive and editable in Admin so the owner can review each draft without silent metadata corruption.
+
+## Implementation checklist
+
+- [x] Match card, progress marker, typography and CTA aligned with the approved visual direction.
+- [x] Light and Dark rendering checked at desktop and 390px.
+- [x] Branded error views implemented and previewed.
+- [x] Owner decision on option taxonomy.
+- [x] Final same-state comparison after taxonomy implementation.
+- [x] All eight question states and final transition verified in the live browser.
+- [x] Desktop and 390×844 Light/Dark pass with no page-level horizontal overflow.
+
+final result: pass

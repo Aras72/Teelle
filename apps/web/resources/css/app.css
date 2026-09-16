@@ -1640,6 +1640,58 @@ body:has(.home-hero) #main-content {
     .home-marble-stage { width: clamp(8rem, min(28vw, 34dvh), 20rem); }
 }
 
+/* Approved Quick Match mobile language: one clear question, a living marble, and no visible orbit. */
+.match-page { padding-block: clamp(1rem, 4vw, 2.5rem); overflow-x: clip; overflow-y: visible; }
+.match-card { width: min(100%, 31rem); min-height: min(46rem, calc(100dvh - 7rem)); padding: clamp(1.25rem, 4vw, 2rem); border-color: color-mix(in srgb, var(--border-subtle) 72%, transparent); border-radius: 2rem; box-shadow: 0 1.4rem 3.2rem rgb(64 42 18 / .11); }
+.match-progress-header { grid-template-columns: 3rem 1fr; gap: .65rem 1rem; margin-block-end: clamp(1.5rem, 5vw, 2.75rem); }
+.match-back-control { display: grid; width: 3rem; height: 3rem; place-items: center; border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent); border-radius: 50%; background: var(--surface-elevated); color: var(--text-primary); box-shadow: var(--shadow-low); font-size: 2rem; line-height: 1; text-decoration: none; }
+.match-back-control button { width: 100%; height: 100%; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; }
+.match-step-label { margin: 0; color: var(--text-secondary); font-size: .82rem; text-align: end; }
+.match-progress { position: relative; grid-column: 1 / -1; height: 2.75rem; overflow: visible; background: transparent; }
+.match-progress::before { position: absolute; inset: 50% .65rem auto; height: .28rem; border-radius: var(--radius-pill); background: var(--surface-muted); content: ''; transform: translateY(-50%); }
+.match-progress span { position: absolute; z-index: 1; top: 50%; left: .65rem; width: var(--match-progress); height: .3rem; max-width: calc(100% - 1.3rem); border-radius: var(--radius-pill); background: var(--teelle-petrol); transform: translateY(-50%); transform-origin: left center; }
+.match-progress img { position: absolute; z-index: 2; top: 50%; left: clamp(0rem, calc(var(--match-progress) - 1.375rem), calc(100% - 2.75rem)); width: 2.75rem; height: 2.75rem; object-fit: contain; filter: drop-shadow(0 .35rem .45rem rgb(18 63 70 / .24)); transform: translateY(-50%); transition: left var(--duration-emphasis) var(--ease-enter); }
+.match-question { min-height: 31rem; align-content: space-between; }
+.match-question fieldset { gap: 1rem; }
+.match-question legend, .match-card--complete h1 { max-width: none; margin-inline: auto; font-family: var(--font-display); font-size: clamp(2rem, 7vw, 2.7rem); font-weight: 400; letter-spacing: 0; text-align: center; }
+.match-question__hint { text-align: center; }
+.match-options { grid-template-columns: 1fr; gap: .55rem; }
+.match-option span { min-height: 3.75rem; padding: .8rem 1rem; border-radius: .9rem; }
+.match-option input:checked + span { border-color: color-mix(in srgb, var(--teelle-peach) 82%, var(--action-primary)); background: color-mix(in srgb, var(--surface-warm) 56%, var(--surface-primary)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--teelle-peach) 65%, transparent); }
+.match-options--compact { grid-template-columns: 1fr; }
+.match-age-fields { margin-block-start: .75rem; }
+.match-actions { margin-block-start: auto; }
+.match-actions .teelle-button { width: 100%; min-width: 0; font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; }
+.home-hero__content--start { align-items: start; text-align: start; }
+.home-hero__content--start .home-hero__cta { align-self: start; }
+
+/* Friendly, resilient error states inspired by the approved system-state boards. */
+.error-body { min-height: 100dvh; background: var(--surface-canvas); }
+.error-header { display: flex; min-height: var(--header-height); align-items: center; justify-content: space-between; }
+.error-page { display: grid; min-height: calc(100dvh - var(--header-height)); place-items: center; padding-block: 1rem 3rem; }
+.error-card { display: grid; width: min(100%, 34rem); justify-items: center; gap: 1rem; padding: clamp(1.5rem, 7vw, 3.5rem); border: 1px solid var(--border-subtle); border-radius: clamp(1.5rem, 6vw, 2.75rem); background: var(--surface-elevated); box-shadow: var(--shadow-medium); text-align: center; }
+.error-marbles { display: flex; min-height: 8.5rem; align-items: end; justify-content: center; gap: .4rem; }
+.error-marbles img { width: clamp(4.5rem, 18vw, 7.25rem); height: auto; object-fit: contain; filter: drop-shadow(0 .8rem .8rem rgb(18 63 70 / .22)); }
+.error-marbles img:nth-child(2) { width: clamp(3rem, 13vw, 5rem); align-self: start; }
+.error-marbles img:nth-child(3) { width: clamp(2.25rem, 9vw, 3.5rem); }
+.error-code { margin: 0; color: var(--action-primary); font-family: var(--font-display); font-size: 1.25rem; }
+.error-card h1 { margin: 0; font-family: var(--font-display); font-size: clamp(2.1rem, 8vw, 3.35rem); font-weight: 400; line-height: 1.25; }
+.error-copy { max-width: 30rem; margin: 0; color: var(--text-secondary); line-height: 1.9; }
+.error-actions { display: flex; width: 100%; flex-wrap: wrap; justify-content: center; gap: .75rem; margin-block-start: .5rem; }
+.error-actions .teelle-button { flex: 1 1 12rem; }
+@media (prefers-reduced-motion: no-preference) {
+    .error-marbles img:first-child { animation: error-marble-float 4.8s ease-in-out infinite alternate; }
+    .error-marbles img:nth-child(2) { animation: error-marble-float 5.7s ease-in-out .3s infinite alternate-reverse; }
+    @keyframes error-marble-float { to { transform: translateY(-.45rem) rotate(7deg); } }
+}
+@media (max-width: 35rem) {
+    .match-card { min-height: calc(100dvh - 6rem); border-radius: 1.5rem; }
+    .match-question { min-height: calc(100dvh - 17rem); }
+    .match-age-fields { grid-template-columns: 1fr 1fr; }
+    .error-header { padding-block: .5rem; }
+    .error-card { min-height: calc(100dvh - 7rem); align-content: center; }
+}
+
 /* Content operations use the existing Teelle tokens in both themes. */
 .admin-shell { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); padding-block: var(--space-8); }
 .admin-heading { display: flex; min-width: 0; align-items: end; justify-content: space-between; gap: var(--space-5); }
@@ -1666,6 +1718,7 @@ body:has(.home-hero) #main-content {
 .admin-role-form { max-width: 42rem; }
 .admin-form textarea { resize: vertical; line-height: 1.8; }
 .admin-form select { appearance: auto; }
+.admin-control-note { margin: 0; padding: var(--space-4); border-inline-start: .25rem solid var(--status-warning); border-radius: var(--radius-input); background: var(--surface-warm); color: var(--text-secondary); }
 .admin-user-search { display: grid; gap: var(--space-2); padding: var(--space-5); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); }
 .admin-user-search > label { font-weight: var(--font-weight-bold); }
 .admin-user-search > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-3); }
@@ -1977,3 +2030,34 @@ body:has(.home-hero) #main-content {
     .catalog-filter fieldset, .catalog-filter__actions { grid-column: auto; }
     .catalog-filter__actions, .catalog-filter__actions .teelle-button { width: 100%; }
 }
+
+/* Magazine is a long-lived editorial surface: calm reading, clear categories, and both Teelle themes. */
+.magazine-page, .magazine-article { display: grid; gap: clamp(1.5rem, 4vw, 3rem); padding-block: clamp(2.5rem, 7vw, 6rem); }
+.magazine-hero { display: grid; gap: .7rem; max-width: 58rem; }
+.magazine-hero h1, .magazine-article h1 { margin: 0; font-size: clamp(2.25rem, 6vw, 5rem); line-height: 1.12; text-wrap: balance; }
+.magazine-hero > p:last-child, .magazine-lead { max-width: 48rem; margin: 0; color: var(--text-secondary); font-size: clamp(1rem, 2vw, 1.2rem); line-height: 2; }
+.magazine-categories { display: flex; flex-wrap: wrap; gap: .65rem; }
+.magazine-categories a { display: inline-flex; min-height: var(--touch-target); align-items: center; padding-inline: 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); background: var(--surface-primary); color: var(--text-primary); font-weight: var(--font-weight-bold); text-decoration: none; }
+.magazine-categories a:hover, .magazine-categories a.is-active { border-color: var(--action-primary); background: var(--surface-warm); color: var(--action-primary); }
+.magazine-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.magazine-card { overflow: hidden; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-low); }
+.magazine-card > a { display: block; overflow: hidden; }
+.magazine-card img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform var(--duration-emphasis) var(--ease-enter); }
+.magazine-card:hover img { transform: scale(1.025); }
+.magazine-card > div { display: grid; gap: .65rem; padding: clamp(1rem, 3vw, 1.5rem); }
+.magazine-card h2, .magazine-card p { margin: 0; }
+.magazine-card h2 { font-size: clamp(1.35rem, 2.4vw, 1.85rem); line-height: 1.45; }
+.magazine-card h2 a { color: var(--text-primary); text-decoration: none; }
+.magazine-card > div > p:not(.page-kicker) { color: var(--text-secondary); line-height: 1.9; }
+.magazine-read, .magazine-back { color: var(--action-primary); font-weight: var(--font-weight-black); text-underline-offset: .25em; }
+.magazine-article { max-width: 62rem; }
+.magazine-article > article, .magazine-article header { display: grid; gap: 1rem; }
+.magazine-cover { display: block; width: 100%; max-height: 34rem; border-radius: var(--radius-card); object-fit: cover; box-shadow: var(--shadow-low); }
+.magazine-body { display: grid; gap: 1rem; max-width: 48rem; font-size: 1.05rem; line-height: 2.1; }
+.magazine-body h2, .magazine-body h3, .magazine-body p, .magazine-body ul, .magazine-body ol { margin: 0; }
+.magazine-body h2 { margin-block-start: 1.4rem; font-size: clamp(1.6rem, 3vw, 2.25rem); }
+.magazine-body h3 { margin-block-start: 1rem; font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+.magazine-body p, .magazine-body li { color: var(--text-secondary); }
+.admin-article-cover { display: block; width: min(100%, 28rem); margin-block-start: 1rem; aspect-ratio: 16 / 10; border: 1px solid var(--border-subtle); border-radius: var(--radius-input); object-fit: cover; }
+@media (max-width: 63.99rem) { .magazine-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 47.99rem) { .magazine-grid { grid-template-columns: 1fr; } }

@@ -15,6 +15,7 @@ final class CoverageMatrix
         return DB::table('coverage_matrix_cells as cells')
             ->join('age_bands', 'age_bands.id', '=', 'cells.age_band_id')
             ->join('situations', 'situations.id', '=', 'cells.situation_id')
+            ->where('situations.is_active', true)
             ->leftJoinSub($this->survivorCounts(), 'coverage', function ($join): void {
                 $join->on('coverage.age_band_id', '=', 'cells.age_band_id')
                     ->on('coverage.situation_id', '=', 'cells.situation_id');

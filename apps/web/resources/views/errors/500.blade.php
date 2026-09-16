@@ -1,0 +1,6 @@
+@extends('errors.layout')
+@section('title', 'خطای موقت')
+@section('code', '۵۰۰')
+@section('heading', 'یک چیزی درست پیش نرفت')
+@section('message', 'اگر وسط انتخاب بازی بودید، پاسخ‌هایتان حفظ شده است. دوباره تلاش کنید؛ اگر مشکل ماند، کمی بعد برگردید.')
+@section('retry', 'دوباره تلاش کن')

@@ -25,7 +25,7 @@ class QuickMatchWebTest extends TestCase
     {
         $this->get('/')->assertOk()->assertSee('href="/match"', false);
         $this->get(route('match.show'))->assertOk()
-            ->assertSee('سن کودک چقدر است؟')->assertSee('سؤال 1 از 6');
+            ->assertSee('چند سالشه؟')->assertSee('سؤال 1 از 8');
     }
 
     public function test_age_bounds_and_persian_digits_are_normalized(): void
@@ -35,25 +35,30 @@ class QuickMatchWebTest extends TestCase
             ->assertSessionHasErrors('age_years');
         $this->post(route('match.answer'), ['step' => 'age', 'age_years' => '۰', 'age_months' => '۶'])
             ->assertRedirect(route('match.show'));
-        $this->get(route('match.show'))->assertOk()->assertSee('الان بیشتر دنبال چه لحظه‌ای هستید؟');
+        $this->get(route('match.show'))->assertOk()->assertSee('الان چه موقعیتیه؟');
     }
 
     public function test_guest_flow_persists_normalized_context_once_without_results(): void
     {
         $this->get(route('match.show'));
         $this->post(route('match.answer'), ['step' => 'age', 'age_years' => 4, 'age_months' => 2]);
-        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'connection']);
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'after-work']);
         $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 15]);
         $this->post(route('match.answer'), ['step' => 'location', 'answer' => 'home-inside']);
-        $this->post(route('match.answer'), ['step' => 'materials', 'answer' => ['paper', 'ball']]);
-        $response = $this->post(route('match.answer'), ['step' => 'players', 'answer' => 'one-child-adult']);
+        $this->post(route('match.answer'), ['step' => 'materials', 'answer' => ['paper-pencil', 'ball']]);
+        $this->post(route('match.answer'), ['step' => 'players', 'answer' => 'child-and-adult']);
+        $this->post(route('match.answer'), ['step' => 'caregiver_energy', 'answer' => 'medium']);
+        $response = $this->post(route('match.answer'), ['step' => 'mood', 'answer' => 'calm']);
 
         $match = MatchSession::query()->firstOrFail();
         $response->assertRedirect(route('matches.show', $match));
         $this->assertSame(50, $match->age_months);
         $this->assertSame(MatchOutcome::Collecting, $match->outcome);
-        $this->assertSame(['paper', 'ball'], $match->context_json['available_materials']);
+        $this->assertSame(['paper-pencil', 'ball'], $match->context_json['available_materials']);
         $this->assertTrue($match->context_json['adult_present']);
+        $this->assertSame('child-and-adult', $match->context_json['player_requirement']);
+        $this->assertSame('medium', $match->context_json['caregiver_energy']);
+        $this->assertSame('calm', $match->context_json['child_mood']);
         $this->assertDatabaseCount('guest_identities', 1);
         $this->assertDatabaseCount('match_results', 0);
         $this->get(route('matches.show', $match))->assertOk()->assertSee('پیشنهادها هنوز آماده نیستند');
@@ -61,39 +66,34 @@ class QuickMatchWebTest extends TestCase
 
         $this->post(route('match.back'));
         $this->get(route('match.show'))->assertOk()->assertSee('حالا تیله این لحظه را می‌شناسد');
-        $this->post(route('match.answer'), ['step' => 'players', 'answer' => 'one-child-adult']);
+        $this->post(route('match.answer'), ['step' => 'mood', 'answer' => 'calm']);
         $this->assertDatabaseCount('match_sessions', 1);
         $this->assertSame(1, GuestIdentity::query()->count());
     }
 
-    public function test_indoor_situation_skips_redundant_location_question(): void
+    public function test_approved_situation_and_location_options_are_rendered_in_order(): void
     {
         $this->get(route('match.show'));
         $this->post(route('match.answer'), ['step' => 'age', 'age_years' => 3, 'age_months' => 0]);
-        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'indoor-time']);
-        $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 10]);
-
         $this->get(route('match.show'))->assertOk()
-            ->assertSee('سؤال 4 از 5')
-            ->assertSee('کدام وسیله‌ها همین حالا در دسترس‌اند؟')
-            ->assertDontSee('کجا می‌خواهید بازی کنید؟');
-
-        $this->post(route('match.answer'), ['step' => 'materials', 'answer' => ['none']]);
-        $this->post(route('match.answer'), ['step' => 'players', 'answer' => 'one-child-adult']);
-
-        $this->assertSame('home-inside', MatchSession::query()->firstOrFail()->context_json['location']);
+            ->assertSeeInOrder(['بعد از کار', 'روز بارانی', 'رستوران', 'ماشین', 'مهمانی', 'قبل خواب'])
+            ->assertDontSee('وقت با هم بودن');
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'party']);
+        $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 30]);
+        $this->get(route('match.show'))->assertOk()
+            ->assertSeeInOrder(['داخل خانه', 'بیرون', 'رستوران', 'ماشین', 'مهمانی']);
     }
 
     public function test_step_skipping_and_conflicting_material_answers_fail_closed(): void
     {
         $this->get(route('match.show'));
-        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'connection'])
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'after-work'])
             ->assertSessionHasErrors('answer');
         $this->post(route('match.answer'), ['step' => 'age', 'age_years' => 5, 'age_months' => 0]);
-        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'bored']);
-        $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 10]);
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'rainy-day']);
+        $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 15]);
         $this->post(route('match.answer'), ['step' => 'location', 'answer' => 'home-inside']);
-        $this->post(route('match.answer'), ['step' => 'materials', 'answer' => ['none', 'paper']])
+        $this->post(route('match.answer'), ['step' => 'materials', 'answer' => ['none', 'paper-pencil']])
             ->assertSessionHasErrors('answer');
         $this->assertDatabaseCount('match_sessions', 0);
     }

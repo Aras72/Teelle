@@ -21,6 +21,14 @@ final class QuickMatchSubmission
             'location' => $answers['location'] ?? 'home-inside', 'available_materials' => array_values($answers['materials']),
             'children_count' => (int) $answers['players']['children_count'],
             'adult_present' => (bool) $answers['players']['adult_present'],
+            'player_requirement' => $answers['players']['requirement'],
+            'caregiver_energy' => $answers['caregiver_energy'],
+            'child_mood' => $answers['mood'],
+            'child_energy' => match ($answers['mood']) {
+                'calm' => 'low',
+                'energetic' => 'high',
+                default => 'medium',
+            },
         ];
         $actor = $user ? ['user_id' => $user->id, 'guest_identity_id' => null] : [
             'user_id' => null, 'guest_identity_id' => $this->guests->resolve($session)->id,
@@ -30,7 +38,7 @@ final class QuickMatchSubmission
             ['submission_key' => $state['submission_key']],
             $actor + [
                 'age_months' => (int) $answers['age'], 'context_json' => $context,
-                'ruleset_version' => 'context-v1', 'outcome' => MatchOutcome::Collecting,
+                'ruleset_version' => 'context-v2', 'outcome' => MatchOutcome::Collecting,
                 'expires_at' => now()->addHours(2),
             ],
         );

@@ -20,6 +20,7 @@
         <section class="admin-panel" aria-labelledby="excel-import-title">
             <h2 id="excel-import-title">افزودن از فایل Excel</h2>
             <p>تمپلیت رسمی تیله را پر کنید. فایل ابتدا بررسی و پیش‌نمایش داده می‌شود و بدون تأیید شما هیچ بازی‌ای ساخته نمی‌شود.</p>
+            <p><x-ui.button href="{{ route('admin.content.imports.template') }}" variant="secondary">دریافت تمپلیت Excel</x-ui.button></p>
             <form class="admin-form admin-import-upload" method="post" enctype="multipart/form-data" action="{{ route('admin.content.imports.excel.preview') }}">@csrf
                 <label>فایل Excel<input class="teelle-input" type="file" name="workbook" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required></label>
                 <x-ui.button type="submit">بررسی فایل و نمایش پیش‌نمایش</x-ui.button>
@@ -70,7 +71,7 @@
                     <fieldset><legend>{{ $label }}</legend><div class="admin-choice-grid">@foreach($options[$key] as $value=>$title)<label class="teelle-check"><input type="checkbox" name="game[metadata][{{ $field }}][]" value="{{ $value }}"><span>{{ $title }}</span></label>@endforeach</div></fieldset>
                 @endforeach
 
-                <fieldset><legend>وسایل</legend><div class="admin-material-grid">@foreach([0,1] as $index)<div>
+                <fieldset><legend>وسایل</legend><div class="admin-material-grid">@foreach([0,1,2,3] as $index)<div>
                     <label>وسیله {{ $index + 1 }}<select class="teelle-input" name="game[metadata][materials][{{ $index }}][slug]"><option value="">بدون وسیله</option>@foreach($options['materials'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
                     <label>وضعیت<select class="teelle-input" name="game[metadata][materials][{{ $index }}][requirement]"><option value="required">لازم</option><option value="optional">اختیاری</option></select></label>
                     <label>توضیح مقدار<input class="teelle-input" name="game[metadata][materials][{{ $index }}][quantity_note]"></label>

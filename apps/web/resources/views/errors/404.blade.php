@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('title', 'صفحه پیدا نشد')
+@section('code', '۴۰۴')
+@section('heading', 'اینجا چیزی پیدا نکردیم')
+@section('message', 'شاید نشانی صفحه عوض شده باشد؛ از خانه دوباره مسیرتان را پیدا کنید.')

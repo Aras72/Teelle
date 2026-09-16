@@ -34,11 +34,13 @@ final class QuickMatchAnswerRequest extends FormRequest
         return match ((string) $this->input('step')) {
             'age' => ['step' => ['required', 'in:age'], 'age_years' => ['required', 'integer', 'min:0', 'max:12'], 'age_months' => ['required', 'integer', 'min:0', 'max:11']],
             'situation' => ['step' => ['required', 'in:situation'], 'answer' => ['required', Rule::exists('situations', 'slug')->where('is_active', true)]],
-            'duration' => ['step' => ['required', 'in:duration'], 'answer' => ['required', 'integer', Rule::in([5, 10, 15, 20, 30])]],
+            'duration' => ['step' => ['required', 'in:duration'], 'answer' => ['required', 'integer', Rule::in([15, 30, 45])]],
             'location' => ['step' => ['required', 'in:location'], 'answer' => ['required', Rule::exists('locations', 'slug')->where('is_active', true)]],
-            'materials' => ['step' => ['required', 'in:materials'], 'answer' => ['present', 'array', 'max:4'], 'answer.*' => ['string', 'distinct', Rule::in(['none', 'paper', 'ball', 'cups', 'blanket'])]],
-            'players' => ['step' => ['required', 'in:players'], 'answer' => ['required', Rule::in(['one-child-adult', 'two-children-adult', 'small-group-adult', 'children-only'])]],
-            default => ['step' => ['required', 'in:age,situation,duration,location,materials,players']],
+            'materials' => ['step' => ['required', 'in:materials'], 'answer' => ['present', 'array', 'min:1', 'max:4'], 'answer.*' => ['string', 'distinct', Rule::in(['none', 'paper-pencil', 'ball', 'household-items'])]],
+            'players' => ['step' => ['required', 'in:players'], 'answer' => ['required', Rule::exists('player_requirements', 'slug')->where('is_active', true)]],
+            'caregiver_energy' => ['step' => ['required', 'in:caregiver_energy'], 'answer' => ['required', Rule::exists('energy_levels', 'slug')->where('is_active', true)]],
+            'mood' => ['step' => ['required', 'in:mood'], 'answer' => ['required', Rule::exists('moods', 'slug')->where('is_active', true)]],
+            default => ['step' => ['required', 'in:age,situation,duration,location,materials,players,caregiver_energy,mood']],
         };
     }
 
@@ -70,10 +72,9 @@ final class QuickMatchAnswerRequest extends FormRequest
             'duration' => (int) $this->validated('answer'),
             'materials' => array_values(array_diff($this->validated('answer'), ['none'])),
             'players' => match ($this->validated('answer')) {
-                'one-child-adult' => ['children_count' => 1, 'adult_present' => true],
-                'two-children-adult' => ['children_count' => 2, 'adult_present' => true],
-                'small-group-adult' => ['children_count' => 3, 'adult_present' => true],
-                default => ['children_count' => 2, 'adult_present' => false],
+                'child-and-adult' => ['requirement' => 'child-and-adult', 'children_count' => 1, 'adult_present' => true],
+                'multiple-children' => ['requirement' => 'multiple-children', 'children_count' => 2, 'adult_present' => true],
+                default => ['requirement' => 'no-adult', 'children_count' => 1, 'adult_present' => false],
             },
             default => $this->validated('answer'),
         };

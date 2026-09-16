@@ -5,27 +5,28 @@ use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Account\ChildProfileController;
 use App\Http\Controllers\Account\PrivacyController;
 use App\Http\Controllers\Account\SavedGameController;
+use App\Http\Controllers\Admin\ArticleCategoryController;
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\CoverageController;
-use App\Http\Controllers\Admin\EditorialCollectionController;
 use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\PrivacyAccountController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\SiteContentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\OnboardingController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\CollectionController;
-use App\Http\Controllers\CollectionCoverController;
 use App\Http\Controllers\Homepage\ShowHomepageController;
 use App\Http\Controllers\Jigari\JigariController;
 use App\Http\Controllers\Jigari\JigariGameController;
 use App\Http\Controllers\Jigari\JigariGameCoverController;
 use App\Http\Controllers\Jigari\JigariSearchController;
+use App\Http\Controllers\MagazineController;
 use App\Http\Controllers\Match\QuickMatchController;
 use App\Http\Controllers\Play\GameDetailController;
 use App\Http\Controllers\Play\MatchResultsController;
@@ -36,9 +37,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', ShowHomepageController::class)->name('home');
 Route::get('/about', AboutController::class)->name('about');
 Route::view('/privacy', 'privacy')->name('privacy');
-Route::get('/collections', [CollectionController::class, 'index'])->name('collections.index');
-Route::get('/collections/{collection:slug}', [CollectionController::class, 'show'])->name('collections.show');
-Route::get('/collections/{collection:slug}/games/{game:public_id}/cover', CollectionCoverController::class)->name('collections.games.cover');
+Route::get('/magazine', [MagazineController::class, 'index'])->name('magazine.index');
+Route::get('/magazine/{article:slug}', [MagazineController::class, 'show'])->name('magazine.show');
+Route::get('/magazine/{article:slug}/cover', [MagazineController::class, 'cover'])->name('magazine.cover');
 Route::get('/jigari', JigariController::class)->name('jigari.show');
 Route::middleware('guest')->group(function (): void {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
@@ -101,6 +102,14 @@ Route::middleware('throttle:play')->group(function (): void {
 });
 Route::get('/plays/{play:public_id}', [PlayController::class, 'show'])->name('plays.show');
 
+if (app()->environment('local')) {
+    Route::get('/_preview/errors/{code}', function (string $code) {
+        abort_unless(in_array($code, ['403', '404', '419', '429', '500', '503'], true), 404);
+
+        return response()->view("errors.{$code}");
+    })->name('preview.errors');
+}
+
 Route::prefix('admin/content')->name('admin.content.')->middleware('content.staff')->group(function (): void {
     Route::get('/', [ContentController::class, 'index'])->name('index');
     Route::get('/coverage', CoverageController::class)->name('coverage');
@@ -116,13 +125,20 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::put('/users/{user}/role', [UserController::class, 'updateRole'])->name('users.role.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-    Route::get('/collections', [EditorialCollectionController::class, 'index'])->name('collections.index');
-    Route::get('/collections/new', [EditorialCollectionController::class, 'create'])->name('collections.create');
-    Route::post('/collections', [EditorialCollectionController::class, 'store'])->name('collections.store');
-    Route::get('/collections/{collection:slug}/edit', [EditorialCollectionController::class, 'edit'])->name('collections.edit');
-    Route::put('/collections/{collection:slug}', [EditorialCollectionController::class, 'update'])->name('collections.update');
-    Route::post('/collections/{collection:slug}/publish', [EditorialCollectionController::class, 'publish'])->name('collections.publish');
-    Route::post('/collections/{collection:slug}/unpublish', [EditorialCollectionController::class, 'unpublish'])->name('collections.unpublish');
+    Route::get('/site-content', [SiteContentController::class, 'edit'])->name('site.edit');
+    Route::put('/site-content', [SiteContentController::class, 'update'])->name('site.update');
+    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/articles/new', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('/articles/{article:slug}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::put('/articles/{article:slug}', [ArticleController::class, 'update'])->name('articles.update');
+    Route::post('/articles/{article:slug}/submit', [ArticleController::class, 'submit'])->name('articles.submit');
+    Route::post('/articles/{article:slug}/publish', [ArticleController::class, 'publish'])->name('articles.publish');
+    Route::post('/articles/{article:slug}/unpublish', [ArticleController::class, 'unpublish'])->name('articles.unpublish');
+    Route::get('/articles/{article:slug}/cover', [ArticleController::class, 'cover'])->name('articles.cover');
+    Route::get('/article-categories', [ArticleCategoryController::class, 'index'])->name('article-categories.index');
+    Route::post('/article-categories', [ArticleCategoryController::class, 'store'])->name('article-categories.store');
+    Route::put('/article-categories/{category:slug}', [ArticleCategoryController::class, 'update'])->name('article-categories.update');
     Route::get('/new', [ContentController::class, 'create'])->name('create');
     Route::post('/', [ContentController::class, 'store'])->name('store');
     Route::get('/versions/{version}/edit', [ContentController::class, 'edit'])->name('edit');
@@ -139,6 +155,7 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::get('/games/{game:public_id}/revision', [ContentController::class, 'revision'])->name('revision');
     Route::post('/games/{game:public_id}/revision', [ContentController::class, 'storeRevision'])->name('revision.store');
     Route::get('/imports', [ImportController::class, 'index'])->name('imports.index');
+    Route::get('/imports/template', [ImportController::class, 'template'])->name('imports.template');
     Route::post('/imports/excel/preview', [ImportController::class, 'previewExcel'])->name('imports.excel.preview');
     Route::post('/imports/form/preview', [ImportController::class, 'previewForm'])->name('imports.form.preview');
     Route::post('/imports/pilot/preview', [ImportController::class, 'previewPilot'])->name('imports.pilot.preview');

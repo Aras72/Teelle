@@ -46,17 +46,17 @@ final class JigariSearchTest extends TestCase
         $user = User::factory()->create();
         $this->activate($user);
         $matching = $this->publishedGame('بازی بادبادک کاغذی');
-        $this->publishedGame('آواز آرام', situation: 'calm-down', location: 'park', material: 'ball');
+        $this->publishedGame('آواز آرام', situation: 'before-bed', location: 'outdoors', material: 'ball');
 
         DB::flushQueryLog();
         DB::enableQueryLog();
         $response = $this->actingAs($user)->get(route('jigari.games.index', [
             'q' => '  بازي   بادبادك ',
             'age_band' => '4-6y',
-            'situation' => 'connection',
+            'situation' => 'after-work',
             'duration' => 10,
             'location' => 'home-inside',
-            'materials' => ['paper'],
+            'materials' => ['paper-pencil'],
             'players' => 'child-and-adult',
         ]));
 
@@ -136,7 +136,7 @@ final class JigariSearchTest extends TestCase
         ]);
     }
 
-    private function publishedGame(string $title, string $situation = 'connection', string $location = 'home-inside', string $material = 'paper'): Game
+    private function publishedGame(string $title, string $situation = 'after-work', string $location = 'home-inside', string $material = 'paper-pencil'): Game
     {
         $publisher = User::factory()->create();
         $game = Game::factory()->create();

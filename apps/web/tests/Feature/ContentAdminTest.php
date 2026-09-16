@@ -49,7 +49,12 @@ class ContentAdminTest extends TestCase
         $version = $game->versions()->firstOrFail();
 
         $this->actingAs($editor)->get('/admin/content')->assertOk()->assertSee('بازی‌ها و چرخه انتشار');
-        $this->actingAs($editor)->get(route('admin.content.edit', $version))->assertOk()->assertSee('پیش‌نمایش متن در دو تم');
+        $this->actingAs($editor)->get(route('admin.content.edit', $version))->assertOk()
+            ->assertSee('پیش‌نمایش متن در دو تم')
+            ->assertSee('جزئیات کامل بازی')
+            ->assertSee('رستوران')
+            ->assertSee('نیاز به توجه')
+            ->assertDontSee('metadata_json', false);
         $this->actingAs($editor)->put(route('admin.content.update', $version), $this->form('عنوان تازه'))->assertRedirect();
         $this->actingAs($editor)->post(route('admin.content.submit', $version))->assertRedirect();
         $this->actingAs($editor)->post(route('admin.content.review', $version), ['decision' => 'approved'])->assertForbidden();
@@ -184,7 +189,9 @@ class ContentAdminTest extends TestCase
     {
         $editor = $this->staff('content_editor');
         $this->actingAs($editor)->get(route('admin.content.imports.index'))
-            ->assertOk()->assertSee('افزودن از فایل Excel')->assertSee('افزودن یک بازی با فرم')->assertDontSee('آرایه JSON بازی‌ها');
+            ->assertOk()->assertSee('افزودن از فایل Excel')->assertSee('افزودن یک بازی با فرم')->assertSee('دریافت تمپلیت Excel')->assertDontSee('آرایه JSON بازی‌ها');
+        $this->actingAs($editor)->get(route('admin.content.imports.template'))
+            ->assertOk()->assertDownload('Teelle_New_Game_Template_v2.xlsx');
 
         $path = base_path('../../docs/14-operations/templates/Teelle_Game_Review_Template_v2.xlsx');
         $workbook = new UploadedFile($path, 'Teelle_Game_Review_Template_v2.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', null, true);
@@ -238,11 +245,11 @@ class ContentAdminTest extends TestCase
 
         $report = app(CoverageMatrix::class)->report();
 
-        $this->assertCount(25, $report);
-        $this->assertSame(25, app(CoverageMatrix::class)->criticalGaps());
+        $this->assertCount(30, $report);
+        $this->assertSame(30, app(CoverageMatrix::class)->criticalGaps());
         $this->assertTrue($report->every(fn (object $cell): bool => (int) $cell->survivors === 0));
         $this->actingAs($reviewer)->get(route('admin.content.coverage'))
-            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('از مجموع ۲۵ ترکیب سن و موقعیت، در ۲۵ ترکیب هنوز بازی کافی نداریم')->assertSee('هر ترکیب باید حداقل سه بازی منتشرشده و تأییدشده داشته باشد');
+            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('از مجموع ۳۰ ترکیب سن و موقعیت، در ۳۰ ترکیب هنوز بازی کافی نداریم')->assertSee('هر ترکیب باید حداقل سه بازی منتشرشده و تأییدشده داشته باشد');
     }
 
     public function test_image_upload_uses_private_quarantine_and_rejects_duplicate_or_self_review(): void

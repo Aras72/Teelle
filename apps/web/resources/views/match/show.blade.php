@@ -1,29 +1,19 @@
 @php
     $titles = [
-        'age' => ['سن کودک چقدر است؟', 'سن را به سال و ماه وارد کنید'],
-        'situation' => ['الان بیشتر دنبال چه لحظه‌ای هستید؟', 'نزدیک‌ترین گزینه به حال همین لحظه را انتخاب کنید'],
-        'duration' => ['چقدر وقت برای بازی دارید؟', 'یک بازه واقعی انتخاب کنید؛ آماده‌سازی جداگانه حساب می‌شود'],
-        'location' => ['کجا می‌خواهید بازی کنید؟', 'فضای در دسترس، بخشی از انتخاب امن بازی است'],
-        'materials' => ['کدام وسیله‌ها همین حالا در دسترس‌اند؟', 'فقط چیزهایی را انتخاب کنید که واقعاً آماده‌اند'],
-        'players' => ['چه کسانی با هم بازی می‌کنند؟', 'حضور بزرگسال و تعداد کودکان روی ایمنی اثر دارد'],
+        'age' => ['چند سالشه؟', 'سن کودک را به سال و ماه انتخاب کنید'],
+        'situation' => ['الان چه موقعیتیه؟', 'نزدیک‌ترین گزینه به همین لحظه را انتخاب کنید'],
+        'duration' => ['چقدر وقت دارید؟', 'یک زمان واقعی برای بازی انتخاب کنید'],
+        'location' => ['کجا بازی می‌کنید؟', 'فضای بازی را هم انتخاب کنید'],
+        'materials' => ['چه وسایلی دم دستتونه؟', 'می‌توانید چند مورد را انتخاب کنید'],
+        'players' => ['چند نفرید؟', 'ترکیب نزدیک‌تر به جمع خودتان را انتخاب کنید'],
+        'caregiver_energy' => ['انرژی‌تون چقدره؟', 'انرژی همراه را انتخاب کنید'],
+        'mood' => ['حال کودک چطوره؟', 'نزدیک‌ترین حالت همین لحظه را انتخاب کنید'],
     ];
-    $materialOptions = [
-        ['value' => 'none', 'label' => 'بدون وسیله'], ['value' => 'paper', 'label' => 'کاغذ'],
-        ['value' => 'ball', 'label' => 'توپ نرم'], ['value' => 'cups', 'label' => 'لیوان سبک'],
-        ['value' => 'blanket', 'label' => 'پتو'],
-    ];
+    $progressPosition = $totalSteps > 1 ? (($progress - 1) / ($totalSteps - 1)) * 100 : 0;
 @endphp
 
 <x-layouts.app title="چی بازی کنیم؟" description="چند سؤال کوتاه برای پیدا کردن بازی مناسب همین لحظه">
     <section class="match-page teelle-container" aria-labelledby="match-title">
-        <div class="match-orbit" aria-hidden="true">
-            <span class="match-orbit__marble match-orbit__marble--primary"><img src="{{ asset('images/marbles/match-violet-v1.webp') }}" alt="" width="768" height="768"></span>
-            <span class="match-orbit__marble match-orbit__marble--secondary"><img src="{{ asset('images/marbles/auth-emerald-v1.webp') }}" alt="" width="768" height="768"></span>
-            <span class="match-orbit__marble match-orbit__marble--tertiary"><img src="{{ asset('images/marbles/play-amber-v1.webp') }}" alt="" width="768" height="768"></span>
-            <span class="match-orbit__marble match-orbit__marble--quaternary"><img src="{{ asset('images/marbles/heartbeat-cobalt-v1.webp') }}" alt="" width="768" height="768"></span>
-            <span class="match-orbit__marble match-orbit__marble--quinary"><img src="{{ asset('images/marbles/account-indigo-v1.webp') }}" alt="" width="768" height="768"></span>
-        </div>
-
         @if($match)
             <article class="match-card match-card--complete teelle-enter">
                 <p class="match-kicker">پاسخ‌ها آماده‌اند</p>
@@ -39,9 +29,15 @@
         @elseif($step)
             <article class="match-card teelle-enter">
                 <header class="match-progress-header">
-                    <a href="{{ route('home') }}" class="match-close" aria-label="خروج از پرسش‌ها">×</a>
-                    <div class="match-progress-copy"><span>سؤال {{ $progress }} از {{ $totalSteps }}</span><strong>{{ round(($progress / $totalSteps) * 100) }}٪</strong></div>
-                    <div class="match-progress" role="progressbar" aria-label="پیشرفت پرسش‌ها" aria-valuemin="1" aria-valuemax="{{ $totalSteps }}" aria-valuenow="{{ $progress }}"><span style="--match-progress: {{ ($progress / $totalSteps) * 100 }}%"></span></div>
+                    @if(count($state['history']))
+                        <form method="post" action="{{ route('match.back') }}" class="match-back-control">@csrf<button type="submit" aria-label="سؤال قبل">‹</button></form>
+                    @else
+                        <a href="{{ route('home') }}" class="match-back-control" aria-label="بازگشت به خانه">‹</a>
+                    @endif
+                    <p class="match-step-label">سؤال {{ $progress }} از {{ $totalSteps }}</p>
+                    <div class="match-progress" role="progressbar" aria-label="پیشرفت پرسش‌ها" aria-valuemin="1" aria-valuemax="{{ $totalSteps }}" aria-valuenow="{{ $progress }}" style="--match-progress: {{ $progressPosition }}%">
+                        <span></span><img src="{{ asset('images/marbles/match-violet-v1.webp') }}" alt="" width="768" height="768">
+                    </div>
                 </header>
 
                 <form method="post" action="{{ route('match.answer') }}" class="match-question">
@@ -62,7 +58,7 @@
                             </div>
                         @elseif($step === 'materials')
                             <div class="match-options match-options--compact">
-                                @foreach($materialOptions as $option)
+                                @foreach($options as $option)
                                     <label class="match-option"><input type="checkbox" name="answer[]" value="{{ $option['value'] }}" @checked(in_array($option['value'], old('answer', []), true))><span><b>{{ $option['label'] }}</b></span></label>
                                 @endforeach
                             </div>
@@ -76,13 +72,10 @@
                     </fieldset>
 
                     <div class="match-actions">
-                        <x-ui.button type="submit">{{ $step === 'players' ? 'ثبت این لحظه' : 'ادامه' }}</x-ui.button>
+                        <x-ui.button type="submit">{{ $step === 'mood' ? 'پیشنهادها رو ببین' : 'ادامه' }}</x-ui.button>
                     </div>
                 </form>
 
-                @if(count($state['history']))
-                    <form method="post" action="{{ route('match.back') }}" class="match-back">@csrf<button type="submit">→ سؤال قبل</button></form>
-                @endif
             </article>
         @else
             <article class="match-card teelle-enter"><h1 id="match-title">این Session قابل بازیابی نیست</h1><p>برای حفظ حریم خصوصی، پاسخ‌های ناشناس فقط با همان Session قابل دسترسی‌اند</p><form method="post" action="{{ route('match.restart') }}">@csrf<x-ui.button type="submit">شروع دوباره</x-ui.button></form></article>

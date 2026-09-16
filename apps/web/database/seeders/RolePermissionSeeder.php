@@ -21,6 +21,8 @@ class RolePermissionSeeder extends Seeder
             'content.edit' => 'ویرایش محتوای پیش‌نویس',
             'content.review' => 'بازبینی محتوا',
             'content.publish' => 'انتشار و توقف انتشار',
+            'articles.edit' => 'ساخت و ویرایش مطالب مجله',
+            'articles.publish' => 'تأیید نهایی و انتشار مطالب مجله',
             'taxonomy.manage' => 'مدیریت طبقه‌بندی',
             'coverage.view' => 'مشاهده پوشش محتوا',
             'analytics.view' => 'مشاهده آمار تجمیعی',
@@ -30,6 +32,7 @@ class RolePermissionSeeder extends Seeder
             'users.edit' => 'ویرایش مشخصات عمومی کاربران',
             'users.delete' => 'غیرفعال‌سازی حساب کاربر',
             'users.manage' => 'مدیریت بازگردانی حساب‌ها',
+            'site.manage' => 'مدیریت متن‌ها و چیدمان عمومی',
         ];
 
         foreach ($roles as $code => $title) {
@@ -43,7 +46,7 @@ class RolePermissionSeeder extends Seeder
         $grants = [
             'content_editor' => ['content.edit', 'coverage.view'],
             'reviewer' => ['content.edit', 'content.review', 'content.publish', 'coverage.view', 'analytics.view'],
-            'support_admin' => ['users.view', 'users.edit', 'users.delete'],
+            'support_admin' => [],
             'admin' => array_keys($permissions),
         ];
 

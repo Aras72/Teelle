@@ -3,21 +3,21 @@
         <header class="admin-heading">
             <div><p class="admin-kicker">اتاق محتوای تیله</p><h1>بازی‌ها و چرخه انتشار</h1></div>
             <nav class="admin-actions" aria-label="عملیات محتوا">
-                @can('content.edit')<x-ui.button href="{{ route('admin.content.create') }}">پیش‌نویس تازه</x-ui.button>@endcan
                 @can('content.edit')<x-ui.button href="{{ route('admin.content.imports.index') }}" variant="secondary">افزودن بازی‌ها</x-ui.button>@endcan
+                @if(auth()->user()->can('articles.edit') || auth()->user()->can('articles.publish'))<x-ui.button href="{{ route('admin.content.articles.index') }}" variant="secondary">مجله تیله</x-ui.button>@endif
                 @can('coverage.view')<x-ui.button href="{{ route('admin.content.coverage') }}" variant="secondary">ماتریس پوشش</x-ui.button>@endcan
                 @can('analytics.view')<x-ui.button href="{{ route('admin.content.reports.weekly') }}" variant="secondary">گزارش هفتگی</x-ui.button>@endcan
-                @can('content.edit')<x-ui.button href="{{ route('admin.content.collections.index') }}" variant="secondary">مجموعه‌ها</x-ui.button>@endcan
                 @can('subscription.manage')<x-ui.button href="{{ route('admin.content.plans.index') }}" variant="secondary">پلن‌ها و قیمت‌ها</x-ui.button>@endcan
                 @can('users.manage')<x-ui.button href="{{ route('admin.content.accounts.index') }}" variant="secondary">درخواست‌های حساب</x-ui.button>@endcan
                 @can('users.view')<x-ui.button href="{{ route('admin.content.users.index') }}" variant="secondary">کاربران و عضویت‌ها</x-ui.button>@endcan
+                @can('site.manage')<x-ui.button href="{{ route('admin.content.site.edit') }}" variant="secondary">متن‌ها و چیدمان</x-ui.button>@endcan
             </nav>
         </header>
 
         @if (session('status'))<p class="admin-notice" role="status">{{ session('status') }}</p>@endif
         @if ($errors->any())<div class="admin-error" role="alert"><strong>عملیات انجام نشد</strong><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
 
-        <section class="admin-panel" aria-labelledby="games-title">
+        @if($canManageGames)<section class="admin-panel" aria-labelledby="games-title">
             <h2 id="games-title">فهرست بازی‌ها</h2>
             <div class="admin-table-wrap">
                 <table class="admin-table">
@@ -50,7 +50,7 @@
                 </table>
             </div>
             {{ $games->links() }}
-        </section>
+        </section>@endif
 
         @php($auditLabels = [
             'content.game.created' => 'بازی تازه ساخته شد',
@@ -69,6 +69,12 @@
             'identity.user.updated' => 'اطلاعات کاربر ویرایش شد',
             'identity.user.support_admin.updated' => 'دسترسی ادمین کاربر تغییر کرد',
             'identity.user.disabled' => 'حساب کاربر غیرفعال شد',
+            'site.content.updated' => 'متن یا چیدمان عمومی تغییر کرد',
+            'magazine.article.created' => 'پیش‌نویس مطلب ساخته شد',
+            'magazine.article.updated' => 'مطلب مجله ویرایش شد',
+            'magazine.article.submitted' => 'مطلب برای تأیید مدیر فرستاده شد',
+            'magazine.article.published' => 'مطلب مجله منتشر شد',
+            'magazine.article.unpublished' => 'انتشار مطلب متوقف شد',
         ])
         <section class="admin-panel" aria-labelledby="audit-title"><h2 id="audit-title">آخرین تغییرات ثبت‌شده</h2>
             <ol class="admin-audit">@forelse($audits as $audit)<li><span>{{ $auditLabels[$audit->action] ?? 'یک تغییر مدیریتی ثبت شد' }}</span><time datetime="{{ $audit->occurred_at?->toIso8601String() }}">{{ $audit->occurred_at?->diffForHumans() }}</time></li>@empty<li>هنوز تغییری ثبت نشده است</li>@endforelse</ol>

@@ -31,10 +31,20 @@
         @can('roles.manage')
             <section class="admin-panel" aria-labelledby="role-title">
                 <h2 id="role-title">دسترسی ادمین</h2>
-                <p>ادمین می‌تواند کاربران و عضویت‌ها را ببیند و مشخصات عمومی را اصلاح کند. به انتشار محتوا، قیمت‌گذاری و تعیین نقش دسترسی ندارد.</p>
+                <p>افزودن و ویرایش بازی‌ها و مجله، دسترسی پایه ادمین است. سایر بخش‌ها را برای هر ادمین جداگانه انتخاب کنید. تأیید و انتشار نهایی فقط با مدیر است.</p>
                 <form class="admin-form admin-role-form" method="post" action="{{ route('admin.content.users.role.update', $user) }}">
                     @csrf @method('PUT')
                     <label class="teelle-check"><input type="checkbox" name="support_admin" value="1" @checked(old('support_admin', $user->roles->contains('code', 'support_admin')))><span>دسترسی ادمین فعال باشد</span></label>
+                    <fieldset><legend>بخش‌های در دسترس ادمین</legend><div class="admin-choice-grid">
+                        @foreach($delegablePermissions as $permission)
+                            @php($isBase = in_array($permission->code, ['content.edit', 'articles.edit'], true))
+                            <label class="teelle-check">
+                                <input type="checkbox" name="permissions[]" value="{{ $permission->code }}" @checked($isBase || in_array($permission->code, old('permissions', $selectedPermissionCodes), true)) @disabled($isBase)>
+                                @if($isBase)<input type="hidden" name="permissions[]" value="{{ $permission->code }}">@endif
+                                <span>{{ $permission->title }}{{ $isBase ? ' — دسترسی پایه' : '' }}</span>
+                            </label>
+                        @endforeach
+                    </div></fieldset>
                     <x-ui.field label="دلیل تغییر یا شماره تیکت" name="reason" value="{{ old('reason') }}" required :error="$errors->first('reason')" />
                     <x-ui.button type="submit">ذخیره دسترسی</x-ui.button>
                 </form>

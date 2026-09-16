@@ -1,0 +1,6 @@
+@extends('errors.layout')
+@section('title', 'به‌روزرسانی تیله')
+@section('code', '۵۰۳')
+@section('heading', 'داریم تیله‌ها را جور می‌کنیم')
+@section('message', 'تیله برای یک به‌روزرسانی کوتاه در دسترس نیست. خیلی زود برمی‌گردیم.')
+@section('retry', 'بررسی دوباره')

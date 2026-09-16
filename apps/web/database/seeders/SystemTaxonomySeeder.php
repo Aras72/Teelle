@@ -12,24 +12,39 @@ class SystemTaxonomySeeder extends Seeder
         $this->seedAgeBands();
 
         $this->seedSlugTable('situations', [
-            'connection' => 'وقت باهم بودن',
-            'restless' => 'بی‌قراری',
-            'bored' => 'حوصله‌سررفتگی',
-            'calm-down' => 'آرام‌شدن',
-            'indoor-time' => 'وقت داخل خانه',
+            'after-work' => 'بعد از کار',
+            'rainy-day' => 'روز بارانی',
+            'restaurant' => 'رستوران',
+            'car' => 'ماشین',
+            'party' => 'مهمانی',
+            'before-bed' => 'قبل خواب',
         ]);
         $this->seedSlugTable('locations', [
             'home-inside' => 'داخل خانه',
-            'home-outside' => 'حیاط یا فضای باز خانه',
-            'park' => 'پارک',
-            'travel' => 'در مسیر یا سفر',
+            'outdoors' => 'بیرون',
+            'restaurant' => 'رستوران',
+            'car' => 'ماشین',
+            'party' => 'مهمانی',
         ]);
         $this->seedSlugTable('energy_levels', ['low' => 'کم', 'medium' => 'متوسط', 'high' => 'زیاد']);
-        $this->seedSlugTable('moods', ['calm' => 'آرام', 'restless' => 'بی‌قرار', 'sad' => 'غمگین', 'excited' => 'هیجان‌زده']);
+        $this->seedSlugTable('moods', ['calm' => 'آرام', 'bored' => 'بی‌حوصله', 'energetic' => 'پرانرژی', 'needs-attention' => 'نیاز به توجه']);
         $this->seedSlugTable('player_requirements', [
-            'child-and-adult' => 'کودک و یک بزرگسال',
-            'two-players' => 'حداقل دو بازیکن',
-            'small-group' => 'گروه کوچک',
+            'child-and-adult' => 'یک کودک و یک بزرگسال',
+            'multiple-children' => 'چند کودک',
+            'no-adult' => 'بزرگسال همراه نیست',
+        ]);
+        $this->seedLegacySlugTable('situations', [
+            'connection' => 'ارتباط', 'bored' => 'بی‌حوصلگی', 'indoor-time' => 'وقت داخل خانه',
+            'restless' => 'بی‌قراری', 'calm-down' => 'آرام‌شدن',
+        ]);
+        $this->seedLegacySlugTable('locations', [
+            'home-outside' => 'حیاط خانه', 'travel' => 'سفر', 'park' => 'پارک',
+        ]);
+        $this->seedLegacySlugTable('moods', [
+            'restless' => 'بی‌قرار', 'excited' => 'هیجان‌زده', 'sad' => 'غمگین',
+        ]);
+        $this->seedLegacySlugTable('player_requirements', [
+            'two-players' => 'دو بازیکن', 'small-group' => 'گروه کوچک',
         ]);
         $this->seedSlugTable('tags', [
             'creative' => 'خلاقیت',
@@ -39,10 +54,16 @@ class SystemTaxonomySeeder extends Seeder
             'cooperative' => 'همکاری',
         ]);
 
-        foreach (['paper' => 'کاغذ', 'ball' => 'توپ', 'cups' => 'لیوان', 'blanket' => 'پتو'] as $slug => $title) {
+        foreach (['paper-pencil' => 'کاغذ و مداد', 'ball' => 'توپ', 'household-items' => 'وسایل خانه'] as $slug => $title) {
             DB::table('materials')->updateOrInsert(
                 ['slug' => $slug],
                 ['title' => $title, 'risk_class' => 'low', 'is_active' => true],
+            );
+        }
+        foreach (['cups' => 'لیوان', 'blanket' => 'پتو', 'paper' => 'کاغذ'] as $slug => $title) {
+            DB::table('materials')->updateOrInsert(
+                ['slug' => $slug],
+                ['title' => $title, 'risk_class' => 'low', 'is_active' => false],
             );
         }
 
@@ -91,6 +112,17 @@ class SystemTaxonomySeeder extends Seeder
             DB::table($table)->updateOrInsert(
                 ['slug' => $slug],
                 ['title' => $title, 'is_active' => true],
+            );
+        }
+    }
+
+    /** @param array<string, string> $items */
+    private function seedLegacySlugTable(string $table, array $items): void
+    {
+        foreach ($items as $slug => $title) {
+            DB::table($table)->updateOrInsert(
+                ['slug' => $slug],
+                ['title' => $title, 'is_active' => false],
             );
         }
     }

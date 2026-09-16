@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('title', 'دسترسی محدود')
+@section('code', '۴۰۳')
+@section('heading', 'این بخش برای شما باز نیست')
+@section('message', 'اگر فکر می‌کنید باید این صفحه را ببینید، با حساب درست وارد شوید یا به خانه برگردید.')

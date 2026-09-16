@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Enums\EntitlementStatus;
 use App\Models\Entitlement;
+use App\Models\Permission;
 use App\Models\Plan;
 use App\Models\Purchase;
 use App\Models\Role;
@@ -43,7 +44,7 @@ final class AdminUserManagementTest extends TestCase
         $this->actingAs(User::factory()->create())->get(route('admin.content.users.index'))->assertForbidden();
         $this->actingAs($support)->get(route('admin.content.users.index', ['q' => 'uncle@example.test']))
             ->assertOk()->assertSee('داییِ ارغوان')->assertSee($plan->title)->assertSee('فعال');
-        $this->actingAs($support)->get(route('admin.content.index'))->assertForbidden();
+        $this->actingAs($support)->get(route('admin.content.index'))->assertOk()->assertSee('افزودن بازی‌ها')->assertSee('مجله تیله');
         $this->actingAs($support)->get(route('admin.content.plans.index'))->assertForbidden();
     }
 
@@ -88,9 +89,10 @@ final class AdminUserManagementTest extends TestCase
         $member = User::factory()->create();
 
         $this->actingAs($manager)->put(route('admin.content.users.role.update', $member), [
-            'support_admin' => '1', 'reason' => 'افزودن ادمین پشتیبانی',
+            'support_admin' => '1', 'permissions' => ['content.edit', 'articles.edit', 'coverage.view'], 'reason' => 'افزودن ادمین پشتیبانی',
         ])->assertRedirect()->assertSessionHas('status');
         $this->assertTrue($member->roles()->where('code', 'support_admin')->exists());
+        $this->assertEqualsCanonicalizing(['articles.edit', 'content.edit', 'coverage.view'], $member->directPermissions()->pluck('code')->all());
 
         $this->actingAs($manager)->put(route('admin.content.users.role.update', $member), [
             'reason' => 'برداشتن دسترسی ادمین',
@@ -122,6 +124,10 @@ final class AdminUserManagementTest extends TestCase
     {
         $user = User::factory()->create();
         $user->roles()->attach(Role::query()->where('code', $role)->value('id'));
+        if ($role === 'support_admin') {
+            $ids = Permission::query()->whereIn('code', ['content.edit', 'articles.edit', 'users.view', 'users.edit', 'users.delete'])->pluck('id');
+            $user->directPermissions()->sync($ids);
+        }
 
         return $user;
     }

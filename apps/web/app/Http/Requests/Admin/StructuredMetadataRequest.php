@@ -8,9 +8,28 @@ class StructuredMetadataRequest extends FormRequest
 {
     protected function prepareForValidation(): void
     {
-        $decoded = json_decode((string) $this->input('metadata_json'), true);
-        if (is_array($decoded)) {
+        $decoded = $this->filled('metadata_json') ? json_decode((string) $this->input('metadata_json'), true) : null;
+        if (is_array($decoded) && ! $this->has('metadata')) {
             $this->merge(['metadata' => $decoded]);
+        }
+        if (is_array($this->input('metadata'))) {
+            $metadata = $this->input('metadata');
+            $metadata['required_adult'] = filter_var($metadata['required_adult'] ?? false, FILTER_VALIDATE_BOOLEAN);
+            foreach (['situations', 'locations', 'moods', 'tags', 'safety_flags'] as $field) {
+                $metadata[$field] = array_values(array_filter(array_unique(array_map('strval', is_array($metadata[$field] ?? null) ? $metadata[$field] : []))));
+            }
+            $metadata['materials'] = array_values(array_filter(array_map(function ($material): ?array {
+                if (! is_array($material) || blank($material['slug'] ?? null)) {
+                    return null;
+                }
+
+                return [
+                    'slug' => (string) $material['slug'],
+                    'requirement' => (string) ($material['requirement'] ?? 'required'),
+                    'quantity_note' => filled($material['quantity_note'] ?? null) ? trim((string) $material['quantity_note']) : null,
+                ];
+            }, is_array($metadata['materials'] ?? null) ? $metadata['materials'] : [])));
+            $this->merge(['metadata' => $metadata]);
         }
     }
 
@@ -22,7 +41,7 @@ class StructuredMetadataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'metadata_json' => ['required', 'json', 'max:50000'], 'metadata' => ['required', 'array'],
+            'metadata_json' => ['nullable', 'json', 'max:50000'], 'metadata' => ['required', 'array'],
             'metadata.age_band' => ['required', 'exists:age_bands,code'],
             'metadata.minimum_age_months' => ['required', 'integer', 'min:6', 'max:155'],
             'metadata.maximum_age_months_exclusive' => ['required', 'integer', 'gt:metadata.minimum_age_months', 'max:156'],

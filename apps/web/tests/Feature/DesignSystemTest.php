@@ -122,7 +122,7 @@ class DesignSystemTest extends TestCase
 
         $expectedByView = [
             'welcome.blade.php' => ['heartbeat-cobalt-v1.webp'],
-            'match/show.blade.php' => ['match-violet-v1.webp', 'auth-emerald-v1.webp'],
+            'match/show.blade.php' => ['match-violet-v1.webp'],
             'results/show.blade.php' => ['play-amber-v1.webp'],
             'play/show.blade.php' => ['play-amber-v1.webp'],
             'auth/login.blade.php' => ['auth-emerald-v1.webp'],
@@ -161,7 +161,7 @@ class DesignSystemTest extends TestCase
 
         $match = file_get_contents(resource_path('views/match/show.blade.php'));
         $this->assertIsString($match);
-        $this->assertSame(5, substr_count($match, 'match-orbit__marble match-orbit__marble--'));
+        $this->assertSame(0, substr_count($match, 'match-orbit__marble match-orbit__marble--'));
 
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(resource_path('views'))) as $file) {
             if (! $file->isFile() || $file->getExtension() !== 'php' || $file->getFilename() === 'welcome.blade.php') {

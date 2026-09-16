@@ -3,27 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Content\ContentImportService;
+use App\Content\GameFormOptions;
 use App\Content\TeelleXlsxGameReader;
 use App\Http\Controllers\Controller;
 use App\Models\ContentImportBatch;
 use DomainException;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ImportController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request, GameFormOptions $formOptions): View
     {
         abort_unless($request->user()->can('content.edit'), 403);
 
         return view('admin.imports.index', [
             'batches' => ContentImportBatch::query()->latest()->paginate(20),
-            'options' => $this->formOptions(),
+            'options' => $formOptions->all(),
         ]);
     }
 
@@ -34,6 +33,15 @@ class ImportController extends Controller
         $batch = $service->previewPayload($request->user(), $reader->read($data['workbook']));
 
         return redirect()->route('admin.content.imports.show', $batch)->with('status', 'فایل Excel بررسی شد؛ هنوز هیچ بازی ایجاد نشده است');
+    }
+
+    public function template(Request $request): BinaryFileResponse
+    {
+        abort_unless($request->user()->can('content.edit'), 403);
+        $path = base_path('../../docs/14-operations/templates/Teelle_New_Game_Template_v2.xlsx');
+        abort_unless(is_file($path), 404);
+
+        return response()->download($path, 'Teelle_New_Game_Template_v2.xlsx');
     }
 
     public function previewForm(Request $request, ContentImportService $service): RedirectResponse
@@ -112,20 +120,5 @@ class ImportController extends Controller
     private function parts(string $value): array
     {
         return array_values(array_filter(array_map('trim', preg_split('/[|\r\n]+/u', $value) ?: [])));
-    }
-
-    /** @return array<string, mixed> */
-    private function formOptions(): array
-    {
-        $lookup = fn (string $table, string $key = 'slug', string $label = 'title'): array => DB::table($table)
-            ->when(Schema::hasColumn($table, 'is_active'), fn (Builder $query) => $query->where('is_active', true))
-            ->orderBy($label)->pluck($label, $key)->all();
-
-        return [
-            'age_bands' => $lookup('age_bands', 'code'), 'situations' => $lookup('situations'), 'locations' => $lookup('locations'),
-            'moods' => $lookup('moods'), 'tags' => $lookup('tags'), 'energy_levels' => $lookup('energy_levels'),
-            'players' => $lookup('player_requirements'), 'materials' => $lookup('materials'),
-            'safety' => $lookup('safety_rules', 'code', 'copy'),
-        ];
     }
 }

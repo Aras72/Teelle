@@ -247,12 +247,27 @@ final class TeelleXlsxGameReader
             'interaction' => ['کنار هم' => 'side_by_side', 'همکاری' => 'cooperative', 'رقابتی' => 'competitive', 'بازی خیالی' => 'pretend', 'گفت‌وگو' => 'conversation'],
             'involvement' => ['فعال' => 'active', 'مشترک' => 'shared', 'کم' => 'light'],
             'setup' => ['بدون آماده‌سازی' => 'none', 'ساده' => 'simple', 'متوسط' => 'moderate'],
-            'situation' => ['ارتباط' => 'connection', 'بی‌حوصلگی' => 'bored', 'وقت داخل خانه' => 'indoor-time', 'بی‌قراری' => 'restless', 'آرام‌شدن' => 'calm-down'],
-            'location' => ['داخل خانه' => 'home-inside', 'حیاط خانه' => 'home-outside', 'سفر' => 'travel', 'پارک' => 'park'],
-            'mood' => ['آرام' => 'calm', 'بی‌قرار' => 'restless', 'هیجان‌زده' => 'excited', 'غمگین' => 'sad'],
+            'situation' => [
+                'بعد از کار' => 'after-work', 'روز بارانی' => 'rainy-day', 'رستوران' => 'restaurant', 'ماشین' => 'car', 'مهمانی' => 'party', 'قبل خواب' => 'before-bed',
+                'ارتباط' => 'connection', 'بی‌حوصلگی' => 'bored', 'وقت داخل خانه' => 'indoor-time', 'بی‌قراری' => 'restless', 'آرام‌شدن' => 'calm-down',
+            ],
+            'location' => [
+                'داخل خانه' => 'home-inside', 'بیرون' => 'outdoors', 'رستوران' => 'restaurant', 'ماشین' => 'car', 'مهمانی' => 'party',
+                'حیاط خانه' => 'home-outside', 'سفر' => 'travel', 'پارک' => 'park',
+            ],
+            'mood' => [
+                'آرام' => 'calm', 'بی‌حوصله' => 'bored', 'پرانرژی' => 'energetic', 'نیاز به توجه' => 'needs-attention',
+                'بی‌قرار' => 'restless', 'هیجان‌زده' => 'excited', 'غمگین' => 'sad',
+            ],
             'tag' => ['همکاری' => 'cooperative', 'زبان و گفت‌وگو' => 'language', 'حرکت' => 'movement', 'خلاقیت' => 'creative', 'حسی' => 'sensory'],
-            'player' => ['کودک و بزرگسال' => 'child-and-adult', 'دو بازیکن' => 'two-players', 'گروه کوچک' => 'small-group'],
-            'material' => ['لیوان' => 'cups', 'پتو' => 'blanket', 'کاغذ' => 'paper', 'توپ نرم' => 'ball', 'توپ' => 'ball'],
+            'player' => [
+                'یک کودک و یک بزرگسال' => 'child-and-adult', 'چند کودک' => 'multiple-children', 'بزرگسال همراه نیست' => 'no-adult',
+                'کودک و بزرگسال' => 'child-and-adult', 'دو بازیکن' => 'two-players', 'گروه کوچک' => 'small-group',
+            ],
+            'material' => [
+                'کاغذ و مداد' => 'paper-pencil', 'توپ' => 'ball', 'وسایل خانه' => 'household-items',
+                'لیوان' => 'cups', 'پتو' => 'blanket', 'کاغذ' => 'paper', 'توپ نرم' => 'ball',
+            ],
             'requirement' => ['لازم' => 'required', 'اختیاری' => 'optional'],
             'safety' => ['شدت حسی' => 'sensory_intensity', 'خطر افتادن' => 'fall_height', 'قطعات ریز' => 'small_parts', 'بند یا خفگی' => 'strangulation', 'ضربه' => 'high_impact', 'خوردن مواد' => 'ingestion', 'ترافیک و فضای باز' => 'traffic_outdoor', 'جسم تیز' => 'sharp_object'],
         ];

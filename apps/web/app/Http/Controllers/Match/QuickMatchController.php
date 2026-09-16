@@ -87,14 +87,12 @@ final class QuickMatchController extends Controller
     {
         return match ($step) {
             'situation' => DB::table('situations')->where('is_active', true)->orderBy('id')->get()->map(fn ($item) => ['value' => $item->slug, 'label' => $item->title])->all(),
-            'duration' => [['value' => '5', 'label' => '۵ دقیقه'], ['value' => '10', 'label' => '۱۰ دقیقه'], ['value' => '15', 'label' => '۱۵ دقیقه'], ['value' => '20', 'label' => '۲۰ دقیقه'], ['value' => '30', 'label' => 'نیم ساعت']],
+            'duration' => [['value' => '15', 'label' => 'تا ۱۵ دقیقه'], ['value' => '30', 'label' => '۱۵ تا ۳۰ دقیقه'], ['value' => '45', 'label' => 'بیشتر از ۳۰ دقیقه']],
             'location' => DB::table('locations')->where('is_active', true)->orderBy('id')->get()->map(fn ($item) => ['value' => $item->slug, 'label' => $item->title])->all(),
-            'players' => [
-                ['value' => 'one-child-adult', 'label' => 'یک کودک و یک بزرگسال'],
-                ['value' => 'two-children-adult', 'label' => 'دو کودک و یک بزرگسال'],
-                ['value' => 'small-group-adult', 'label' => 'گروه کوچک با بزرگسال'],
-                ['value' => 'children-only', 'label' => 'فقط کودکان', 'detail' => 'ممکن است به‌دلیل نیاز به نظارت نتیجه‌ای نداشته باشد'],
-            ],
+            'materials' => [['value' => 'none', 'label' => 'بدون وسیله'], ['value' => 'paper-pencil', 'label' => 'کاغذ و مداد'], ['value' => 'ball', 'label' => 'توپ'], ['value' => 'household-items', 'label' => 'وسایل خانه']],
+            'players' => DB::table('player_requirements')->where('is_active', true)->orderBy('id')->get()->map(fn ($item) => ['value' => $item->slug, 'label' => $item->title])->all(),
+            'caregiver_energy' => DB::table('energy_levels')->where('is_active', true)->orderBy('id')->get()->map(fn ($item) => ['value' => $item->slug, 'label' => $item->title])->all(),
+            'mood' => DB::table('moods')->where('is_active', true)->orderBy('id')->get()->map(fn ($item) => ['value' => $item->slug, 'label' => $item->title])->all(),
             default => [],
         };
     }

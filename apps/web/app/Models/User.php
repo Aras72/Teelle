@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 #[Fillable(['name', 'email', 'phone_e164', 'locale', 'timezone', 'password', 'onboarding_completed_at', 'privacy_accepted_at', 'privacy_policy_version'])]
 #[Hidden(['password', 'remember_token'])]
@@ -20,6 +21,9 @@ class User extends Authenticatable implements MustVerifyEmailContract
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, HasPublicUlid, Notifiable;
+
+    /** @var array<int, string>|null */
+    private ?array $permissionCodeCache = null;
 
     public function getRouteKeyName(): string
     {
@@ -46,6 +50,11 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function directPermissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Permission::class)->withPivot('granted_by')->withTimestamps();
     }
 
     public function playSessions(): HasMany
@@ -85,12 +94,34 @@ class User extends Authenticatable implements MustVerifyEmailContract
 
     public function hasPermission(string $permission): bool
     {
-        return $this->roles()->whereHas('permissions', fn ($query) => $query->where('code', $permission))->exists();
+        return in_array($permission, $this->permissionCodes(), true);
     }
 
     /** @param array<int, string> $permissions */
     public function hasAnyPermission(array $permissions): bool
     {
-        return $this->roles()->whereHas('permissions', fn ($query) => $query->whereIn('code', $permissions))->exists();
+        return array_intersect($permissions, $this->permissionCodes()) !== [];
+    }
+
+    /** @return array<int, string> */
+    private function permissionCodes(): array
+    {
+        return $this->permissionCodeCache ??= DB::table('permissions')
+            ->where(function ($query): void {
+                $query->whereExists(function ($direct): void {
+                    $direct->selectRaw('1')
+                        ->from('permission_user')
+                        ->whereColumn('permission_user.permission_id', 'permissions.id')
+                        ->where('permission_user.user_id', $this->getKey());
+                })->orWhereExists(function ($throughRole): void {
+                    $throughRole->selectRaw('1')
+                        ->from('permission_role')
+                        ->join('role_user', 'role_user.role_id', '=', 'permission_role.role_id')
+                        ->whereColumn('permission_role.permission_id', 'permissions.id')
+                        ->where('role_user.user_id', $this->getKey());
+                });
+            })
+            ->pluck('code')
+            ->all();
     }
 }

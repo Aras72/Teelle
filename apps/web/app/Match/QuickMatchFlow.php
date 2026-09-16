@@ -12,7 +12,7 @@ final class QuickMatchFlow
 {
     private const SESSION_KEY = 'teelle.quick_match';
 
-    private const STEPS = ['age', 'situation', 'duration', 'location', 'materials', 'players'];
+    private const STEPS = ['age', 'situation', 'duration', 'location', 'materials', 'players', 'caregiver_energy', 'mood'];
 
     /** @return array{current: string|null, history: array<int, string>, answers: array<string, mixed>, submission_key: string, match_public_id: string|null} */
     public function state(Session $session): array
@@ -35,7 +35,7 @@ final class QuickMatchFlow
 
         $state['answers'][$step] = $answer;
         $state['history'][] = $step;
-        $steps = $this->stepsFor($state['answers']);
+        $steps = self::STEPS;
         $position = array_search($step, $steps, true);
         $state['current'] = $steps[$position + 1] ?? null;
         $session->put(self::SESSION_KEY, $state);
@@ -75,7 +75,7 @@ final class QuickMatchFlow
 
     public function totalSteps(array $state): int
     {
-        return count($this->stepsFor($state['answers']));
+        return count(self::STEPS);
     }
 
     public function progress(array $state): int
@@ -89,15 +89,5 @@ final class QuickMatchFlow
             'current' => self::STEPS[0], 'history' => [], 'answers' => [],
             'submission_key' => (string) Str::ulid(), 'match_public_id' => null,
         ];
-    }
-
-    /** @param array<string, mixed> $answers */
-    private function stepsFor(array $answers): array
-    {
-        if (($answers['situation'] ?? null) === 'indoor-time') {
-            return array_values(array_diff(self::STEPS, ['location']));
-        }
-
-        return self::STEPS;
     }
 }

@@ -9,6 +9,9 @@ Overall Status: PHASE 14 PASS / RELEASE QA NOT STARTED
 
 Last Completed:
 
+- Prompt 032 آغاز شد: مالک Taxonomy هشت‌مرحله‌ای تصاویر، مجله تیله و مجوزهای انتخابی هر ادمین را تأیید کرد. مهاجرت داده‌های قدیمی خودکار نیست و پیش‌نویس‌ها توسط مالک بازبینی می‌شوند.
+- Prompt 031 آغاز شد: صفحات خطای اختصاصی 403/404/419/429/500/503، بازطراحی بصری فرم تطبیقی با مرجع مصوب، حذف دسترسی عمومی Collections و دکمه تکراری پیش‌نویس و پنل کنترل‌شده متن‌ها/چیدمان برای نقش مدیر پیاده‌سازی شدند؛ محتوای Taxonomy فرم تا پاسخ مالک تغییر نکرده است.
+
 - مخزن GitHub به‌عنوان حافظه و Source of Truth پروژه فعال شد.
 - سه سند ورودی اصلی بدون تغییر محتوا داخل Repository ذخیره شدند.
 - PHASE 00 — PROJECT FOUNDATION تکمیل و Gate آن PASS شد.
@@ -119,6 +122,10 @@ Currently Working On:
 - Copy ماتریس پوشش روشن شد: ۲۵ سلول کل ماتریس فعلی از ۵ بازه سنی × ۵ موقعیت است و هر سلول حداقل سه بازی کامل Published/Reviewed می‌خواهد.
 - Wordmark تیله، CTAهای «چی بازی کنیم؟» و شعار برند با Lalezar و تأکید آجری همگام شدند؛ عنوان Hero صفحه About در Desktop یک‌خطی و Heartbeat با baseline تازه ۱۲۱ در مرکز پایدار شد.
 - دو تمپلیت یک‌شیتی با حفظ ظاهر قبلی بازتولید شدند؛ سن ۶ تا ۱۲ ماه و سپس ۱ تا ۱۲ سال، زمان و تعداد کودک/بزرگسال همگی Dropdown دارند.
+- Prompt 032 واژگان نهایی فرم بازی را مطابق تصاویر تأییدشده مالک فعال کرد: فرم عمومی هشت مرحله قطعی دارد، رستوران/ماشین/مهمانی اضافه شدند، «وقت با هم بودن» از گزینه‌های فعال حذف شد و رکوردهای قدیمی بدون بازنویسی اجباری برای اصلاح انسانی باقی ماندند.
+- افزودن و ویرایش پیش‌نویس بازی اکنون همه فیلدهای سن، زمان، بازیکن، موقعیت، مکان، حال، انرژی، وسیله، ایمنی و منبع را جداگانه نمایش می‌دهد؛ مدیر و ادمین می‌توانند پیش‌نویس بسازند و انتشار نهایی فقط با مدیر است.
+- مجله تیله با دسته‌بندی درختی، Draft، بازبینی، فیلدهای SEO و انتشار Manager-only اضافه شد؛ دسترسی هر ادمین نیز به‌صورت مستقیم و مستقل با Checkbox تعیین می‌شود.
+- تمپلیت رسمی `Teelle_New_Game_Template_v2.xlsx` با همین واژگان نهایی، Dropdownهای کامل و فونت Vazirmatn تحویل شد.
 
 ## نقشه صریح فازهای ۱۱ تا ۱۵
 
@@ -189,6 +196,7 @@ Testing Status Update: PROMPT 019 local contract 1/1 PASS with 24 assertions; cu
 Testing Status Update: PROMPT 020 Plan pricing 4/4 PASS with 36 assertions; combined Jigari/Plan 11/11 PASS with 92 assertions; current MySQL 8.4.11 full Laravel 99/99 PASS with 841 assertions; focused MySQL foundation + Plan gate 12/12 PASS with 78 assertions; JavaScript 8/8، Build، Blade، Pint and pnpm production audit PASS. Remote Run `34723528510` exposed the superseded inactive-plan assertion; replacement Run `34743030855` on correction Commit `1886d5e` PASS.
 Testing Status Update: PROMPT 026 current MySQL 8.4.11 full Laravel 106/106 PASS with 937 assertions and zero skip; Content Admin focused 11/11 PASS with 69 assertions; owner Copy 1/1 PASS with 7 assertions; JavaScript 8/8، Build 58 modules، Blade، Pint and Composer/pnpm audits PASS. Browser QA Desktop and Mobile 390 for Admin list/edit/metadata/media PASS.
 Testing Status Update: PROMPT 029 current MySQL 8.4.11 full Laravel 113/113 PASS with 1000 assertions and zero skip; focused Account، Admin users، Content Admin and Jigari 36/36 with 284 assertions PASS. JavaScript 8/8، Build 58 modules، Blade، Pint and Composer/pnpm audits PASS. Browser QA Desktop and 390px for Admin dashboard، Excel/form import and user list/edit PASS with zero page-level horizontal overflow and no Console warning/error.
+Testing Status Update: PROMPT 032 current MySQL 8.4.11 full Laravel 117/117 PASS with 1053 assertions and zero skip; JavaScript 8/8، Build 58 modules، Pint، Composer audit and pnpm production audit PASS. Browser QA covers all eight Quick Match states and final transition at Desktop and 390×844 in Light/Dark، Admin Excel/manual game form، Magazine categories and per-admin permission controls with no page-level horizontal overflow.
 Launch Status: PHASE 15 PAUSED / NOT STARTED BY OWNER
 Website Complete: NOT EVALUATED
 TWA Implementation: LOCKED
