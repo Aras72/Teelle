@@ -12,9 +12,10 @@ class SystemTaxonomySeeder extends Seeder
         $this->seedAgeBands();
 
         $this->seedSlugTable('situations', [
-            'after-work' => 'بعد از کار',
-            'rainy-day' => 'روز بارانی',
-            'before-bed' => 'قبل خواب',
+            'between-meals' => 'بین وعده‌های غذایی',
+            'after-meal' => 'بعد از غذا',
+            'between-routines' => 'بین کارهای روزمره',
+            'before-bed' => 'قبل از خواب',
         ]);
         $this->seedSlugTable('locations', [
             'home-inside' => 'داخل خانه',
@@ -33,6 +34,7 @@ class SystemTaxonomySeeder extends Seeder
         $this->seedLegacySlugTable('situations', [
             'connection' => 'ارتباط', 'bored' => 'بی‌حوصلگی', 'indoor-time' => 'وقت داخل خانه',
             'restless' => 'بی‌قراری', 'calm-down' => 'آرام‌شدن',
+            'after-work' => 'بعد از کار', 'rainy-day' => 'روز بارانی',
             'restaurant' => 'رستوران', 'car' => 'ماشین', 'party' => 'مهمانی',
         ]);
         $this->seedLegacySlugTable('locations', [

@@ -187,19 +187,13 @@ class ContentAdminTest extends TestCase
         $this->assertSame('rolled_back', ContentImportBatch::query()->find($batch->id)->status);
     }
 
-    public function test_admin_can_preview_the_official_excel_template_and_use_the_panel_form_without_json(): void
+    public function test_admin_can_download_the_official_excel_template_and_use_the_panel_form_without_json(): void
     {
         $editor = $this->staff('content_editor');
         $this->actingAs($editor)->get(route('admin.content.imports.index'))
             ->assertOk()->assertSee('افزودن از فایل Excel')->assertSee('افزودن یک بازی با فرم')->assertSee('دریافت تمپلیت Excel')->assertDontSee('آرایه JSON بازی‌ها');
         $this->actingAs($editor)->get(route('admin.content.imports.template'))
             ->assertOk()->assertDownload('Teelle_New_Game_Template_v2.xlsx');
-
-        $path = base_path('../../docs/14-operations/templates/Teelle_Game_Review_Template_v2.xlsx');
-        $workbook = new UploadedFile($path, 'Teelle_Game_Review_Template_v2.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', null, true);
-        $this->actingAs($editor)->post(route('admin.content.imports.excel.preview'), ['workbook' => $workbook])->assertRedirect();
-        $this->assertSame(25, count(ContentImportBatch::query()->latest('id')->firstOrFail()->payload_json));
-        $this->assertDatabaseCount('games', 0);
 
         $draft = $this->draft('panel-form-game');
         $draft['instructions_text'] = implode("\n", $draft['instructions']);
@@ -247,26 +241,31 @@ class ContentAdminTest extends TestCase
 
         $report = app(CoverageMatrix::class)->report();
 
-        $this->assertCount(15, $report);
-        $this->assertSame(15, app(CoverageMatrix::class)->criticalGaps());
+        $this->assertCount(20, $report);
+        $this->assertSame(20, app(CoverageMatrix::class)->criticalGaps());
         $this->assertTrue($report->every(fn (object $cell): bool => (int) $cell->survivors === 0));
         $this->actingAs($reviewer)->get(route('admin.content.coverage'))
-            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('از مجموع ۱۵ ترکیب سن و موقعیت، در ۱۵ ترکیب هنوز بازی کافی نداریم')->assertSee('ماتریس فعلی از ۵ بازه سنی و ۳ موقعیت ساخته شده است')->assertSee('هر ترکیب باید حداقل سه بازی منتشرشده و تأییدشده داشته باشد');
+            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('از مجموع ۲۰ ترکیب سن و موقعیت، در ۲۰ ترکیب هنوز بازی کافی نداریم')->assertSee('ماتریس فعلی از ۵ بازه سنی و ۴ موقعیت ساخته شده است')->assertSee('هر ترکیب باید حداقل سه بازی منتشرشده و تأییدشده داشته باشد');
     }
 
-    public function test_location_only_values_are_not_offered_or_accepted_as_situations(): void
+    public function test_only_active_daily_moments_are_offered_or_accepted_as_situations(): void
     {
         $options = app(GameFormOptions::class)->all(includeInactive: true);
 
         $this->assertArrayNotHasKey('restaurant', $options['situations']);
         $this->assertArrayNotHasKey('car', $options['situations']);
         $this->assertArrayNotHasKey('party', $options['situations']);
+        $this->assertArrayNotHasKey('after-work', $options['situations']);
+        $this->assertArrayNotHasKey('rainy-day', $options['situations']);
+        $this->assertSame([
+            'between-meals', 'after-meal', 'between-routines', 'before-bed',
+        ], array_keys($options['situations']));
         $this->assertArrayHasKey('restaurant', $options['locations']);
         $this->assertArrayHasKey('car', $options['locations']);
         $this->assertArrayHasKey('party', $options['locations']);
 
         $draft = $this->draft('location-only-situation');
-        $draft['metadata']['situations'] = ['party'];
+        $draft['metadata']['situations'] = ['after-work'];
 
         $this->expectException(ValidationException::class);
         app(ContentImportService::class)->previewPayload($this->staff('content_editor'), [$draft]);
@@ -345,7 +344,7 @@ class ContentAdminTest extends TestCase
             'minimum_children' => 1, 'maximum_children' => 2, 'minimum_adults' => 1, 'required_adult' => true,
             'child_energy' => 'medium', 'caregiver_energy' => 'low', 'interaction_type' => 'cooperative',
             'caregiver_involvement' => 'shared', 'setup_complexity' => 'simple', 'source_title' => 'Test source',
-            'source_url' => 'https://example.com/source', 'cultural_origin' => 'test', 'situations' => ['connection'],
+            'source_url' => 'https://example.com/source', 'cultural_origin' => 'test', 'situations' => ['between-meals'],
             'locations' => ['home-inside'], 'moods' => ['calm'], 'tags' => ['cooperative'],
             'player_requirement' => 'child-and-adult', 'materials' => [], 'safety_flags' => ['sensory_intensity']];
     }

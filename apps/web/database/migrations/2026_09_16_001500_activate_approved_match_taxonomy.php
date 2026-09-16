@@ -8,9 +8,10 @@ return new class extends Migration
     public function up(): void
     {
         $this->replaceActiveTaxonomy('situations', [
-            'after-work' => 'بعد از کار',
-            'rainy-day' => 'روز بارانی',
-            'before-bed' => 'قبل خواب',
+            'between-meals' => 'بین وعده‌های غذایی',
+            'after-meal' => 'بعد از غذا',
+            'between-routines' => 'بین کارهای روزمره',
+            'before-bed' => 'قبل از خواب',
         ]);
         $this->replaceActiveTaxonomy('locations', [
             'home-inside' => 'داخل خانه',

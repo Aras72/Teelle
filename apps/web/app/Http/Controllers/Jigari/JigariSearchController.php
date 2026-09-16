@@ -35,7 +35,7 @@ final class JigariSearchController extends Controller
     private function filterTaxonomy(): Collection
     {
         $query = DB::table('situations')
-            ->selectRaw("'situation' as type, slug, title, id as sort_order")
+            ->selectRaw("'situation' as type, slug, title, CASE slug WHEN 'between-meals' THEN 1 WHEN 'after-meal' THEN 2 WHEN 'between-routines' THEN 3 WHEN 'before-bed' THEN 4 ELSE 99 END as sort_order")
             ->where('is_active', true)
             ->unionAll(DB::table('locations')->selectRaw("'location' as type, slug, title, id as sort_order")->where('is_active', true))
             ->unionAll(DB::table('materials')->selectRaw("'material' as type, slug, title, id as sort_order")->where('is_active', true))

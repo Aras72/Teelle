@@ -10,9 +10,9 @@ $sources = [
 ];
 
 $situations = [
-    ['connection', 'bored', 'indoor-time'], ['restless', 'calm-down', 'indoor-time'],
-    ['connection', 'restless', 'bored'], ['calm-down', 'bored', 'indoor-time'],
-    ['connection', 'restless', 'calm-down'],
+    ['between-meals', 'after-meal'], ['between-routines', 'before-bed'],
+    ['between-meals', 'between-routines'], ['after-meal', 'before-bed'],
+    ['before-bed'],
 ];
 
 $make = static function (

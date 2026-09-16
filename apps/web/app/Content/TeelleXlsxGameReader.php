@@ -248,8 +248,8 @@ final class TeelleXlsxGameReader
             'involvement' => ['فعال' => 'active', 'مشترک' => 'shared', 'کم' => 'light'],
             'setup' => ['بدون آماده‌سازی' => 'none', 'ساده' => 'simple', 'متوسط' => 'moderate'],
             'situation' => [
-                'بعد از کار' => 'after-work', 'روز بارانی' => 'rainy-day', 'قبل خواب' => 'before-bed',
-                'ارتباط' => 'connection', 'بی‌حوصلگی' => 'bored', 'وقت داخل خانه' => 'indoor-time', 'بی‌قراری' => 'restless', 'آرام‌شدن' => 'calm-down',
+                'بین وعده‌های غذایی' => 'between-meals', 'بعد از غذا' => 'after-meal',
+                'بین کارهای روزمره' => 'between-routines', 'قبل از خواب' => 'before-bed',
             ],
             'location' => [
                 'داخل خانه' => 'home-inside', 'بیرون' => 'outdoors', 'رستوران' => 'restaurant', 'ماشین' => 'car', 'مهمانی' => 'party',

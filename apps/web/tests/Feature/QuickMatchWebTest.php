@@ -42,7 +42,7 @@ class QuickMatchWebTest extends TestCase
     {
         $this->get(route('match.show'));
         $this->post(route('match.answer'), ['step' => 'age', 'age_years' => 4, 'age_months' => 2]);
-        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'after-work']);
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'between-meals']);
         $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 15]);
         $this->post(route('match.answer'), ['step' => 'location', 'answer' => 'home-inside']);
         $this->post(route('match.answer'), ['step' => 'materials', 'answer' => ['paper-pencil', 'ball']]);
@@ -76,12 +76,14 @@ class QuickMatchWebTest extends TestCase
         $this->get(route('match.show'));
         $this->post(route('match.answer'), ['step' => 'age', 'age_years' => 3, 'age_months' => 0]);
         $this->get(route('match.show'))->assertOk()
-            ->assertSeeInOrder(['بعد از کار', 'روز بارانی', 'قبل خواب'])
+            ->assertSeeInOrder(['بین وعده‌های غذایی', 'بعد از غذا', 'بین کارهای روزمره', 'قبل از خواب'])
             ->assertDontSee('رستوران')
             ->assertDontSee('ماشین')
             ->assertDontSee('مهمانی')
             ->assertDontSee('وقت با هم بودن');
         $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'party'])
+            ->assertSessionHasErrors('answer');
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'rainy-day'])
             ->assertSessionHasErrors('answer');
         $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'before-bed']);
         $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 30]);
@@ -92,10 +94,10 @@ class QuickMatchWebTest extends TestCase
     public function test_step_skipping_and_conflicting_material_answers_fail_closed(): void
     {
         $this->get(route('match.show'));
-        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'after-work'])
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'between-meals'])
             ->assertSessionHasErrors('answer');
         $this->post(route('match.answer'), ['step' => 'age', 'age_years' => 5, 'age_months' => 0]);
-        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'rainy-day']);
+        $this->post(route('match.answer'), ['step' => 'situation', 'answer' => 'between-routines']);
         $this->post(route('match.answer'), ['step' => 'duration', 'answer' => 15]);
         $this->post(route('match.answer'), ['step' => 'location', 'answer' => 'home-inside']);
         $this->post(route('match.answer'), ['step' => 'materials', 'answer' => ['none', 'paper-pencil']])

@@ -86,7 +86,9 @@ final class QuickMatchController extends Controller
     private function options(string $step): array
     {
         return match ($step) {
-            'situation' => DB::table('situations')->where('is_active', true)->orderBy('id')->get()->map(fn ($item) => ['value' => $item->slug, 'label' => $item->title])->all(),
+            'situation' => DB::table('situations')->where('is_active', true)
+                ->orderByRaw("CASE slug WHEN 'between-meals' THEN 1 WHEN 'after-meal' THEN 2 WHEN 'between-routines' THEN 3 WHEN 'before-bed' THEN 4 ELSE 99 END")
+                ->get()->map(fn ($item) => ['value' => $item->slug, 'label' => $item->title])->all(),
             'duration' => [['value' => '15', 'label' => 'تا ۱۵ دقیقه'], ['value' => '30', 'label' => '۱۵ تا ۳۰ دقیقه'], ['value' => '45', 'label' => 'بیشتر از ۳۰ دقیقه']],
             'location' => DB::table('locations')->where('is_active', true)->orderBy('id')->get()->map(fn ($item) => ['value' => $item->slug, 'label' => $item->title])->all(),
             'materials' => [['value' => 'none', 'label' => 'بدون وسیله'], ['value' => 'paper-pencil', 'label' => 'کاغذ و مداد'], ['value' => 'ball', 'label' => 'توپ'], ['value' => 'household-items', 'label' => 'وسایل خانه']],

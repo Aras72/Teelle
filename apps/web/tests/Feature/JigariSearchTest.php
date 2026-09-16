@@ -53,7 +53,7 @@ final class JigariSearchTest extends TestCase
         $response = $this->actingAs($user)->get(route('jigari.games.index', [
             'q' => '  بازي   بادبادك ',
             'age_band' => '4-6y',
-            'situation' => 'after-work',
+            'situation' => 'between-meals',
             'duration' => 10,
             'location' => 'home-inside',
             'materials' => ['paper-pencil'],
@@ -61,7 +61,8 @@ final class JigariSearchTest extends TestCase
         ]));
 
         $response->assertOk()->assertSee($matching->currentPublishedVersion->title)->assertDontSee('آواز آرام')
-            ->assertSee('پیشنهاد شخصی یا رتبه‌بندی نیستند');
+            ->assertSee('پیشنهاد شخصی یا رتبه‌بندی نیستند')
+            ->assertSeeInOrder(['بین وعده‌های غذایی', 'بعد از غذا', 'بین کارهای روزمره', 'قبل از خواب']);
         $this->assertLessThanOrEqual(18, count(DB::getQueryLog()), 'Search page exceeded its query-count budget.');
     }
 
@@ -136,7 +137,7 @@ final class JigariSearchTest extends TestCase
         ]);
     }
 
-    private function publishedGame(string $title, string $situation = 'after-work', string $location = 'home-inside', string $material = 'paper-pencil'): Game
+    private function publishedGame(string $title, string $situation = 'between-meals', string $location = 'home-inside', string $material = 'paper-pencil'): Game
     {
         $publisher = User::factory()->create();
         $game = Game::factory()->create();

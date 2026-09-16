@@ -42,7 +42,7 @@ final class GameMetadataPayload
             'child_energy' => 'medium', 'caregiver_energy' => 'low', 'interaction_type' => 'cooperative',
             'caregiver_involvement' => 'shared', 'setup_complexity' => 'simple',
             'source_title' => '', 'source_url' => 'https://', 'cultural_origin' => 'ایران',
-            'situations' => ['after-work'], 'locations' => ['home-inside'], 'moods' => ['calm'],
+            'situations' => ['between-meals'], 'locations' => ['home-inside'], 'moods' => ['calm'],
             'tags' => ['cooperative'], 'player_requirement' => 'child-and-adult', 'materials' => [],
             'safety_flags' => ['sensory_intensity']];
     }

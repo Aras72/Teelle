@@ -17,7 +17,9 @@ final class GameFormOptions
             return DB::table($table)
                 ->when(
                     $table === 'situations',
-                    fn (Builder $query) => $query->whereNotIn('slug', ['restaurant', 'car', 'party']),
+                    fn (Builder $query) => $query
+                        ->where('is_active', true)
+                        ->orderByRaw("CASE slug WHEN 'between-meals' THEN 1 WHEN 'after-meal' THEN 2 WHEN 'between-routines' THEN 3 WHEN 'before-bed' THEN 4 ELSE 99 END"),
                 )
                 ->when(
                     ! $includeInactive && Schema::hasColumn($table, 'is_active'),

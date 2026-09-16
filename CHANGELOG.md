@@ -2,6 +2,7 @@
 
 ## 2026-09-16
 
+- Finalized the active situation taxonomy as between meals, after a meal, between daily routines and before sleep across Quick Match, admin metadata, Excel import, search and the 20-cell coverage matrix; legacy game relationships remain intact for manual correction.
 - Removed restaurant, car and party from active situations because they duplicate locations; retained them only as locations and reduced the active age/situation coverage matrix to 15 cells without deleting existing game relationships.
 - Replaced the provisional Quick Match taxonomy with the owner-approved eight-step flow: age, situation, duration, location, available materials, players, caregiver energy and child mood.
 - Added restaurant, car and party to active locations; removed «وقت با هم بودن» from the active matching taxonomy without rewriting existing game records.

@@ -63,7 +63,7 @@ final class ContentImportService
             'metadata.source_url' => ['required', 'url:http,https', 'max:2048'],
             'metadata.cultural_origin' => ['required', 'string', 'max:120'],
             'metadata.situations' => ['required', 'array', 'min:1'],
-            'metadata.situations.*' => ['required', 'distinct', 'exists:situations,slug', Rule::notIn(['restaurant', 'car', 'party'])],
+            'metadata.situations.*' => ['required', 'distinct', Rule::exists('situations', 'slug')->where('is_active', true)],
             'metadata.locations' => ['required', 'array', 'min:1'],
             'metadata.locations.*' => ['required', 'distinct', 'exists:locations,slug'],
             'metadata.moods' => ['required', 'array', 'min:1'],
