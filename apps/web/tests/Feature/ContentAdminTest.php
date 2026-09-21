@@ -193,7 +193,7 @@ class ContentAdminTest extends TestCase
         $this->actingAs($editor)->get(route('admin.content.imports.index'))
             ->assertOk()->assertSee('افزودن از فایل Excel')->assertSee('افزودن یک بازی با فرم')->assertSee('دریافت تمپلیت Excel')->assertDontSee('آرایه JSON بازی‌ها');
         $this->actingAs($editor)->get(route('admin.content.imports.template'))
-            ->assertOk()->assertDownload('Teelle_New_Game_Template_v2.xlsx');
+            ->assertOk()->assertDownload('Teelle_New_Game_Template_v3.xlsx');
 
         $draft = $this->draft('panel-form-game');
         $draft['instructions_text'] = implode("\n", $draft['instructions']);

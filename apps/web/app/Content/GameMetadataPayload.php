@@ -18,6 +18,7 @@ final class GameMetadataPayload
         $age = DB::table('game_age_ranges')->leftJoin('age_bands', 'age_bands.id', '=', 'game_age_ranges.age_band_id')
             ->where('game_version_id', $version->id)->first();
         $payload = collect((array) $facts)->except(['id', 'game_version_id', 'created_at', 'updated_at'])->all();
+        $payload['alternatives'] = $this->decodeAlternatives($facts->alternatives ?? null);
         $payload += ['age_band' => $age->code, 'minimum_age_months' => $age->minimum_age_months,
             'maximum_age_months_exclusive' => $age->maximum_age_months_exclusive];
         $payload['situations'] = $this->slugs($version, 'game_situations', 'situations', 'situation_id');
@@ -42,9 +43,21 @@ final class GameMetadataPayload
             'child_energy' => 'medium', 'caregiver_energy' => 'low', 'interaction_type' => 'cooperative',
             'caregiver_involvement' => 'shared', 'setup_complexity' => 'simple',
             'source_title' => '', 'source_url' => 'https://', 'cultural_origin' => 'ایران',
+            'content_priority' => 'normal', 'priority_reason' => null, 'alternatives' => [],
             'situations' => ['between-meals'], 'locations' => ['home-inside'], 'moods' => ['calm'],
             'tags' => ['cooperative'], 'player_requirement' => 'child-and-adult', 'materials' => [],
             'safety_flags' => ['sensory_intensity']];
+    }
+
+    private function decodeAlternatives(mixed $raw): array
+    {
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+
+            return is_array($decoded) ? $decoded : [];
+        }
+
+        return is_array($raw) ? $raw : [];
     }
 
     private function slugs(GameVersion $version, string $pivot, string $taxonomy, string $foreignKey): array

@@ -19,6 +19,19 @@ class StructuredMetadataRequest extends FormRequest
             foreach (['situations', 'locations', 'moods', 'tags', 'safety_flags'] as $field) {
                 $metadata[$field] = array_values(array_filter(array_unique(array_map('strval', is_array($metadata[$field] ?? null) ? $metadata[$field] : []))));
             }
+            // DEC-059: گزینه‌های اضافی چندانتخابی؛ خارج از موتور تطبیق و صرفاً اطلاعاتی.
+            $metadata['alternatives'] = is_array($metadata['alternatives'] ?? null) ? $metadata['alternatives'] : [];
+            foreach ($metadata['alternatives'] as $field => $extra) {
+                if (! is_array($extra)) {
+                    unset($metadata['alternatives'][$field]);
+
+                    continue;
+                }
+                $metadata['alternatives'][$field] = array_values(array_filter(array_unique(array_map('strval', $extra))));
+                if ($metadata['alternatives'][$field] === []) {
+                    unset($metadata['alternatives'][$field]);
+                }
+            }
             $metadata['materials'] = array_values(array_filter(array_map(function ($material): ?array {
                 if (! is_array($material) || blank($material['slug'] ?? null)) {
                     return null;
@@ -67,6 +80,10 @@ class StructuredMetadataRequest extends FormRequest
             'metadata.materials' => ['present', 'array', 'max:12'], 'metadata.materials.*.slug' => ['required', 'distinct', 'exists:materials,slug'],
             'metadata.materials.*.requirement' => ['required', 'in:required,optional'], 'metadata.materials.*.quantity_note' => ['nullable', 'string', 'max:255'],
             'metadata.safety_flags' => ['required', 'array', 'min:1'], 'metadata.safety_flags.*' => ['required', 'distinct', 'exists:safety_rules,code'],
+            'metadata.alternatives' => ['sometimes', 'array', 'max:12'],
+            'metadata.alternatives.*' => ['array', 'max:12'], 'metadata.alternatives.*.*' => ['string', 'max:120'],
+            'metadata.content_priority' => ['required', 'in:high,normal,low'],
+            'metadata.priority_reason' => ['nullable', 'string', 'max:500'],
         ];
     }
 }

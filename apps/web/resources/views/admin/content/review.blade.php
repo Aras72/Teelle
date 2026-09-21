@@ -7,6 +7,14 @@
     $digits = ['0'=>'۰','1'=>'۱','2'=>'۲','3'=>'۳','4'=>'۴','5'=>'۵','6'=>'۶','7'=>'۷','8'=>'۸','9'=>'۹'];
     $statusLabels = ['draft' => 'پیش‌نویس', 'in_review' => 'در حال بازبینی', 'approved' => 'تأییدشده', 'published' => 'منتشرشده'];
     $ageLabels = ['6-23m' => '۶ تا پیش از ۲۴ ماهگی', '2-3y' => '۲ تا پیش از ۴ سالگی', '4-6y' => '۴ تا پیش از ۷ سالگی', '7-9y' => '۷ تا پیش از ۱۰ سالگی', '10-12y' => '۱۰ تا پیش از ۱۳ سالگی'];
+    $priorityLabels = ['high' => 'بالا', 'normal' => 'معمولی', 'low' => 'پایین'];
+    $alternativeLabels = [
+        'situations' => 'موقعیت‌های جانبی', 'locations' => 'مکان‌های جانبی', 'moods' => 'حال‌های جانبی',
+        'tags' => 'برچسب‌های جانبی', 'safety_flags' => 'ایمنی جانبی', 'player_requirement' => 'ترکیب بازیکن جانبی',
+        'space_required' => 'فضای جانبی', 'noise_level' => 'صدای جانبی', 'mess_level' => 'کثیفی جانبی',
+        'interaction_type' => 'تعامل جانبی', 'caregiver_involvement' => 'مشارکت جانبی', 'setup_complexity' => 'آماده‌سازی جانبی',
+        'child_energy' => 'انرژی جانبی کودک', 'caregiver_energy' => 'انرژی جانبی همراه', 'supervision_level' => 'نظارت جانبی',
+    ];
     $hasReviewedCover = $media->contains(fn ($asset) => $asset->status === 'reviewed');
 @endphp
 <x-layouts.app title="پرونده بازبینی {{ $version->title }}" description="بازبینی مستقل محتوای بازی تیله">
@@ -51,6 +59,12 @@
                     <div><dt>آماده‌سازی</dt><dd>{{ strtr((string) $metadata['prep_time_minutes'], $digits) }} دقیقه</dd></div>
                     <div><dt>تعداد کودک</dt><dd>{{ strtr((string) $metadata['minimum_children'], $digits) }} تا {{ strtr((string) $metadata['maximum_children'], $digits) }}</dd></div>
                     <div><dt>نظارت</dt><dd>{{ $labels[$version->supervision_level] ?? $version->supervision_level }}</dd></div>
+                    <div><dt>اولویت محتوا</dt><dd>{{ $priorityLabels[$metadata['content_priority'] ?? 'normal'] ?? 'معمولی' }}@if (! empty($metadata['priority_reason'])) — {{ $metadata['priority_reason'] }}@endif</dd></div>
+                    @if (! empty($metadata['alternatives']))
+                        @foreach ($metadata['alternatives'] as $field => $options)
+                            <div><dt>{{ $alternativeLabels[$field] ?? $field }}</dt><dd dir="ltr">{{ implode(', ', (array) $options) }}</dd></div>
+                        @endforeach
+                    @endif
                 </dl>
             </section>
 

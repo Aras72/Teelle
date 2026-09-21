@@ -225,6 +225,9 @@ final class GameContentWorkflow
             'caregiver_involvement' => $metadata['caregiver_involvement'], 'setup_complexity' => $metadata['setup_complexity'],
             'source_title' => $metadata['source_title'], 'source_url' => $metadata['source_url'],
             'cultural_origin' => $metadata['cultural_origin'], 'created_at' => now(), 'updated_at' => now(),
+            'alternatives' => json_encode($this->alternatives($metadata), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'content_priority' => $metadata['content_priority'] ?? 'normal',
+            'priority_reason' => $metadata['priority_reason'] ?? null,
         ]);
         DB::table('game_age_ranges')->updateOrInsert(['game_version_id' => $version->id], [
             'age_band_id' => DB::table('age_bands')->where('code', $metadata['age_band'])->value('id'),
@@ -250,6 +253,34 @@ final class GameContentWorkflow
             DB::table('game_safety_rules')->insert(['game_version_id' => $version->id,
                 'safety_rule_id' => DB::table('safety_rules')->where('code', $code)->value('id'), 'hard_filter' => true]);
         }
+    }
+
+    /**
+     * گزینه‌های چندگانه انتخاب‌شده برای فیلدهای دسته‌ای؛ اضافه‌ای و بدون اثر روی موتور تطبیق.
+     *
+     * @param  array<string, mixed>  $metadata
+     * @return array<string, array<int, string>>
+     */
+    private function alternatives(array $metadata): array
+    {
+        $alternatives = [];
+        foreach (['player_requirement' => 'player_requirements', 'child_energy' => 'energy_levels',
+            'caregiver_energy' => 'energy_levels', 'interaction_type' => null, 'caregiver_involvement' => null,
+            'setup_complexity' => null, 'space_required' => null, 'noise_level' => null, 'mess_level' => null,
+        ] as $field => $taxonomy) {
+            $extra = $metadata['alternatives'][$field] ?? [];
+            if (is_array($extra) && $extra !== []) {
+                $alternatives[$field] = array_values(array_filter(array_map('strval', $extra)));
+            }
+        }
+        foreach (['situations', 'locations', 'moods', 'tags', 'safety_flags'] as $field) {
+            $extra = $metadata['alternatives'][$field] ?? [];
+            if (is_array($extra) && $extra !== []) {
+                $alternatives[$field] = array_values(array_filter(array_map('strval', $extra)));
+            }
+        }
+
+        return $alternatives;
     }
 
     private function replaceSlugPivots(int $versionId, string $pivot, string $taxonomy, string $foreignKey, array $slugs): void

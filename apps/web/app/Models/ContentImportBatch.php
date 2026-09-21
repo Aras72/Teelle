@@ -9,7 +9,7 @@ class ContentImportBatch extends Model
 {
     use HasPublicUlid;
 
-    protected $fillable = ['actor_user_id', 'status', 'payload_json', 'manifest_json', 'confirmed_at', 'rolled_back_at'];
+    protected $fillable = ['actor_user_id', 'status', 'payload_json', 'manifest_json', 'confirmed_at', 'rolled_back_at', 'media_asset_id'];
 
     protected function casts(): array
     {

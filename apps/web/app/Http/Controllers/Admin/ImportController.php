@@ -10,6 +10,9 @@ use App\Models\ContentImportBatch;
 use DomainException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -38,10 +41,11 @@ class ImportController extends Controller
     public function template(Request $request): BinaryFileResponse
     {
         abort_unless($request->user()->can('content.edit'), 403);
-        $path = base_path('../../docs/14-operations/templates/Teelle_New_Game_Template_v2.xlsx');
+        $versioned = 'Teelle_New_Game_Template_v3.xlsx';
+        $path = base_path('../../docs/14-operations/templates/'.$versioned);
         abort_unless(is_file($path), 404);
 
-        return response()->download($path, 'Teelle_New_Game_Template_v2.xlsx');
+        return response()->download($path, $versioned);
     }
 
     public function previewForm(Request $request, ContentImportService $service): RedirectResponse
@@ -67,10 +71,57 @@ class ImportController extends Controller
         foreach (['situations', 'locations', 'moods', 'tags', 'safety_flags'] as $field) {
             $metadata[$field] = array_values(array_filter(array_unique(array_map('strval', is_array($metadata[$field] ?? null) ? $metadata[$field] : []))));
         }
+        $metadata['alternatives'] = array_filter(array_map(function ($extra): array {
+            return array_values(array_filter(array_unique(array_map('strval', is_array($extra) ? $extra : []))));
+        }, is_array($metadata['alternatives'] ?? null) ? $metadata['alternatives'] : []));
+        $metadata['content_priority'] = in_array((string) ($metadata['content_priority'] ?? 'normal'), ['high', 'normal', 'low'], true)
+            ? (string) ($metadata['content_priority'] ?? 'normal') : 'normal';
+        $metadata['priority_reason'] = trim((string) ($metadata['priority_reason'] ?? '')) ?: null;
         $game['metadata'] = $metadata;
         $batch = $service->previewPayload($request->user(), [$game]);
+        $this->attachQuarantinedImage($request, $batch);
 
         return redirect()->route('admin.content.imports.show', $batch)->with('status', 'بازی بررسی شد؛ هنوز چیزی به فهرست اضافه نشده است');
+    }
+
+    /**
+     * تصویر اختیاری فرم افزودن بازی در قرنطینه ذخیره و به بسته ایمپورت وصل می‌شود؛
+     * پس از تأیید بسته، به پیش‌نویس ساخته‌شده منتقل می‌شود و مسیر بازبینی مستقل رسانه حفظ است.
+     */
+    private function attachQuarantinedImage(Request $request, ContentImportBatch $batch): void
+    {
+        if (! $request->hasFile('game.image')) {
+            return;
+        }
+        $file = $request->file('game.image');
+        $realPath = (string) $file->getRealPath();
+        $dimensions = getimagesize($realPath);
+        $mime = $dimensions['mime'] ?? '';
+        $extensions = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+        if (! isset($extensions[$mime]) || $file->getMimeType() !== $mime) {
+            throw ValidationException::withMessages(['game.image' => 'امضای واقعی فایل با نوع تصویر سازگار نیست']);
+        }
+        $checksum = hash_file('sha256', $realPath);
+        if (DB::table('media_assets')->where('checksum', $checksum)->exists()) {
+            throw ValidationException::withMessages(['game.image' => 'این فایل قبلاً بارگذاری شده است']);
+        }
+        $path = 'quarantine/'.now()->format('Y/m').'/'.Str::ulid().'.'.$extensions[$mime];
+        if (! Storage::disk('local')->put($path, $file->getContent())) {
+            throw ValidationException::withMessages(['game.image' => 'ذخیره امن تصویر انجام نشد؛ دوباره تلاش کنید']);
+        }
+        try {
+            $assetId = DB::table('media_assets')->insertGetId([
+                'public_id' => (string) Str::ulid(), 'uploaded_by' => $request->user()->id, 'disk' => 'local', 'path' => $path,
+                'original_name' => basename($file->getClientOriginalName()), 'mime' => $mime,
+                'width' => $dimensions[0], 'height' => $dimensions[1], 'checksum' => $checksum,
+                'status' => 'quarantined', 'alt_text' => trim((string) $request->input('game.image_alt_text')) ?: null,
+                'created_at' => now(), 'updated_at' => now(),
+            ]);
+            $batch->forceFill(['media_asset_id' => $assetId])->save();
+        } catch (\Throwable $exception) {
+            Storage::disk('local')->delete($path);
+            throw $exception;
+        }
     }
 
     public function show(Request $request, ContentImportBatch $batch): View

@@ -77,6 +77,10 @@ final class ContentImportService
             'metadata.materials.*.quantity_note' => ['nullable', 'string', 'max:255'],
             'metadata.safety_flags' => ['required', 'array', 'min:1'],
             'metadata.safety_flags.*' => ['required', 'distinct', 'exists:safety_rules,code'],
+            'metadata.alternatives' => ['sometimes', 'present', 'array', 'max:12'],
+            'metadata.alternatives.*' => ['array', 'max:12'], 'metadata.alternatives.*.*' => ['string', 'max:120'],
+            'metadata.content_priority' => ['sometimes', 'in:high,normal,low'],
+            'metadata.priority_reason' => ['sometimes', 'nullable', 'string', 'max:500'],
         ];
         foreach ($payload as $index => $row) {
             $validator = Validator::make(is_array($row) ? $row : [], $rules);
@@ -109,6 +113,14 @@ final class ContentImportService
             foreach ($batch->payload_json as $row) {
                 $game = $this->workflow->createDraft($actor, $row);
                 $manifest[] = ['game_id' => $game->id, 'version_id' => $game->versions()->value('id')];
+            }
+            // DEC-059: تصویر اختیاری فرم، بعد از ساخت پیش‌نویس به آن وصل می‌شود؛
+            // وضعیت قرنطینه حفظ می‌شود و بازبینی مستقل رسانه همچنان لازم است.
+            if ($batch->media_asset_id !== null) {
+                DB::table('game_media')->insert([
+                    'game_version_id' => $manifest[0]['version_id'], 'media_asset_id' => $batch->media_asset_id,
+                    'role' => 'cover', 'sort_order' => 0, 'crop_data' => '{"x":0.5,"y":0.5,"ratio":"4:3"}',
+                ]);
             }
             $batch->update(['status' => 'confirmed', 'manifest_json' => $manifest, 'confirmed_at' => now()]);
             $this->audit->write($actor, 'content.import.confirmed', $batch, ['status' => 'previewed'], ['status' => 'confirmed', 'items' => count($manifest)]);

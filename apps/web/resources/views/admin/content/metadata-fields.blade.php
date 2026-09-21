@@ -9,7 +9,13 @@
         'caregiver_involvement' => ['active'=>'فعال','shared'=>'مشترک','light'=>'کم'],
         'setup_complexity' => ['none'=>'بدون آماده‌سازی','simple'=>'ساده','moderate'=>'متوسط'],
     ];
+    $labels = [
+        'space_required' => 'فضای لازم', 'noise_level' => 'میزان صدا', 'mess_level' => 'میزان کثیفی',
+        'interaction_type' => 'نوع تعامل', 'caregiver_involvement' => 'مشارکت همراه', 'setup_complexity' => 'سختی آماده‌سازی',
+    ];
+    $priorities = ['high'=>'بالا','normal'=>'معمولی','low'=>'پایین'];
     $value = fn (string $key, mixed $fallback = null) => old("metadata.$key", data_get($metadata, $key, $fallback));
+    $extras = fn (string $key): array => (array) (old("metadata.alternatives.$key") ?? data_get($metadata, "alternatives.$key", []));
 @endphp
 
 <fieldset><legend>سن، زمان و همراهان</legend><div class="admin-form-grid">
@@ -25,13 +31,20 @@
     <label>ترکیب بازیکنان<select class="teelle-input" name="metadata[player_requirement]" required>@foreach($options['players'] as $option=>$label)<option value="{{ $option }}" @selected($value('player_requirement') === $option)>{{ $label }}</option>@endforeach</select></label>
     <input type="hidden" name="metadata[required_adult]" value="0">
     <label class="teelle-check"><input type="checkbox" name="metadata[required_adult]" value="1" @checked((bool) $value('required_adult'))><span>حضور بزرگسال ضروری است</span></label>
-</div></fieldset>
+</div>
+<fieldset><legend>ترکیب بازیکنان — انتخاب چندگانه</legend><div class="admin-choice-grid">@foreach($options['players'] as $option=>$title)<label class="teelle-check"><input type="checkbox" name="metadata[alternatives][player_requirement][]" value="{{ $option }}" @checked(in_array($option, $extras('player_requirement'), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
+</fieldset>
 
 <fieldset><legend>شرایط اجرا</legend><div class="admin-form-grid">
-    @foreach($fixed as $field=>$items)<label>{{ match($field) {'space_required'=>'فضای لازم','noise_level'=>'میزان صدا','mess_level'=>'میزان کثیفی','interaction_type'=>'نوع تعامل','caregiver_involvement'=>'مشارکت همراه',default=>'سختی آماده‌سازی'} }}<select class="teelle-input" name="metadata[{{ $field }}]" required>@foreach($items as $option=>$label)<option value="{{ $option }}" @selected($value($field) === $option)>{{ $label }}</option>@endforeach</select></label>@endforeach
+    @foreach($fixed as $field=>$items)<label>{{ $labels[$field] }}<select class="teelle-input" name="metadata[{{ $field }}]" required>@foreach($items as $option=>$label)<option value="{{ $option }}" @selected($value($field) === $option)>{{ $label }}</option>@endforeach</select></label>@endforeach
     <label>انرژی کودک<select class="teelle-input" name="metadata[child_energy]" required>@foreach($options['energy_levels'] as $option=>$label)<option value="{{ $option }}" @selected($value('child_energy') === $option)>{{ $label }}</option>@endforeach</select></label>
     <label>انرژی همراه<select class="teelle-input" name="metadata[caregiver_energy]" required>@foreach($options['energy_levels'] as $option=>$label)<option value="{{ $option }}" @selected($value('caregiver_energy') === $option)>{{ $label }}</option>@endforeach</select></label>
-</div></fieldset>
+</div>
+@foreach(['space_required' => $fixed['space_required'], 'noise_level' => $fixed['noise_level'], 'mess_level' => $fixed['mess_level'], 'interaction_type' => $fixed['interaction_type'], 'caregiver_involvement' => $fixed['caregiver_involvement'], 'setup_complexity' => $fixed['setup_complexity']] as $field=>$items)
+    <fieldset><legend>{{ $labels[$field] }} — انتخاب چندگانه</legend><div class="admin-choice-grid">@foreach($items as $option=>$title)<label class="teelle-check"><input type="checkbox" name="metadata[alternatives][{{ $field }}][]" value="{{ $option }}" @checked(in_array($option, $extras($field), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
+@endforeach
+<fieldset><legend>انرژی کودک و همراه — انتخاب چندگانه</legend><div class="admin-choice-grid">@foreach($options['energy_levels'] as $option=>$title)<label class="teelle-check"><input type="checkbox" name="metadata[alternatives][child_energy][]" value="{{ $option }}" @checked(in_array($option, $extras('child_energy'), true))><span>کودک: {{ $title }}</span></label><label class="teelle-check"><input type="checkbox" name="metadata[alternatives][caregiver_energy][]" value="{{ $option }}" @checked(in_array($option, $extras('caregiver_energy'), true))><span>همراه: {{ $title }}</span></label>@endforeach</div></fieldset>
+</fieldset>
 
 @foreach(['situations'=>'موقعیت‌ها','locations'=>'مکان‌ها','moods'=>'حال کودک','tags'=>'برچسب‌ها','safety'=>'نکات ایمنی ساختاری'] as $key=>$label)
     @php($field = $key === 'safety' ? 'safety_flags' : $key)
@@ -51,8 +64,10 @@
     @endforeach
 </div></fieldset>
 
-<fieldset><legend>منبع</legend><div class="admin-form-grid">
+<fieldset><legend>منبع و اولویت</legend><div class="admin-form-grid">
     <label>نام منبع<input class="teelle-input" name="metadata[source_title]" value="{{ $value('source_title') }}" required maxlength="255"></label>
     <label>نشانی منبع<input class="teelle-input" dir="ltr" type="url" name="metadata[source_url]" value="{{ $value('source_url') }}" required maxlength="2048"></label>
     <label>ریشه فرهنگی<input class="teelle-input" name="metadata[cultural_origin]" value="{{ $value('cultural_origin') }}" required maxlength="120"></label>
+    <label>اولویت محتوا<select class="teelle-input" name="metadata[content_priority]">@foreach($priorities as $option=>$label)<option value="{{ $option }}" @selected($value('content_priority', 'normal') === $option)>{{ $label }}</option>@endforeach</select></label>
+    <label class="admin-field-wide">دلیل اولویت<input class="teelle-input" name="metadata[priority_reason]" value="{{ $value('priority_reason') }}" maxlength="500"></label>
 </div></fieldset>

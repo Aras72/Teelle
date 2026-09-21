@@ -6,10 +6,31 @@
         'space' => ['lap'=>'روی پا یا بغل','small'=>'فضای کوچک','room'=>'اتاق','large'=>'فضای بزرگ','outdoor'=>'فضای باز'],
         'noise' => ['quiet'=>'کم‌صدا','moderate'=>'صدای معمولی','loud'=>'پرسروصدا'],
         'mess' => ['none'=>'بدون کثیفی','light'=>'کثیفی کم','messy'=>'کثیف‌کاری'],
-        'interaction' => ['side_by_side'=>'کنار هم','cooperative'=>'همکاری','competitive'=>'رقابتی','pretend'=>'بازی خیالی','conversation'=>'گفت‌وگو'],
+        'interaction' => ['side_by_side'=>'کنار هم','cooperative'=>'همکاری','رقابتی'=>'رقابتی','pretend'=>'بازی خیالی','conversation'=>'گفت‌وگو'],
         'involvement' => ['active'=>'فعال','shared'=>'مشترک','light'=>'کم'],
         'setup' => ['none'=>'بدون آماده‌سازی','simple'=>'ساده','moderate'=>'متوسط'],
     ];
+    $fixed['interaction'] = ['side_by_side'=>'کنار هم','cooperative'=>'همکاری','competitive'=>'رقابتی','pretend'=>'بازی خیالی','conversation'=>'گفت‌وگو'];
+    $priorities = ['high'=>'بالا','normal'=>'معمولی','low'=>'پایین'];
+    // DEC-059: برای فیلدهای دسته‌ای علاوه بر منوی کشوییِ مقدار اصلی، چک‌باکسِ همه گزینه‌ها هست
+    // تا در بعضی موارد چند گزینه انتخاب شود؛ گزینه‌های اضافی به‌صورت جانبی ذخیره می‌شوند.
+    $multiSelectFields = ['situations', 'locations', 'moods', 'tags', 'safety_flags', 'player_requirement',
+        'space_required', 'noise_level', 'mess_level', 'interaction_type', 'caregiver_involvement', 'setup_complexity'];
+    $checkboxes = [
+        'situations' => ['label' => 'موقعیت‌ها', 'options' => $options['situations']],
+        'locations' => ['label' => 'مکان‌ها', 'options' => $options['locations']],
+        'moods' => ['label' => 'حال کودک', 'options' => $options['moods']],
+        'tags' => ['label' => 'برچسب‌ها', 'options' => $options['tags']],
+        'safety_flags' => ['label' => 'نکات ایمنی ساختاری', 'options' => $options['safety']],
+        'player_requirement' => ['label' => 'ترکیب بازیکنان', 'options' => $options['players']],
+        'space_required' => ['label' => 'فضای لازم', 'options' => $fixed['space']],
+        'noise_level' => ['label' => 'میزان صدا', 'options' => $fixed['noise']],
+        'mess_level' => ['label' => 'میزان کثیفی', 'options' => $fixed['mess']],
+        'interaction_type' => ['label' => 'نوع تعامل', 'options' => $fixed['interaction']],
+        'caregiver_involvement' => ['label' => 'مشارکت همراه', 'options' => $fixed['involvement']],
+        'setup_complexity' => ['label' => 'سختی آماده‌سازی', 'options' => $fixed['setup']],
+    ];
+    $selected = fn (string $field): array => old("game.metadata.$field", is_array(old("game.metadata.$field")) ? old("game.metadata.$field") : []);
 @endphp
 <x-layouts.app title="افزودن بازی‌ها" description="ورود بازی با فایل Excel یا فرم ساده">
     <div class="admin-shell teelle-container admin-import-page">
@@ -29,8 +50,8 @@
 
         <section class="admin-panel" aria-labelledby="manual-game-title">
             <h2 id="manual-game-title">افزودن یک بازی با فرم</h2>
-            <p>این فرم همان اطلاعات اصلی تمپلیت Excel را می‌گیرد. بازی بعد از بررسی شما فقط به‌صورت پیش‌نویس اضافه می‌شود. تصویر را پس از افزودن پیش‌نویس، از صفحه ویرایش همان بازی بارگذاری می‌کنید تا بررسی امنیتی رسانه انجام شود.</p>
-            <form class="admin-form admin-game-entry" method="post" action="{{ route('admin.content.imports.form.preview') }}">@csrf
+            <p>این فرم همه اطلاعات تمپلیت Excel را می‌گیرد؛ برای فیلدهای دسته‌ای علاوه بر منوی کشوییِ مقدار اصلی، چک‌باکس همه گزینه‌ها هست تا چند انتخاب ثبت شود. بازی بعد از بررسی شما فقط به‌صورت پیش‌نویس اضافه می‌شود. تصویر پس از افزودن پیش‌نویس، از صفحه ویرایش همان بازی قابل بارگذاری مجدد است.</p>
+            <form class="admin-form admin-game-entry" method="post" enctype="multipart/form-data" action="{{ route('admin.content.imports.form.preview') }}">@csrf
                 <fieldset><legend>معرفی بازی</legend><div class="admin-form-grid">
                     <label>نام کوتاه انگلیسی برای نشانی صفحه<input class="teelle-input" dir="ltr" name="game[slug]" value="{{ old('game.slug') }}" required maxlength="120" placeholder="paper-tower"></label>
                     <label>عنوان بازی<input class="teelle-input" name="game[title]" value="{{ old('game.title') }}" required maxlength="180"></label>
@@ -38,54 +59,60 @@
                     <label class="admin-field-wide">روش بازی، هر مرحله در یک خط<textarea class="teelle-input" name="game[instructions_text]" rows="5" required>{{ old('game.instructions_text') }}</textarea></label>
                     <label class="admin-field-wide">نکته ایمنی<textarea class="teelle-input" name="game[safety_copy]" rows="3" required>{{ old('game.safety_copy') }}</textarea></label>
                     <label class="admin-field-wide">موارد منع، هر مورد در یک خط<textarea class="teelle-input" name="game[contraindications_text]" rows="2">{{ old('game.contraindications_text') }}</textarea></label>
-                    <label>سطح نظارت<select class="teelle-input" name="game[supervision_level]" required>@foreach($fixed['supervision'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
+                    <label>سطح نظارت<select class="teelle-input" name="game[supervision_level]" required>@foreach($fixed['supervision'] as $value=>$label)<option value="{{ $value }}" @selected(old('game.supervision_level') === $value)>{{ $label }}</option>@endforeach</select></label>
+                    <fieldset class="admin-field-wide"><legend>سطح نظارت — گزینه‌های بیشتر</legend><div class="admin-choice-grid">@foreach($fixed['supervision'] as $value=>$label)<label class="teelle-check"><input type="checkbox" name="game[alternatives][supervision_level][]" value="{{ $value }}" @checked(in_array($value, old('game.alternatives.supervision_level', []), true))><span>{{ $label }}</span></label>@endforeach</div></fieldset>
                 </div></fieldset>
 
                 <fieldset><legend>سن، زمان و همراهان</legend><div class="admin-form-grid">
-                    <label>بازه سنی<select class="teelle-input" name="game[metadata][age_band]" required>@foreach($options['age_bands'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>شروع سن<select class="teelle-input" name="game[metadata][minimum_age_months]" required>@foreach($ageStarts as [$value,$label])<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>پایان سن<select class="teelle-input" name="game[metadata][maximum_age_months_exclusive]" required>@foreach($ageEnds as [$value,$label])<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>حداقل زمان، دقیقه<input class="teelle-input" type="number" name="game[metadata][duration_min_minutes]" min="1" max="240" required></label>
-                    <label>حداکثر زمان، دقیقه<input class="teelle-input" type="number" name="game[metadata][duration_max_minutes]" min="1" max="360" required></label>
-                    <label>آماده‌سازی، دقیقه<input class="teelle-input" type="number" name="game[metadata][prep_time_minutes]" min="0" max="120" required></label>
-                    <label>حداقل کودک<input class="teelle-input" type="number" name="game[metadata][minimum_children]" min="1" max="20" value="1" required></label>
-                    <label>حداکثر کودک<input class="teelle-input" type="number" name="game[metadata][maximum_children]" min="1" max="30" value="1" required></label>
-                    <label>حداقل بزرگسال<input class="teelle-input" type="number" name="game[metadata][minimum_adults]" min="0" max="5" value="1" required></label>
-                    <label class="teelle-check"><input type="checkbox" name="game[metadata][required_adult]" value="1" checked><span>حضور بزرگسال ضروری است</span></label>
+                    <label>بازه سنی<select class="teelle-input" name="game[metadata][age_band]" required>@foreach($options['age_bands'] as $value=>$label)<option value="{{ $value }}" @selected(old('game.metadata.age_band') === $value)>{{ $label }}</option>@endforeach</select></label>
+                    <label>شروع سن<select class="teelle-input" name="game[metadata][minimum_age_months]" required>@foreach($ageStarts as [$value,$label])<option value="{{ $value }}" @selected(old('game.metadata.minimum_age_months') == $value)>{{ $label }}</option>@endforeach</select></label>
+                    <label>پایان سن<select class="teelle-input" name="game[metadata][maximum_age_months_exclusive]" required>@foreach($ageEnds as [$value,$label])<option value="{{ $value }}" @selected(old('game.metadata.maximum_age_months_exclusive') == $value)>{{ $label }}</option>@endforeach</select></label>
+                    <label>حداقل زمان، دقیقه<input class="teelle-input" type="number" name="game[metadata][duration_min_minutes]" min="1" max="240" value="{{ old('game.metadata.duration_min_minutes', 5) }}" required></label>
+                    <label>حداکثر زمان، دقیقه<input class="teelle-input" type="number" name="game[metadata][duration_max_minutes]" min="1" max="360" value="{{ old('game.metadata.duration_max_minutes', 15) }}" required></label>
+                    <label>آماده‌سازی، دقیقه<input class="teelle-input" type="number" name="game[metadata][prep_time_minutes]" min="0" max="120" value="{{ old('game.metadata.prep_time_minutes', 0) }}" required></label>
+                    <label>حداقل کودک<input class="teelle-input" type="number" name="game[metadata][minimum_children]" min="1" max="20" value="{{ old('game.metadata.minimum_children', 1) }}" required></label>
+                    <label>حداکثر کودک<input class="teelle-input" type="number" name="game[metadata][maximum_children]" min="1" max="30" value="{{ old('game.metadata.maximum_children', 1) }}" required></label>
+                    <label>حداقل بزرگسال<input class="teelle-input" type="number" name="game[metadata][minimum_adults]" min="0" max="5" value="{{ old('game.metadata.minimum_adults', 1) }}" required></label>
+                    <label class="teelle-check"><input type="checkbox" name="game[metadata][required_adult]" value="1" @checked(old('game.metadata.required_adult', '1') === '1')><span>حضور بزرگسال ضروری است</span></label>
                 </div></fieldset>
 
                 <fieldset><legend>شرایط اجرا</legend><div class="admin-form-grid">
-                    <label>فضای لازم<select class="teelle-input" name="game[metadata][space_required]" required>@foreach($fixed['space'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>میزان صدا<select class="teelle-input" name="game[metadata][noise_level]" required>@foreach($fixed['noise'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>میزان کثیفی<select class="teelle-input" name="game[metadata][mess_level]" required>@foreach($fixed['mess'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>انرژی کودک<select class="teelle-input" name="game[metadata][child_energy]" required>@foreach($options['energy_levels'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>انرژی همراه<select class="teelle-input" name="game[metadata][caregiver_energy]" required>@foreach($options['energy_levels'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>نوع تعامل<select class="teelle-input" name="game[metadata][interaction_type]" required>@foreach($fixed['interaction'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>مشارکت همراه<select class="teelle-input" name="game[metadata][caregiver_involvement]" required>@foreach($fixed['involvement'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>سختی آماده‌سازی<select class="teelle-input" name="game[metadata][setup_complexity]" required>@foreach($fixed['setup'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>ترکیب بازیکنان<select class="teelle-input" name="game[metadata][player_requirement]" required>@foreach($options['players'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
+                    @foreach(['space_required'=>'فضای لازم','noise_level'=>'میزان صدا','mess_level'=>'میزان کثیفی','interaction_type'=>'نوع تعامل','caregiver_involvement'=>'مشارکت همراه','setup_complexity'=>'سختی آماده‌سازی'] as $field=>$label)
+                        @php($map = match($field) {'space_required'=>'space','noise_level'=>'noise','mess_level'=>'mess','interaction_type'=>'interaction','caregiver_involvement'=>'involvement',default=>'setup'})
+                        <label>{{ $label }}<select class="teelle-input" name="game[metadata][{{ $field }}]" required>@foreach($fixed[$map] as $value=>$title)<option value="{{ $value }}" @selected(old('game.metadata.'.$field) === $value)>{{ $title }}</option>@endforeach</select></label>
+                    @endforeach
+                    <label>انرژی کودک<select class="teelle-input" name="game[metadata][child_energy]" required>@foreach($options['energy_levels'] as $value=>$label)<option value="{{ $value }}" @selected(old('game.metadata.child_energy') === $value)>{{ $label }}</option>@endforeach</select></label>
+                    <label>انرژی همراه<select class="teelle-input" name="game[metadata][caregiver_energy]" required>@foreach($options['energy_levels'] as $value=>$label)<option value="{{ $value }}" @selected(old('game.metadata.caregiver_energy') === $value)>{{ $label }}</option>@endforeach</select></label>
+                    <label>ترکیب بازیکنان<select class="teelle-input" name="game[metadata][player_requirement]" required>@foreach($options['players'] as $value=>$label)<option value="{{ $value }}" @selected(old('game.metadata.player_requirement') === $value)>{{ $label }}</option>@endforeach</select></label>
                 </div></fieldset>
 
-                @foreach(['situations'=>'موقعیت‌ها','locations'=>'مکان‌ها','moods'=>'حال کودک','tags'=>'برچسب‌ها','safety'=>'نکات ایمنی ساختاری'] as $key=>$label)
-                    @php($field = $key === 'safety' ? 'safety_flags' : $key)
-                    <fieldset><legend>{{ $label }}</legend><div class="admin-choice-grid">@foreach($options[$key] as $value=>$title)<label class="teelle-check"><input type="checkbox" name="game[metadata][{{ $field }}][]" value="{{ $value }}"><span>{{ $title }}</span></label>@endforeach</div></fieldset>
+                @foreach($checkboxes as $field=>$group)
+                    <fieldset><legend>{{ $group['label'] }} — انتخاب چندگانه</legend><div class="admin-choice-grid">@foreach($group['options'] as $value=>$title)<label class="teelle-check"><input type="checkbox" name="game[metadata][{{ $field }}][]" value="{{ $value }}" @checked(in_array($value, $selected($field), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
                 @endforeach
 
                 <fieldset><legend>وسایل</legend><div class="admin-material-grid">@foreach([0,1,2,3] as $index)<div>
-                    <label>وسیله {{ $index + 1 }}<select class="teelle-input" name="game[metadata][materials][{{ $index }}][slug]"><option value="">بدون وسیله</option>@foreach($options['materials'] as $value=>$label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></label>
-                    <label>وضعیت<select class="teelle-input" name="game[metadata][materials][{{ $index }}][requirement]"><option value="required">لازم</option><option value="optional">اختیاری</option></select></label>
-                    <label>توضیح مقدار<input class="teelle-input" name="game[metadata][materials][{{ $index }}][quantity_note]"></label>
+                    <label>وسیله {{ $index + 1 }}<select class="teelle-input" name="game[metadata][materials][{{ $index }}][slug]"><option value="">بدون وسیله</option>@foreach($options['materials'] as $value=>$label)<option value="{{ $value }}" @selected(old("game.metadata.materials.$index.slug") === $value)>{{ $label }}</option>@endforeach</select></label>
+                    <label>وضعیت<select class="teelle-input" name="game[metadata][materials][{{ $index }}][requirement]"><option value="required" @selected(old("game.metadata.materials.$index.requirement") === 'required')>لازم</option><option value="optional" @selected(old("game.metadata.materials.$index.requirement") === 'optional')>اختیاری</option></select></label>
+                    <label>توضیح مقدار<input class="teelle-input" name="game[metadata][materials][{{ $index }}][quantity_note]" value="{{ old("game.metadata.materials.$index.quantity_note") }}"></label>
                 </div>@endforeach</div></fieldset>
 
-                <fieldset><legend>منبع</legend><div class="admin-form-grid">
-                    <label>نام منبع<input class="teelle-input" name="game[metadata][source_title]" required maxlength="255"></label>
-                    <label>نشانی منبع<input class="teelle-input" dir="ltr" type="url" name="game[metadata][source_url]" required maxlength="2048" placeholder="https://example.com"></label>
-                    <label>ریشه فرهنگی<input class="teelle-input" name="game[metadata][cultural_origin]" required maxlength="120"></label>
+                <fieldset><legend>منبع و اولویت</legend><div class="admin-form-grid">
+                    <label>نام منبع<input class="teelle-input" name="game[metadata][source_title]" value="{{ old('game.metadata.source_title') }}" required maxlength="255"></label>
+                    <label>نشانی منبع<input class="teelle-input" dir="ltr" type="url" name="game[metadata][source_url]" value="{{ old('game.metadata.source_url') }}" required maxlength="2048" placeholder="https://example.com"></label>
+                    <label>ریشه فرهنگی<input class="teelle-input" name="game[metadata][cultural_origin]" value="{{ old('game.metadata.cultural_origin') }}" required maxlength="120"></label>
+                    <label>اولویت محتوا<select class="teelle-input" name="game[metadata][content_priority]">@foreach($priorities as $value=>$label)<option value="{{ $value }}" @selected(old('game.metadata.content_priority', 'normal') === $value)>{{ $label }}</option>@endforeach</select></label>
+                    <label class="admin-field-wide">دلیل اولویت<input class="teelle-input" name="game[metadata][priority_reason]" value="{{ old('game.metadata.priority_reason') }}" maxlength="500"></label>
                 </div></fieldset>
-                <x-ui.button type="submit">بررسی بازی و نمایش پیش‌نمایش</x-ui.button>
+
+                <fieldset><legend>تصویر بازی</legend><div class="admin-form-grid">
+                    <label>فایل تصویر<input class="teelle-input" type="file" name="game[image]" accept="image/jpeg,image/png,image/webp"></label>
+                    <label class="admin-field-wide">متن جایگزین تصویر<input class="teelle-input" name="game[image_alt_text]" value="{{ old('game.image_alt_text') }}" maxlength="500" placeholder="شرح کوتاه تصویر برای نابینایان"></label>
+                    <p class="admin-field-wide">تصویر اختیاری است و در قرنطینه امن ذخیره می‌شود؛ پس از تأیید بازی، به کاور پیش‌نویس وصل و در بازبینی مستقل رسانه بررسی می‌شود. اگر تصویر ندهید، بعداً از صفحه ویرایش بازی بارگذاری کنید.</p>
+                </div></fieldset>
+                <x-ui.button type="submit">بررسی بازی و پیش‌نمایش</x-ui.button>
             </form>
         </section>
 
-        <section class="admin-panel"><h2>فایل‌های ایمپورت‌شده</h2><p>هر فایل Excel یا فرمی که بررسی شده اینجا می‌ماند تا تصمیم بگیرید بازی‌هایش به پیش‌نویس برود یا برگردد.</p><ol class="admin-audit">@forelse($batches as $batch)<li><a href="{{ route('admin.content.imports.show', $batch) }}">ورود {{ $batch->public_id }}</a><span>{{ match($batch->status) {'previewed'=>'آماده تأیید','confirmed'=>'اضافه‌شده','rolled_back'=>'بازگردانی‌شده',default=>$batch->status} }}، {{ count($batch->payload_json) }} بازی</span></li>@empty<li>هنوز فایلی بررسی نشده است</li>@endforelse</ol>{{ $batches->links() }}</section>
+        <section class="admin-panel"><h2>فایل‌های ایمپورت‌شده</h2><p>هر فایل Excel یا فرمی که بررسی شده اینجا می‌ماند تا تصمیم بگیرید بازی‌هایش به پیش‌نویس برود یا برگردد.</p><ol class="admin-audit"> @forelse($batches as $batch)<li><a href="{{ route('admin.content.imports.show', $batch) }}">ورود {{ $batch->public_id }}</a><span>{{ match($batch->status) {'previewed'=>'آماده تأیید','confirmed'=>'اضافه‌شده','rolled_back'=>'بازگردانی‌شده',default=>$batch->status} }}، {{ count($batch->payload_json) }} بازی@($batch->media_asset_id ? '، با تصویر' : '')</span></li>@empty<li>هنوز فایلی بررسی نشده است</li>@endforelse</ol>{{ $batches->links() }}</section>
     </div>
 </x-layouts.app>

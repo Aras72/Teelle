@@ -14,6 +14,9 @@ final class TeelleXlsxGameReader
 
     private const MAX_UNCOMPRESSED_BYTES = 30_000_000;
 
+    /** @var array<string, int> */
+    private array $optionalColumns = [];
+
     private const IMPORT_HEADERS = [
         'شناسه انگلیسی', 'عنوان بازی', 'توضیح کوتاه', 'روش بازی؛ مرحله‌ها با | جدا شوند', 'نکته ایمنی', 'موارد منع؛ با | جدا شوند',
         'سطح نظارت', 'بازه سنی', 'شروع سن', 'پایان سن', 'حداقل زمان؛ دقیقه', 'حداکثر زمان؛ دقیقه', 'زمان آماده‌سازی؛ دقیقه',
@@ -23,6 +26,9 @@ final class TeelleXlsxGameReader
         'وضعیت وسیله ۱', 'توضیح وسیله ۱', 'وسیله ۲', 'وضعیت وسیله ۲', 'توضیح وسیله ۲', 'نکته ایمنی ساختاری ۱',
         'نکته ایمنی ساختاری ۲', 'نام منبع', 'نشانی منبع', 'ریشه فرهنگی',
     ];
+
+    /** ستون‌های اختیاری تمپلیت v3؛ در v2 غایب هستند و بدون خطا رد می‌شوند. */
+    private const OPTIONAL_HEADERS = ['اولویت محتوا', 'دلیل اولویت'];
 
     /** @return array<int, array<string, mixed>> */
     public function read(UploadedFile $file): array
@@ -145,6 +151,12 @@ final class TeelleXlsxGameReader
                 $this->fail('ستون‌های فایل با تمپلیت رسمی تیله هماهنگ نیستند');
             }
         }
+        // ستون‌های اختیاری v3 فقط وقتی معتبرند که سرستونشان دقیقاً در جای خودش باشد.
+        foreach (self::OPTIONAL_HEADERS as $offset => $title) {
+            if (($headers[$offset + 49] ?? '') === $title) {
+                $this->optionalColumns[$title] = $offset + 49;
+            }
+        }
 
         $games = [];
         foreach ($rows as $number => $row) {
@@ -190,11 +202,82 @@ final class TeelleXlsxGameReader
                 'setup_complexity' => $this->decode($this->value($row, 26), 'setup'),
                 'situations' => $this->decodedColumns($row, [27, 28, 29], 'situation'), 'locations' => $this->decodedColumns($row, [30, 31], 'location'),
                 'moods' => $this->decodedColumns($row, [32, 33], 'mood'), 'tags' => $this->decodedColumns($row, [34, 35, 36], 'tag'),
-                'player_requirement' => $this->decode($this->value($row, 37), 'player'), 'materials' => $materials,
+                'player_requirement' => $this->decode($this->firstPart($this->value($row, 37)), 'player'), 'materials' => $materials,
                 'safety_flags' => $this->decodedColumns($row, [44, 45], 'safety'), 'source_title' => $this->value($row, 46),
                 'source_url' => $this->value($row, 47), 'cultural_origin' => $this->value($row, 48),
+                'content_priority' => $this->priority($row), 'priority_reason' => $this->reason($row),
+                // DEC-059: در ستون‌های دسته‌ای، چند مقدار با ویرگول پذیرفته می‌شود؛
+                // مقدار نخست ستونِ اصلی و باقی در «alternatives» ذخیره می‌شود.
+                'alternatives' => $this->alternatives($row),
             ],
         ];
+    }
+
+    /** @param array<int, string> $row
+     * @return array<string, array<int, string>>
+     */
+    private function alternatives(array $row): array
+    {
+        $columnGroups = [
+            'situations' => [[27, 'situation'], [28, 'situation'], [29, 'situation']],
+            'locations' => [[30, 'location'], [31, 'location']],
+            'moods' => [[32, 'mood'], [33, 'mood']],
+            'tags' => [[34, 'tag'], [35, 'tag'], [36, 'tag']],
+            'safety_flags' => [[44, 'safety'], [45, 'safety']],
+            'player_requirement' => [[37, 'player']],
+            'space_required' => [[15, 'space']], 'noise_level' => [[16, 'noise']], 'mess_level' => [[17, 'mess']],
+            'interaction_type' => [[24, 'interaction']], 'caregiver_involvement' => [[25, 'involvement']],
+            'setup_complexity' => [[26, 'setup']], 'child_energy' => [[22, 'energy']], 'caregiver_energy' => [[23, 'energy']],
+        ];
+        $alternatives = [];
+        foreach ($columnGroups as $field => $columns) {
+            $values = [];
+            foreach ($columns as [$column, $type]) {
+                foreach ($this->commaParts($this->value($row, $column)) as $index => $part) {
+                    if ($index === 0 && $column === $columns[0][0]) {
+                        continue; // مقدار نخست ستون نخست، انتخاب اصلی است.
+                    }
+                    $decoded = $this->decode($part, $type);
+                    if ($decoded !== '') {
+                        $values[] = $decoded;
+                    }
+                }
+            }
+            if ($values !== []) {
+                $alternatives[$field] = array_values(array_unique($values));
+            }
+        }
+
+        return $alternatives;
+    }
+
+    /** @return array<int, string> */
+    private function commaParts(string $value): array
+    {
+        return array_values(array_filter(array_map('trim', explode(',', $value)), fn (string $part): bool => $part !== ''));
+    }
+
+    /** @param array<int, string> $row */
+    private function priority(array $row): string
+    {
+        $column = $this->optionalColumns['اولویت محتوا'] ?? null;
+        if ($column === null) {
+            return 'normal';
+        }
+        $map = ['خیلی بالا' => 'high', 'بالا' => 'high', 'معمولی' => 'normal', 'پایین' => 'low'];
+
+        return $map[$this->value($row, $column)] ?? 'normal';
+    }
+
+    /** @param array<int, string> $row */
+    private function reason(array $row): ?string
+    {
+        $column = $this->optionalColumns['دلیل اولویت'] ?? null;
+        if ($column === null) {
+            return null;
+        }
+
+        return $this->value($row, $column) ?: null;
     }
 
     /** @param array<int, string> $row
@@ -203,7 +286,47 @@ final class TeelleXlsxGameReader
      */
     private function decodedColumns(array $row, array $columns, string $type): array
     {
-        return array_values(array_unique(array_filter(array_map(fn (int $column): string => $this->decode($this->value($row, $column), $type), $columns))));
+        // DEC-059: هر ستون می‌تواند چند مقدار با ویرگول داشته باشد؛ مقدار نخستِ ستون نخست
+        // انتخاب اصلی است و بقیه هم در همان فهرست اصلی بازی می‌آیند (نه فقط alternatives).
+        $values = [];
+        foreach ($columns as $index => $column) {
+            $parts = $this->commaParts($this->value($row, $column));
+            foreach ($parts as $position => $part) {
+                if ($index === 0 && $position === 0) {
+                    continue; // انتخاب اصلی در ستون خودش جدا می‌شود.
+                }
+                $decoded = $this->decode($part, $type);
+                if ($decoded !== '') {
+                    $values[] = $decoded;
+                }
+            }
+        }
+
+        return array_values(array_unique(array_merge(
+            [$this->decode($this->firstColumnHead($row, $columns, $type), $type)],
+            $values,
+        )));
+    }
+
+    /**
+     * مقدار انتخاب اصلی: نخستین قطعه نخستین ستونِ گروه.
+     *
+     * @param  array<int, string>  $row
+     * @param  array<int, int>  $columns
+     */
+    private function firstColumnHead(array $row, array $columns, string $type): string
+    {
+        $parts = $this->commaParts($this->value($row, $columns[0]));
+
+        return $parts[0] ?? '';
+    }
+
+    /** نخستین قطعه یک مقدار ویرگولی. */
+    private function firstPart(string $value): string
+    {
+        $parts = $this->commaParts($value);
+
+        return $parts[0] ?? '';
     }
 
     /** @return array<int, string> */

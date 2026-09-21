@@ -82,6 +82,11 @@ if (-not (Test-LocalPort -Port $webPort)) {
     $env:DB_USERNAME = 'root'
     $env:DB_PASSWORD = ''
 
+    # هر بار که وب بالا می‌آید، مهاجرت‌های فقط-افزایشی و سیدر تاکسونومی ایدمپوتنت اجرا می‌شوند
+    # تا فرم‌ها هیچ‌وقت برچسب/ایمنی/بازه سنی خالی نبینند؛ داده‌های کاربر دست‌نخورده می‌ماند.
+    & $phpExecutable artisan migrate --force | Out-Null
+    & $phpExecutable artisan db:seed --class=SystemTaxonomySeeder --force | Out-Null
+
     Start-Process -FilePath $phpExecutable `
         -ArgumentList @('artisan', 'serve', '--host=127.0.0.1', "--port=$webPort") `
         -WorkingDirectory $webRoot `

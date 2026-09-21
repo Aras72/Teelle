@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-09-21 (DEC-059)
+
+- Aligned the add-game panel form with the official Excel template: added an optional quarantined image with alt text (attached to the draft cover on confirm while keeping independent media review), plus «اولویت محتوا» and «دلیل اولویت» fields.
+- Added multi-select checkboxes next to every categorical dropdown (supervision, situations, locations, moods, tags, player composition, space, noise, mess, interaction, involvement, setup) so several options can be recorded per game; extra choices persist in a new additive `game_facts.alternatives` JSON column and never affect the deterministic match engine.
+- Released Excel template v3 with comma-separated multi-value guidance and removed single-choice validations from categorical columns; the import reader now accepts comma-separated values and the two priority columns while still accepting v2 workbooks.
+- Fixed the empty tags/safety/age-band dropdowns on the local preview by running the idempotent taxonomy seeder and additive migrations on every local preview start; the form button was renamed to «بررسی بازی و پیش‌نمایش».
+
 ## 2026-09-21
 
 - Added safe category deletion to the magazine admin: empty categories can be removed, categories linked to articles or child categories are rejected with a clear Persian reason, and every deletion is audited.

@@ -3,12 +3,13 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 COMPLETE / PHASE 15 PAUSED BY OWNER
-Current Stage: DEC-058 OWNER MAINTENANCE SLICE (MAGAZINE CATEGORY DELETE, IMPORT FILE LIST, JIGARI/MAGAZINE SITE COPY, UPDATE SAFETY AND 7-DAY SESSION) IMPLEMENTED AND VERIFIED
+Current Stage: DEC-059 GAME FORM/EXCEL ALIGNMENT (IMAGE UPLOAD, CONTENT PRIORITY, MULTI-SELECT CATEGORICAL FIELDS, TEMPLATE V3, AUTO-SEEDED LOCAL TAXONOMY) IMPLEMENTED AND VERIFIED
 Current Task: انتظار برای تصاویر بازی‌ها و دستور صریح مالک برای آغاز PHASE 15
 Overall Status: PHASE 14 PASS / RELEASE QA NOT STARTED
 
 Last Completed:
 
+- DEC-059 (Maintenance، Phase 14 را باز نمی‌کند): فرم افزودن بازی با تمپلیت اکسل هماهنگ شد — بارگذاری تصویر اختیاری با متن جایگزین (قرنطینه امن و انتقال به کاور پس از تأیید)، فیلدهای «اولویت محتوا» و «دلیل اولویت»، و برای همه فیلدهای دسته‌ای (سطح نظارت، موقعیت، مکان، حال، برچسب، ترکیب بازیکنان، فضا/صدا/کثیفی، تعامل، مشارکت، آماده‌سازی) چک‌باکس چندگزینه‌ای کنار منوی کشوییِ مقدار اصلی. گزینه‌های اضافی در ستون JSON `alternatives` روی `game_facts` ذخیره می‌شوند و موتور تطبیق را نمی‌شکنند. تمپلیت اکسل v3 با راهنمای «چند مقدار با ویرگول» صادر می‌شود و خواننده ایمپورت مقادیر ویرگولی و ستون‌های اولویت را می‌خواند (v2 هم پذیرفته می‌ماند). ریشه خالی‌بودن برچسب‌ها/نکات ایمنی/بازه سنی در پیش‌نمایش محلی پیدا شد: سیدر تاکسونومی اجرا نشده بود؛ حالا اسکریپت پیش‌نمایش در هر اجرا مهاجرت فقط-افزایشی و سیدر ایدمپوتنت تاکسونومی را اجرا می‌کند. دکمه فرم به «بررسی بازی و پیش‌نمایش» تغییر کرد. Regression کامل روی MySQL 8.4.11 ایزوله برابر 136/136 با 1216 assertion و بدون Skip PASS شد؛ JavaScript، Build، Blade و Pint نیز PASS هستند.
 - DEC-058 (Maintenance، Phase 14 را باز نمی‌کند): حذف امن دسته مجله، میکروکپی فارسی فیلدهای SEO، فهرست «فایل‌های ایمپورت‌شده» جای بلوک دائمی Pilot، ویرایش تیتر/معرفی جیگری و مجله و ترتیب شش‌حالتی منو در پنل فقط‌مدیر متن‌ها و چیدمان، پیش‌نمایش محلی دائمی روی MySQL ایزوله با Session/Cache دیتابیسی، تازه‌سازی پس‌زمینه‌ای کش استاتیک با پنجره یک‌خطی «سایت رو به‌روز کردیم» بر اساس TEELLE_DEPLOY_VERSION و بازه ریست هفت‌روزه نشست. Regression کامل روی MySQL 8.4.11 ایزوله برابر 130/130 با 1167 assertion و بدون Skip PASS شد؛ JavaScript 8/8، Build، Blade، Pint و Auditهای Composer/pnpm نیز PASS هستند.
 - Prompt 036: تیکت آزاد کاربر با پاسخ و وضعیت مدیریتی جایگزین سطح «درخواست‌های حساب» شد و گزارش از محدودیت هفتگی/۳۱روزه به بازه دلخواه تغییر کرد؛ MySQL، Regression، Build و QA مرورگر PASS هستند.
 - Prompt 035: سه گزینه انرژی همراه با Migration مستقل تضمین شدند، مسیر تا مرحله حال کودک تحت تست End-to-End قرار گرفت و جهت فلش بازگشت فرم برای RTL اصلاح شد.
