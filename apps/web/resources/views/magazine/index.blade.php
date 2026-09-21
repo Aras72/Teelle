@@ -1,9 +1,10 @@
+@php($siteCopy = app(\App\Site\SiteContent::class)->all())
 <x-layouts.app title="مجله تیله" description="قصه‌ها، راهنماها و ایده‌های واقعی برای وقت کنار کودک">
     <main class="magazine-page teelle-container">
         <header class="magazine-hero teelle-enter">
             <p class="page-kicker">مجله تیله</p>
-            <h1>{{ $category ? $category->title : 'چیزهایی برای خواندن، ساختن و باهم‌بودن' }}</h1>
-            <p>{{ $category?->description ?: 'قصه‌های شب، راهنمای بازی و ایده‌هایی که وقت واقعی کنار کودک را شیرین‌تر می‌کنند.' }}</p>
+            <h1>{{ $category ? $category->title : $siteCopy['magazine_title'] }}</h1>
+            <p>{{ $category?->description ?: $siteCopy['magazine_intro'] }}</p>
         </header>
         <nav class="magazine-categories" aria-label="موضوع‌های مجله">
             <a href="{{ route('magazine.index') }}" @class(['is-active' => ! $category])>همه</a>

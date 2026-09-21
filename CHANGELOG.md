@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-09-21
+
+- Added safe category deletion to the magazine admin: empty categories can be removed, categories linked to articles or child categories are rejected with a clear Persian reason, and every deletion is audited.
+- Rewrote the article form's search-engine fields in plain Persian microcopy: «عنوان در نتیجه جست‌وجو» and «توضیح کوتاه زیر نتیجه جست‌وجو» with guidance that leaving them empty reuses the article title.
+- Replaced the permanent bundled-pilot block on the add-games page with a persistent «فایل‌های ایمپورت‌شده» list of every reviewed Excel/form batch so the owner can send each file to drafts or roll it back; shortened the upload button copy to «بررسی فایل و پیش‌نمایش».
+- Extended the manager-only copy/layout editor with Teelle Jigari and Teelle Magazine titles and intros plus a six-way navigation order control; the public header, Jigari page and magazine index now render this managed copy and legacy stored nav orders keep rendering.
+- Hardened update flow: the local preview now runs on the persistent isolated MySQL with database sessions/cache, the service worker refreshes static cache in the background on each deploy and a one-line «سایت رو به‌روز کردیم؛ لطفاً صفحه را دوباره بارگذاری کنید» banner appears when the deployed version changes, so clearing browser cache is never required and user data survives cache clears.
+- Added a standard seven-day session lifetime (EnsureFreshSession): sessions expire to a fresh login while registration, child profiles and account data remain untouched.
+
 ## 2026-09-16
 
 - Replaced the account-request admin surface with general user tickets and audited replies, and expanded the product report from a weekly/31-day window to any ordered date range with aligned CSV/PDF exports.

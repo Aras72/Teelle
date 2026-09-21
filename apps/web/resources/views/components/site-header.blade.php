@@ -1,8 +1,21 @@
 @php
     $siteCopy = app(\App\Site\SiteContent::class)->all();
-    $navItems = $siteCopy['nav_order'] === 'about_jigari'
-        ? [['route' => 'about', 'label' => $siteCopy['nav_about_label']], ['route' => 'jigari.show', 'label' => $siteCopy['nav_jigari_label']], ['route' => 'magazine.index', 'label' => 'مجله تیله']]
-        : [['route' => 'jigari.show', 'label' => $siteCopy['nav_jigari_label']], ['route' => 'about', 'label' => $siteCopy['nav_about_label']], ['route' => 'magazine.index', 'label' => 'مجله تیله']];
+    $navPages = [
+        'jigari' => ['route' => 'jigari.show', 'label' => $siteCopy['nav_jigari_label']],
+        'about' => ['route' => 'about', 'label' => $siteCopy['nav_about_label']],
+        'magazine' => ['route' => 'magazine.index', 'label' => $siteCopy['nav_magazine_label']],
+    ];
+    $navOrderMap = [
+        'jigari_about' => ['jigari', 'about', 'magazine'],
+        'about_jigari' => ['about', 'jigari', 'magazine'],
+        'jigari_about_magazine' => ['jigari', 'about', 'magazine'],
+        'jigari_magazine_about' => ['jigari', 'magazine', 'about'],
+        'magazine_jigari_about' => ['magazine', 'jigari', 'about'],
+        'about_jigari_magazine' => ['about', 'jigari', 'magazine'],
+        'about_magazine_jigari' => ['about', 'magazine', 'jigari'],
+        'magazine_about_jigari' => ['magazine', 'about', 'jigari'],
+    ];
+    $navItems = array_map(fn (string $page): array => $navPages[$page], $navOrderMap[$siteCopy['nav_order']] ?? $navOrderMap['jigari_about_magazine']);
 @endphp
 <header class="teelle-site-header">
     <div class="teelle-container teelle-site-header__bar">

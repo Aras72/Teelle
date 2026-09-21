@@ -24,7 +24,24 @@
                 <div class="admin-form-grid">
                     <label>عنوان تیله جیگری<input class="teelle-input" name="nav_jigari_label" value="{{ old('nav_jigari_label', $content['nav_jigari_label']) }}" maxlength="40" required></label>
                     <label>عنوان درباره تیله<input class="teelle-input" name="nav_about_label" value="{{ old('nav_about_label', $content['nav_about_label']) }}" maxlength="40" required></label>
-                    <label>ترتیب نمایش<select class="teelle-input" name="nav_order"><option value="jigari_about" @selected(old('nav_order', $content['nav_order']) === 'jigari_about')>تیله جیگری، سپس درباره تیله</option><option value="about_jigari" @selected(old('nav_order', $content['nav_order']) === 'about_jigari')>درباره تیله، سپس تیله جیگری</option></select></label>
+                    <label>عنوان مجله تیله<input class="teelle-input" name="nav_magazine_label" value="{{ old('nav_magazine_label', $content['nav_magazine_label']) }}" maxlength="40" required></label>
+                    <label>ترتیب نمایش<select class="teelle-input" name="nav_order">@foreach(['jigari_about_magazine' => 'تیله جیگری، درباره تیله، مجله تیله', 'jigari_magazine_about' => 'تیله جیگری، مجله تیله، درباره تیله', 'magazine_jigari_about' => 'مجله تیله، تیله جیگری، درباره تیله', 'about_jigari_magazine' => 'درباره تیله، تیله جیگری، مجله تیله', 'about_magazine_jigari' => 'درباره تیله، مجله تیله، تیله جیگری', 'magazine_about_jigari' => 'مجله تیله، درباره تیله، تیله جیگری'] as $value => $label)<option value="{{ $value }}" @selected(old('nav_order', $content['nav_order']) === $value)>{{ $label }}</option>@endforeach</select></label>
+                </div>
+            </section>
+
+            <section class="admin-panel">
+                <h2>تیله جیگری</h2>
+                <div class="admin-form-grid">
+                    <label>تیتر اصلی<input class="teelle-input" name="jigari_title" value="{{ old('jigari_title', $content['jigari_title']) }}" maxlength="80" required></label>
+                    <label class="admin-field-wide">متن معرفی<textarea class="teelle-input" name="jigari_intro" rows="3" maxlength="220" required>{{ old('jigari_intro', $content['jigari_intro']) }}</textarea></label>
+                </div>
+            </section>
+
+            <section class="admin-panel">
+                <h2>مجله تیله</h2>
+                <div class="admin-form-grid">
+                    <label>تیتر صفحه<input class="teelle-input" name="magazine_title" value="{{ old('magazine_title', $content['magazine_title']) }}" maxlength="80" required></label>
+                    <label class="admin-field-wide">متن معرفی<textarea class="teelle-input" name="magazine_intro" rows="3" maxlength="220" required>{{ old('magazine_intro', $content['magazine_intro']) }}</textarea></label>
                 </div>
             </section>
 

@@ -23,7 +23,7 @@
             <p><x-ui.button href="{{ route('admin.content.imports.template') }}" variant="secondary">دریافت تمپلیت Excel</x-ui.button></p>
             <form class="admin-form admin-import-upload" method="post" enctype="multipart/form-data" action="{{ route('admin.content.imports.excel.preview') }}">@csrf
                 <label>فایل Excel<input class="teelle-input" type="file" name="workbook" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required></label>
-                <x-ui.button type="submit">بررسی فایل و نمایش پیش‌نمایش</x-ui.button>
+                <x-ui.button type="submit">بررسی فایل و پیش‌نمایش</x-ui.button>
             </form>
         </section>
 
@@ -86,7 +86,6 @@
             </form>
         </section>
 
-        <section class="admin-panel"><h2>بازی‌های پیشنهادی اولیه تیله</h2><p>این فایل ۲۵ بازی پیشنهادی را فقط برای بررسی آماده می‌کند و همه بازی‌ها تا تکمیل تصویر و بازبینی مستقل، پیش‌نویس می‌مانند.</p><form method="post" action="{{ route('admin.content.imports.pilot.preview') }}">@csrf<x-ui.button type="submit" variant="secondary">دیدن پیش‌نمایش بازی‌های پیشنهادی</x-ui.button></form></section>
-        <section class="admin-panel"><h2>ورودهای گروهی اخیر</h2><ol class="admin-audit">@forelse($batches as $batch)<li><a href="{{ route('admin.content.imports.show', $batch) }}">ورود {{ $batch->public_id }}</a><span>{{ match($batch->status) {'previewed'=>'آماده تأیید','confirmed'=>'اضافه‌شده','rolled_back'=>'بازگردانی‌شده',default=>$batch->status} }}، {{ count($batch->payload_json) }} بازی</span></li>@empty<li>هنوز فایلی بررسی نشده است</li>@endforelse</ol>{{ $batches->links() }}</section>
+        <section class="admin-panel"><h2>فایل‌های ایمپورت‌شده</h2><p>هر فایل Excel یا فرمی که بررسی شده اینجا می‌ماند تا تصمیم بگیرید بازی‌هایش به پیش‌نویس برود یا برگردد.</p><ol class="admin-audit">@forelse($batches as $batch)<li><a href="{{ route('admin.content.imports.show', $batch) }}">ورود {{ $batch->public_id }}</a><span>{{ match($batch->status) {'previewed'=>'آماده تأیید','confirmed'=>'اضافه‌شده','rolled_back'=>'بازگردانی‌شده',default=>$batch->status} }}، {{ count($batch->payload_json) }} بازی</span></li>@empty<li>هنوز فایلی بررسی نشده است</li>@endforelse</ol>{{ $batches->links() }}</section>
     </div>
 </x-layouts.app>

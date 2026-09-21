@@ -1,4 +1,5 @@
 @php($digits = ['0'=>'۰','1'=>'۱','2'=>'۲','3'=>'۳','4'=>'۴','5'=>'۵','6'=>'۶','7'=>'۷','8'=>'۸','9'=>'۹',','=>'٬'])
+@php($siteCopy = app(\App\Site\SiteContent::class)->all())
 <x-layouts.app title="تیله جیگری" description="عضویت تیله جیگری برای همراهی شخصی‌تر خانواده‌ها">
     <section class="jigari-page teelle-container" aria-labelledby="jigari-title">
         <header class="jigari-hero teelle-enter">
@@ -8,8 +9,8 @@
                 <span class="jigari-orbit__track jigari-orbit__track--three"><span class="jigari-orbit__planet jigari-orbit__planet--three"><img src="{{ asset('images/marbles/jigari-ruby-v1.webp') }}" alt="" width="768" height="768"></span></span>
             </div>
             <p class="match-kicker">همراهی که با خانواده بزرگ می‌شود</p>
-            <h1 id="jigari-title">تیله جیگری</h1>
-            <p>پروفایل کودک، برنامه‌ریزی بازی، کشف دقیق‌تر و کیفیت بالاتر</p>
+            <h1 id="jigari-title">{{ $siteCopy['jigari_title'] }}</h1>
+            <p>{{ $siteCopy['jigari_intro'] }}</p>
             @if($active)
                 <div class="jigari-hero__actions">
                     <x-ui.button href="{{ route('jigari.games.index') }}">جست‌وجوی بازی‌ها</x-ui.button>

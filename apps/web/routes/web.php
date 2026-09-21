@@ -113,6 +113,12 @@ if (app()->environment('local')) {
     })->name('preview.errors');
 }
 
+Route::get('/teelle-asset-index.txt', function () {
+    return response(config('teelle.deploy_version', '0'), 200)
+        ->header('Content-Type', 'text/plain; charset=UTF-8')
+        ->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+})->name('asset.index');
+
 Route::prefix('admin/content')->name('admin.content.')->middleware('content.staff')->group(function (): void {
     Route::get('/', [ContentController::class, 'index'])->name('index');
     Route::get('/coverage', CoverageController::class)->name('coverage');
@@ -143,6 +149,7 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::get('/article-categories', [ArticleCategoryController::class, 'index'])->name('article-categories.index');
     Route::post('/article-categories', [ArticleCategoryController::class, 'store'])->name('article-categories.store');
     Route::put('/article-categories/{category:slug}', [ArticleCategoryController::class, 'update'])->name('article-categories.update');
+    Route::delete('/article-categories/{category:slug}', [ArticleCategoryController::class, 'destroy'])->name('article-categories.destroy');
     Route::get('/new', [ContentController::class, 'create'])->name('create');
     Route::post('/', [ContentController::class, 'store'])->name('store');
     Route::get('/versions/{version}/edit', [ContentController::class, 'edit'])->name('edit');
@@ -162,7 +169,6 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::get('/imports/template', [ImportController::class, 'template'])->name('imports.template');
     Route::post('/imports/excel/preview', [ImportController::class, 'previewExcel'])->name('imports.excel.preview');
     Route::post('/imports/form/preview', [ImportController::class, 'previewForm'])->name('imports.form.preview');
-    Route::post('/imports/pilot/preview', [ImportController::class, 'previewPilot'])->name('imports.pilot.preview');
     Route::get('/imports/{batch:public_id}', [ImportController::class, 'show'])->name('imports.show');
     Route::post('/imports/{batch:public_id}/confirm', [ImportController::class, 'confirm'])->name('imports.confirm');
     Route::post('/imports/{batch:public_id}/rollback', [ImportController::class, 'rollback'])->name('imports.rollback');

@@ -73,17 +73,6 @@ class ImportController extends Controller
         return redirect()->route('admin.content.imports.show', $batch)->with('status', 'بازی بررسی شد؛ هنوز چیزی به فهرست اضافه نشده است');
     }
 
-    public function previewPilot(Request $request, ContentImportService $service): RedirectResponse
-    {
-        abort_unless($request->user()->can('content.edit'), 403);
-        $path = resource_path('content/pilot-games-v1.php');
-        abort_unless(is_file($path), 404);
-        $batch = $service->preview($request->user(), json_encode(require $path, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-
-        return redirect()->route('admin.content.imports.show', $batch)
-            ->with('status', 'Pilot پیشنهادی فقط برای بازبینی آماده شد؛ هنوز هیچ بازی ایجاد نشده است');
-    }
-
     public function show(Request $request, ContentImportBatch $batch): View
     {
         abort_unless($request->user()->can('content.edit'), 403);

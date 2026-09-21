@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\ApplySecurityHeaders;
 use App\Http\Middleware\EnsureContentStaff;
+use App\Http\Middleware\EnsureFreshSession;
 use App\Http\Middleware\EnsureJigariActive;
 use App\Http\Middleware\EnsureOnboardingCompleted;
 use Illuminate\Foundation\Application;
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
+            EnsureFreshSession::class,
             ApplySecurityHeaders::class,
         ]);
 

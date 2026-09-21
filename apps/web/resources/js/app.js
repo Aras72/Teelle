@@ -117,6 +117,45 @@ const announcePwaUpdate = (registration) => {
     document.body.append(notice);
 };
 
+const checkDeployedVersion = async () => {
+    try {
+        const cached = await caches.open('teelle-static-v2').then((cache) => cache.match('/teelle-asset-index.txt'));
+        const cachedVersion = cached ? await cached.text() : null;
+        if (!cachedVersion) {
+            return;
+        }
+
+        const deployed = await fetch('/teelle-asset-index.txt', { cache: 'no-store' }).then((response) => response.text());
+        if (deployed !== cachedVersion && !sessionStorage.getItem('teelle-deploy-notice')) {
+            sessionStorage.setItem('teelle-deploy-notice', '1');
+            document.dispatchEvent(new CustomEvent('teelle:deploy', { detail: { from: cachedVersion, to: deployed } }));
+        }
+    } catch {
+        // The page stays fully usable when the version check is unavailable.
+    }
+};
+
+const showDeployNotice = () => {
+    if (document.querySelector('[data-deploy-notice]')) {
+        return;
+    }
+
+    const notice = document.createElement('div');
+    notice.className = 'pwa-update-notice';
+    notice.dataset.deployNotice = '';
+    notice.setAttribute('role', 'alert');
+    notice.innerHTML = '<span>سایت رو به‌روز کردیم؛ لطفاً صفحه را دوباره بارگذاری کنید</span><button type="button">بارگذاری دوباره</button>';
+
+    notice.querySelector('button').addEventListener('click', () => {
+        navigator.serviceWorker?.controller?.postMessage({ type: 'CLEAR_CACHES' });
+        window.location.reload();
+    });
+
+    document.body.append(notice);
+};
+
+document.addEventListener('teelle:deploy', showDeployNotice);
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
         try {
@@ -134,6 +173,8 @@ if ('serviceWorker' in navigator) {
                     }
                 });
             });
+
+            checkDeployedVersion();
         } catch {
             // The website remains fully usable when PWA registration is unavailable.
         }

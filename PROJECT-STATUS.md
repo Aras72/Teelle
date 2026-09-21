@@ -3,12 +3,13 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 COMPLETE / PHASE 15 PAUSED BY OWNER
-Current Stage: PROMPT 036 GENERAL SUPPORT TICKETS AND FLEXIBLE REPORTING IMPLEMENTED AND VERIFIED
+Current Stage: DEC-058 OWNER MAINTENANCE SLICE (MAGAZINE CATEGORY DELETE, IMPORT FILE LIST, JIGARI/MAGAZINE SITE COPY, UPDATE SAFETY AND 7-DAY SESSION) IMPLEMENTED AND VERIFIED
 Current Task: انتظار برای تصاویر بازی‌ها و دستور صریح مالک برای آغاز PHASE 15
 Overall Status: PHASE 14 PASS / RELEASE QA NOT STARTED
 
 Last Completed:
 
+- DEC-058 (Maintenance، Phase 14 را باز نمی‌کند): حذف امن دسته مجله، میکروکپی فارسی فیلدهای SEO، فهرست «فایل‌های ایمپورت‌شده» جای بلوک دائمی Pilot، ویرایش تیتر/معرفی جیگری و مجله و ترتیب شش‌حالتی منو در پنل فقط‌مدیر متن‌ها و چیدمان، پیش‌نمایش محلی دائمی روی MySQL ایزوله با Session/Cache دیتابیسی، تازه‌سازی پس‌زمینه‌ای کش استاتیک با پنجره یک‌خطی «سایت رو به‌روز کردیم» بر اساس TEELLE_DEPLOY_VERSION و بازه ریست هفت‌روزه نشست. Regression کامل روی MySQL 8.4.11 ایزوله برابر 130/130 با 1167 assertion و بدون Skip PASS شد؛ JavaScript 8/8، Build، Blade، Pint و Auditهای Composer/pnpm نیز PASS هستند.
 - Prompt 036: تیکت آزاد کاربر با پاسخ و وضعیت مدیریتی جایگزین سطح «درخواست‌های حساب» شد و گزارش از محدودیت هفتگی/۳۱روزه به بازه دلخواه تغییر کرد؛ MySQL، Regression، Build و QA مرورگر PASS هستند.
 - Prompt 035: سه گزینه انرژی همراه با Migration مستقل تضمین شدند، مسیر تا مرحله حال کودک تحت تست End-to-End قرار گرفت و جهت فلش بازگشت فرم برای RTL اصلاح شد.
 - Prompt 034: چهار موقعیت نهایی «بین وعده‌های غذایی»، «بعد از غذا»، «بین کارهای روزمره» و «قبل از خواب» برای تمام ورودی‌ها تصویب شد؛ Coverage فعال ۲۰ ترکیب است و گزینه‌های قدیمی بدون حذف روابط بازی‌ها غیرفعال می‌شوند.

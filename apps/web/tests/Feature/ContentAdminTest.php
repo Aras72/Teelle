@@ -217,22 +217,20 @@ class ContentAdminTest extends TestCase
         $this->assertDatabaseCount('games', 0);
     }
 
-    public function test_bundled_pilot_previews_and_imports_complete_drafts(): void
+    public function test_import_page_lists_imported_files_without_bundled_pilot_button(): void
     {
         $editor = $this->staff('content_editor');
-        $service = app(ContentImportService::class);
         $payload = require resource_path('content/pilot-games-v1.php');
-
         $this->assertCount(25, $payload);
-        $this->actingAs($editor)->post(route('admin.content.imports.pilot.preview'))->assertRedirect();
-        $batch = ContentImportBatch::query()->latest('id')->firstOrFail();
+
+        $batch = app(ContentImportService::class)->preview($editor, json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+        $this->actingAs($editor)->get(route('admin.content.imports.index'))->assertOk()
+            ->assertSee('فایل‌های ایمپورت‌شده')
+            ->assertSee('بررسی فایل و پیش‌نمایش')
+            ->assertDontSee('بازی‌های پیشنهادی اولیه تیله')
+            ->assertSee(route('admin.content.imports.show', $batch), false);
         $this->assertSame(0, Game::query()->count());
-
-        $service->confirm($editor, $batch);
-
-        $this->assertSame(25, Game::query()->where('status', GameStatus::Draft)->count());
-        $this->assertSame(25, DB::table('game_facts')->count());
-        $this->assertSame(0, Game::query()->where('status', GameStatus::Published)->count());
     }
 
     public function test_coverage_dashboard_reports_fail_closed_gaps(): void

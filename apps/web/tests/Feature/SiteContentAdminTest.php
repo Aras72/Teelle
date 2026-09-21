@@ -34,7 +34,9 @@ final class SiteContentAdminTest extends TestCase
     {
         $admin = $this->userWithRole('admin');
         $payload = [
-            'nav_jigari_label' => 'عضویت جیگری', 'nav_about_label' => 'قصه تیله', 'nav_order' => 'about_jigari',
+            'nav_jigari_label' => 'عضویت جیگری', 'nav_about_label' => 'قصه تیله', 'nav_magazine_label' => 'مجله تیله', 'nav_order' => 'about_magazine_jigari',
+            'jigari_title' => 'عضویت خانواده‌ها', 'jigari_intro' => 'برای بازی بیشتر کنار کودک، عضو شوید.',
+            'magazine_title' => 'خواندنی‌های تیله', 'magazine_intro' => 'مطالب کوتاه برای وقت کنار کودک.',
             'home_title' => 'همین حالا بازی را شروع کنیم', 'home_intro' => 'چند پاسخ کوتاه تا بازی واقعی',
             'home_cta_label' => 'بازی را پیدا کن', 'brand_promise' => 'کودک به هم‌بازی نیاز دارد',
             'home_alignment' => 'start', 'about_title' => 'کنار هم بازی کنیم',
@@ -44,6 +46,8 @@ final class SiteContentAdminTest extends TestCase
         $this->actingAs($admin)->put('/admin/content/site-content', $payload)->assertRedirect();
         $this->get('/')->assertOk()->assertSee('همین حالا بازی را شروع کنیم')->assertSee('بازی را پیدا کن');
         $this->get('/about')->assertOk()->assertSee('کنار هم بازی کنیم')->assertSee('شروع کنیم');
+        $this->get('/jigari')->assertOk()->assertSee('عضویت خانواده‌ها');
+        $this->get('/magazine')->assertOk()->assertSee('خواندنی‌های تیله');
         $this->assertDatabaseHas('audit_logs', ['action' => 'site.content.updated']);
     }
 
