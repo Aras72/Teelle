@@ -15,7 +15,8 @@
     ];
     $priorities = ['high'=>'بالا','normal'=>'معمولی','low'=>'پایین'];
     $value = fn (string $key, mixed $fallback = null) => old("metadata.$key", data_get($metadata, $key, $fallback));
-    $extras = fn (string $key): array => (array) (old("metadata.alternatives.$key") ?? data_get($metadata, "alternatives.$key", []));
+    // DEC-060: گزینه‌های اضافی هر فیلد؛ از ورود ناموفق قبلی یا از ستون alternatives دیتابیس خوانده می‌شود.
+    $extras = fn (string $key): array => (array) (old("metadata_extra.$key") ?? data_get($metadata, "alternatives.$key", []));
 @endphp
 
 <fieldset><legend>سن، زمان و همراهان</legend><div class="admin-form-grid">
@@ -32,7 +33,7 @@
     <input type="hidden" name="metadata[required_adult]" value="0">
     <label class="teelle-check"><input type="checkbox" name="metadata[required_adult]" value="1" @checked((bool) $value('required_adult'))><span>حضور بزرگسال ضروری است</span></label>
 </div>
-<fieldset><legend>ترکیب بازیکنان — انتخاب چندگانه</legend><div class="admin-choice-grid">@foreach($options['players'] as $option=>$title)<label class="teelle-check"><input type="checkbox" name="metadata[alternatives][player_requirement][]" value="{{ $option }}" @checked(in_array($option, $extras('player_requirement'), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
+<fieldset><legend>ترکیب بازیکنان — گزینه‌های دیگر</legend><div class="admin-choice-grid">@foreach($options['players'] as $option=>$title)<label class="teelle-check"><input type="checkbox" name="metadata_extra[player_requirement][]" value="{{ $option }}" @checked(in_array($option, array_merge($extras('player_requirement'), (array) $value('player_requirement')), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
 </fieldset>
 
 <fieldset><legend>شرایط اجرا</legend><div class="admin-form-grid">
@@ -40,10 +41,10 @@
     <label>انرژی کودک<select class="teelle-input" name="metadata[child_energy]" required>@foreach($options['energy_levels'] as $option=>$label)<option value="{{ $option }}" @selected($value('child_energy') === $option)>{{ $label }}</option>@endforeach</select></label>
     <label>انرژی همراه<select class="teelle-input" name="metadata[caregiver_energy]" required>@foreach($options['energy_levels'] as $option=>$label)<option value="{{ $option }}" @selected($value('caregiver_energy') === $option)>{{ $label }}</option>@endforeach</select></label>
 </div>
-@foreach(['space_required' => $fixed['space_required'], 'noise_level' => $fixed['noise_level'], 'mess_level' => $fixed['mess_level'], 'interaction_type' => $fixed['interaction_type'], 'caregiver_involvement' => $fixed['caregiver_involvement'], 'setup_complexity' => $fixed['setup_complexity']] as $field=>$items)
-    <fieldset><legend>{{ $labels[$field] }} — انتخاب چندگانه</legend><div class="admin-choice-grid">@foreach($items as $option=>$title)<label class="teelle-check"><input type="checkbox" name="metadata[alternatives][{{ $field }}][]" value="{{ $option }}" @checked(in_array($option, $extras($field), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
+@foreach(['space_required', 'noise_level', 'mess_level', 'interaction_type', 'caregiver_involvement', 'setup_complexity'] as $field)
+    <fieldset><legend>{{ $labels[$field] }} — گزینه‌های دیگر</legend><div class="admin-choice-grid">@foreach($fixed[$field] as $option=>$title)<label class="teelle-check"><input type="checkbox" name="metadata_extra[{{ $field }}][]" value="{{ $option }}" @checked(in_array($option, array_merge($extras($field), (array) $value($field)), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
 @endforeach
-<fieldset><legend>انرژی کودک و همراه — انتخاب چندگانه</legend><div class="admin-choice-grid">@foreach($options['energy_levels'] as $option=>$title)<label class="teelle-check"><input type="checkbox" name="metadata[alternatives][child_energy][]" value="{{ $option }}" @checked(in_array($option, $extras('child_energy'), true))><span>کودک: {{ $title }}</span></label><label class="teelle-check"><input type="checkbox" name="metadata[alternatives][caregiver_energy][]" value="{{ $option }}" @checked(in_array($option, $extras('caregiver_energy'), true))><span>همراه: {{ $title }}</span></label>@endforeach</div></fieldset>
+<fieldset><legend>انرژی کودک و همراه — گزینه‌های دیگر</legend><div class="admin-choice-grid">@foreach($options['energy_levels'] as $option=>$title)<label class="teelle-check"><input type="checkbox" name="metadata_extra[child_energy][]" value="{{ $option }}" @checked(in_array($option, array_merge($extras('child_energy'), (array) $value('child_energy')), true))><span>کودک: {{ $title }}</span></label><label class="teelle-check"><input type="checkbox" name="metadata_extra[caregiver_energy][]" value="{{ $option }}" @checked(in_array($option, array_merge($extras('caregiver_energy'), (array) $value('caregiver_energy')), true))><span>همراه: {{ $title }}</span></label>@endforeach</div></fieldset>
 </fieldset>
 
 @foreach(['situations'=>'موقعیت‌ها','locations'=>'مکان‌ها','moods'=>'حال کودک','tags'=>'برچسب‌ها','safety'=>'نکات ایمنی ساختاری'] as $key=>$label)

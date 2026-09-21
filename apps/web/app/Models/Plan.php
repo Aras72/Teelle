@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plan extends Model
 {
-    protected $fillable = ['code', 'title', 'duration_months', 'price_minor', 'currency', 'is_active'];
+    protected $fillable = ['code', 'title', 'description', 'duration_months', 'price_minor', 'currency', 'is_active'];
 
     protected function casts(): array
     {

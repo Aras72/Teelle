@@ -41,9 +41,11 @@ class GameFormExcelAlignmentTest extends TestCase
             ->assertSee('متن جایگزین تصویر')
             ->assertSee('اولویت محتوا')
             ->assertSee('دلیل اولویت')
-            ->assertSee('نکات ایمنی ساختاری — انتخاب چندگانه')
-            ->assertSee('برچسب‌ها — انتخاب چندگانه')
-            ->assertSee('سطح نظارت — گزینه‌های بیشتر');
+            ->assertSee('نکات ایمنی ساختاری')
+            ->assertSee('برچسب‌ها')
+            ->assertSee('سطح نظارت — گزینه‌های قابل قبول دیگر')
+            ->assertSee('سختی آماده‌سازی — گزینه‌های دیگر')
+            ->assertDontSee('انتخاب چندگانه');
     }
 
     public function test_edit_form_offers_multi_select_checkboxes_and_priority(): void
@@ -53,10 +55,11 @@ class GameFormExcelAlignmentTest extends TestCase
         app(GameContentWorkflow::class)->updateStructuredMetadata($editor, $version, $this->metadata());
 
         $this->actingAs($editor)->get(route('admin.content.edit', $version))->assertOk()
-            ->assertSee('سختی آماده‌سازی — انتخاب چندگانه')
-            ->assertSee('ترکیب بازیکنان — انتخاب چندگانه')
+            ->assertSee('سختی آماده‌سازی — گزینه‌های دیگر')
+            ->assertSee('ترکیب بازیکنان — گزینه‌های دیگر')
             ->assertSee('اولویت محتوا')
-            ->assertSee('دلیل اولویت');
+            ->assertSee('دلیل اولویت')
+            ->assertDontSee('انتخاب چندگانه');
     }
 
     public function test_form_preview_accepts_multiple_selections_priority_and_optional_image(): void
@@ -73,7 +76,11 @@ class GameFormExcelAlignmentTest extends TestCase
         $image = new UploadedFile(public_path('images/teelle-hero-marble-poster-v1.png'), 'cover.png', 'image/png', null, true);
 
         $this->actingAs($editor)->post(route('admin.content.imports.form.preview'), [
-            'game' => $this->form('چندگزینه‌ای') + ['metadata' => $metadata, 'image' => $image, 'image_alt_text' => 'کودک و بزرگسال با کارت‌های رنگی'],
+            'game' => $this->form('چندگزینه‌ای') + ['metadata' => $metadata, 'metadata_extra' => [
+                'setup_complexity' => ['moderate', 'simple'], 'interaction_type' => ['side_by_side'],
+                'player_requirement' => ['child-and-adult'], 'space_required' => ['room', 'small'],
+                'supervision_level' => ['same_room', 'check_in'],
+            ], 'image' => $image, 'image_alt_text' => 'کودک و بزرگسال با کارت‌های رنگی'],
         ])->assertRedirect();
 
         $batch = ContentImportBatch::query()->latest('id')->firstOrFail();
@@ -81,7 +88,11 @@ class GameFormExcelAlignmentTest extends TestCase
         $this->assertSame(['between-meals', 'before-bed'], $payload['metadata']['situations']);
         $this->assertSame(['cooperative', 'movement', 'sensory'], $payload['metadata']['tags']);
         $this->assertSame(['sensory_intensity', 'fall_height'], $payload['metadata']['safety_flags']);
-        $this->assertSame(['simple'], $payload['metadata']['alternatives']['setup_complexity']);
+        // مقدار اصلی (simple) از انتخاب‌های جانبی حذف می‌شود و فقط مازاد (moderate) می‌ماند.
+        $this->assertSame(['moderate'], $payload['metadata']['alternatives']['setup_complexity']);
+        // DEC-060: مقدار اصلی همان منوی کشویی می‌ماند و دست‌نخورده است.
+        $this->assertSame('simple', $payload['metadata']['setup_complexity']);
+        $this->assertSame(['check_in'], $payload['metadata']['alternatives']['supervision_level']);
         $this->assertSame('high', $payload['metadata']['content_priority']);
         $this->assertSame('برای شب‌های بی‌قراری', $payload['metadata']['priority_reason']);
         $this->assertNotNull($batch->media_asset_id);
@@ -102,7 +113,8 @@ class GameFormExcelAlignmentTest extends TestCase
         // alternatives و اولویت روی facts ثبت شده‌اند.
         $facts = DB::table('game_facts')->where('game_version_id', $versionId)->first();
         $alternatives = json_decode((string) $facts->alternatives, true);
-        $this->assertSame(['simple'], $alternatives['setup_complexity']);
+        $this->assertSame(['moderate'], $alternatives['setup_complexity']);
+        $this->assertSame(['check_in'], $alternatives['supervision_level']);
         $this->assertSame('high', $facts->content_priority);
         $this->assertSame('برای شب‌های بی‌قراری', $facts->priority_reason);
     }

@@ -1,7 +1,7 @@
 @php($digits = ['0'=>'۰','1'=>'۱','2'=>'۲','3'=>'۳','4'=>'۴','5'=>'۵','6'=>'۶','7'=>'۷','8'=>'۸','9'=>'۹'])
 <x-layouts.app title="پوشش محتوای تیله" description="ماتریس شفاف پوشش بازی‌های منتشرشده">
     <div class="admin-shell teelle-container">
-        <header class="admin-heading"><div><p class="admin-kicker">Coverage Matrix</p><h1>پوشش بازی‌های تأییدشده</h1></div><a href="{{ route('admin.content.index') }}">بازگشت</a></header>
+        <header class="admin-heading"><div><p class="admin-kicker">پنل مدیریت تیله</p><h1>ماتریس پوشش</h1></div><a href="{{ route('admin.content.index') }}">بازگشت</a></header>
         <section class="admin-panel">
             <p class="{{ $criticalGaps ? 'admin-error' : 'admin-notice' }}" role="status">
                 @if($criticalGaps) از مجموع {{ strtr((string) $cells->count(), $digits) }} ترکیب سن و موقعیت، در {{ strtr((string) $criticalGaps, $digits) }} ترکیب هنوز بازی کافی نداریم @else همه {{ strtr((string) $cells->count(), $digits) }} ترکیب سن و موقعیت حداقل سه بازی دارند @endif

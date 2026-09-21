@@ -19,6 +19,21 @@ class StructuredMetadataRequest extends FormRequest
             foreach (['situations', 'locations', 'moods', 'tags', 'safety_flags'] as $field) {
                 $metadata[$field] = array_values(array_filter(array_unique(array_map('strval', is_array($metadata[$field] ?? null) ? $metadata[$field] : []))));
             }
+            // DEC-060: چک‌باکس‌های «گزینه‌های دیگر» جدا (metadata_extra) ارسال می‌شوند؛ مقدار اصلی
+            // همان منوی کشویی می‌ماند (نخستین عضو اگر آرایه بود) و بقیه انتخاب‌ها جانبی ذخیره می‌شوند.
+            $extras = is_array($this->input('metadata_extra')) ? $this->input('metadata_extra') : [];
+            foreach (['space_required', 'noise_level', 'mess_level', 'interaction_type', 'caregiver_involvement',
+                'setup_complexity', 'player_requirement', 'child_energy', 'caregiver_energy'] as $field) {
+                $value = $metadata[$field] ?? null;
+                if (is_array($value)) {
+                    $value = $value[0] ?? null;
+                }
+                $metadata[$field] = filled($value) ? trim((string) $value) : null;
+                $alternatives = array_values(array_diff(array_filter(array_map('strval', (array) ($extras[$field] ?? []))), [$metadata[$field]]));
+                if ($alternatives !== []) {
+                    $metadata['alternatives'][$field] = $alternatives;
+                }
+            }
             // DEC-059: گزینه‌های اضافی چندانتخابی؛ خارج از موتور تطبیق و صرفاً اطلاعاتی.
             $metadata['alternatives'] = is_array($metadata['alternatives'] ?? null) ? $metadata['alternatives'] : [];
             foreach ($metadata['alternatives'] as $field => $extra) {
@@ -82,6 +97,8 @@ class StructuredMetadataRequest extends FormRequest
             'metadata.safety_flags' => ['required', 'array', 'min:1'], 'metadata.safety_flags.*' => ['required', 'distinct', 'exists:safety_rules,code'],
             'metadata.alternatives' => ['sometimes', 'array', 'max:12'],
             'metadata.alternatives.*' => ['array', 'max:12'], 'metadata.alternatives.*.*' => ['string', 'max:120'],
+            'metadata_extra' => ['sometimes', 'array', 'max:20'],
+            'metadata_extra.*' => ['array', 'max:20'], 'metadata_extra.*.*' => ['string', 'max:120'],
             'metadata.content_priority' => ['required', 'in:high,normal,low'],
             'metadata.priority_reason' => ['nullable', 'string', 'max:500'],
         ];

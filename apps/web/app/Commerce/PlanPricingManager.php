@@ -13,13 +13,14 @@ final class PlanPricingManager
 {
     public function __construct(private readonly AuditWriter $audit) {}
 
-    /** @param array{title: string, price_toman: int|string, is_active: bool} $data */
+    /** @param array{title: string, description?: string|null, price_toman: int|string, is_active: bool} $data */
     public function update(User $actor, Plan $plan, array $data): Plan
     {
         return DB::transaction(function () use ($actor, $plan, $data): Plan {
             $before = $this->snapshot($plan);
             $plan->update([
                 'title' => $data['title'],
+                'description' => filled($data['description'] ?? null) ? trim((string) $data['description']) : null,
                 'price_minor' => (int) $data['price_toman'] * 10,
                 'currency' => 'IRR',
                 'is_active' => $data['is_active'],
@@ -31,12 +32,13 @@ final class PlanPricingManager
         });
     }
 
-    /** @return array{code: string, title: string, duration_months: int, price_minor: int|null, currency: string, is_active: bool} */
+    /** @return array{code: string, title: string, description: string|null, duration_months: int, price_minor: int|null, currency: string, is_active: bool} */
     private function snapshot(Plan $plan): array
     {
         return [
             'code' => $plan->code,
             'title' => $plan->title,
+            'description' => $plan->description,
             'duration_months' => (int) $plan->duration_months,
             'price_minor' => $plan->price_minor === null ? null : (int) $plan->price_minor,
             'currency' => $plan->currency,

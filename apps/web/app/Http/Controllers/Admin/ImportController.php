@@ -69,7 +69,23 @@ class ImportController extends Controller
             ];
         }, is_array($metadata['materials'] ?? null) ? $metadata['materials'] : [])));
         foreach (['situations', 'locations', 'moods', 'tags', 'safety_flags'] as $field) {
-            $metadata[$field] = array_values(array_filter(array_unique(array_map('strval', is_array($metadata[$field] ?? null) ? $metadata[$field] : []))));
+            $metadata[$field] = $this->uniqueList($metadata[$field] ?? null);
+        }
+        // DEC-060: چک‌باکس‌های «گزینه‌های دیگر» فرم به‌صورت جدا (game[metadata_extra]) ارسال می‌شوند؛
+        // مقدار اصلی همان منوی کشویی می‌ماند و بقیه انتخاب‌ها به‌عنوان جانبی ذخیره می‌شوند.
+        $extras = is_array($game['metadata_extra'] ?? null) ? $game['metadata_extra'] : [];
+        foreach (['space_required', 'noise_level', 'mess_level', 'interaction_type', 'caregiver_involvement',
+            'setup_complexity', 'player_requirement', 'child_energy', 'caregiver_energy'] as $field) {
+            $alternatives = $this->uniqueList($extras[$field] ?? null);
+            $primary = trim((string) ($metadata[$field] ?? ''));
+            $alternatives = array_values(array_diff($alternatives, [$primary]));
+            if ($alternatives !== []) {
+                $metadata['alternatives'][$field] = $alternatives;
+            }
+        }
+        $supervisionExtras = array_values(array_diff($this->uniqueList($extras['supervision_level'] ?? null), [trim((string) ($game['supervision_level'] ?? ''))]));
+        if ($supervisionExtras !== []) {
+            $metadata['alternatives']['supervision_level'] = $supervisionExtras;
         }
         $metadata['alternatives'] = array_filter(array_map(function ($extra): array {
             return array_values(array_filter(array_unique(array_map('strval', is_array($extra) ? $extra : []))));
@@ -160,5 +176,23 @@ class ImportController extends Controller
     private function parts(string $value): array
     {
         return array_values(array_filter(array_map('trim', preg_split('/[|\r\n]+/u', $value) ?: [])));
+    }
+
+    /**
+     * ورودی چندگانه فرم/اکسل را به فهرست یکتا و تمیز تبدیل می‌کند؛
+     * وقتی منبع مقدار واحدی است (مثل منوی کشویی) خروجی تک‌عضوی است.
+     *
+     * @return array<int, string>
+     */
+    private function uniqueList(mixed $value): array
+    {
+        if (is_string($value)) {
+            $value = explode(',', $value);
+        }
+        if (! is_array($value)) {
+            return [];
+        }
+
+        return array_values(array_unique(array_filter(array_map('trim', array_map('strval', $value)))));
     }
 }

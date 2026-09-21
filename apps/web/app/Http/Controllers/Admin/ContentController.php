@@ -84,7 +84,25 @@ class ContentController extends Controller
 
     public function structuredMetadata(StructuredMetadataRequest $request, GameVersion $version, GameContentWorkflow $workflow): RedirectResponse
     {
-        return $this->attempt(fn () => $workflow->updateStructuredMetadata($request->user(), $version, $request->validated('metadata')),
+        // DEC-060: چک‌باکس‌های «گزینه‌های دیگر» (از جمله سطح نظارت) به گزینه‌های جانبی همان فیلد وصل می‌شوند؛
+        // مقدار اصلی هر فیلد همچنان در ستون خودش ذخیره می‌شود و موتور تطبیق تغییری نمی‌کند.
+        $metadata = $request->validated('metadata');
+        $extras = is_array($request->validated('metadata_extra')) ? $request->validated('metadata_extra') : [];
+        foreach ($extras as $field => $options) {
+            // در صفحه ویرایش، سطح نظارت در فرم جداگانه بالا ذخیره می‌شود؛ مقدار اصلی همین نسخه است.
+            $primary = $field === 'supervision_level'
+                ? (string) $version->supervision_level
+                : ($metadata[$field] ?? null);
+            if (is_array($primary)) {
+                $primary = $primary[0] ?? null;
+            }
+            $metadata['alternatives'][$field] = array_values(array_diff(array_filter(array_map('strval', (array) $options)), [(string) $primary]));
+            if ($metadata['alternatives'][$field] === []) {
+                unset($metadata['alternatives'][$field]);
+            }
+        }
+
+        return $this->attempt(fn () => $workflow->updateStructuredMetadata($request->user(), $version, $metadata),
             back()->with('status', 'Metadata کامل بازی ذخیره شد'));
     }
 

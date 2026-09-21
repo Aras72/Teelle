@@ -267,6 +267,7 @@ final class GameContentWorkflow
         foreach (['player_requirement' => 'player_requirements', 'child_energy' => 'energy_levels',
             'caregiver_energy' => 'energy_levels', 'interaction_type' => null, 'caregiver_involvement' => null,
             'setup_complexity' => null, 'space_required' => null, 'noise_level' => null, 'mess_level' => null,
+            'supervision_level' => null,
         ] as $field => $taxonomy) {
             $extra = $metadata['alternatives'][$field] ?? [];
             if (is_array($extra) && $extra !== []) {

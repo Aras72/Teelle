@@ -40,8 +40,11 @@ final class GameFormOptions
             'players' => $lookup('player_requirements'),
             'materials' => $lookup('materials'),
             'safety' => $lookup('safety_rules', 'code', 'copy'),
-            // DEC-059: فیلدهای دسته‌ای که مالک خواستار انتخاب چندگانه آن‌ها شد.
-            'multi_select_fields' => ['situations', 'locations', 'moods', 'tags', 'safety_flags', 'player_requirement'],
+            // DEC-060: همه فیلدهای دسته‌ای که مالک برایشان گزینه‌های اضافی می‌خواهد؛
+            // مقدار اصلی هم‌چنان در ستون خودش ذخیره می‌شود و موتور تطبیق تغییری نمی‌کند.
+            'multi_select_fields' => ['situations', 'locations', 'moods', 'tags', 'safety_flags', 'player_requirement',
+                'child_energy', 'caregiver_energy', 'space_required', 'noise_level', 'mess_level',
+                'interaction_type', 'caregiver_involvement', 'setup_complexity'],
         ];
     }
 }

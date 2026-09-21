@@ -39,8 +39,8 @@
                 @forelse($plans as $plan)
                     <article class="jigari-plan">
                         <img class="jigari-plan__marble" src="{{ asset('images/marbles/jigari-ruby-v1.webp') }}" alt="" width="768" height="768" aria-hidden="true">
-                        <h3>{{ strtr((string) $plan->duration_months, $digits) }} ماهه</h3>
-                        <p>همه امکانات تیله جیگری</p>
+                        <h3>{{ strtr($plan->title, $digits) }}</h3>
+                        @if (filled($plan->description))<p>{{ $plan->description }}</p>@endif
                         <strong class="jigari-plan__price">{{ strtr(number_format(intdiv((int) $plan->price_minor, 10)), $digits) }} تومان</strong>
                     </article>
                 @empty

@@ -243,7 +243,7 @@ class ContentAdminTest extends TestCase
         $this->assertSame(20, app(CoverageMatrix::class)->criticalGaps());
         $this->assertTrue($report->every(fn (object $cell): bool => (int) $cell->survivors === 0));
         $this->actingAs($reviewer)->get(route('admin.content.coverage'))
-            ->assertOk()->assertSee('پوشش بازی‌های تأییدشده')->assertSee('از مجموع ۲۰ ترکیب سن و موقعیت، در ۲۰ ترکیب هنوز بازی کافی نداریم')->assertSee('ماتریس فعلی از ۵ بازه سنی و ۴ موقعیت ساخته شده است')->assertSee('هر ترکیب باید حداقل سه بازی منتشرشده و تأییدشده داشته باشد');
+            ->assertOk()->assertSee('ماتریس پوشش')->assertSee('از مجموع ۲۰ ترکیب سن و موقعیت، در ۲۰ ترکیب هنوز بازی کافی نداریم')->assertSee('ماتریس فعلی از ۵ بازه سنی و ۴ موقعیت ساخته شده است')->assertSee('هر ترکیب باید حداقل سه بازی منتشرشده و تأییدشده داشته باشد');
     }
 
     public function test_only_active_daily_moments_are_offered_or_accepted_as_situations(): void

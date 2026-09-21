@@ -28,6 +28,6 @@ final class PlanController extends Controller
         abort_unless(in_array((int) $plan->duration_months, [3, 6, 12], true), 404);
         $pricing->update($request->user(), $plan, $request->validated());
 
-        return back()->with('status', 'قیمت و وضعیت پلن ذخیره شد');
+        return back()->with('status', 'پلن ذخیره شد؛ عنوان، توضیحات و قیمت به‌روزرسانی شد');
     }
 }

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-09-22 (DEC-060)
+
+- Extended multi-select to game conditions: space, noise, mess, interaction type, caregiver involvement, setup complexity, player composition and child/caregiver energy now offer «گزینه‌های دیگر» checkboxes alongside their primary dropdown (supervision included); extra choices are sent separately (`metadata_extra`), merged into the additive `game_facts.alternatives` JSON after removing the primary value, and the deterministic match engine is untouched.
+- Removed the phrase «انتخاب چندگانه» from every section title in both forms while keeping the capability.
+- Renamed the plans admin panel to «پلن‌های جیگری» and made plans fully editable: title, a new 500-character multi-line description column (additive migration), price and public visibility can all be changed per plan and render immediately on the public Jigari page (Persian-digit rendering for plan titles).
+- Replaced the English kickers in the coverage and plans admin pages («Coverage Matrix», «Jigari pricing») with Persian copy.
+
 ## 2026-09-21 (DEC-059)
 
 - Aligned the add-game panel form with the official Excel template: added an optional quarantined image with alt text (attached to the draft cover on confirm while keeping independent media review), plus «اولویت محتوا» and «دلیل اولویت» fields.

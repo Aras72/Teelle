@@ -33,10 +33,12 @@ final class JigariPlanPricingTest extends TestCase
         $this->actingAs($member)->get(route('admin.content.plans.index'))->assertForbidden();
         $this->actingAs($editor)->get(route('admin.content.plans.index'))->assertForbidden();
         $this->actingAs($admin)->get(route('admin.content.plans.index'))
-            ->assertOk()->assertSee('پلن‌ها و قیمت آزمایشی')->assertSee('۳۹۰٬۰۰۰');
+            ->assertOk()->assertSee('پلن‌های جیگری')->assertSee('۳۹۰٬۰۰۰');
 
         $this->actingAs($admin)->put(route('admin.content.plans.update', $plan), [
             'title' => ' تیله جیگری سه‌ماهه تازه ',
+            'description' => ' هر دو هفته یک جلسه خاطره‌بازی
+شامل راهنمای تصویری بازی‌ها ',
             'price_toman' => '۴۵۰٬۰۰۰',
             'is_active' => '1',
             'duration_months' => 1,
@@ -45,11 +47,18 @@ final class JigariPlanPricingTest extends TestCase
 
         $plan->refresh();
         $this->assertSame('تیله جیگری سه‌ماهه تازه', $plan->title);
+        $this->assertSame("هر دو هفته یک جلسه خاطره‌بازی\nشامل راهنمای تصویری بازی‌ها", $plan->description);
         $this->assertSame(4_500_000, $plan->price_minor);
         $this->assertSame('IRR', $plan->currency);
         $this->assertTrue($plan->is_active);
         $this->assertSame(3, $plan->duration_months);
         $this->assertSame('jigari-3m', $plan->code);
+
+        // DEC-060: عنوان و توضیحات ویرایش‌شده بلافاصله در صفحه عمومی تیله جیگری می‌آید.
+        $this->get(route('jigari.show'))->assertOk()
+            ->assertSee('تیله جیگری سه‌ماهه تازه')
+            ->assertSee('هر دو هفته یک جلسه خاطره‌بازی');
+
         $this->assertDatabaseHas('audit_logs', [
             'actor_user_id' => $admin->id,
             'actor_type' => 'staff',
@@ -85,7 +94,7 @@ final class JigariPlanPricingTest extends TestCase
         ])->assertRedirect();
 
         $this->get(route('jigari.show'))->assertOk()
-            ->assertDontSee('۱۲ ماهه')->assertDontSee('۱٬۱۹۰٬۰۰۰ تومان')
+            ->assertDontSee('۱٬۱۹۰٬۰۰۰ تومان')
             ->assertSee('۳۹۰٬۰۰۰ تومان')->assertSee('۶۹۰٬۰۰۰ تومان')
             ->assertDontSee('/checkout', false);
         $this->assertDatabaseCount('purchases', 0);

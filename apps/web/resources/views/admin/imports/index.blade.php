@@ -14,14 +14,16 @@
     $priorities = ['high'=>'بالا','normal'=>'معمولی','low'=>'پایین'];
     // DEC-059: برای فیلدهای دسته‌ای علاوه بر منوی کشوییِ مقدار اصلی، چک‌باکسِ همه گزینه‌ها هست
     // تا در بعضی موارد چند گزینه انتخاب شود؛ گزینه‌های اضافی به‌صورت جانبی ذخیره می‌شوند.
-    $multiSelectFields = ['situations', 'locations', 'moods', 'tags', 'safety_flags', 'player_requirement',
-        'space_required', 'noise_level', 'mess_level', 'interaction_type', 'caregiver_involvement', 'setup_complexity'];
     $checkboxes = [
         'situations' => ['label' => 'موقعیت‌ها', 'options' => $options['situations']],
         'locations' => ['label' => 'مکان‌ها', 'options' => $options['locations']],
         'moods' => ['label' => 'حال کودک', 'options' => $options['moods']],
         'tags' => ['label' => 'برچسب‌ها', 'options' => $options['tags']],
         'safety_flags' => ['label' => 'نکات ایمنی ساختاری', 'options' => $options['safety']],
+    ];
+    // DEC-060: برای شرایط اجرا، ترکیب بازیکنان و انرژی هم علاوه بر منوی مقدار اصلی،
+    // چک‌باکس گزینه‌های دیگر هست؛ گزینه‌های اضافی جدا ارسال و بعد از مقدار اصلی ذخیره می‌شوند.
+    $extraGroups = [
         'player_requirement' => ['label' => 'ترکیب بازیکنان', 'options' => $options['players']],
         'space_required' => ['label' => 'فضای لازم', 'options' => $fixed['space']],
         'noise_level' => ['label' => 'میزان صدا', 'options' => $fixed['noise']],
@@ -29,8 +31,12 @@
         'interaction_type' => ['label' => 'نوع تعامل', 'options' => $fixed['interaction']],
         'caregiver_involvement' => ['label' => 'مشارکت همراه', 'options' => $fixed['involvement']],
         'setup_complexity' => ['label' => 'سختی آماده‌سازی', 'options' => $fixed['setup']],
+        'child_energy' => ['label' => 'انرژی کودک', 'options' => $options['energy_levels']],
+        'caregiver_energy' => ['label' => 'انرژی همراه', 'options' => $options['energy_levels']],
     ];
     $selected = fn (string $field): array => old("game.metadata.$field", is_array(old("game.metadata.$field")) ? old("game.metadata.$field") : []);
+    $extraSelected = fn (string $field): array => old("game.metadata_extra.$field", is_array(old("game.metadata_extra.$field")) ? old("game.metadata_extra.$field") : []);
+    $primarySelected = fn (string $field): array => (array) old("game.metadata.$field", []);
 @endphp
 <x-layouts.app title="افزودن بازی‌ها" description="ورود بازی با فایل Excel یا فرم ساده">
     <div class="admin-shell teelle-container admin-import-page">
@@ -50,7 +56,7 @@
 
         <section class="admin-panel" aria-labelledby="manual-game-title">
             <h2 id="manual-game-title">افزودن یک بازی با فرم</h2>
-            <p>این فرم همه اطلاعات تمپلیت Excel را می‌گیرد؛ برای فیلدهای دسته‌ای علاوه بر منوی کشوییِ مقدار اصلی، چک‌باکس همه گزینه‌ها هست تا چند انتخاب ثبت شود. بازی بعد از بررسی شما فقط به‌صورت پیش‌نویس اضافه می‌شود. تصویر پس از افزودن پیش‌نویس، از صفحه ویرایش همان بازی قابل بارگذاری مجدد است.</p>
+            <p>این فرم همه اطلاعات تمپلیت Excel را می‌گیرد؛ برای هر فیلد دسته‌ای علاوه بر منوی کشویی، چک‌باکس گزینه‌های دیگر هم هست. بازی بعد از بررسی شما فقط به‌صورت پیش‌نویس اضافه می‌شود. تصویر پس از افزودن پیش‌نویس، از صفحه ویرایش همان بازی قابل بارگذاری مجدد است.</p>
             <form class="admin-form admin-game-entry" method="post" enctype="multipart/form-data" action="{{ route('admin.content.imports.form.preview') }}">@csrf
                 <fieldset><legend>معرفی بازی</legend><div class="admin-form-grid">
                     <label>نام کوتاه انگلیسی برای نشانی صفحه<input class="teelle-input" dir="ltr" name="game[slug]" value="{{ old('game.slug') }}" required maxlength="120" placeholder="paper-tower"></label>
@@ -60,7 +66,7 @@
                     <label class="admin-field-wide">نکته ایمنی<textarea class="teelle-input" name="game[safety_copy]" rows="3" required>{{ old('game.safety_copy') }}</textarea></label>
                     <label class="admin-field-wide">موارد منع، هر مورد در یک خط<textarea class="teelle-input" name="game[contraindications_text]" rows="2">{{ old('game.contraindications_text') }}</textarea></label>
                     <label>سطح نظارت<select class="teelle-input" name="game[supervision_level]" required>@foreach($fixed['supervision'] as $value=>$label)<option value="{{ $value }}" @selected(old('game.supervision_level') === $value)>{{ $label }}</option>@endforeach</select></label>
-                    <fieldset class="admin-field-wide"><legend>سطح نظارت — گزینه‌های بیشتر</legend><div class="admin-choice-grid">@foreach($fixed['supervision'] as $value=>$label)<label class="teelle-check"><input type="checkbox" name="game[alternatives][supervision_level][]" value="{{ $value }}" @checked(in_array($value, old('game.alternatives.supervision_level', []), true))><span>{{ $label }}</span></label>@endforeach</div></fieldset>
+                    <fieldset class="admin-field-wide"><legend>سطح نظارت — گزینه‌های قابل قبول دیگر</legend><div class="admin-choice-grid">@foreach($fixed['supervision'] as $value=>$label)<label class="teelle-check"><input type="checkbox" name="game[metadata_extra][supervision_level][]" value="{{ $value }}" @checked(in_array($value, array_merge($extraSelected('supervision_level'), (array) old('game.supervision_level', [])), true))><span>{{ $label }}</span></label>@endforeach</div></fieldset>
                 </div></fieldset>
 
                 <fieldset><legend>سن، زمان و همراهان</legend><div class="admin-form-grid">
@@ -84,10 +90,14 @@
                     <label>انرژی کودک<select class="teelle-input" name="game[metadata][child_energy]" required>@foreach($options['energy_levels'] as $value=>$label)<option value="{{ $value }}" @selected(old('game.metadata.child_energy') === $value)>{{ $label }}</option>@endforeach</select></label>
                     <label>انرژی همراه<select class="teelle-input" name="game[metadata][caregiver_energy]" required>@foreach($options['energy_levels'] as $value=>$label)<option value="{{ $value }}" @selected(old('game.metadata.caregiver_energy') === $value)>{{ $label }}</option>@endforeach</select></label>
                     <label>ترکیب بازیکنان<select class="teelle-input" name="game[metadata][player_requirement]" required>@foreach($options['players'] as $value=>$label)<option value="{{ $value }}" @selected(old('game.metadata.player_requirement') === $value)>{{ $label }}</option>@endforeach</select></label>
-                </div></fieldset>
+                </div>
+                @foreach($extraGroups as $field=>$group)
+                    <fieldset><legend>{{ $group['label'] }} — گزینه‌های دیگر</legend><div class="admin-choice-grid">@foreach($group['options'] as $value=>$title)<label class="teelle-check"><input type="checkbox" name="game[metadata_extra][{{ $field }}][]" value="{{ $value }}" @checked(in_array($value, array_merge($extraSelected($field), $primarySelected($field)), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
+                @endforeach
+                </fieldset>
 
                 @foreach($checkboxes as $field=>$group)
-                    <fieldset><legend>{{ $group['label'] }} — انتخاب چندگانه</legend><div class="admin-choice-grid">@foreach($group['options'] as $value=>$title)<label class="teelle-check"><input type="checkbox" name="game[metadata][{{ $field }}][]" value="{{ $value }}" @checked(in_array($value, $selected($field), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
+                    <fieldset><legend>{{ $group['label'] }}</legend><div class="admin-choice-grid">@foreach($group['options'] as $value=>$title)<label class="teelle-check"><input type="checkbox" name="game[metadata][{{ $field }}][]" value="{{ $value }}" @checked(in_array($value, $selected($field), true))><span>{{ $title }}</span></label>@endforeach</div></fieldset>
                 @endforeach
 
                 <fieldset><legend>وسایل</legend><div class="admin-material-grid">@foreach([0,1,2,3] as $index)<div>

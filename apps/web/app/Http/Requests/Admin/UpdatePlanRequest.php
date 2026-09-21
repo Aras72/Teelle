@@ -21,6 +21,8 @@ final class UpdatePlanRequest extends FormRequest
 
         $this->merge([
             'title' => trim((string) $this->input('title')),
+            // DEC-060: متن و جزئیات پلن حالا قابل ویرایش است؛ خط‌ها حفظ می‌شوند.
+            'description' => trim((string) $this->input('description')),
             'price_toman' => str_replace([',', '٬', '،', ' '], '', $price),
             'is_active' => $this->boolean('is_active'),
         ]);
@@ -31,6 +33,7 @@ final class UpdatePlanRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:120'],
+            'description' => ['nullable', 'string', 'max:500'],
             'price_toman' => ['required', 'integer', 'min:1000', 'max:999999999'],
             'is_active' => ['required', 'boolean'],
         ];
