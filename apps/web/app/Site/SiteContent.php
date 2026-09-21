@@ -10,7 +10,7 @@ use Throwable;
 
 final class SiteContent
 {
-    public const CACHE_KEY = 'teelle.site-content.v1';
+    public const CACHE_KEY = 'teelle.site-content.v2';
 
     public function defaults(): array
     {
@@ -30,9 +30,17 @@ final class SiteContent
     public function all(): array
     {
         try {
-            return Cache::rememberForever(self::CACHE_KEY, fn (): array => array_replace(
-                $this->defaults(), SiteContentSetting::query()->pluck('value', 'key')->all()
-            ));
+            // کش فقط مقادیر ذخیره‌شده در دیتابیس را نگه می‌دارد؛ مقادیر پیش‌فرض
+            // تازه‌ای که با آپدیت اضافه می‌شوند همیشه هنگام خواندن ادغام می‌شوند
+            // تا کش قدیمی نتواند صفحات عمومی را بعد از انتشار بشکند.
+            $stored = Cache::get(self::CACHE_KEY);
+            if (! is_array($stored)) {
+                $stored = SiteContentSetting::query()->pluck('value', 'key')->all();
+                Cache::forget(self::CACHE_KEY);
+                Cache::forever(self::CACHE_KEY, $stored);
+            }
+
+            return array_replace($this->defaults(), $stored);
         } catch (Throwable) {
             return $this->defaults();
         }
