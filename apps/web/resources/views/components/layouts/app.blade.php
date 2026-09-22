@@ -20,6 +20,8 @@
 
         <x-site-header />
 
+        <div data-deploy-notice-host></div>
+
         <main id="main-content" tabindex="-1">
             {{ $slot }}
         </main>

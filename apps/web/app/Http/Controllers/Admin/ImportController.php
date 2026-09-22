@@ -71,25 +71,33 @@ class ImportController extends Controller
         foreach (['situations', 'locations', 'moods', 'tags', 'safety_flags'] as $field) {
             $metadata[$field] = $this->uniqueList($metadata[$field] ?? null);
         }
-        // DEC-060: چک‌باکس‌های «گزینه‌های دیگر» فرم به‌صورت جدا (game[metadata_extra]) ارسال می‌شوند؛
-        // مقدار اصلی همان منوی کشویی می‌ماند و بقیه انتخاب‌ها به‌عنوان جانبی ذخیره می‌شوند.
+        // DEC-060: برای هر فیلد دسته‌ای فقط چک‌باکس هست؛ نخستین چک‌باکس علامت‌خورده انتخاب اصلی است
+        // و بقیه انتخاب‌ها جانبی ذخیره می‌شوند. موتور تطبیق تغییری نمی‌کند.
         $extras = is_array($game['metadata_extra'] ?? null) ? $game['metadata_extra'] : [];
-        foreach (['space_required', 'noise_level', 'mess_level', 'interaction_type', 'caregiver_involvement',
-            'setup_complexity', 'player_requirement', 'child_energy', 'caregiver_energy'] as $field) {
-            $alternatives = $this->uniqueList($extras[$field] ?? null);
-            $primary = trim((string) ($metadata[$field] ?? ''));
-            $alternatives = array_values(array_diff($alternatives, [$primary]));
-            if ($alternatives !== []) {
-                $metadata['alternatives'][$field] = $alternatives;
+        foreach (['supervision_level', 'player_requirement', 'space_required', 'noise_level', 'mess_level',
+            'interaction_type', 'caregiver_involvement', 'setup_complexity', 'child_energy', 'caregiver_energy'] as $field) {
+            $checked = $this->uniqueList($extras[$field] ?? null);
+            $fallback = $field === 'supervision_level' ? ($game[$field] ?? '') : ($metadata[$field] ?? '');
+            $primary = $checked[0] ?? trim((string) (is_array($fallback) ? ($fallback[0] ?? '') : $fallback));
+            if ($field === 'supervision_level') {
+                $game[$field] = $primary;
+            } else {
+                $metadata[$field] = $primary;
+            }
+            if (count($checked) > 1) {
+                $metadata['alternatives'][$field] = array_slice($checked, 1);
             }
         }
-        $supervisionExtras = array_values(array_diff($this->uniqueList($extras['supervision_level'] ?? null), [trim((string) ($game['supervision_level'] ?? ''))]));
-        if ($supervisionExtras !== []) {
-            $metadata['alternatives']['supervision_level'] = $supervisionExtras;
+        // نرمال‌سازی: حذف انتخاب اصلی از گزینه‌های جانبی و حفظ نام فیلد به‌عنوان کلید.
+        $alternatives = [];
+        foreach (is_array($metadata['alternatives'] ?? null) ? $metadata['alternatives'] : [] as $field => $extra) {
+            $primary = $field === 'supervision_level' ? (string) ($game['supervision_level'] ?? '') : (string) ($metadata[$field] ?? '');
+            $values = array_values(array_diff(array_filter(array_unique(array_map('strval', is_array($extra) ? $extra : []))), [$primary]));
+            if ($values !== []) {
+                $alternatives[(string) $field] = $values;
+            }
         }
-        $metadata['alternatives'] = array_filter(array_map(function ($extra): array {
-            return array_values(array_filter(array_unique(array_map('strval', is_array($extra) ? $extra : []))));
-        }, is_array($metadata['alternatives'] ?? null) ? $metadata['alternatives'] : []));
+        $metadata['alternatives'] = $alternatives;
         $metadata['content_priority'] = in_array((string) ($metadata['content_priority'] ?? 'normal'), ['high', 'normal', 'low'], true)
             ? (string) ($metadata['content_priority'] ?? 'normal') : 'normal';
         $metadata['priority_reason'] = trim((string) ($metadata['priority_reason'] ?? '')) ?: null;

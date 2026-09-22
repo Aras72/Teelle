@@ -43,9 +43,11 @@ class GameFormExcelAlignmentTest extends TestCase
             ->assertSee('دلیل اولویت')
             ->assertSee('نکات ایمنی ساختاری')
             ->assertSee('برچسب‌ها')
-            ->assertSee('سطح نظارت — گزینه‌های قابل قبول دیگر')
-            ->assertSee('سختی آماده‌سازی — گزینه‌های دیگر')
-            ->assertDontSee('انتخاب چندگانه');
+            ->assertSee('در دسترس مستقیم')
+            ->assertDontSee('انتخاب چندگانه')
+            // ممنوعیت اضافه‌نویسی: تیتر بخش‌ها فقط نام خودشان است.
+            ->assertDontSee('گزینه‌های دیگر')
+            ->assertDontSee('گزینه‌های قابل قبول دیگر');
     }
 
     public function test_edit_form_offers_multi_select_checkboxes_and_priority(): void
@@ -55,11 +57,12 @@ class GameFormExcelAlignmentTest extends TestCase
         app(GameContentWorkflow::class)->updateStructuredMetadata($editor, $version, $this->metadata());
 
         $this->actingAs($editor)->get(route('admin.content.edit', $version))->assertOk()
-            ->assertSee('سختی آماده‌سازی — گزینه‌های دیگر')
-            ->assertSee('ترکیب بازیکنان — گزینه‌های دیگر')
+            ->assertSee('سختی آماده‌سازی')
+            ->assertSee('ترکیب بازیکنان')
             ->assertSee('اولویت محتوا')
             ->assertSee('دلیل اولویت')
-            ->assertDontSee('انتخاب چندگانه');
+            ->assertDontSee('انتخاب چندگانه')
+            ->assertDontSee('گزینه‌های دیگر');
     }
 
     public function test_form_preview_accepts_multiple_selections_priority_and_optional_image(): void
@@ -88,10 +91,13 @@ class GameFormExcelAlignmentTest extends TestCase
         $this->assertSame(['between-meals', 'before-bed'], $payload['metadata']['situations']);
         $this->assertSame(['cooperative', 'movement', 'sensory'], $payload['metadata']['tags']);
         $this->assertSame(['sensory_intensity', 'fall_height'], $payload['metadata']['safety_flags']);
-        // مقدار اصلی (simple) از انتخاب‌های جانبی حذف می‌شود و فقط مازاد (moderate) می‌ماند.
-        $this->assertSame(['moderate'], $payload['metadata']['alternatives']['setup_complexity']);
-        // DEC-060: مقدار اصلی همان منوی کشویی می‌ماند و دست‌نخورده است.
-        $this->assertSame('simple', $payload['metadata']['setup_complexity']);
+        // DEC-060: انتخاب اصلی نخستین چک‌باکس علامت‌خورده است و بقیه جانبی ذخیره می‌شوند.
+        $this->assertSame('moderate', $payload['metadata']['setup_complexity']);
+        $this->assertSame(['simple'], $payload['metadata']['alternatives']['setup_complexity']);
+        $this->assertSame('room', $payload['metadata']['space_required']);
+        $this->assertSame(['small'], $payload['metadata']['alternatives']['space_required']);
+        $this->assertSame('side_by_side', $payload['metadata']['interaction_type']);
+        $this->assertSame('same_room', $payload['supervision_level']);
         $this->assertSame(['check_in'], $payload['metadata']['alternatives']['supervision_level']);
         $this->assertSame('high', $payload['metadata']['content_priority']);
         $this->assertSame('برای شب‌های بی‌قراری', $payload['metadata']['priority_reason']);
@@ -113,7 +119,7 @@ class GameFormExcelAlignmentTest extends TestCase
         // alternatives و اولویت روی facts ثبت شده‌اند.
         $facts = DB::table('game_facts')->where('game_version_id', $versionId)->first();
         $alternatives = json_decode((string) $facts->alternatives, true);
-        $this->assertSame(['moderate'], $alternatives['setup_complexity']);
+        $this->assertSame(['simple'], $alternatives['setup_complexity']);
         $this->assertSame(['check_in'], $alternatives['supervision_level']);
         $this->assertSame('high', $facts->content_priority);
         $this->assertSame('برای شب‌های بی‌قراری', $facts->priority_reason);

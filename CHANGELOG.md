@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-09-22 (DEC-061)
+
+- Redesigned the deploy notice as a single line with the «بارگذاری» button beside the text, now rendered at the top of the site between the main navigation and the central marble hero (via a `data-deploy-notice-host` slot); the PWA update notice uses the same slot.
+- Removed the categorical dropdowns from both game forms: every managed field (supervision, execution conditions, player composition, energies) is checkbox-only, the first checked box becomes the primary value, extra checks stay informational in `alternatives`, and an unchecked field keeps its previously stored (Excel) value.
+- Enforced the owner's no-extra-copy rule: «گزینه‌های دیگر» was removed from every section title in both forms — titles now carry only the field name.
+
 ## 2026-09-22 (DEC-060)
 
 - Extended multi-select to game conditions: space, noise, mess, interaction type, caregiver involvement, setup complexity, player composition and child/caregiver energy now offer «گزینه‌های دیگر» checkboxes alongside their primary dropdown (supervision included); extra choices are sent separately (`metadata_extra`), merged into the additive `game_facts.alternatives` JSON after removing the primary value, and the deterministic match engine is untouched.

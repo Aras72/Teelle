@@ -207,34 +207,46 @@ h6,
     font-synthesis: none;
 }
 
+/* پیام آپدیت: یک‌خطی در بالای سایت، بین منو و تیله مرکزی؛ دکمه کنار متن در همان خط. */
 .pwa-update-notice {
-    position: fixed;
-    inset-inline: max(var(--page-gutter), calc((100vw - var(--content-max)) / 2));
-    bottom: var(--space-4);
+    position: sticky;
+    top: var(--header-height);
     z-index: var(--layer-toast);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
-    max-width: 30rem;
-    min-height: var(--touch-target);
-    padding: var(--space-3) var(--space-4);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-container);
+    justify-content: center;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-2) var(--space-4);
+    border-block: 1px solid var(--border-subtle);
     background: var(--surface-elevated);
-    box-shadow: var(--shadow-medium);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+}
+
+.pwa-update-notice span {
+    white-space: nowrap;
 }
 
 .pwa-update-notice button {
-    min-height: var(--touch-target);
-    padding-inline: var(--space-4);
-    border: 0;
+    flex: none;
+    min-height: 2rem;
+    padding-inline: var(--space-3);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-pill);
-    background: var(--action-primary);
-    color: var(--text-on-action);
+    background: transparent;
+    color: inherit;
     font: inherit;
+    font-size: 0.875rem;
     font-weight: var(--font-weight-bold);
+    white-space: nowrap;
     cursor: pointer;
+}
+
+.pwa-update-notice button:hover {
+    background: var(--action-primary);
+    border-color: var(--action-primary);
+    color: var(--text-on-action);
 }
 
 .onboarding-page {
@@ -750,8 +762,8 @@ h6,
     }
 
     .pwa-update-notice {
-        align-items: stretch;
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
 

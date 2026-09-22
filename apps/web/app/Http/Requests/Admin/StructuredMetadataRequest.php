@@ -19,19 +19,18 @@ class StructuredMetadataRequest extends FormRequest
             foreach (['situations', 'locations', 'moods', 'tags', 'safety_flags'] as $field) {
                 $metadata[$field] = array_values(array_filter(array_unique(array_map('strval', is_array($metadata[$field] ?? null) ? $metadata[$field] : []))));
             }
-            // DEC-060: چک‌باکس‌های «گزینه‌های دیگر» جدا (metadata_extra) ارسال می‌شوند؛ مقدار اصلی
-            // همان منوی کشویی می‌ماند (نخستین عضو اگر آرایه بود) و بقیه انتخاب‌ها جانبی ذخیره می‌شوند.
+            // DEC-060: برای هر فیلد دسته‌ای فقط چک‌باکس هست؛ نخستین چک‌باکس علامت‌خورده انتخاب اصلی
+            // است و بقیه انتخاب‌ها جانبی ذخیره می‌شوند. سطح نظارت در فرم جداگانه بالا ذخیره می‌شود.
             $extras = is_array($this->input('metadata_extra')) ? $this->input('metadata_extra') : [];
-            foreach (['space_required', 'noise_level', 'mess_level', 'interaction_type', 'caregiver_involvement',
-                'setup_complexity', 'player_requirement', 'child_energy', 'caregiver_energy'] as $field) {
-                $value = $metadata[$field] ?? null;
-                if (is_array($value)) {
-                    $value = $value[0] ?? null;
+            foreach (['player_requirement', 'space_required', 'noise_level', 'mess_level', 'interaction_type',
+                'caregiver_involvement', 'setup_complexity', 'child_energy', 'caregiver_energy'] as $field) {
+                $checked = array_values(array_filter(array_map('strval', (array) ($extras[$field] ?? []))));
+                $metadata[$field] = $checked[0] ?? ($metadata[$field] ?? null);
+                if (is_array($metadata[$field])) {
+                    $metadata[$field] = $metadata[$field][0] ?? null;
                 }
-                $metadata[$field] = filled($value) ? trim((string) $value) : null;
-                $alternatives = array_values(array_diff(array_filter(array_map('strval', (array) ($extras[$field] ?? []))), [$metadata[$field]]));
-                if ($alternatives !== []) {
-                    $metadata['alternatives'][$field] = $alternatives;
+                if (count($checked) > 1) {
+                    $metadata['alternatives'][$field] = array_slice($checked, 1);
                 }
             }
             // DEC-059: گزینه‌های اضافی چندانتخابی؛ خارج از موتور تطبیق و صرفاً اطلاعاتی.
@@ -101,6 +100,21 @@ class StructuredMetadataRequest extends FormRequest
             'metadata_extra.*' => ['array', 'max:20'], 'metadata_extra.*.*' => ['string', 'max:120'],
             'metadata.content_priority' => ['required', 'in:high,normal,low'],
             'metadata.priority_reason' => ['nullable', 'string', 'max:500'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'metadata.player_requirement.required' => 'ترکیب بازیکنان را انتخاب کنید',
+            'metadata.space_required.required' => 'فضای لازم را انتخاب کنید',
+            'metadata.noise_level.required' => 'میزان صدا را انتخاب کنید',
+            'metadata.mess_level.required' => 'میزان کثیفی را انتخاب کنید',
+            'metadata.child_energy.required' => 'انرژی کودک را انتخاب کنید',
+            'metadata.caregiver_energy.required' => 'انرژی همراه را انتخاب کنید',
+            'metadata.interaction_type.required' => 'نوع تعامل را انتخاب کنید',
+            'metadata.caregiver_involvement.required' => 'مشارکت همراه را انتخاب کنید',
+            'metadata.setup_complexity.required' => 'سختی آماده‌سازی را انتخاب کنید',
         ];
     }
 }

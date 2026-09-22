@@ -114,7 +114,13 @@ const announcePwaUpdate = (registration) => {
         registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
     });
 
-    document.body.append(notice);
+    // جای اعلان‌ها: بالای سایت، بین منو و تیله مرکزی.
+    const host = document.querySelector('[data-deploy-notice-host]');
+    if (host) {
+        host.append(notice);
+    } else {
+        document.body.append(notice);
+    }
 };
 
 const checkDeployedVersion = async () => {
@@ -144,14 +150,20 @@ const showDeployNotice = () => {
     notice.className = 'pwa-update-notice';
     notice.dataset.deployNotice = '';
     notice.setAttribute('role', 'alert');
-    notice.innerHTML = '<span>سایت رو به‌روز کردیم؛ لطفاً صفحه را دوباره بارگذاری کنید</span><button type="button">بارگذاری دوباره</button>';
+    notice.innerHTML = '<span>سایت رو به‌روز کردیم؛ لطفاً صفحه را دوباره بارگذاری کنید</span><button type="button">بارگذاری</button>';
 
     notice.querySelector('button').addEventListener('click', () => {
         navigator.serviceWorker?.controller?.postMessage({ type: 'CLEAR_CACHES' });
         window.location.reload();
     });
 
-    document.body.append(notice);
+    // جای پیام: بالای سایت، بین منو و تیله مرکزی.
+    const host = document.querySelector('[data-deploy-notice-host]');
+    if (host) {
+        host.append(notice);
+    } else {
+        document.body.append(notice);
+    }
 };
 
 document.addEventListener('teelle:deploy', showDeployNotice);
