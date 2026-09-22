@@ -84,7 +84,7 @@ class ContentController extends Controller
 
     public function structuredMetadata(StructuredMetadataRequest $request, GameVersion $version, GameContentWorkflow $workflow): RedirectResponse
     {
-        // DEC-060: چک‌باکس‌های «گزینه‌های دیگر» (از جمله سطح نظارت) به گزینه‌های جانبی همان فیلد وصل می‌شوند؛
+        // DEC-060: چک‌باکس‌های انتخاب‌های بیشتر (از جمله سطح نظارت) به گزینه‌های جانبی همان فیلد وصل می‌شوند؛
         // مقدار اصلی هر فیلد همچنان در ستون خودش ذخیره می‌شود و موتور تطبیق تغییری نمی‌کند.
         $metadata = $request->validated('metadata');
         $extras = is_array($request->validated('metadata_extra')) ? $request->validated('metadata_extra') : [];

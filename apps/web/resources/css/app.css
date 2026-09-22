@@ -762,8 +762,9 @@ h6,
     }
 
     .pwa-update-notice {
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: var(--space-2);
+        padding-inline: var(--space-2);
+        font-size: 0.8125rem;
     }
 }
 
