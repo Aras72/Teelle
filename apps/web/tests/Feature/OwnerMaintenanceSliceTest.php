@@ -75,14 +75,17 @@ final class OwnerMaintenanceSliceTest extends TestCase
             ->assertDontSee('توضیح SEO');
     }
 
-    public function test_import_page_replaces_pilot_block_with_imported_file_list(): void
+    public function test_import_page_shows_form_only_without_excel_or_imported_files(): void
     {
         $manager = $this->userWithRole('admin');
 
+        // DEC-062: مسیر Excel و فهرست فایل‌های ایمپورت‌شده حذف شده است؛ صفحه فقط فرم داخلی سایت را نشان می‌دهد.
         $this->actingAs($manager)->get(route('admin.content.imports.index'))->assertOk()
-            ->assertSee('فایل‌های ایمپورت‌شده')
-            ->assertSee('بررسی فایل و پیش‌نمایش')
-            ->assertDontSee('بازی‌های پیشنهادی اولیه تیله');
+            ->assertSee('افزودن بازی با فرم')
+            ->assertSee('بررسی بازی و پیش‌نمایش')
+            ->assertDontSee('بازی‌های پیشنهادی اولیه تیله')
+            ->assertDontSee('افزودن از فایل Excel')
+            ->assertDontSee('فایل‌های ایمپورت‌شده');
     }
 
     public function test_site_content_editor_only_exposes_jigari_and_magazine_copy_to_manager(): void

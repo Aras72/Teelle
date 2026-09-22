@@ -176,7 +176,7 @@ class ContentAdminTest extends TestCase
         $before = Game::query()->count();
         $batch = $service->preview($editor, json_encode([$this->draft('batch-one'), $this->draft('batch-two')], JSON_THROW_ON_ERROR));
         $this->assertSame($before, Game::query()->count());
-        $this->actingAs($editor)->get(route('admin.content.imports.index'))->assertOk()->assertSee('فایل Excel یا فرم آنلاین');
+        $this->actingAs($editor)->get(route('admin.content.imports.index'))->assertOk()->assertSee('افزودن بازی با فرم');
         $this->actingAs($editor)->get(route('admin.content.imports.show', $batch))->assertOk()->assertSee('batch-one');
         $service->confirm($editor, $batch);
         $service->confirm($editor, $batch->fresh());
@@ -187,13 +187,11 @@ class ContentAdminTest extends TestCase
         $this->assertSame('rolled_back', ContentImportBatch::query()->find($batch->id)->status);
     }
 
-    public function test_admin_can_download_the_official_excel_template_and_use_the_panel_form_without_json(): void
+    public function test_admin_can_use_the_panel_form_without_json(): void
     {
         $editor = $this->staff('content_editor');
         $this->actingAs($editor)->get(route('admin.content.imports.index'))
-            ->assertOk()->assertSee('افزودن از فایل Excel')->assertSee('افزودن یک بازی با فرم')->assertSee('دریافت تمپلیت Excel')->assertDontSee('آرایه JSON بازی‌ها');
-        $this->actingAs($editor)->get(route('admin.content.imports.template'))
-            ->assertOk()->assertDownload('Teelle_New_Game_Template_v3.xlsx');
+            ->assertOk()->assertSee('افزودن بازی با فرم')->assertDontSee('افزودن از فایل Excel')->assertDontSee('دریافت تمپلیت Excel')->assertDontSee('فایل‌های ایمپورت‌شده');
 
         $draft = $this->draft('panel-form-game');
         $draft['instructions_text'] = implode("\n", $draft['instructions']);
@@ -204,32 +202,32 @@ class ContentAdminTest extends TestCase
         $this->assertDatabaseCount('games', 0);
     }
 
-    public function test_excel_import_rejects_a_fake_workbook_without_creating_a_preview(): void
+    public function test_excel_route_is_gone(): void
     {
         $editor = $this->staff('content_editor');
         $workbook = UploadedFile::fake()->createWithContent('games.xlsx', 'this is not an Excel workbook');
 
         $this->actingAs($editor)
-            ->post(route('admin.content.imports.excel.preview'), ['workbook' => $workbook])
-            ->assertSessionHasErrors('workbook');
+            ->post('/admin/content/imports/excel/preview', ['workbook' => $workbook])
+            ->assertNotFound();
 
         $this->assertDatabaseCount('content_import_batches', 0);
         $this->assertDatabaseCount('games', 0);
     }
 
-    public function test_import_page_lists_imported_files_without_bundled_pilot_button(): void
+    public function test_import_page_hides_imported_files_list_and_bundled_pilot_button(): void
     {
         $editor = $this->staff('content_editor');
         $payload = require resource_path('content/pilot-games-v1.php');
         $this->assertCount(25, $payload);
 
-        $batch = app(ContentImportService::class)->preview($editor, json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        app(ContentImportService::class)->preview($editor, json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
+        // مسیر Excel حذف شده است؛ صفحه افزودن بازی فقط فرم داخلی سایت را نشان می‌دهد.
         $this->actingAs($editor)->get(route('admin.content.imports.index'))->assertOk()
-            ->assertSee('فایل‌های ایمپورت‌شده')
-            ->assertSee('بررسی فایل و پیش‌نمایش')
-            ->assertDontSee('بازی‌های پیشنهادی اولیه تیله')
-            ->assertSee(route('admin.content.imports.show', $batch), false);
+            ->assertDontSee('فایل‌های ایمپورت‌شده')
+            ->assertDontSee('بررسی فایل و پیش‌نمایش')
+            ->assertDontSee('بازی‌های پیشنهادی اولیه تیله');
         $this->assertSame(0, Game::query()->count());
     }
 

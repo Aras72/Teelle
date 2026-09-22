@@ -166,8 +166,6 @@ Route::prefix('admin/content')->name('admin.content.')->middleware('content.staf
     Route::get('/games/{game:public_id}/revision', [ContentController::class, 'revision'])->name('revision');
     Route::post('/games/{game:public_id}/revision', [ContentController::class, 'storeRevision'])->name('revision.store');
     Route::get('/imports', [ImportController::class, 'index'])->name('imports.index');
-    Route::get('/imports/template', [ImportController::class, 'template'])->name('imports.template');
-    Route::post('/imports/excel/preview', [ImportController::class, 'previewExcel'])->name('imports.excel.preview');
     Route::post('/imports/form/preview', [ImportController::class, 'previewForm'])->name('imports.form.preview');
     Route::get('/imports/{batch:public_id}', [ImportController::class, 'show'])->name('imports.show');
     Route::post('/imports/{batch:public_id}/confirm', [ImportController::class, 'confirm'])->name('imports.confirm');

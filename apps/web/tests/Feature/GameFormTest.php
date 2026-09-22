@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class GameFormExcelAlignmentTest extends TestCase
+class GameFormTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -47,7 +47,11 @@ class GameFormExcelAlignmentTest extends TestCase
             ->assertDontSee('انتخاب چندگانه')
             // ممنوعیت اضافه‌نویسی: تیتر بخش‌ها فقط نام خودشان است.
             ->assertDontSee('گزینه‌های دیگر')
-            ->assertDontSee('گزینه‌های قابل قبول دیگر');
+            ->assertDontSee('گزینه‌های قابل قبول دیگر')
+            // مسیر Excel حذف شده؛ صفحه فقط فرم است.
+            ->assertDontSee('افزودن از فایل Excel')
+            ->assertDontSee('دریافت تمپلیت Excel')
+            ->assertDontSee('فایل‌های ایمپورت‌شده');
     }
 
     public function test_edit_form_offers_multi_select_checkboxes_and_priority(): void
@@ -123,13 +127,6 @@ class GameFormExcelAlignmentTest extends TestCase
         $this->assertSame(['check_in'], $alternatives['supervision_level']);
         $this->assertSame('high', $facts->content_priority);
         $this->assertSame('برای شب‌های بی‌قراری', $facts->priority_reason);
-    }
-
-    public function test_v3_template_downloads_with_multi_value_guidance(): void
-    {
-        $editor = $this->staff('content_editor');
-        $this->actingAs($editor)->get(route('admin.content.imports.template'))
-            ->assertOk()->assertDownload('Teelle_New_Game_Template_v3.xlsx');
     }
 
     private function staff(string $role): User

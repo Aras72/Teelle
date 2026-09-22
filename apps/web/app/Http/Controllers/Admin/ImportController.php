@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Content\ContentImportService;
 use App\Content\GameFormOptions;
-use App\Content\TeelleXlsxGameReader;
 use App\Http\Controllers\Controller;
 use App\Models\ContentImportBatch;
 use DomainException;
@@ -15,7 +14,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ImportController extends Controller
 {
@@ -27,25 +25,6 @@ class ImportController extends Controller
             'batches' => ContentImportBatch::query()->latest()->paginate(20),
             'options' => $formOptions->all(),
         ]);
-    }
-
-    public function previewExcel(Request $request, TeelleXlsxGameReader $reader, ContentImportService $service): RedirectResponse
-    {
-        abort_unless($request->user()->can('content.edit'), 403);
-        $data = $request->validate(['workbook' => ['required', 'file', 'max:10240']]);
-        $batch = $service->previewPayload($request->user(), $reader->read($data['workbook']));
-
-        return redirect()->route('admin.content.imports.show', $batch)->with('status', 'فایل Excel بررسی شد؛ هنوز هیچ بازی ایجاد نشده است');
-    }
-
-    public function template(Request $request): BinaryFileResponse
-    {
-        abort_unless($request->user()->can('content.edit'), 403);
-        $versioned = 'Teelle_New_Game_Template_v3.xlsx';
-        $path = base_path('../../docs/14-operations/templates/'.$versioned);
-        abort_unless(is_file($path), 404);
-
-        return response()->download($path, $versioned);
     }
 
     public function previewForm(Request $request, ContentImportService $service): RedirectResponse
@@ -187,8 +166,8 @@ class ImportController extends Controller
     }
 
     /**
-     * ورودی چندگانه فرم/اکسل را به فهرست یکتا و تمیز تبدیل می‌کند؛
-     * وقتی منبع مقدار واحدی است (مثل منوی کشویی) خروجی تک‌عضوی است.
+     * ورودی چندگانه فرم افزودن بازی را به فهرست یکتا و تمیز تبدیل می‌کند؛
+     * وقتی منبع مقدار واحدی است خروجی تک‌عضوی است.
      *
      * @return array<int, string>
      */

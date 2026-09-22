@@ -3,11 +3,13 @@
 Project: Teelle / تیله
 Canonical Local Checkout: `C:\Users\Aras\Downloads\Teelle`
 Current Phase: PHASE 14 COMPLETE / PHASE 15 PAUSED BY OWNER
-Current Stage: DEC-061 FORM SIMPLICITY AND TOP-OF-SITE UPDATE NOTICE IMPLEMENTED AND VERIFIED
+Current Stage: DEC-062 EXCEL IMPORT PATH REMOVED / FORM-ONLY GAME ENTRY IMPLEMENTED AND VERIFIED
 Current Task: انتظار برای تصاویر بازی‌ها و دستور صریح مالک برای آغاز PHASE 15
 Overall Status: PHASE 14 PASS / RELEASE QA NOT STARTED
 
 Last Completed:
+
+- DEC-062 (Maintenance، Phase 14 را باز نمی‌کند): مسیر ورود بازی با Excel به‌طور کامل حذف شد — روت‌های `imports/template` و `imports/excel/preview`، متدهای `previewExcel`/`template`، خواننده `TeelleXlsxGameReader`، تست آن و هر سه فایل `Teelle_New_Game_Template_v1/v2/v3.xlsx` برداشته شدند. صفحه «افزودن بازی‌ها» فقط فرم داخلی سایت را نشان می‌دهد؛ بخش «افزودن از فایل Excel»، دکمه «دریافت تمپلیت Excel» و فهرست «فایل‌های ایمپورت‌شده» حذف شدند. جریان بررسی/تأیید/بازگردانی فرم و سیدر بازی‌های پایه (`preview` JSON) دست‌نخورده ماند و هیچ جدول یا داده‌ای حذف نشد. Regression کامل روی MySQL 8.4.11 ایزوله برابر 133/133 با 1215 assertion و بدون Skip PASS شد؛ Pint، Blade و Build نیز PASS هستند.
 
 - DEC-061 (Maintenance، Phase 14 را باز نمی‌کند): در فرم‌های افزودن و ویرایش بازی منوی کشویی همه فیلدهای دسته‌ای (سطح نظارت، شرایط اجرا، ترکیب بازیکنان و انرژی‌ها) حذف شد و فقط چک‌باکس ماند؛ نخستین چک‌باکس علامت‌خورده انتخاب اصلی است، انتخاب‌های بعدی جانبی در `alternatives` ذخیره می‌شوند و اگر چیزی علامت نخورده باشد مقدار ذخیره‌شده قبلی (مسیر اکسل) حفظ می‌شود. قاعده مالک مبنی بر ممنوعیت هر عبارت اضافه در تیتر بخش‌ها اعمال و «گزینه‌های دیگر» از همه تیترها حذف شد. پیام آپدیت «سایت رو به‌روز کردیم؛ لطفاً صفحه را دوباره بارگذاری کنید» یک‌خطی شد، دکمه «بارگذاری» در همان خط کنار متن است و جایگاه آن بالای سایت بین منو و تیله مرکزی است (اعلان PWA هم همان‌جا رندر می‌شود). Regression کامل روی MySQL 8.4.11 ایزوله برابر 136/136 با 1231 assertion و بدون Skip PASS شد؛ Pint 215 فایل، Blade و Build نیز PASS هستند.
 

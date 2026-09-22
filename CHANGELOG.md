@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-09-22 (DEC-062)
+
+- Removed the Excel import path entirely per owner decision: the `imports/template` and `imports/excel/preview` routes, the `previewExcel`/`template` controller methods, the `TeelleXlsxGameReader`, its test and all three `Teelle_New_Game_Template_v1/v2/v3.xlsx` files are gone.
+- The «افزودن بازی‌ها» page now shows only the on-site form: the «افزودن از فایل Excel» section, the «دریافت تمپلیت Excel» button and the «فایل‌های ایمپورت‌شده» list were removed; the form flow (بررسی بازی و پیش‌نمایش → تأیید → پیش‌نویس) and rollback are untouched and `ContentImportService::preview` (JSON) remains for the pilot seeder.
+- Docs synced: content admin guide, safe-update contract, DEC-062.
+
 ## 2026-09-22 (DEC-061)
 
 - Redesigned the deploy notice as a single line with the «بارگذاری» button beside the text, now rendered at the top of the site between the main navigation and the central marble hero (via a `data-deploy-notice-host` slot); the PWA update notice uses the same slot.

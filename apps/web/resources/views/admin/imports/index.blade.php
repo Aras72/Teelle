@@ -10,7 +10,7 @@
         'setup' => ['none'=>'بدون آماده‌سازی','simple'=>'ساده','moderate'=>'متوسط'],
     ];
     $priorities = ['high'=>'بالا','normal'=>'معمولی','low'=>'پایین'];
-    // DEC-060: برای هر فیلد دسته‌ای فقط چک‌باکس هست؛ انتخاب اصلی نخستین چک‌باکس علامت‌خورده است
+    // DEC-060: برای هر فیلد دسته‌ای فقط چک‌باکس هست؛ نخستین چک‌باکس علامت‌خورده انتخاب اصلی است
     // و بقیه انتخاب‌ها جانبی ذخیره می‌شوند.
     $checkboxGroups = [
         'supervision_level' => ['label' => 'سطح نظارت', 'options' => ['within_reach'=>'در دسترس مستقیم','same_room'=>'در همان اتاق','check_in'=>'بررسی دوره‌ای']],
@@ -36,25 +36,15 @@
     $primarySelected = fn (string $field): array => (array) old("game.metadata.$field", []);
     $singleChecked = fn (string $field): array => array_merge($extraSelected($field), $primarySelected($field));
 @endphp
-<x-layouts.app title="افزودن بازی‌ها" description="ورود بازی با فایل Excel یا فرم ساده">
+<x-layouts.app title="افزودن بازی‌ها" description="افزودن بازی با فرم داخل سایت">
     <div class="admin-shell teelle-container admin-import-page">
-        <header class="admin-heading"><div><p class="admin-kicker">افزودن بازی</p><h1>فایل Excel یا فرم آنلاین</h1></div><a href="{{ route('admin.content.index') }}">بازگشت</a></header>
+        <header class="admin-heading"><div><p class="admin-kicker">افزودن بازی</p><h1>افزودن بازی با فرم</h1></div><a href="{{ route('admin.content.index') }}">بازگشت</a></header>
         @if(session('status'))<p class="admin-notice" role="status">{{ session('status') }}</p>@endif
-        @if($errors->any())<div class="admin-error" role="alert"><strong>فایل یا فرم نیاز به اصلاح دارد</strong><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
-
-        <section class="admin-panel" aria-labelledby="excel-import-title">
-            <h2 id="excel-import-title">افزودن از فایل Excel</h2>
-            <p>تمپلیت رسمی تیله را پر کنید. فایل ابتدا بررسی و پیش‌نمایش داده می‌شود و بدون تأیید شما هیچ بازی‌ای ساخته نمی‌شود.</p>
-            <p><x-ui.button href="{{ route('admin.content.imports.template') }}" variant="secondary">دریافت تمپلیت Excel</x-ui.button></p>
-            <form class="admin-form admin-import-upload" method="post" enctype="multipart/form-data" action="{{ route('admin.content.imports.excel.preview') }}">@csrf
-                <label>فایل Excel<input class="teelle-input" type="file" name="workbook" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required></label>
-                <x-ui.button type="submit">بررسی فایل و پیش‌نمایش</x-ui.button>
-            </form>
-        </section>
+        @if($errors->any())<div class="admin-error" role="alert"><strong>فرم نیاز به اصلاح دارد</strong><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
 
         <section class="admin-panel" aria-labelledby="manual-game-title">
-            <h2 id="manual-game-title">افزودن یک بازی با فرم</h2>
-            <p>این فرم همه اطلاعات تمپلیت Excel را می‌گیرد. بازی بعد از بررسی شما فقط به‌صورت پیش‌نویس اضافه می‌شود. تصویر پس از افزودن پیش‌نویس، از صفحه ویرایش همان بازی قابل بارگذاری مجدد است.</p>
+            <h2 id="manual-game-title">افزودن بازی</h2>
+            <p>بازی بعد از بررسی شما فقط به‌صورت پیش‌نویس اضافه می‌شود. تصویر پس از افزودن پیش‌نویس، از صفحه ویرایش همان بازی قابل بارگذاری مجدد است.</p>
             <form class="admin-form admin-game-entry" method="post" enctype="multipart/form-data" action="{{ route('admin.content.imports.form.preview') }}">@csrf
                 <fieldset><legend>معرفی بازی</legend><div class="admin-form-grid">
                     <label>نام کوتاه انگلیسی برای نشانی صفحه<input class="teelle-input" dir="ltr" name="game[slug]" value="{{ old('game.slug') }}" required maxlength="120" placeholder="paper-tower"></label>
@@ -109,7 +99,5 @@
                 <x-ui.button type="submit">بررسی بازی و پیش‌نمایش</x-ui.button>
             </form>
         </section>
-
-        <section class="admin-panel"><h2>فایل‌های ایمپورت‌شده</h2><p>هر فایل Excel یا فرمی که بررسی شده اینجا می‌ماند تا تصمیم بگیرید بازی‌هایش به پیش‌نویس برود یا برگردد.</p><ol class="admin-audit"> @forelse($batches as $batch)<li><a href="{{ route('admin.content.imports.show', $batch) }}">ورود {{ $batch->public_id }}</a><span>{{ match($batch->status) {'previewed'=>'آماده تأیید','confirmed'=>'اضافه‌شده','rolled_back'=>'بازگردانی‌شده',default=>$batch->status} }}، {{ count($batch->payload_json) }} بازی@($batch->media_asset_id ? '، با تصویر' : '')</span></li>@empty<li>هنوز فایلی بررسی نشده است</li>@endforelse</ol>{{ $batches->links() }}</section>
     </div>
 </x-layouts.app>
